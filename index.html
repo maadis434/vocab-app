@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
+  <meta name="theme-color" content="#fbfbfa">
+  <meta name="description" content="Minimalist English Urdu Vocabulary & Dictionary">
+  <link rel="manifest" href="./manifest.json">
+  <title>Vocab — English Urdu Notes</title>
+  <link rel="stylesheet" href="./css/styles.css">
+  <script>
+    (function() {
+      try {
+        const saved = localStorage.getItem('vocab_theme_v5');
+        const theme = saved || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+        document.documentElement.setAttribute('data-theme', theme);
+      } catch(e) {}
+    })();
+  </script>
+</head>
+<body>
+
+  <!-- App Wrapper -->
+  <main class="app-wrapper">
+    
+    <!-- Top Action Header -->
+    <header class="app-header">
+      <h1 class="brand-title">Vocab</h1>
+    </header>
+
+    <!-- Scrollable Content Body -->
+    <div class="app-body">
+      
+      <!-- 1. DICTIONARY TAB (English <-> Urdu Dual Search) -->
+      <section class="tab-view active" id="dictionary-tab">
+        <div style="margin-top: 4px;">
+          <div class="search-bar-wrap">
+            <input type="text" class="search-minimal-input" id="dict-search-input" placeholder="Search English word or Urdu maani...">
+            <button class="search-action-btn" id="dict-search-btn" title="Search">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+            </button>
+          </div>
+          <div id="dictionary-container">
+            <!-- Populated by app.js -->
+          </div>
+        </div>
+      </section>
+
+      <!-- 2. WORD OF THE DAY TAB (With Refresh) -->
+      <section class="tab-view" id="today-tab">
+        <div id="today-container">
+          <!-- Populated by app.js -->
+        </div>
+      </section>
+
+      <!-- 3. DISCOVER TAB (Words List with Urdu Meanings) -->
+      <section class="tab-view" id="discover-tab">
+        <div style="margin-top: 4px;" id="discover-container">
+          <!-- Populated by app.js -->
+        </div>
+      </section>
+
+      <!-- 4. MORE TAB (Hub: My Words / Saved, AI Settings, Flashcards, etc.) -->
+      <section class="tab-view" id="more-tab">
+        <div style="margin-top: 4px;" id="more-container">
+          <!-- Populated by app.js -->
+        </div>
+      </section>
+
+      <!-- 5. PRACTICE / FLASHCARD TAB -->
+      <section class="tab-view" id="practice-tab">
+        <div style="margin-top: 4px;" id="practice-container">
+          <!-- Populated by app.js -->
+        </div>
+      </section>
+
+    </div>
+
+    <!-- Bottom Navigation Bar (1. Dictionary, 2. Word of Day, 3. Discover, 4. More) -->
+    <nav class="bottom-bar">
+      <button class="bottom-tab-btn active" data-tab="dictionary">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+        <span>Dictionary</span>
+      </button>
+
+      <button class="bottom-tab-btn" data-tab="today">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="10"></circle><polygon points="12 6 12 12 16 14"></polygon></svg>
+        <span>Word of Day</span>
+      </button>
+
+      <button class="bottom-tab-btn" data-tab="discover">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"><line x1="8" y1="6" x2="21" y2="6"></line><line x1="8" y1="12" x2="21" y2="12"></line><line x1="8" y1="18" x2="21" y2="18"></line><line x1="3" y1="6" x2="3.01" y2="6"></line><line x1="3" y1="12" x2="3.01" y2="12"></line><line x1="3" y1="18" x2="3.01" y2="18"></line></svg>
+        <span>Discover</span>
+      </button>
+
+      <button class="bottom-tab-btn" data-tab="more">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="1.5"></circle><circle cx="19" cy="12" r="1.5"></circle><circle cx="5" cy="12" r="1.5"></circle></svg>
+        <span>More</span>
+      </button>
+    </nav>
+ 
+    <!-- Gemini AI Settings Modal -->
+    <div class="word-modal-backdrop" id="ai-key-modal" style="display: none;">
+      <div class="word-modal-content" style="padding: 24px 20px;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+          <div style="display: flex; align-items: center; gap: 8px;">
+            <span style="font-size: 1.25rem;">✨</span>
+            <span style="font-size: 1.05rem; font-weight: 700; color: var(--text-title);">Google Gemini AI</span>
+          </div>
+          <button id="close-ai-modal-btn" style="background: none; border: none; font-size: 1.2rem; cursor: pointer; color: var(--text-muted); padding: 4px;">✕</button>
+        </div>
+
+        <p style="font-size: 0.85rem; color: var(--text-muted); line-height: 1.5; margin-bottom: 14px;">
+          Connect your free Google Gemini API key to unlock natural Urdu translations, colloquial context, and authentic <em>Instead of / Use this</em> pairs for any word in the world.
+        </p>
+
+        <div class="modal-info-box" style="background: var(--bg-search); border: 0.5px solid var(--divider); border-radius: 12px; padding: 12px 14px; margin-bottom: 18px; font-size: 0.82rem; color: var(--text-body); line-height: 1.6;">
+          <strong style="color: var(--text-title);">Get a free key in 30 seconds:</strong>
+          <ol style="margin-top: 6px; padding-left: 18px;">
+            <li>Go to <a href="https://aistudio.google.com/app/apikey" target="_blank" style="color: var(--accent-blue); text-decoration: underline; font-weight: 600;">aistudio.google.com</a></li>
+            <li>Click <strong>"Create API Key"</strong> (Free tier: 1,500 words/day free)</li>
+            <li>Paste the key below:</li>
+          </ol>
+        </div>
+
+        <div style="margin-bottom: 16px;">
+          <label for="ai-key-input" style="display: block; font-size: 0.76rem; font-weight: 700; color: var(--text-faint); margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.04em;">Gemini API Key</label>
+          <input type="password" id="ai-key-input" class="search-minimal-input" placeholder="AIzaSy..." style="border: 1px solid var(--divider); width: 100%; font-family: monospace; font-size: 0.88rem; padding: 11px 14px; border-radius: 10px; background: var(--bg-search); color: var(--text-title);">
+        </div>
+
+        <div style="display: flex; gap: 10px;">
+          <button id="save-ai-key-btn" class="notes-text-btn" style="flex: 2; justify-content: center; background: var(--text-title); color: var(--bg-app); border-radius: 12px; padding: 12px; font-weight: 700; font-size: 0.9rem;">
+            Save & Verify AI ✨
+          </button>
+          <button id="remove-ai-key-btn" class="notes-text-btn" style="flex: 1; justify-content: center; border: 1px solid var(--divider); background: var(--bg-card); color: var(--text-body); border-radius: 12px; padding: 12px; font-size: 0.82rem;">
+            Clear
+          </button>
+        </div>
+        <div id="ai-test-feedback" style="display: none; margin-top: 12px; padding: 10px 14px; border-radius: 10px; font-size: 0.82rem; line-height: 1.4;"></div>
+        <p style="font-size: 0.74rem; color: var(--text-faint); text-align: center; margin-top: 14px; line-height: 1.4;">
+          Your key is saved locally in your browser storage. Without a key, the app automatically falls back to free public dictionary APIs.
+        </p>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- Dynamic Anti-Cache Script Loader -->
+  <script>
+    (function() {
+      const script = document.createElement('script');
+      script.src = './js/app.js?t=' + Date.now();
+      document.body.appendChild(script);
+    })();
+  </script>
+</body>
+</html>
