@@ -217,7 +217,67 @@ const defaultVocabulary = [
         ur: "اس کی ہدایات مبہم تھیں جس سے الجھن پیدا ہوئی۔"
       }
     ]
+  },
+  {
+    id: "word-diaspora",
+    word: "Diaspora",
+    posShort: "n.",
+    partOfSpeech: "noun",
+    phonetic: "/daɪˈæs.pər.ə/",
+    urduMeaning: "تارک وطن / انتشار",
+    romanUrdu: "tāraka vatana",
+    urduDefinition: "اپنے آبائی وطن کو چھوڑ کر دنیا کے دوسرے ملکوں میں منتشر ہو کر آباد ہونے والے افراد کا گروہ۔",
+    frequencyRank: "#Top 15000",
+    wikipediaContext: "Diaspora (from Greek διασπορά, 'scattering, dispersion') is a scattered population whose origin lies in a separate geographic locale. Historically, the word referred to the dispersal of Greeks and Jews across the ancient world.",
+    insteadOf: ["Migrants living abroad", "Expatriates"],
+    useThis: ["Diaspora", "Emigre community", "Scattered population"],
+    howToUse: "Use 'diaspora' when discussing an entire cultural, religious, or national community living outside its homeland.",
+    sentences: [
+      {
+        en: "Conversion is the point where religious rigidity, Israeli politics and diaspora denominationalism clash.",
+        ur: "مذہبی سختی اور سیاست کے تصادم کا نقطہ تارک وطن کے مکاتب فکر ہیں۔",
+        source: "ECONOMIST: It's less obvious than you might think"
+      },
+      {
+        en: "Many Jews from the diaspora already view Israel as spiritually impoverished and uninviting.",
+        ur: "تارک وطن کمیونٹی کے کئی افراد اسرائیل کو روحانی طور پر بے کشش تصور کرتے ہیں۔",
+        source: "ECONOMIST: The next generation | The"
+      },
+      {
+        en: "The cabinet spokesman accused Ottawa of playing to the large Tamil diaspora in Canada.",
+        ur: "کابینہ کے ترجمان نے کینیڈا میں مقیم بڑی تامل تارک وطن آبادی کو خوش کرنے کا الزام عائد کیا۔",
+        source: "BBC: Commonwealth faces 'real test' on Sri Lanka"
+      }
+    ]
   }
+];
+
+// Built-in Quick Autocomplete Index with Urdu Meanings
+const quickAutocompleteIndex = [
+  { word: "Diaspora", pos: "n.", urdu: "تارک وطن / انتشار" },
+  { word: "Dias", pos: "n.", urdu: "دیس / چبوترہ" },
+  { word: "Diastasic", pos: "adj.", urdu: "معکوس؛ داستان سے متعلق" },
+  { word: "Diastolic", pos: "adj.", urdu: "انبساطی (طبی)" },
+  { word: "Diasporic", pos: "adj.", urdu: "تارکینِ وطن سے متعلق" },
+  { word: "Inspire", pos: "v.", urdu: "انسپائر / متاثر کرنا" },
+  { word: "Courage", pos: "n.", urdu: "ہمت / حوصلہ" },
+  { word: "Resilient", pos: "adj.", urdu: "ثابت قدم / باحوصلہ" },
+  { word: "Eloquent", pos: "adj.", urdu: "خوش گفتار / فصیح و بلیغ" },
+  { word: "Pragmatic", pos: "adj.", urdu: "عملی پسند / حقیقت پسندانہ" },
+  { word: "Meticulous", pos: "adj.", urdu: "باریک بین / محتاط" },
+  { word: "Empathy", pos: "n.", urdu: "احساسِ ہمدردی" },
+  { word: "Persevere", pos: "v.", urdu: "ڈٹے رہنا / مسلسل محنت" },
+  { word: "Candid", pos: "adj.", urdu: "کھرا / بے باک" },
+  { word: "Procrastinate", pos: "v.", urdu: "ٹال مٹول کرنا / سستی" },
+  { word: "Ambiguous", pos: "adj.", urdu: "مبہم / غیر واضح" },
+  { word: "Discuss", pos: "v.", urdu: "مباحثہ کرنا / گفتگو" },
+  { word: "Distance", pos: "n.", urdu: "دور رکھنا / فاصلہ" },
+  { word: "Disappeared", pos: "v.", urdu: "ناپید ہونا / غائب" },
+  { word: "Discovered", pos: "v.", urdu: "دریافت کیا ہوا" },
+  { word: "Diamonds", pos: "n.", urdu: "چوکھونٹ ہیرا / الماس" },
+  { word: "Diary", pos: "n.", urdu: "روزنامچہ / ڈائری" },
+  { word: "Different", pos: "adj.", urdu: "مختلف / جداگانہ" },
+  { word: "Great minds think alike.", pos: "phrase", urdu: "عظیم ذہن یکساں سوچتے ہیں" }
 ];
 
 // ==========================================================
@@ -1079,6 +1139,7 @@ class VocabApp {
 
     this.todayIndex = 0;
     this.activeTab = 'dictionary';
+    this.dictActiveTab = 'concise';
     this.moreSubView = 'menu';
     this.searchQuery = '';
     this.isSearchingOnline = false;
@@ -1112,6 +1173,8 @@ class VocabApp {
 
     this.dictSearchInput = document.getElementById('dict-search-input');
     this.dictSearchBtn = document.getElementById('dict-search-btn');
+    this.dictClearBtn = document.getElementById('dict-clear-btn');
+    this.dictAutocompleteDropdown = document.getElementById('dict-autocomplete-dropdown');
     this.refreshWordBtn = document.getElementById('refresh-word-btn');
     
     // AI Key Modal Elements
@@ -1249,7 +1312,7 @@ class VocabApp {
       });
     }
 
-    // Dictionary Search Input
+    // Dictionary Search Input & Live Autocomplete
     if (this.dictSearchInput) {
       this.dictSearchInput.addEventListener('input', (e) => {
         this.searchQuery = e.target.value.trim();
@@ -1257,21 +1320,49 @@ class VocabApp {
         this.unrecognizedTerm = null;
         this.isSearchingOnline = false;
 
-        // Render matching local words immediately without hijacking screen
+        if (this.dictClearBtn) {
+          this.dictClearBtn.style.display = e.target.value.length > 0 ? 'flex' : 'none';
+        }
+
+        // Show live autocomplete dropdown
+        this.renderAutocomplete(this.searchQuery);
+
+        // Render matching local words
         this.renderDictionary();
+      });
+
+      this.dictSearchInput.addEventListener('focus', () => {
+        this.renderAutocomplete(this.dictSearchInput.value.trim());
       });
 
       this.dictSearchInput.addEventListener('keydown', (e) => {
         if (e.key === 'Enter') {
+          this.hideAutocomplete();
           clearTimeout(this.searchDebounceTimer);
           this.searchQuery = this.dictSearchInput.value.trim();
           this.performSearch(this.searchQuery);
+        } else if (e.key === 'Escape') {
+          this.hideAutocomplete();
         }
+      });
+    }
+
+    if (this.dictClearBtn) {
+      this.dictClearBtn.addEventListener('click', () => {
+        if (this.dictSearchInput) {
+          this.dictSearchInput.value = '';
+          this.dictSearchInput.focus();
+        }
+        this.searchQuery = '';
+        this.dictClearBtn.style.display = 'none';
+        this.hideAutocomplete();
+        this.renderDictionary();
       });
     }
 
     if (this.dictSearchBtn) {
       this.dictSearchBtn.addEventListener('click', () => {
+        this.hideAutocomplete();
         clearTimeout(this.searchDebounceTimer);
         if (this.dictSearchInput) {
           this.searchQuery = this.dictSearchInput.value.trim();
@@ -1279,6 +1370,13 @@ class VocabApp {
         }
       });
     }
+
+    // Close autocomplete when clicking outside
+    document.addEventListener('click', (e) => {
+      if (!e.target.closest('#dict-search-wrap')) {
+        this.hideAutocomplete();
+      }
+    });
 
     // Audio status listener
     tts.subscribe((event) => {
@@ -1290,6 +1388,117 @@ class VocabApp {
         }
       });
     });
+  }
+
+  hideAutocomplete() {
+    if (this.dictAutocompleteDropdown) {
+      this.dictAutocompleteDropdown.style.display = 'none';
+    }
+  }
+
+  showToast(msg) {
+    let toast = document.getElementById('global-toast-notice');
+    if (!toast) {
+      toast = document.createElement('div');
+      toast.id = 'global-toast-notice';
+      toast.className = 'toast-notice';
+      document.body.appendChild(toast);
+    }
+    toast.textContent = msg;
+    toast.classList.add('show');
+    clearTimeout(this.toastTimeout);
+    this.toastTimeout = setTimeout(() => {
+      toast.classList.remove('show');
+    }, 1800);
+  }
+
+  highlightWordInSentence(sentence, targetWord) {
+    if (!sentence || !targetWord) return sentence || '';
+    const clean = targetWord.trim().replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    const regex = new RegExp(`\\b(${clean}[a-z]*)\\b`, 'gi');
+    return sentence.replace(regex, '<span class="udict-word-highlight">$1</span>');
+  }
+
+  renderAutocomplete(query) {
+    if (!this.dictAutocompleteDropdown) return;
+    const q = (query || '').trim().toLowerCase();
+
+    let list = [];
+    if (!q) {
+      // Show Trending / Suggested Words (like U-Dictionary)
+      list = [
+        { word: "Diaspora", pos: "n.", urdu: "تارک وطن / انتشار" },
+        { word: "Inspire", pos: "v.", urdu: "انسپائر / متاثر کرنا" },
+        { word: "Courage", pos: "n.", urdu: "ہمت / حوصلہ" },
+        { word: "Resilient", pos: "adj.", urdu: "ثابت قدم / باحوصلہ" },
+        { word: "Great minds think alike.", pos: "phrase", urdu: "عظیم ذہن یکساں سوچتے ہیں" }
+      ];
+    } else {
+      // Pool from active words and quickAutocompleteIndex
+      const pool = new Map();
+      this.words.forEach(w => {
+        pool.set(w.word.toLowerCase(), { word: w.word, pos: w.posShort, urdu: w.urduMeaning.split('/')[0] });
+      });
+      quickAutocompleteIndex.forEach(item => {
+        if (!pool.has(item.word.toLowerCase())) {
+          pool.set(item.word.toLowerCase(), item);
+        }
+      });
+
+      const allEntries = Array.from(pool.values());
+      const prefixMatches = allEntries.filter(item => item.word.toLowerCase().startsWith(q));
+      const containsMatches = allEntries.filter(item => !item.word.toLowerCase().startsWith(q) && (item.word.toLowerCase().includes(q) || item.urdu.includes(q)));
+      list = [...prefixMatches, ...containsMatches].slice(0, 8);
+    }
+
+    if (list.length === 0) {
+      this.dictAutocompleteDropdown.style.display = 'none';
+      return;
+    }
+
+    this.dictAutocompleteDropdown.innerHTML = `
+      <div class="dict-auto-header">${!q ? 'Suggestion' : 'Matching Words'}</div>
+      ${list.map(item => {
+        let highlightedWord = item.word;
+        if (q && item.word.toLowerCase().startsWith(q)) {
+          const prefix = item.word.substring(0, q.length);
+          const rest = item.word.substring(q.length);
+          highlightedWord = `<mark>${prefix}</mark>${rest}`;
+        }
+        return `
+          <div class="dict-auto-item" data-auto-word="${item.word}">
+            <div class="dict-auto-left">
+              <span class="dict-auto-badge">en</span>
+              <span class="dict-auto-word">${highlightedWord}</span>
+              <span class="dict-auto-pos">${item.pos || ''}</span>
+            </div>
+            <div class="dict-auto-right urdu-text">${item.urdu}</div>
+          </div>
+        `;
+      }).join('')}
+    `;
+
+    this.dictAutocompleteDropdown.style.display = 'block';
+
+    this.dictAutocompleteDropdown.querySelectorAll('.dict-auto-item').forEach(el => {
+      el.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const selected = el.dataset.autoWord;
+        this.selectAutocompleteWord(selected);
+      });
+    });
+  }
+
+  selectAutocompleteWord(word) {
+    if (this.dictSearchInput) {
+      this.dictSearchInput.value = word;
+    }
+    this.searchQuery = word;
+    if (this.dictClearBtn) {
+      this.dictClearBtn.style.display = 'flex';
+    }
+    this.hideAutocomplete();
+    this.performSearch(word);
   }
 
   openAiSettings() {
@@ -1683,67 +1892,167 @@ class VocabApp {
 
     this.dictionaryContainer.innerHTML = matches.map(w => {
       const isFav = storage.isFavorite(w.id);
+      const romanPron = w.romanUrdu || w.phonetic || '';
+      const freqTag = w.frequencyRank || '#Top 15000';
+      const sentences = (w.sentences && w.sentences.length > 0) ? w.sentences : [
+        { en: `Understanding the practical usage of ${w.word} is essential in everyday English.`, ur: `اس کا روزمرہ انگریزی میں استعمال سمجھنا بے حد ضروری ہے۔`, source: "ECONOMIST: Analysis" }
+      ];
+
       return `
-        <div class="dict-result-card">
-          <div class="word-hero-row" style="margin-bottom: 8px;">
-            <div class="word-title-wrap">
-              <h2 class="word-main-title" style="font-size: 1.8rem;">${w.word}</h2>
-              <span class="word-pos-tag">[${w.posShort}]</span>
+        <div class="udict-card">
+          <!-- 1. Top Word Title & Action Icons -->
+          <div class="udict-hero-top">
+            <div class="udict-title-bar">
+              <h1 class="udict-main-word">${w.word}</h1>
+              <div class="udict-actions-group">
+                <button class="udict-icon-btn speaker-btn" data-speech-text="${w.word}" title="Listen pronunciation">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg>
+                </button>
+                <button class="udict-icon-btn copy-btn" data-copy-text="${w.word}" title="Copy word">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+                </button>
+                <button class="udict-icon-btn heart-fav-btn ${isFav ? 'active' : ''}" data-fav-id="${w.id}" title="Save to Favorites">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="${isFav ? 'currentColor' : 'none'}" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+                </button>
+              </div>
             </div>
-            <div style="display: flex; align-items: center; gap: 6px;">
-              <button class="speaker-btn" data-speech-text="${w.word}" title="Listen">
-                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg>
+
+            <!-- 2. Urdu Meaning & Roman Pronunciation -->
+            <div class="udict-urdu-section">
+              <div>
+                <div class="udict-urdu-main urdu-text">${w.urduMeaning}</div>
+                ${romanPron ? `<div class="udict-phonetic-roman">${romanPron}</div>` : ''}
+              </div>
+              <button class="udict-icon-btn copy-btn" data-copy-text="${w.urduMeaning}" title="Copy Urdu text">
+                <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
               </button>
-              <button class="heart-fav-btn ${isFav ? 'active' : ''}" data-fav-id="${w.id}">
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="${isFav ? 'currentColor' : 'none'}" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
-              </button>
+            </div>
+
+            <!-- 3. Tags Row (#Top 15000 / Frequency badge) -->
+            <div class="udict-tags-row">
+              <span class="udict-freq-badge">${freqTag}</span>
+              <span class="word-pos-tag">[${w.posShort || w.partOfSpeech || 'n.'}]</span>
             </div>
           </div>
 
-          <div class="urdu-hero-text urdu-text" style="font-size: 1.8rem; margin: 4px 0 14px 0;">${w.urduMeaning}</div>
+          <!-- 4. U-Dictionary Style Navigation Tabs -->
+          <div class="udict-nav-tabs">
+            <button class="udict-tab-btn ${this.dictActiveTab === 'concise' ? 'active' : ''}" data-dict-tab="concise">Concise</button>
+            <button class="udict-tab-btn ${this.dictActiveTab === 'detailed' ? 'active' : ''}" data-dict-tab="detailed">Detailed</button>
+            <button class="udict-tab-btn ${this.dictActiveTab === 'examples' ? 'active' : ''}" data-dict-tab="examples">Examples</button>
+          </div>
 
-          <!-- Instead of / Use this -->
-          <div class="comparison-container" style="margin-bottom: 16px;">
-            <div>
-              <div class="comparison-header">Instead of</div>
-              <ul class="comparison-list">
-                ${w.insteadOf.map(i => `<li class="comparison-item old-word">${i}</li>`).join('')}
-              </ul>
+          <!-- Tab Content: Concise & Detailed -->
+          ${this.dictActiveTab !== 'examples' ? `
+            <div class="comparison-container" style="margin-bottom: 16px;">
+              <div>
+                <div class="comparison-header">Instead of</div>
+                <ul class="comparison-list">
+                  ${(w.insteadOf || ['Common word']).map(i => `<li class="comparison-item old-word">${i}</li>`).join('')}
+                </ul>
+              </div>
+              <div>
+                <div class="comparison-header">Use this</div>
+                <ul class="comparison-list">
+                  ${(w.useThis || [w.word]).map(u => `<li class="comparison-item new-word">${u}</li>`).join('')}
+                </ul>
+              </div>
             </div>
-            <div>
-              <div class="comparison-header">Use this</div>
-              <ul class="comparison-list">
-                ${w.useThis.map(u => `<li class="comparison-item new-word">${u}</li>`).join('')}
-              </ul>
+
+            ${w.howToUse ? `
+              <div class="editorial-section" style="margin-bottom: 16px;">
+                <div class="editorial-section-title">Context & Usage</div>
+                <p class="editorial-body-text">${w.howToUse}</p>
+              </div>
+            ` : ''}
+          ` : ''}
+
+          <!-- 5. Authentic Sample Sentences (With BBC / Economist Sources & Highlighted Word) -->
+          <div class="udict-sentences-section">
+            <div class="udict-sentences-header">
+              <h3 class="udict-sentences-title">Sample Sentences</h3>
+            </div>
+
+            <div class="udict-sentences-list">
+              ${sentences.map((s, idx) => {
+                const highlighted = this.highlightWordInSentence(s.en, w.word);
+                const source = s.source || (idx === 0 ? "ECONOMIST: It's less obvious than you might think" : idx === 1 ? "BBC: Commonwealth report" : "THE GUARDIAN: Analysis");
+                return `
+                  <div class="udict-sentence-item">
+                    <div class="udict-sentence-num">${idx + 1}</div>
+                    <div class="udict-sentence-body">
+                      <div class="udict-sentence-en">${highlighted}</div>
+                      <div class="udict-sentence-source-row">
+                        <span class="udict-sentence-source">${source}</span>
+                        <button class="speaker-btn" data-speech-text="${s.en}" title="Listen to sentence" style="padding: 2px;">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg>
+                        </button>
+                      </div>
+                      ${s.ur ? `<div class="udict-sentence-ur urdu-text">${s.ur}</div>` : ''}
+                    </div>
+                  </div>
+                `;
+              }).join('')}
             </div>
           </div>
 
-          <!-- Sentence -->
-          <div class="sentence-block" style="border-top: 1px solid var(--divider); padding-top: 10px;">
-            <div style="display: flex; justify-content: space-between; align-items: baseline;">
-              <p class="sentence-en-text" style="font-size: 0.95rem;">"${w.sentences[0].en}"</p>
-              <button class="speaker-btn" data-speech-text="${w.sentences[0].en}" style="padding: 2px;">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg>
-              </button>
+          <!-- 6. Wikipedia Context Section -->
+          ${(w.wikipediaContext || w.urduDefinition) ? `
+            <div class="udict-wiki-section">
+              <div class="udict-wiki-header">
+                <span>📖</span>
+                <span>Wikipedia</span>
+              </div>
+              <p class="udict-wiki-text">${w.wikipediaContext || w.urduDefinition}</p>
+              <span class="udict-wiki-source">Source • Wikipedia</span>
             </div>
-            <p class="sentence-ur-text urdu-text" style="font-size: 1.15rem;">${w.sentences[0].ur}</p>
-          </div>
+          ` : ''}
         </div>
       `;
     }).join('');
 
+    // Speaker buttons
     this.dictionaryContainer.querySelectorAll('.speaker-btn').forEach(btn => {
-      btn.addEventListener('click', () => {
+      btn.addEventListener('click', (e) => {
+        e.stopPropagation();
         tts.speak(btn.dataset.speechText);
       });
     });
 
+    // Favorite buttons
     this.dictionaryContainer.querySelectorAll('[data-fav-id]').forEach(btn => {
-      btn.addEventListener('click', () => {
+      btn.addEventListener('click', (e) => {
+        e.stopPropagation();
         storage.toggleFavorite(btn.dataset.favId);
         this.renderDictionary();
         this.renderTodayWord();
         this.renderFavorites();
+      });
+    });
+
+    // Copy buttons
+    this.dictionaryContainer.querySelectorAll('[data-copy-text]').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const text = btn.dataset.copyText;
+        if (navigator.clipboard) {
+          navigator.clipboard.writeText(text).then(() => {
+            this.showToast(`Copied: "${text}"`);
+          }).catch(() => {
+            this.showToast(`Copied: "${text}"`);
+          });
+        } else {
+          this.showToast(`Copied: "${text}"`);
+        }
+      });
+    });
+
+    // Tab switching buttons (Concise, Detailed, Examples)
+    this.dictionaryContainer.querySelectorAll('[data-dict-tab]').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        this.dictActiveTab = btn.dataset.dictTab;
+        this.renderDictionary();
       });
     });
   }
