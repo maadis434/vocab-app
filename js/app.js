@@ -1138,7 +1138,7 @@ class VocabApp {
     });
 
     this.todayIndex = 0;
-    this.activeTab = 'dictionary';
+    this.activeTab = 'home';
     this.dictActiveTab = 'concise';
     this.moreSubView = 'menu';
     this.searchQuery = '';
@@ -1168,6 +1168,7 @@ class VocabApp {
     this.dictionaryContainer = document.getElementById('dictionary-container');
     this.todayContainer = document.getElementById('today-container');
     this.discoverContainer = document.getElementById('discover-container');
+    this.favoritesContainer = document.getElementById('favorites-container');
     this.moreContainer = document.getElementById('more-container');
     this.practiceContainer = document.getElementById('practice-container');
 
@@ -1176,6 +1177,12 @@ class VocabApp {
     this.dictClearBtn = document.getElementById('dict-clear-btn');
     this.dictAutocompleteDropdown = document.getElementById('dict-autocomplete-dropdown');
     this.refreshWordBtn = document.getElementById('refresh-word-btn');
+
+    // Home Quick Action Tiles
+    this.tileDictBtn = document.getElementById('tile-dict-btn');
+    this.tileGrammarBtn = document.getElementById('tile-grammar-btn');
+    this.tilePracticeBtn = document.getElementById('tile-practice-btn');
+    this.tileFavBtn = document.getElementById('tile-fav-btn');
     
     // AI Key Modal Elements
     this.themeToggleBtn = document.getElementById('theme-toggle-btn');
@@ -1378,6 +1385,36 @@ class VocabApp {
       }
     });
 
+    // Home Quick Navigation Tiles
+    if (this.tileDictBtn) {
+      this.tileDictBtn.addEventListener('click', () => {
+        if (this.dictSearchInput) {
+          this.dictSearchInput.focus();
+          this.dictSearchInput.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+      });
+    }
+
+    if (this.tileGrammarBtn) {
+      this.tileGrammarBtn.addEventListener('click', () => {
+        this.resetGrammarState();
+        this.moreSubView = 'grammar';
+        this.switchTab('more');
+      });
+    }
+
+    if (this.tilePracticeBtn) {
+      this.tilePracticeBtn.addEventListener('click', () => {
+        this.switchTab('practice');
+      });
+    }
+
+    if (this.tileFavBtn) {
+      this.tileFavBtn.addEventListener('click', () => {
+        this.switchTab('favorites');
+      });
+    }
+
     // Audio status listener
     tts.subscribe((event) => {
       document.querySelectorAll('.speaker-btn').forEach(btn => {
@@ -1544,13 +1581,12 @@ class VocabApp {
       view.classList.toggle('active', view.id === `${tabName}-tab`);
     });
 
-    if (tabName === 'dictionary') {
-      this.renderDictionary();
-      if (this.dictSearchInput) this.dictSearchInput.focus();
-    } else if (tabName === 'today') {
-      this.renderTodayWord();
+    if (tabName === 'home') {
+      this.renderHome();
     } else if (tabName === 'discover') {
       this.renderDiscover();
+    } else if (tabName === 'favorites') {
+      this.renderFavoritesTab();
     } else if (tabName === 'more') {
       this.renderMoreHub();
     } else if (tabName === 'practice') {
@@ -1558,12 +1594,20 @@ class VocabApp {
     }
   }
 
+  renderHome() {
+    this.renderDictionary();
+    if (!this.searchQuery) {
+      if (this.todayContainer) this.todayContainer.style.display = 'block';
+      this.renderTodayWord();
+    }
+  }
+
   render() {
     this.updateThemeUI();
     this.updateAiBadge();
-    this.renderDictionary();
-    this.renderTodayWord();
+    this.renderHome();
     this.renderDiscover();
+    this.renderFavoritesTab();
     this.renderMoreHub();
   }
 
@@ -1797,6 +1841,8 @@ class VocabApp {
     if (!this.dictionaryContainer) return;
 
     if (this.isSearchingOnline) {
+      this.dictionaryContainer.style.display = 'block';
+      if (this.todayContainer) this.todayContainer.style.display = 'none';
       this.dictionaryContainer.innerHTML = `
         <div class="search-loading-row">
           <div class="apple-spinner"></div>
@@ -1807,6 +1853,8 @@ class VocabApp {
     }
 
     if (this.unrecognizedTerm) {
+      this.dictionaryContainer.style.display = 'block';
+      if (this.todayContainer) this.todayContainer.style.display = 'none';
       const { query, geminiError } = this.unrecognizedTerm;
       this.dictionaryContainer.innerHTML = `
         <div style="padding: 10px 0;">
@@ -1839,33 +1887,14 @@ class VocabApp {
     }
 
     if (!this.searchQuery) {
-      this.dictionaryContainer.innerHTML = `
-        <div style="padding: 10px 0;">
-          <div style="font-size: 0.78rem; font-weight: 700; color: var(--text-faint); margin-bottom: 10px; text-transform: uppercase;">Quick Lookups</div>
-          <div class="dict-chips-scroll">
-            ${this.words.slice(0, 8).map(w => `
-              <button class="dict-suggest-chip" data-chip-word="${w.word}">
-                ${w.word} <span style="font-size:0.7rem; color:var(--text-muted); font-weight:400;">(${w.urduMeaning.split('/')[0]})</span>
-              </button>
-            `).join('')}
-          </div>
-
-          <div style="text-align: center; padding: 36px 10px; color: var(--text-muted); font-size: 0.88rem;">
-            <p style="font-weight: 700; color: var(--text-title); margin-bottom: 4px;">English to Urdu & Vice Versa</p>
-            <p style="font-size: 0.82rem; line-height: 1.5;">Type <strong>any English or Urdu word</strong> above and press <strong>Enter</strong> to look up pronunciation, meaning, and sentences.</p>
-          </div>
-        </div>
-      `;
-
-      this.dictionaryContainer.querySelectorAll('[data-chip-word]').forEach(chip => {
-        chip.addEventListener('click', () => {
-          this.searchQuery = chip.dataset.chipWord;
-          if (this.dictSearchInput) this.dictSearchInput.value = this.searchQuery;
-          this.renderDictionary();
-        });
-      });
+      this.dictionaryContainer.style.display = 'none';
+      if (this.todayContainer) this.todayContainer.style.display = 'block';
+      this.renderTodayWord();
       return;
     }
+
+    this.dictionaryContainer.style.display = 'block';
+    if (this.todayContainer) this.todayContainer.style.display = 'none';
 
     const q = this.searchQuery.toLowerCase();
     const matches = this.words.filter(w => 
@@ -2181,9 +2210,85 @@ class VocabApp {
     });
   }
 
-  // --- 4. MORE HUB (Settings, My Words, Practice, AI Key) ---
+  // --- 4. MORE HUB & FAVORITES ---
   renderFavorites() {
+    this.renderFavoritesTab();
     this.renderMoreHub();
+  }
+
+  renderFavoritesTab() {
+    if (!this.favoritesContainer) return;
+
+    const favIds = storage.favorites;
+    const favWords = this.words.filter(w => favIds.includes(w.id));
+
+    this.favoritesContainer.innerHTML = `
+      <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 16px; border-bottom: 1px solid var(--divider); padding-bottom: 8px;">
+        <span style="font-size: 0.88rem; font-weight: 700; color: var(--text-title); letter-spacing: 0.05em; text-transform: uppercase;">Saved Words (${favWords.length})</span>
+        ${favWords.length > 0 ? `
+          <button class="notes-text-btn" id="fav-tab-start-practice-btn" style="color: var(--text-title); font-weight: 700;">
+            Start Practice ▶
+          </button>
+        ` : ''}
+      </div>
+
+      ${favWords.length === 0 ? `
+        <div style="text-align: center; padding: 60px 20px; color: var(--text-muted);">
+          <div style="font-size: 2.2rem; margin-bottom: 12px;">⭐</div>
+          <p style="font-size: 1.1rem; font-weight: 700; color: var(--text-title); margin-bottom: 6px;">No Saved Words Yet</p>
+          <p style="font-size: 0.88rem; line-height: 1.5; margin-bottom: 20px;">Tap the star or heart icon on any word in Home, Dictionary, or Discover to build your personal vocabulary list.</p>
+          <button class="notes-text-btn" style="margin: 0 auto; color: var(--text-title); text-decoration: underline;" id="fav-tab-goto-discover">
+            Explore Discover Words →
+          </button>
+        </div>
+      ` : `
+        <div>
+          ${favWords.map(w => `
+            <div class="discover-list-row" data-fav-tab-open-id="${w.id}">
+              <div class="discover-row-left">
+                <span class="discover-word-text">${w.word}</span>
+                <span class="word-pos-tag">[${w.posShort || 'n.'}]</span>
+              </div>
+              <div style="display: flex; align-items: center; gap: 14px;">
+                <span class="discover-row-right urdu-text">${w.urduMeaning.split('/')[0]}</span>
+                <button class="speaker-btn" data-speech-text="${w.word}" style="padding: 2px;" title="Listen to pronunciation">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg>
+                </button>
+              </div>
+            </div>
+          `).join('')}
+        </div>
+      `}
+    `;
+
+    const startPracticeBtn = document.getElementById('fav-tab-start-practice-btn');
+    if (startPracticeBtn) {
+      startPracticeBtn.addEventListener('click', () => {
+        this.switchTab('practice');
+      });
+    }
+
+    const gotoDiscoverBtn = document.getElementById('fav-tab-goto-discover');
+    if (gotoDiscoverBtn) {
+      gotoDiscoverBtn.addEventListener('click', () => {
+        this.switchTab('discover');
+      });
+    }
+
+    this.favoritesContainer.querySelectorAll('.speaker-btn').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        tts.speak(btn.dataset.speechText);
+      });
+    });
+
+    this.favoritesContainer.querySelectorAll('[data-fav-tab-open-id]').forEach(row => {
+      row.addEventListener('click', (e) => {
+        if (e.target.closest('.speaker-btn')) return;
+        const w = this.words.find(item => item.id === row.dataset.favTabOpenId);
+        if (w) this.openWordModal(w);
+      });
+    });
   }
 
     renderMoreHub() {
@@ -2604,7 +2709,10 @@ class VocabApp {
     const gotoDictBtn = document.getElementById('my-words-goto-dict');
     if (gotoDictBtn) {
       gotoDictBtn.addEventListener('click', () => {
-        this.switchTab('dictionary');
+        this.switchTab('home');
+        if (this.dictSearchInput) {
+          this.dictSearchInput.focus();
+        }
       });
     }
 

@@ -1782,3 +1782,71 @@ body {
   color: #1c1c1e;
 }
 
+/* ==========================================================
+   HOME SCREEN (Quick Tiles & Language Header)
+   ========================================================== */
+.home-lang-pill-row {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 14px;
+}
+
+.home-lang-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--bg-card);
+  border: 0.5px solid var(--divider);
+  padding: 6px 16px;
+  border-radius: 9999px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--text-title);
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04);
+}
+
+.home-lang-pill svg {
+  color: #e11d48;
+}
+
+.home-quick-tiles-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+  margin-bottom: 18px;
+}
+
+.home-tile-card {
+  background: var(--bg-card);
+  border: 0.5px solid var(--divider-hairline);
+  border-radius: 14px;
+  padding: 12px 6px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03);
+}
+
+.home-tile-card:hover, .home-tile-card:active {
+  background: var(--bg-search);
+  transform: translateY(-2px);
+  border-color: var(--divider);
+}
+
+.home-tile-icon {
+  font-size: 1.35rem;
+  line-height: 1;
+}
+
+.home-tile-label {
+  font-size: 0.74rem;
+  font-weight: 700;
+  color: var(--text-title);
+  letter-spacing: -0.01em;
+}
+
+
