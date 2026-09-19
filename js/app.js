@@ -894,19 +894,40 @@ const quickAutocompleteIndex = [
   { word: "Reputation", pos: "n.", urdu: "شہرت / ساکھ" },
   { word: "Request", pos: "n.", urdu: "درخواست / التجا" },
   { word: "Require", pos: "v.", urdu: "ضرورت ہونا / تقاضا" },
-  { word: "Rescue", pos: "v.", urdu: "بچانا / نجات دلانا" },
-  { word: "Research", pos: "n.", urdu: "تحقیق / کھوج" },
-  { word: "Reserve", pos: "v.", urdu: "محفوظ رکھنا / بکنگ" },
-  { word: "Resilient", pos: "adj.", urdu: "ثابت قدم / باحوصلہ" },
-  { word: "Resist", pos: "v.", urdu: "مزاحمت کرنا / رکاوٹ" },
-  { word: "Resolution", pos: "n.", urdu: "قرارداد / پکا ارادہ" },
-  { word: "Resolve", pos: "v.", urdu: "حل کرنا / مصمم ارادہ" },
-  { word: "Resource", pos: "n.", urdu: "وسیلہ / ذریعہ" },
-  { word: "Respect", pos: "n.", urdu: "عزت / احترام" },
-  { word: "Respond", pos: "v.", urdu: "جواب دینا / ردعمل" },
-  { word: "Responsible", pos: "adj.", urdu: "ذمہ دار / جوابدہ" },
-  { word: "Restore", pos: "v.", urdu: "بحال کرنا / دوبارہ قائم" },
-  { word: "Result", pos: "n.", urdu: "نتیجہ / انجام" },
+  { word: "res", pos: "n.", urdu: "چیز؛ شے؛ جائیداد" },
+  { word: "rest", pos: "n./v.", urdu: "باقی بچاہوا؛ نیند n. ؛آرام کرنا؛ محنت .v" },
+  { word: "respect", pos: "n.", urdu: "عزت؛ تکریم، تعظیم جو کسی کودی جائے n." },
+  { word: "responsible", pos: "adj.", urdu: "adj. ذمہ دار؛ جوابدہ؛ جواب دہ" },
+  { word: "restaurant", pos: "n.", urdu: "ریستوران؛ سب کے لیے کھلی طعام گاہ n." },
+  { word: "research", pos: "n./v.", urdu: "تحقیق کرنا کسی امر کی بابت v. ؛تحقیق n." },
+  { word: "responsibility", pos: "n.", urdu: "ذمہ داری؛ ذمہ داری n." },
+  { word: "results", pos: "n.", urdu: "نتیجے؛ نتائج" },
+  { word: "rescue", pos: "n./v.", urdu: "بچاؤ؛ چھڑانے، آزاد کرانے کا عمل n. ؛بچانا v." },
+  { word: "result", pos: "n./v.", urdu: "نتیجہ نکالنا؛ حالات v. ؛نتیجہ n." },
+  { word: "response", pos: "n.", urdu: "جواب؛ ردعمل n." },
+  { word: "respond", pos: "v.", urdu: "جواب دینا / ردعمل" },
+  { word: "resident", pos: "n.", urdu: "رہائشی؛ مقیم n." },
+  { word: "residence", pos: "n.", urdu: "رہائش گاہ؛ قیام گاہ n." },
+  { word: "resume", pos: "v./n.", urdu: "دوبارہ شروع کرنا v. ؛خلاصہ n." },
+  { word: "resort", pos: "n.", urdu: "سیرگاہ؛ سہارا n." },
+  { word: "resign", pos: "v.", urdu: "استعفیٰ دینا v." },
+  { word: "resignation", pos: "n.", urdu: "استعفیٰ n." },
+  { word: "resource", pos: "n.", urdu: "وسیلہ / ذریعہ" },
+  { word: "resources", pos: "n.", urdu: "وسائل؛ ذرائع n." },
+  { word: "reserve", pos: "v.", urdu: "محفوظ رکھنا / بکنگ" },
+  { word: "reservation", pos: "n.", urdu: "بکنگ؛ تحفظ n." },
+  { word: "resilient", pos: "adj.", urdu: "ثابت قدم / باحوصلہ" },
+  { word: "resilience", pos: "n.", urdu: "لچک؛ ثابت قدمی n." },
+  { word: "resist", pos: "v.", urdu: "مزاحمت کرنا / رکاوٹ" },
+  { word: "resistance", pos: "n.", urdu: "مزاحمت؛ روک n." },
+  { word: "resolution", pos: "n.", urdu: "قرارداد / پکا ارادہ" },
+  { word: "resolve", pos: "v.", urdu: "حل کرنا / مصمم ارادہ" },
+  { word: "restore", pos: "v.", urdu: "بحال کرنا / دوبارہ قائم" },
+  { word: "restoration", pos: "n.", urdu: "بحالی؛ تجدید n." },
+  { word: "restrict", pos: "v.", urdu: "محدود کرنا؛ پابندی v." },
+  { word: "restriction", pos: "n.", urdu: "پابندی؛ روک n." },
+  { word: "restart", pos: "v.", urdu: "دوبارہ شروع کرنا v." },
+  { word: "reset", pos: "v.", urdu: "ری سیٹ؛ دوبارہ ترتیب v." },
   { word: "Retain", pos: "v.", urdu: "برقرار رکھنا / یاد رکھنا" },
   { word: "Reveal", pos: "v.", urdu: "فاش کرنا / ظاہر کرنا" },
   { word: "Review", pos: "v.", urdu: "نظر ثانی کرنا" },
@@ -1236,6 +1257,23 @@ class StorageManager {
     this.cachedWords.unshift(wordObj);
     if (this.cachedWords.length > 200) this.cachedWords.pop();
     this.save(this.cacheKey, this.cachedWords);
+  }
+
+  getAutoTranslation(word) {
+    if (!word) return null;
+    const cache = this.load('vocab_auto_trans_cache') || {};
+    return cache[word.toLowerCase().trim()] || null;
+  }
+
+  saveAutoTranslation(word, data) {
+    if (!word || !data) return;
+    const cache = this.load('vocab_auto_trans_cache') || {};
+    cache[word.toLowerCase().trim()] = data;
+    const keys = Object.keys(cache);
+    if (keys.length > 500) {
+      delete cache[keys[0]];
+    }
+    this.save('vocab_auto_trans_cache', cache);
   }
 }
 const storage = new StorageManager();
@@ -2372,14 +2410,22 @@ class VocabApp {
           const after = item.word.substring(idx + q.length);
           highlightedWord = `${before}<mark>${matched}</mark>${after}`;
         }
+
+        // Format Urdu with part of speech matching U-Dictionary
+        let urduText = (item.urdu || '').trim();
+        const posText = (item.pos || '').trim();
+        let formattedRight = urduText;
+        if (posText && !urduText.toLowerCase().includes(posText.toLowerCase())) {
+          formattedRight = `${urduText} <span class="dict-auto-pos-tag">${posText}</span>`;
+        }
+
         return `
           <div class="dict-auto-item" data-auto-word="${item.word}">
             <div class="dict-auto-left">
               <span class="dict-auto-badge">en</span>
               <span class="dict-auto-word">${highlightedWord}</span>
-              ${item.pos ? `<span class="dict-auto-pos">${item.pos}</span>` : ''}
             </div>
-            <div class="dict-auto-right urdu-text">${item.urdu || 'معنی دیکھیں'}</div>
+            <div class="dict-auto-right urdu-text">${formattedRight}</div>
           </div>
         `;
       }).join('')}
@@ -2396,6 +2442,57 @@ class VocabApp {
     });
   }
 
+  async fetchUrduForWord(word) {
+    const clean = (word || '').toLowerCase().trim();
+    if (!clean) return null;
+
+    // 1. Check storage cache
+    const cached = storage.getAutoTranslation(clean);
+    if (cached) return cached;
+
+    // 2. Check local database
+    const local = quickAutocompleteIndex.find(x => x.word.toLowerCase() === clean);
+    if (local && local.urdu) {
+      return { urdu: local.urdu, pos: local.pos || 'n.' };
+    }
+
+    // 3. Fast dictionary translation with POS via Google Translate dictionary API
+    try {
+      const res = await fetch(`https://translate.googleapis.com/translate_a/single?client=gtx&sl=en&tl=ur&dt=t&dt=bd&q=${encodeURIComponent(clean)}`);
+      if (!res.ok) return null;
+      const d = await res.json();
+      let urdu = d[0] && d[0][0] && d[0][0][0] ? d[0][0][0].trim() : '';
+      let pos = 'n.';
+
+      if (d[1] && Array.isArray(d[1]) && d[1].length > 0) {
+        const parts = [];
+        for (const entry of d[1]) {
+          const rawPos = (entry[0] || '').toLowerCase();
+          const p = rawPos.includes('noun') ? 'n.' :
+                    rawPos.includes('verb') ? 'v.' :
+                    rawPos.includes('adjective') ? 'adj.' :
+                    rawPos.includes('adverb') ? 'adv.' : rawPos + '.';
+          const words = (entry[1] || []).slice(0, 2).join('؛ ');
+          if (words) {
+            parts.push(`${words} ${p}`);
+          }
+        }
+        if (parts.length > 0) {
+          urdu = parts.join(' ؛ ');
+          pos = d[1][0][0].includes('verb') ? 'v.' : d[1][0][0].includes('adj') ? 'adj.' : 'n.';
+        }
+      }
+
+      if (urdu && urdu.toLowerCase() !== clean) {
+        const result = { urdu, pos };
+        storage.saveAutoTranslation(clean, result);
+        return result;
+      }
+    } catch (e) {}
+
+    return null;
+  }
+
   renderAutocomplete(query) {
     if (!this.dictAutocompleteDropdown) return;
     const q = (query || '').trim().toLowerCase();
@@ -2403,10 +2500,10 @@ class VocabApp {
     if (!q) {
       // Show Trending / Suggested Words (like U-Dictionary)
       const suggestions = [
-        { word: "Diaspora", pos: "n.", urdu: "تارک وطن / انتشار" },
-        { word: "Inspire", pos: "v.", urdu: "انسپائر / متاثر کرنا" },
-        { word: "Courage", pos: "n.", urdu: "ہمت / حوصلہ" },
-        { word: "Resilient", pos: "adj.", urdu: "ثابت قدم / باحوصلہ" },
+        { word: "Diaspora", pos: "n.", urdu: "تارک وطن / انتشار n." },
+        { word: "Inspire", pos: "v.", urdu: "انسپائر / متاثر کرنا v." },
+        { word: "Courage", pos: "n.", urdu: "ہمت / حوصلہ n." },
+        { word: "Resilient", pos: "adj.", urdu: "ثابت قدم / باحوصلہ adj." },
         { word: "Great minds think alike.", pos: "phrase", urdu: "عظیم ذہن یکساں سوچتے ہیں" }
       ];
       this.displayAutocompleteItems(suggestions, '', 'Suggestions');
@@ -2416,7 +2513,7 @@ class VocabApp {
     // Step 1: Instant local pool lookup (0ms latency)
     const pool = new Map();
     this.words.forEach(w => {
-      pool.set(w.word.toLowerCase(), { word: w.word, pos: w.posShort, urdu: (w.urduMeaning || '').split('/')[0].trim() });
+      pool.set(w.word.toLowerCase(), { word: w.word, pos: w.posShort || 'n.', urdu: (w.urduMeaning || '').split('/')[0].trim() });
     });
     quickAutocompleteIndex.forEach(item => {
       if (!pool.has(item.word.toLowerCase())) {
@@ -2425,9 +2522,12 @@ class VocabApp {
     });
 
     const allEntries = Array.from(pool.values());
-    const prefixMatches = allEntries.filter(item => item.word.toLowerCase().startsWith(q));
-    const containsMatches = allEntries.filter(item => !item.word.toLowerCase().startsWith(q) && (item.word.toLowerCase().includes(q) || (item.urdu && item.urdu.includes(q))));
-    let list = [...prefixMatches, ...containsMatches].slice(0, 8);
+    const prefixMatches = allEntries
+      .filter(item => item.word.toLowerCase().startsWith(q))
+      .sort((a, b) => a.word.length - b.word.length || a.word.localeCompare(b.word));
+    const containsMatches = allEntries
+      .filter(item => !item.word.toLowerCase().startsWith(q) && (item.word.toLowerCase().includes(q) || (item.urdu && item.urdu.includes(q))));
+    let list = [...prefixMatches, ...containsMatches].slice(0, 10);
 
     // Display instant local results
     if (list.length > 0) {
@@ -2436,7 +2536,7 @@ class VocabApp {
       this.dictAutocompleteDropdown.style.display = 'none';
     }
 
-    // Step 2: Datamuse API prediction fallback (debounced 120ms)
+    // Step 2: Datamuse API prediction with fast Urdu & POS enrichment (debounced 100ms)
     clearTimeout(this.autoDebounceTimer);
     if (q.length >= 2) {
       this.autoDebounceTimer = setTimeout(async () => {
@@ -2444,7 +2544,7 @@ class VocabApp {
           const currentInput = (this.dictSearchInput ? this.dictSearchInput.value : '').trim().toLowerCase();
           if (currentInput !== q) return;
 
-          const res = await fetch(`https://api.datamuse.com/sug?s=${encodeURIComponent(q)}&max=8`);
+          const res = await fetch(`https://api.datamuse.com/sug?s=${encodeURIComponent(q)}&max=10`);
           if (!res.ok) return;
           const data = await res.json();
           if (!Array.isArray(data) || data.length === 0) return;
@@ -2455,29 +2555,56 @@ class VocabApp {
           const mergedPool = new Map();
           list.forEach(item => mergedPool.set(item.word.toLowerCase(), item));
 
-          data.forEach(item => {
-            const w = item.word;
-            if (!w || mergedPool.has(w.toLowerCase())) return;
+          // Enrich Datamuse words with authentic Urdu translations & POS
+          const missingWords = [];
+          for (const item of data) {
+            const w = (item.word || '').trim();
+            if (!w || mergedPool.has(w.toLowerCase())) continue;
+
             const local = pool.get(w.toLowerCase());
             if (local) {
               mergedPool.set(w.toLowerCase(), local);
             } else {
-              mergedPool.set(w.toLowerCase(), {
-                word: w.charAt(0).toUpperCase() + w.slice(1),
-                pos: 'word',
-                urdu: 'معنی تلاش کریں'
-              });
+              const cached = storage.getAutoTranslation(w.toLowerCase());
+              if (cached) {
+                mergedPool.set(w.toLowerCase(), { word: w, pos: cached.pos, urdu: cached.urdu });
+              } else {
+                missingWords.push(w);
+              }
             }
-          });
+          }
 
-          const updatedList = Array.from(mergedPool.values()).slice(0, 8);
+          // Fetch translations for missing words concurrently
+          if (missingWords.length > 0) {
+            const translationPromises = missingWords.slice(0, 6).map(async (mw) => {
+              const trans = await this.fetchUrduForWord(mw);
+              if (trans) {
+                mergedPool.set(mw.toLowerCase(), {
+                  word: mw,
+                  pos: trans.pos || 'n.',
+                  urdu: trans.urdu
+                });
+              }
+            });
+            await Promise.all(translationPromises);
+          }
+
+          // Re-sort: exact prefix matches first, ordered by length
+          const finalEntries = Array.from(mergedPool.values());
+          const finalPrefix = finalEntries
+            .filter(item => item.word.toLowerCase().startsWith(q))
+            .sort((a, b) => a.word.length - b.word.length || a.word.localeCompare(b.word));
+          const finalContains = finalEntries
+            .filter(item => !item.word.toLowerCase().startsWith(q));
+
+          const updatedList = [...finalPrefix, ...finalContains].slice(0, 10);
           if (updatedList.length > 0) {
             this.displayAutocompleteItems(updatedList, q, 'Matching Words');
           }
         } catch (e) {
-          // Datamuse offline or blocked; silently keep local matches
+          // Keep current matches safely
         }
-      }, 120);
+      }, 100);
     }
   }
 

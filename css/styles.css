@@ -1467,12 +1467,13 @@ body {
 }
 
 .dict-auto-badge {
-  background: rgba(14, 165, 233, 0.12);
-  color: #0284c7;
+  background: rgba(244, 63, 94, 0.12);
+  color: #f43f5e;
+  border: 0.5px solid rgba(244, 63, 94, 0.28);
   font-size: 0.68rem;
   font-weight: 700;
-  border-radius: 6px;
-  padding: 2px 6px;
+  border-radius: 4px;
+  padding: 1px 5px;
   text-transform: lowercase;
   letter-spacing: 0.02em;
 }
@@ -1481,25 +1482,29 @@ body {
   font-size: 0.94rem;
   font-weight: 600;
   color: var(--text-title);
+  white-space: nowrap;
 }
 
 .dict-auto-word mark {
   background: transparent;
-  color: #e11d48;
+  color: #f43f5e;
   font-weight: 800;
 }
 
-.dict-auto-pos {
-  font-size: 0.76rem;
-  color: var(--text-faint);
+.dict-auto-pos-tag {
+  font-size: 0.74rem;
+  color: #f43f5e;
   font-style: italic;
+  font-weight: 600;
+  margin: 0 4px;
 }
 
 .dict-auto-right {
-  font-size: 1rem;
+  font-size: 0.88rem;
   color: var(--text-body);
   direction: rtl;
-  max-width: 50%;
+  text-align: right;
+  max-width: 68%;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
