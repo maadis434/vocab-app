@@ -3004,6 +3004,8 @@ class VocabApp {
 
           <!-- Tab Content: Concise & Detailed -->
           ${this.dictActiveTab !== 'examples' ? `
+            <!-- [FEATURE PAUSED]: "Instead of / Use this" temporarily hidden per user request, will be updated and restored later -->
+            ${false && w.insteadOf ? `
             <div class="comparison-container" style="margin-bottom: 16px;">
               <div>
                 <div class="comparison-header">Instead of</div>
@@ -3018,6 +3020,7 @@ class VocabApp {
                 </ul>
               </div>
             </div>
+            ` : ''}
 
             ${w.howToUse ? `
               <div class="editorial-section" style="margin-bottom: 16px;">
@@ -3181,6 +3184,8 @@ class VocabApp {
 
       <div class="urdu-hero-text urdu-text" style="font-size: 1.8rem; margin: 4px 0 16px 0;">${word.urduMeaning}</div>
 
+      <!-- [FEATURE PAUSED]: "Instead of / Use this" temporarily hidden per user request, will be updated and restored later -->
+      ${false && word.insteadOf ? `
       <div class="comparison-container" style="margin-bottom: 20px;">
         <div>
           <div class="comparison-header">Instead of</div>
@@ -3195,6 +3200,7 @@ class VocabApp {
           </ul>
         </div>
       </div>
+      ` : ''}
 
       <div class="editorial-section">
         <div class="editorial-section-title">Context & Usage</div>
