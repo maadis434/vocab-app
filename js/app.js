@@ -1180,9 +1180,6 @@ class VocabApp {
     this.langSwapBtn = document.getElementById('lang-swap-btn');
     this.dictAutocompleteDropdown = document.getElementById('dict-autocomplete-dropdown');
     this.refreshWordBtn = document.getElementById('refresh-word-btn');
-
-    // Home Dictionary Feature Tile (Only Dictionary as requested)
-    this.tileDictBtn = document.getElementById('tile-dict-btn');
     
     // AI Key Modal Elements
     this.themeToggleBtn = document.getElementById('theme-toggle-btn');
@@ -1450,16 +1447,6 @@ class VocabApp {
       this.langSwapBtn.addEventListener('click', () => {
         this.langSwapBtn.classList.toggle('rotated');
         this.showToast("Language: English ⇄ Urdu");
-      });
-    }
-
-    // Home Dictionary Feature Tile
-    if (this.tileDictBtn) {
-      this.tileDictBtn.addEventListener('click', () => {
-        if (this.dictSearchInput) {
-          this.dictSearchInput.focus();
-          this.dictSearchInput.scrollIntoView({ behavior: 'smooth', block: 'center' });
-        }
       });
     }
 
