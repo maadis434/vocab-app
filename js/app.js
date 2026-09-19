@@ -1175,14 +1175,14 @@ class VocabApp {
     this.dictSearchInput = document.getElementById('dict-search-input');
     this.dictSearchBtn = document.getElementById('dict-search-btn');
     this.dictClearBtn = document.getElementById('dict-clear-btn');
+    this.dictPasteBtn = document.getElementById('dict-paste-btn');
+    this.dictVoiceBtn = document.getElementById('dict-voice-btn');
+    this.langSwapBtn = document.getElementById('lang-swap-btn');
     this.dictAutocompleteDropdown = document.getElementById('dict-autocomplete-dropdown');
     this.refreshWordBtn = document.getElementById('refresh-word-btn');
 
-    // Home Quick Action Tiles
+    // Home Dictionary Feature Tile (Only Dictionary as requested)
     this.tileDictBtn = document.getElementById('tile-dict-btn');
-    this.tileGrammarBtn = document.getElementById('tile-grammar-btn');
-    this.tilePracticeBtn = document.getElementById('tile-practice-btn');
-    this.tileFavBtn = document.getElementById('tile-fav-btn');
     
     // AI Key Modal Elements
     this.themeToggleBtn = document.getElementById('theme-toggle-btn');
@@ -1385,33 +1385,81 @@ class VocabApp {
       }
     });
 
-    // Home Quick Navigation Tiles
+    // U-Dictionary Paste Button
+    if (this.dictPasteBtn) {
+      this.dictPasteBtn.addEventListener('click', async () => {
+        try {
+          let text = '';
+          if (navigator.clipboard && navigator.clipboard.readText) {
+            text = await navigator.clipboard.readText();
+          }
+          if (text) {
+            if (this.dictSearchInput) {
+              this.dictSearchInput.value = text.trim();
+              this.searchQuery = text.trim();
+              if (this.dictClearBtn) this.dictClearBtn.style.display = 'flex';
+              this.performSearch(this.searchQuery);
+            }
+          } else {
+            if (this.dictSearchInput) this.dictSearchInput.focus();
+          }
+        } catch (err) {
+          if (this.dictSearchInput) this.dictSearchInput.focus();
+        }
+      });
+    }
+
+    // U-Dictionary Voice Search Button
+    if (this.dictVoiceBtn) {
+      this.dictVoiceBtn.addEventListener('click', () => {
+        const SpeechRec = window.SpeechRecognition || window.webkitSpeechRecognition;
+        if (!SpeechRec) {
+          this.showToast("Voice search not supported in this browser");
+          if (this.dictSearchInput) this.dictSearchInput.focus();
+          return;
+        }
+        try {
+          const rec = new SpeechRec();
+          rec.lang = 'en-US';
+          rec.start();
+          this.dictVoiceBtn.classList.add('recording-pulse');
+          this.showToast("Listening... Speak now");
+          rec.onresult = (e) => {
+            const transcript = e.results[0][0].transcript;
+            if (transcript) {
+              this.dictSearchInput.value = transcript.trim();
+              this.searchQuery = transcript.trim();
+              if (this.dictClearBtn) this.dictClearBtn.style.display = 'flex';
+              this.performSearch(this.searchQuery);
+            }
+          };
+          rec.onerror = () => {
+            this.dictVoiceBtn.classList.remove('recording-pulse');
+          };
+          rec.onend = () => {
+            this.dictVoiceBtn.classList.remove('recording-pulse');
+          };
+        } catch (err) {
+          if (this.dictSearchInput) this.dictSearchInput.focus();
+        }
+      });
+    }
+
+    // Language Swap Button
+    if (this.langSwapBtn) {
+      this.langSwapBtn.addEventListener('click', () => {
+        this.langSwapBtn.classList.toggle('rotated');
+        this.showToast("Language: English ⇄ Urdu");
+      });
+    }
+
+    // Home Dictionary Feature Tile
     if (this.tileDictBtn) {
       this.tileDictBtn.addEventListener('click', () => {
         if (this.dictSearchInput) {
           this.dictSearchInput.focus();
           this.dictSearchInput.scrollIntoView({ behavior: 'smooth', block: 'center' });
         }
-      });
-    }
-
-    if (this.tileGrammarBtn) {
-      this.tileGrammarBtn.addEventListener('click', () => {
-        this.resetGrammarState();
-        this.moreSubView = 'grammar';
-        this.switchTab('more');
-      });
-    }
-
-    if (this.tilePracticeBtn) {
-      this.tilePracticeBtn.addEventListener('click', () => {
-        this.switchTab('practice');
-      });
-    }
-
-    if (this.tileFavBtn) {
-      this.tileFavBtn.addEventListener('click', () => {
-        this.switchTab('favorites');
       });
     }
 

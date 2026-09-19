@@ -28,52 +28,69 @@
     
     <!-- Top Action Header -->
     <header class="app-header">
-      <h1 class="brand-title">Vocab</h1>
+      <h1 class="brand-title">U Dictionary</h1>
     </header>
 
     <!-- Scrollable Content Body -->
     <div class="app-body">
       
-      <!-- 1. HOME TAB (With Dictionary Search + Quick Features + Word of Day) -->
+      <!-- 1. HOME TAB (U-Dictionary Style Search Card + Dictionary Tile + Word of Day) -->
       <section class="tab-view active" id="home-tab">
         <div style="margin-top: 4px;">
-          <!-- Language Indicator Pill -->
-          <div class="home-lang-pill-row">
-            <div class="home-lang-pill">
-              <span>English</span>
-              <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="17 1 21 5 17 9"></polyline><path d="M3 11V9a4 4 0 0 1 4-4h14"></path><polyline points="7 23 3 19 7 15"></polyline><path d="M21 13v2a4 4 0 0 1-4 4H3"></path></svg>
-              <span>Urdu</span>
-            </div>
-          </div>
+          
+          <!-- U-Dictionary Unified Search Card -->
+          <div class="udict-search-card" id="dict-search-wrap">
+            <!-- Language Selection Row inside Card -->
+            <div class="udict-lang-row">
+              <div class="udict-lang-chip" id="lang-from-chip">
+                <span class="udict-lang-circle en">en</span>
+                <span class="udict-lang-text">English</span>
+                <span class="udict-lang-caret">▾</span>
+              </div>
 
-          <!-- Dictionary Search Bar with Live Autocomplete -->
-          <div class="search-bar-wrap" id="dict-search-wrap">
-            <input type="text" class="search-minimal-input" id="dict-search-input" placeholder="Search English word or Urdu maani..." autocomplete="off">
-            <button class="search-clear-btn" id="dict-clear-btn" style="display: none;" title="Clear search">✕</button>
-            <button class="search-action-btn" id="dict-search-btn" title="Search">
-              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
-            </button>
+              <button class="udict-swap-btn" id="lang-swap-btn" title="Swap languages">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M7 16V4M7 4L3 8M7 4L11 8M17 8V20M17 20L21 16M17 20L13 16"/></svg>
+              </button>
+
+              <div class="udict-lang-chip" id="lang-to-chip">
+                <span class="udict-lang-circle ur">ur</span>
+                <span class="udict-lang-text">Urdu</span>
+                <span class="udict-lang-caret">▾</span>
+              </div>
+            </div>
+
+            <!-- Input and Action Buttons Row -->
+            <div class="udict-input-row">
+              <input type="text" class="udict-main-search-input" id="dict-search-input" placeholder="Enter text" autocomplete="off">
+              <div class="udict-input-actions">
+                <button class="udict-clear-btn" id="dict-clear-btn" style="display: none;" title="Clear search">✕</button>
+                <button class="udict-action-icon-btn" id="dict-paste-btn" title="Paste from clipboard">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+                </button>
+                <button class="udict-action-icon-btn" id="dict-voice-btn" title="Voice search">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"></path><path d="M19 10v2a7 7 0 0 1-14 0v-2"></path><line x1="12" y1="19" x2="12" y2="23"></line><line x1="8" y1="23" x2="16" y2="23"></line></svg>
+                </button>
+                <button id="dict-search-btn" style="display: none;"></button>
+              </div>
+            </div>
+
             <!-- Live Autocomplete Suggestions Dropdown -->
             <div class="dict-autocomplete-dropdown" id="dict-autocomplete-dropdown" style="display: none;"></div>
           </div>
 
-          <!-- Quick Navigation Tiles (Like U-Dictionary) -->
-          <div class="home-quick-tiles-grid" id="home-quick-tiles">
-            <div class="home-tile-card" id="tile-dict-btn" title="Focus Dictionary Search">
-              <span class="home-tile-icon">📖</span>
-              <span class="home-tile-label">Dictionary</span>
-            </div>
-            <div class="home-tile-card" id="tile-grammar-btn" title="Grammar Checker">
-              <span class="home-tile-icon">✍️</span>
-              <span class="home-tile-label">Grammar</span>
-            </div>
-            <div class="home-tile-card" id="tile-practice-btn" title="Flashcard Practice">
-              <span class="home-tile-icon">🎴</span>
-              <span class="home-tile-label">Practice</span>
-            </div>
-            <div class="home-tile-card" id="tile-fav-btn" title="Saved Favorites">
-              <span class="home-tile-icon">⭐</span>
-              <span class="home-tile-label">Favorites</span>
+          <!-- Quick Tiles Section (Only Dictionary tile as requested) -->
+          <div class="udict-home-tiles-wrap">
+            <div class="udict-feature-tile" id="tile-dict-btn" title="Open Dictionary">
+              <div class="udict-tile-left">
+                <div class="udict-tile-emblem">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>
+                </div>
+                <div class="udict-tile-content">
+                  <div class="udict-tile-heading">Dictionary</div>
+                  <div class="udict-tile-desc">English to Urdu • Oxford & Slang Definitions</div>
+                </div>
+              </div>
+              <div class="udict-tile-arrow">›</div>
             </div>
           </div>
 
