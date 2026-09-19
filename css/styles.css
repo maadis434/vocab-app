@@ -1456,6 +1456,8 @@ body {
 
 .dict-auto-item:hover, .dict-auto-item.active {
   background: var(--bg-search);
+  border-left: 3px solid #0284c7;
+  padding-left: 11px;
 }
 
 .dict-auto-left {

@@ -252,32 +252,852 @@ const defaultVocabulary = [
   }
 ];
 
-// Built-in Quick Autocomplete Index with Urdu Meanings
+// Built-in Quick Autocomplete Index with Urdu Meanings (Comprehensive A-Z Core Vocabulary)
 const quickAutocompleteIndex = [
-  { word: "Diaspora", pos: "n.", urdu: "تارک وطن / انتشار" },
-  { word: "Dias", pos: "n.", urdu: "دیس / چبوترہ" },
-  { word: "Diastasic", pos: "adj.", urdu: "معکوس؛ داستان سے متعلق" },
-  { word: "Diastolic", pos: "adj.", urdu: "انبساطی (طبی)" },
-  { word: "Diasporic", pos: "adj.", urdu: "تارکینِ وطن سے متعلق" },
-  { word: "Inspire", pos: "v.", urdu: "انسپائر / متاثر کرنا" },
-  { word: "Courage", pos: "n.", urdu: "ہمت / حوصلہ" },
-  { word: "Resilient", pos: "adj.", urdu: "ثابت قدم / باحوصلہ" },
-  { word: "Eloquent", pos: "adj.", urdu: "خوش گفتار / فصیح و بلیغ" },
-  { word: "Pragmatic", pos: "adj.", urdu: "عملی پسند / حقیقت پسندانہ" },
-  { word: "Meticulous", pos: "adj.", urdu: "باریک بین / محتاط" },
-  { word: "Empathy", pos: "n.", urdu: "احساسِ ہمدردی" },
-  { word: "Persevere", pos: "v.", urdu: "ڈٹے رہنا / مسلسل محنت" },
-  { word: "Candid", pos: "adj.", urdu: "کھرا / بے باک" },
-  { word: "Procrastinate", pos: "v.", urdu: "ٹال مٹول کرنا / سستی" },
+  // A
+  { word: "Ability", pos: "n.", urdu: "قابلیت / صلاحیت" },
+  { word: "About", pos: "prep.", urdu: "کے بارے میں / متعلق" },
+  { word: "Accept", pos: "v.", urdu: "قبول کرنا / ماننا" },
+  { word: "Accurate", pos: "adj.", urdu: "درست / صحیح" },
+  { word: "Achieve", pos: "v.", urdu: "حاصل کرنا / کامیابی پانا" },
+  { word: "Action", pos: "n.", urdu: "عمل / کارروائی" },
+  { word: "Active", pos: "adj.", urdu: "چست / سرگرم" },
+  { word: "Admire", pos: "v.", urdu: "تعریف کرنا / پسند کرنا" },
+  { word: "Advice", pos: "n.", urdu: "نصیحت / مشورہ" },
+  { word: "Afraid", pos: "adj.", urdu: "خوفزدہ / ڈرا ہوا" },
+  { word: "After", pos: "prep.", urdu: "بعد میں / پیچھے" },
+  { word: "Again", pos: "adv.", urdu: "دوبارہ / پھر سے" },
+  { word: "Agree", pos: "v.", urdu: "متفق ہونا / راضی ہونا" },
+  { word: "Allow", pos: "v.", urdu: "اجازت دینا" },
+  { word: "Alone", pos: "adj.", urdu: "تنہا / اکیلا" },
+  { word: "Always", pos: "adv.", urdu: "ہمیشہ / سدا" },
+  { word: "Amazing", pos: "adj.", urdu: "حیرت انگیز / زبردست" },
   { word: "Ambiguous", pos: "adj.", urdu: "مبہم / غیر واضح" },
-  { word: "Discuss", pos: "v.", urdu: "مباحثہ کرنا / گفتگو" },
-  { word: "Distance", pos: "n.", urdu: "دور رکھنا / فاصلہ" },
-  { word: "Disappeared", pos: "v.", urdu: "ناپید ہونا / غائب" },
-  { word: "Discovered", pos: "v.", urdu: "دریافت کیا ہوا" },
-  { word: "Diamonds", pos: "n.", urdu: "چوکھونٹ ہیرا / الماس" },
+  { word: "Ambition", pos: "n.", urdu: "عزم / بلند حوصلگی" },
+  { word: "Ancient", pos: "adj.", urdu: "قدیم / پرانا" },
+  { word: "Angry", pos: "adj.", urdu: "غصہ / ناراض" },
+  { word: "Answer", pos: "n.", urdu: "جواب / حل" },
+  { word: "Anxiety", pos: "n.", urdu: "اضطراب / بے چینی" },
+  { word: "Apologize", pos: "v.", urdu: "معافی مانگنا" },
+  { word: "Appear", pos: "v.", urdu: "ظاہر ہونا / نمودار ہونا" },
+  { word: "Apply", pos: "v.", urdu: "درخواست دینا / لاگو کرنا" },
+  { word: "Appreciate", pos: "v.", urdu: "قدردانی کرنا / سراہنا" },
+  { word: "Approach", pos: "n.", urdu: "طریقہ کار / رسائی" },
+  { word: "Argue", pos: "v.", urdu: "بحث کرنا / تکرار" },
+  { word: "Arrive", pos: "v.", urdu: "پہنچنا / آمد" },
+  { word: "Articulate", pos: "adj.", urdu: "صاف گو / واضح بیان کرنے والا" },
+  { word: "Assume", pos: "v.", urdu: "فرض کرنا / قیاس" },
+  { word: "Attempt", pos: "n.", urdu: "کوشش / سعی" },
+  { word: "Attitude", pos: "n.", urdu: "رویہ / اندازِ فکر" },
+  { word: "Attract", pos: "v.", urdu: "کھینچنا / متوجہ کرنا" },
+  { word: "Authentic", pos: "adj.", urdu: "اصلی / مستند" },
+  { word: "Avoid", pos: "v.", urdu: "بچنا / گریز کرنا" },
+  { word: "Aware", pos: "adj.", urdu: "باخبر / آگاہ" },
+  // B
+  { word: "Balance", pos: "n.", urdu: "توازن / اعتدال" },
+  { word: "Basic", pos: "adj.", urdu: "بنیادی / ابتدائی" },
+  { word: "Battle", pos: "n.", urdu: "جنگ / لڑائی" },
+  { word: "Beautiful", pos: "adj.", urdu: "خوبصورت / حسین" },
+  { word: "Beauty", pos: "n.", urdu: "خوبصورتی / حسن" },
+  { word: "Because", pos: "conj.", urdu: "کیونکہ / اس وجہ سے" },
+  { word: "Become", pos: "v.", urdu: "بننا / ہو جانا" },
+  { word: "Before", pos: "prep.", urdu: "پہلے / آگے" },
+  { word: "Begin", pos: "v.", urdu: "شروع کرنا / آغاز" },
+  { word: "Behave", pos: "v.", urdu: "برتاؤ کرنا / پیش آنا" },
+  { word: "Believe", pos: "v.", urdu: "یقین کرنا / ماننا" },
+  { word: "Belong", pos: "v.", urdu: "تعلق رکھنا / ملکیت ہونا" },
+  { word: "Benefit", pos: "n.", urdu: "فائدہ / نفع" },
+  { word: "Beside", pos: "prep.", urdu: "پہلو میں / قریب" },
+  { word: "Better", pos: "adj.", urdu: "بہتر / عمدہ" },
+  { word: "Beyond", pos: "prep.", urdu: "اس پار / بالاتر" },
+  { word: "Bitter", pos: "adj.", urdu: "کڑوا / تلخ" },
+  { word: "Blame", pos: "v.", urdu: "الزام لگانا" },
+  { word: "Bold", pos: "adj.", urdu: "بے باک / دلیر" },
+  { word: "Bother", pos: "v.", urdu: "تنگ کرنا / پریشان کرنا" },
+  { word: "Brave", pos: "adj.", urdu: "بہادر / شجاع" },
+  { word: "Break", pos: "v.", urdu: "توڑنا / وقفہ" },
+  { word: "Breath", pos: "n.", urdu: "سانس / دم" },
+  { word: "Brief", pos: "adj.", urdu: "مختصر / مجمل" },
+  { word: "Bright", pos: "adj.", urdu: "روشن / چمکدار" },
+  { word: "Brilliant", pos: "adj.", urdu: "ذہین / شاندار" },
+  { word: "Bring", pos: "v.", urdu: "لانا / پہنچانا" },
+  { word: "Broad", pos: "adj.", urdu: "وسیع / کشادہ" },
+  { word: "Build", pos: "v.", urdu: "تعمیر کرنا / بنانا" },
+  { word: "Burden", pos: "n.", urdu: "بوجھ / بار" },
+  { word: "Business", pos: "n.", urdu: "کاروبار / تجارت" },
+  { word: "Busy", pos: "adj.", urdu: "مصروف / مشغول" },
+  // C
+  { word: "Calm", pos: "adj.", urdu: "پرسکون / خاموش" },
+  { word: "Camera", pos: "n.", urdu: "کیمرہ / عکاسہ" },
+  { word: "Candid", pos: "adj.", urdu: "کھرا / بے باک" },
+  { word: "Capable", pos: "adj.", urdu: "اہل / قابل" },
+  { word: "Capture", pos: "v.", urdu: "گرفتار کرنا / قید کرنا" },
+  { word: "Careful", pos: "adj.", urdu: "محتاط / ہوشیار" },
+  { word: "Cause", pos: "n.", urdu: "وجہ / سبب" },
+  { word: "Celebrate", pos: "v.", urdu: "جشن منانا" },
+  { word: "Certain", pos: "adj.", urdu: "یقینی / پکا" },
+  { word: "Challenge", pos: "n.", urdu: "چیلنج / آزمائش" },
+  { word: "Chance", pos: "n.", urdu: "موقع / امکان" },
+  { word: "Change", pos: "v.", urdu: "تبدیل کرنا / بدلنا" },
+  { word: "Character", pos: "n.", urdu: "کردار / سیرت" },
+  { word: "Charge", pos: "v.", urdu: "قیمت لگانا / چارج" },
+  { word: "Charming", pos: "adj.", urdu: "دلکش / پرکشش" },
+  { word: "Cheap", pos: "adj.", urdu: "سستا / کم قیمت" },
+  { word: "Check", pos: "v.", urdu: "جانچنا / پڑتال" },
+  { word: "Choice", pos: "n.", urdu: "انتخاب / پسند" },
+  { word: "Choose", pos: "v.", urdu: "چننا / منتخب کرنا" },
+  { word: "Circumstance", pos: "n.", urdu: "حالات / کیفیت" },
+  { word: "Citizen", pos: "n.", urdu: "شہری / باشندہ" },
+  { word: "Clean", pos: "adj.", urdu: "صاف ستھرا" },
+  { word: "Clear", pos: "adj.", urdu: "واضح / صاف" },
+  { word: "Clever", pos: "adj.", urdu: "چالاک / ہوشیار" },
+  { word: "Climb", pos: "v.", urdu: "چڑھنا / بلندی پر جانا" },
+  { word: "Close", pos: "adj.", urdu: "قریب / بند کرنا" },
+  { word: "Collect", pos: "v.", urdu: "جمع کرنا / اکٹھا کرنا" },
+  { word: "Combine", pos: "v.", urdu: "ملانا / یکجا کرنا" },
+  { word: "Comfort", pos: "n.", urdu: "سکون / آرام" },
+  { word: "Common", pos: "adj.", urdu: "عام / مشترکہ" },
+  { word: "Company", pos: "n.", urdu: "کمپنی / صحبت" },
+  { word: "Compare", pos: "v.", urdu: "موازنہ کرنا" },
+  { word: "Compel", pos: "v.", urdu: "مجبور کرنا" },
+  { word: "Compete", pos: "v.", urdu: "مقابلہ کرنا" },
+  { word: "Complain", pos: "v.", urdu: "شکایت کرنا" },
+  { word: "Complete", pos: "adj.", urdu: "مکمل / پورا" },
+  { word: "Complex", pos: "adj.", urdu: "پیچیدہ / الجھا ہوا" },
+  { word: "Conceal", pos: "v.", urdu: "چھپانا / پوشیدہ رکھنا" },
+  { word: "Concept", pos: "n.", urdu: "تصور / نظریہ" },
+  { word: "Concern", pos: "n.", urdu: "تشویش / فکر" },
+  { word: "Condition", pos: "n.", urdu: "حالت / شرط" },
+  { word: "Confident", pos: "adj.", urdu: "پر اعتماد / پر یقین" },
+  { word: "Confirm", pos: "v.", urdu: "تصدیق کرنا" },
+  { word: "Conflict", pos: "n.", urdu: "تنازعہ / کشمکش" },
+  { word: "Connect", pos: "v.", urdu: "جوڑنا / رابطہ کرنا" },
+  { word: "Conscious", pos: "adj.", urdu: "با شعور / باخبر" },
+  { word: "Consider", pos: "v.", urdu: "غور کرنا / سمجھنا" },
+  { word: "Consistent", pos: "adj.", urdu: "مستقل مزاج / ہم آہنگ" },
+  { word: "Constant", pos: "adj.", urdu: "مسلسل / دائمی" },
+  { word: "Construct", pos: "v.", urdu: "تعمیر کرنا / بنانا" },
+  { word: "Contact", pos: "n.", urdu: "رابطہ / تعلق" },
+  { word: "Contain", pos: "v.", urdu: "شامل ہونا / سمونا" },
+  { word: "Content", pos: "adj.", urdu: "مطمئن / مواد" },
+  { word: "Continue", pos: "v.", urdu: "جاری رکھنا" },
+  { word: "Control", pos: "v.", urdu: "قابو پانا / کنٹرول" },
+  { word: "Convenient", pos: "adj.", urdu: "آسان / آرام دہ" },
+  { word: "Convince", pos: "v.", urdu: "قائل کرنا" },
+  { word: "Correct", pos: "adj.", urdu: "درست / صحیح" },
+  { word: "Courage", pos: "n.", urdu: "ہمت / حوصلہ" },
+  { word: "Create", pos: "v.", urdu: "تخلیق کرنا / بنانا" },
+  { word: "Crisis", pos: "n.", urdu: "بحران / نازک موڑ" },
+  { word: "Crucial", pos: "adj.", urdu: "انتہائی اہم / لازمی" },
+  { word: "Culture", pos: "n.", urdu: "ثقافت / تہذیب" },
+  { word: "Curious", pos: "adj.", urdu: "متجسس / جستجو والا" },
+  // D
+  { word: "Damage", pos: "n.", urdu: "نقصان / خرابی" },
+  { word: "Danger", pos: "n.", urdu: "خطرہ / اندیشہ" },
+  { word: "Dark", pos: "adj.", urdu: "اندھیرا / تاریک" },
+  { word: "Debate", pos: "n.", urdu: "مناظرہ / بحث" },
+  { word: "Decide", pos: "v.", urdu: "فیصلہ کرنا" },
+  { word: "Decision", pos: "n.", urdu: "فیصلہ / ارادہ" },
+  { word: "Declare", pos: "v.", urdu: "اعلان کرنا" },
+  { word: "Decline", pos: "v.", urdu: "انکار کرنا / زوال" },
+  { word: "Deep", pos: "adj.", urdu: "گہرا / عمیق" },
+  { word: "Defend", pos: "v.", urdu: "دفاع کرنا / حفاظت" },
+  { word: "Define", pos: "v.", urdu: "تعریف کرنا / واضح کرنا" },
+  { word: "Delay", pos: "v.", urdu: "تاخیر کرنا / دیر" },
+  { word: "Deliberate", pos: "adj.", urdu: "دانستہ / سوچا سمجھا" },
+  { word: "Delicate", pos: "adj.", urdu: "نازک / نفیس" },
+  { word: "Delight", pos: "n.", urdu: "خوشی / مسرت" },
+  { word: "Deliver", pos: "v.", urdu: "پہنچانا / سپرد کرنا" },
+  { word: "Demand", pos: "n.", urdu: "مطالبہ / مانگ" },
+  { word: "Depend", pos: "v.", urdu: "انحصار کرنا" },
+  { word: "Describe", pos: "v.", urdu: "بیان کرنا / تفصیل دینا" },
+  { word: "Deserve", pos: "v.", urdu: "حقدار ہونا" },
+  { word: "Design", pos: "n.", urdu: "ڈیزائن / نقشہ" },
+  { word: "Desire", pos: "n.", urdu: "خواہش / تمنا" },
+  { word: "Desperate", pos: "adj.", urdu: "مایوس / بے چین" },
+  { word: "Destroy", pos: "v.", urdu: "تباہ کرنا / برباد" },
+  { word: "Detail", pos: "n.", urdu: "تفصیل / جزئیات" },
+  { word: "Determine", pos: "v.", urdu: "عزم کرنا / طے کرنا" },
+  { word: "Develop", pos: "v.", urdu: "ترقی دینا / پروان چڑھنا" },
+  { word: "Device", pos: "n.", urdu: "آلہ / تدبیر" },
+  { word: "Devote", pos: "v.", urdu: "وقف کرنا / نچھاور کرنا" },
+  { word: "Diamonds", pos: "n.", urdu: "ہیرے / الماس" },
   { word: "Diary", pos: "n.", urdu: "روزنامچہ / ڈائری" },
+  { word: "Diaspora", pos: "n.", urdu: "تارک وطن / انتشار" },
+  { word: "Difference", pos: "n.", urdu: "فرق / اختلاف" },
   { word: "Different", pos: "adj.", urdu: "مختلف / جداگانہ" },
-  { word: "Great minds think alike.", pos: "phrase", urdu: "عظیم ذہن یکساں سوچتے ہیں" }
+  { word: "Difficult", pos: "adj.", urdu: "مشکل / کٹھن" },
+  { word: "Dignity", pos: "n.", urdu: "وقار / عزتِ نفس" },
+  { word: "Diligent", pos: "adj.", urdu: "محنتی / انتھک" },
+  { word: "Direct", pos: "adj.", urdu: "براہِ راست / سیدھا" },
+  { word: "Disaster", pos: "n.", urdu: "تباہی / آفت" },
+  { word: "Discipline", pos: "n.", urdu: "نظم و ضبط" },
+  { word: "Discover", pos: "v.", urdu: "دریافت کرنا" },
+  { word: "Discuss", pos: "v.", urdu: "گفتگو کرنا / تبادلہ خیال" },
+  { word: "Disease", pos: "n.", urdu: "بیماری / مرض" },
+  { word: "Dismiss", pos: "v.", urdu: "برطرف کرنا / رد کرنا" },
+  { word: "Display", pos: "v.", urdu: "دکھانا / نمائش کرنا" },
+  { word: "Distance", pos: "n.", urdu: "فاصلہ / دوری" },
+  { word: "Distinct", pos: "adj.", urdu: "نمایاں / منفرد" },
+  { word: "Diverse", pos: "adj.", urdu: "متنوع / گوناگوں" },
+  { word: "Divide", pos: "v.", urdu: "تقسیم کرنا / بانٹنا" },
+  { word: "Divine", pos: "adj.", urdu: "الہامی / مقدس" },
+  { word: "Doubt", pos: "n.", urdu: "شک / شبہ" },
+  { word: "Dramatic", pos: "adj.", urdu: "ڈرامائی / سنسنی خیز" },
+  { word: "Dream", pos: "n.", urdu: "خواب / آرزو" },
+  { word: "Duty", pos: "n.", urdu: "فرض / ذمہ داری" },
+  // E
+  { word: "Eager", pos: "adj.", urdu: "شائق / بے تاب" },
+  { word: "Early", pos: "adv.", urdu: "جلد / وقت سے پہلے" },
+  { word: "Earn", pos: "v.", urdu: "کمانا / حاصل کرنا" },
+  { word: "Easy", pos: "adj.", urdu: "آسان / سہل" },
+  { word: "Economy", pos: "n.", urdu: "معیشت / کفایت شعاری" },
+  { word: "Educate", pos: "v.", urdu: "تعلیم دینا / سکھانا" },
+  { word: "Effect", pos: "n.", urdu: "اثر / نتیجہ" },
+  { word: "Efficient", pos: "adj.", urdu: "با صلاحیت / چاق و چوبند" },
+  { word: "Effort", pos: "n.", urdu: "کوشش / محنت" },
+  { word: "Elaborate", pos: "adj.", urdu: "جامع / مفصل" },
+  { word: "Elegant", pos: "adj.", urdu: "حسین / باوقار" },
+  { word: "Eloquent", pos: "adj.", urdu: "خوش گفتار / فصیح" },
+  { word: "Embarrass", pos: "v.", urdu: "شرمندہ کرنا" },
+  { word: "Emerge", pos: "v.", urdu: "ابھرنا / سامنے آنا" },
+  { word: "Emotion", pos: "n.", urdu: "جذبہ / احساس" },
+  { word: "Emphasis", pos: "n.", urdu: "زور / تاکید" },
+  { word: "Empathy", pos: "n.", urdu: "احساسِ ہمدردی" },
+  { word: "Employ", pos: "v.", urdu: "ملازمت دینا / استعمال کرنا" },
+  { word: "Enable", pos: "v.", urdu: "قابل بنانا / اختیار دینا" },
+  { word: "Encourage", pos: "v.", urdu: "حوصلہ افزائی کرنا" },
+  { word: "Endure", pos: "v.", urdu: "برداشت کرنا / جھیلنا" },
+  { word: "Energy", pos: "n.", urdu: "توانائی / قوت" },
+  { word: "Engage", pos: "v.", urdu: "مصروف ہونا / مشغول کرنا" },
+  { word: "Enhance", pos: "v.", urdu: "بڑھانا / نکھارنا" },
+  { word: "Enjoy", pos: "v.", urdu: "لطف اندوز ہونا" },
+  { word: "Enormous", pos: "adj.", urdu: "بہت بڑا / وسیع" },
+  { word: "Enough", pos: "adj.", urdu: "کافی / وافر" },
+  { word: "Ensure", pos: "v.", urdu: "یقینی بنانا" },
+  { word: "Entire", pos: "adj.", urdu: "پورا / تمام" },
+  { word: "Environment", pos: "n.", urdu: "ماحول / ارد گرد" },
+  { word: "Equal", pos: "adj.", urdu: "برابر / یکساں" },
+  { word: "Escape", pos: "v.", urdu: "بچ نکلنا / فرار" },
+  { word: "Essential", pos: "adj.", urdu: "لازمی / ضروری" },
+  { word: "Establish", pos: "v.", urdu: "قائم کرنا / بنیاد رکھنا" },
+  { word: "Estimate", pos: "v.", urdu: "تخمینہ لگانا / اندازہ" },
+  { word: "Eternal", pos: "adj.", urdu: "ہمیشہ رہنے والا / ابدی" },
+  { word: "Evaluate", pos: "v.", urdu: "جانچنا / تخمینہ کرنا" },
+  { word: "Event", pos: "n.", urdu: "واقعہ / تقریب" },
+  { word: "Evidence", pos: "n.", urdu: "ثبوت / شہادت" },
+  { word: "Exact", pos: "adj.", urdu: "عین / بالکل درست" },
+  { word: "Exaggerate", pos: "v.", urdu: "مبالغہ آرائی کرنا" },
+  { word: "Examine", pos: "v.", urdu: "معائنہ کرنا / جانچنا" },
+  { word: "Example", pos: "n.", urdu: "مثال / نمونہ" },
+  { word: "Excellent", pos: "adj.", urdu: "بہترین / شاندار" },
+  { word: "Exchange", pos: "v.", urdu: "تبادلہ کرنا" },
+  { word: "Excite", pos: "v.", urdu: "پرجوش کرنا" },
+  { word: "Execute", pos: "v.", urdu: "عملی جامہ پہنانا / انجام دینا" },
+  { word: "Exercise", pos: "n.", urdu: "ورزش / مشق" },
+  { word: "Exhaust", pos: "v.", urdu: "تھکا دینا / ختم کرنا" },
+  { word: "Exist", pos: "v.", urdu: "موجود ہونا / قائم رہنا" },
+  { word: "Expand", pos: "v.", urdu: "پھیلانا / وسعت دینا" },
+  { word: "Expect", pos: "v.", urdu: "توقع رکھنا / امید کرنا" },
+  { word: "Experience", pos: "n.", urdu: "تجربہ / مشاہدہ" },
+  { word: "Expert", pos: "n.", urdu: "ماہر / تجربہ کار" },
+  { word: "Explain", pos: "v.", urdu: "وضاحت کرنا / سمجھانا" },
+  { word: "Explore", pos: "v.", urdu: "کھوج لگانا / دریافت کرنا" },
+  { word: "Express", pos: "v.", urdu: "اظہار کرنا / ظاہر کرنا" },
+  { word: "Extend", pos: "v.", urdu: "بڑھانا / طوالت دینا" },
+  { word: "Extreme", pos: "adj.", urdu: "شدید / انتہا پسند" },
+  // F
+  { word: "Face", pos: "n.", urdu: "چہرہ / سامنا کرنا" },
+  { word: "Fact", pos: "n.", urdu: "حقیقت / سچائی" },
+  { word: "Fail", pos: "v.", urdu: "ناکام ہونا / ناکامی" },
+  { word: "Faith", pos: "n.", urdu: "ایمان / عقیدہ" },
+  { word: "False", pos: "adj.", urdu: "جھوٹا / غلط" },
+  { word: "Familiar", pos: "adj.", urdu: "مانوس / شناسا" },
+  { word: "Famous", pos: "adj.", urdu: "مشہور / معروف" },
+  { word: "Fancy", pos: "adj.", urdu: "شاندار / پر تکلف" },
+  { word: "Fast", pos: "adj.", urdu: "تیز / فوری" },
+  { word: "Fault", pos: "n.", urdu: "غلطی / نقص" },
+  { word: "Favor", pos: "n.", urdu: "احسان / عنایت" },
+  { word: "Fear", pos: "n.", urdu: "خوف / ڈر" },
+  { word: "Feature", pos: "n.", urdu: "خصوصیت / خدوخال" },
+  { word: "Feel", pos: "v.", urdu: "محسوس کرنا" },
+  { word: "Fierce", pos: "adj.", urdu: "خونخوار / شدید" },
+  { word: "Fight", pos: "v.", urdu: "لڑنا / جدوجہد" },
+  { word: "Final", pos: "adj.", urdu: "آخری / حتمی" },
+  { word: "Find", pos: "v.", urdu: "تلاش کرنا / پانا" },
+  { word: "Fine", pos: "adj.", urdu: "عمدہ / ٹھیک" },
+  { word: "Finish", pos: "v.", urdu: "ختم کرنا / تکمیل" },
+  { word: "Flexible", pos: "adj.", urdu: "لچکدار / نرم" },
+  { word: "Flourish", pos: "v.", urdu: "پھلنا پھولنا / ترقی کرنا" },
+  { word: "Flow", pos: "v.", urdu: "بہنا / روانی" },
+  { word: "Focus", pos: "n.", urdu: "توجہ / مرکز" },
+  { word: "Follow", pos: "v.", urdu: "پیروی کرنا / پیچھے چلنا" },
+  { word: "Force", pos: "n.", urdu: "طاقت / زبردستی" },
+  { word: "Foreign", pos: "adj.", urdu: "غیر ملکی / اجنبی" },
+  { word: "Forever", pos: "adv.", urdu: "ہمیشہ کے لیے" },
+  { word: "Forget", pos: "v.", urdu: "بھول جانا" },
+  { word: "Forgive", pos: "v.", urdu: "معاف کرنا / درگزر" },
+  { word: "Fortune", pos: "n.", urdu: "قسمت / دولت" },
+  { word: "Forward", pos: "adv.", urdu: "آگے کی طرف" },
+  { word: "Foster", pos: "v.", urdu: "پرورش کرنا / فروغ دینا" },
+  { word: "Freedom", pos: "n.", urdu: "آزادی / خود مختاری" },
+  { word: "Frequent", pos: "adj.", urdu: "اکثر / بار بار ہونے والا" },
+  { word: "Fresh", pos: "adj.", urdu: "تازہ / نیا" },
+  { word: "Friend", pos: "n.", urdu: "دوست / ساتھی" },
+  { word: "Future", pos: "n.", urdu: "مستقبل / آنے والا کل" },
+  // G
+  { word: "Gain", pos: "v.", urdu: "حاصل کرنا / فائدہ" },
+  { word: "Gather", pos: "v.", urdu: "اکٹھا کرنا / جمع ہونا" },
+  { word: "General", pos: "adj.", urdu: "عام / مجموعی" },
+  { word: "Generate", pos: "v.", urdu: "پیدا کرنا / بنانا" },
+  { word: "Generous", pos: "adj.", urdu: "سخی / فراخدل" },
+  { word: "Genius", pos: "n.", urdu: "ذہین فطین / نابغہ" },
+  { word: "Gentle", pos: "adj.", urdu: "نرم مزاج / شائستہ" },
+  { word: "Genuine", pos: "adj.", urdu: "خالص / اصلی" },
+  { word: "Gift", pos: "n.", urdu: "تحفہ / عطیہ" },
+  { word: "Global", pos: "adj.", urdu: "عالمی / بین الاقوامی" },
+  { word: "Glory", pos: "n.", urdu: "شان و شوکت / عظمت" },
+  { word: "Goal", pos: "n.", urdu: "مقصد / ہدف" },
+  { word: "Good", pos: "adj.", urdu: "اچھا / نیک" },
+  { word: "Gorgeous", pos: "adj.", urdu: "بہت خوبصورت / دلکش" },
+  { word: "Govern", pos: "v.", urdu: "حکومت کرنا / چلانا" },
+  { word: "Grace", pos: "n.", urdu: "فضل / نزاکت" },
+  { word: "Gradual", pos: "adj.", urdu: "رفتہ رفتہ / بتدریج" },
+  { word: "Grant", pos: "v.", urdu: "عطا کرنا / منظوری دینا" },
+  { word: "Grasp", pos: "v.", urdu: "پکڑنا / سمجھنا" },
+  { word: "Grateful", pos: "adj.", urdu: "شکر گزار / احسان مند" },
+  { word: "Great", pos: "adj.", urdu: "عظیم / بڑا" },
+  { word: "Grief", pos: "n.", urdu: "غم / رنج" },
+  { word: "Grow", pos: "v.", urdu: "بڑھنا / پروان چڑھنا" },
+  { word: "Guarantee", pos: "n.", urdu: "ضمانت / یقین دہانی" },
+  { word: "Guard", pos: "v.", urdu: "پہرا دینا / حفاظت کرنا" },
+  { word: "Guess", pos: "v.", urdu: "اندازہ لگانا / قیاس" },
+  { word: "Guide", pos: "v.", urdu: "رہنمائی کرنا" },
+  { word: "Guilt", pos: "n.", urdu: "جرم کا احساس / گناہ" },
+  // H
+  { word: "Habit", pos: "n.", urdu: "عادت / معمول" },
+  { word: "Handle", pos: "v.", urdu: "سنبھالنا / نمٹنا" },
+  { word: "Handsome", pos: "adj.", urdu: "وجیہہ / خوبصورت" },
+  { word: "Happen", pos: "v.", urdu: "واقع ہونا / رونما ہونا" },
+  { word: "Happy", pos: "adj.", urdu: "خوش / مسرور" },
+  { word: "Hard", pos: "adj.", urdu: "سخت / کٹھن" },
+  { word: "Harm", pos: "n.", urdu: "نقصان / ضرر" },
+  { word: "Harmony", pos: "n.", urdu: "ہم آہنگی / امن" },
+  { word: "Harsh", pos: "adj.", urdu: "سخت / کرخت" },
+  { word: "Hate", pos: "v.", urdu: "نفرت کرنا / بیر" },
+  { word: "Hazard", pos: "n.", urdu: "خطرہ / ہلاکت" },
+  { word: "Health", pos: "n.", urdu: "صحت / تندرستی" },
+  { word: "Hear", pos: "v.", urdu: "سننا / سماعت کرنا" },
+  { word: "Heart", pos: "n.", urdu: "دل / قلب" },
+  { word: "Heavy", pos: "adj.", urdu: "بھاری / وزنی" },
+  { word: "Help", pos: "v.", urdu: "مدد کرنا / اعانت" },
+  { word: "Heritage", pos: "n.", urdu: "ورثہ / میراث" },
+  { word: "Hesitate", pos: "v.", urdu: "ہچکچانا / جھجکنا" },
+  { word: "Hidden", pos: "adj.", urdu: "پوشیدہ / چھپا ہوا" },
+  { word: "Hide", pos: "v.", urdu: "چھپانا / چھپنا" },
+  { word: "High", pos: "adj.", urdu: "اونچا / بلند" },
+  { word: "History", pos: "n.", urdu: "تاریخ / ماضی" },
+  { word: "Hold", pos: "v.", urdu: "پکڑنا / تھامنا" },
+  { word: "Honest", pos: "adj.", urdu: "دیانت دار / سچا" },
+  { word: "Honor", pos: "n.", urdu: "عزت / شرف" },
+  { word: "Hope", pos: "n.", urdu: "امید / آس" },
+  { word: "Hospital", pos: "n.", urdu: "ہسپتال / شفا خانہ" },
+  { word: "Hostile", pos: "adj.", urdu: "دشمنانہ / مخالف" },
+  { word: "Huge", pos: "adj.", urdu: "بہت بڑا / دیو ہیکل" },
+  { word: "Human", pos: "n.", urdu: "انسان / بشر" },
+  { word: "Humble", pos: "adj.", urdu: "عاجز / خاکسار" },
+  { word: "Humor", pos: "n.", urdu: "مزاح / ظرافت" },
+  { word: "Hurry", pos: "v.", urdu: "جلدی کرنا / جلدی" },
+  { word: "Hurt", pos: "v.", urdu: "چوٹ پہنچانا / دکھ" },
+  // I
+  { word: "Idea", pos: "n.", urdu: "خیال / نظریہ" },
+  { word: "Identify", pos: "v.", urdu: "شناخت کرنا / پہچاننا" },
+  { word: "Identity", pos: "n.", urdu: "شناخت / پہچان" },
+  { word: "Ignore", pos: "v.", urdu: "نظر انداز کرنا" },
+  { word: "Illness", pos: "n.", urdu: "بیماری / عارضہ" },
+  { word: "Imagine", pos: "v.", urdu: "تصور کرنا / سوچنا" },
+  { word: "Immediate", pos: "adj.", urdu: "فوری / بر وقت" },
+  { word: "Immense", pos: "adj.", urdu: "بے پناہ / لامحدود" },
+  { word: "Impact", pos: "n.", urdu: "اثر / گہرا اثر" },
+  { word: "Important", pos: "adj.", urdu: "اہم / ضروری" },
+  { word: "Impress", pos: "v.", urdu: "متاثر کرنا" },
+  { word: "Improve", pos: "v.", urdu: "بہتر بنانا / ترقی" },
+  { word: "Include", pos: "v.", urdu: "شامل کرنا" },
+  { word: "Income", pos: "n.", urdu: "آمدنی / کمائی" },
+  { word: "Increase", pos: "v.", urdu: "اضافہ کرنا / بڑھانا" },
+  { word: "Indeed", pos: "adv.", urdu: "واقعی / بلا شبہ" },
+  { word: "Independence", pos: "n.", urdu: "آزادی / خود مختاری" },
+  { word: "Indicate", pos: "v.", urdu: "اشارہ کرنا / بتانا" },
+  { word: "Individual", pos: "n.", urdu: "فرد / انفرادی" },
+  { word: "Influence", pos: "n.", urdu: "اثر و رسوخ" },
+  { word: "Inform", pos: "v.", urdu: "مطلع کرنا / خبر دینا" },
+  { word: "Ingenious", pos: "adj.", urdu: "ذہین / پر حکمت" },
+  { word: "Initial", pos: "adj.", urdu: "ابتدائی / پہلا" },
+  { word: "Initiative", pos: "n.", urdu: "پہل کاری / اقدام" },
+  { word: "Injure", pos: "v.", urdu: "زخمی کرنا" },
+  { word: "Innocent", pos: "adj.", urdu: "معصوم / بے گناہ" },
+  { word: "Innovation", pos: "n.", urdu: "نئی ایجاد / جدت" },
+  { word: "Inside", pos: "prep.", urdu: "اندر / اندرون" },
+  { word: "Insight", pos: "n.", urdu: "بصیرت / اندرونی سمجھ" },
+  { word: "Insist", pos: "v.", urdu: "اصرار کرنا / بضد ہونا" },
+  { word: "Inspire", pos: "v.", urdu: "متاثر کرنا / حوصلہ افزائی" },
+  { word: "Instant", pos: "adj.", urdu: "فوری / لمحہ بھر" },
+  { word: "Instead", pos: "adv.", urdu: "بجائے / کے عوض" },
+  { word: "Instinct", pos: "n.", urdu: "فطرت / جبلت" },
+  { word: "Instruct", pos: "v.", urdu: "ہدایت دینا / سکھانا" },
+  { word: "Insult", pos: "v.", urdu: "توہین کرنا / بے عزتی" },
+  { word: "Integrate", pos: "v.", urdu: "ضم کرنا / یکجا کرنا" },
+  { word: "Integrity", pos: "n.", urdu: "دیانت داری / سالمیت" },
+  { word: "Intellect", pos: "n.", urdu: "عقل / فہم و فراست" },
+  { word: "Intense", pos: "adj.", urdu: "شدید / پر جوش" },
+  { word: "Intention", pos: "n.", urdu: "نیت / ارادہ" },
+  { word: "Interest", pos: "n.", urdu: "دلچسپی / فائدہ" },
+  { word: "Interrupt", pos: "v.", urdu: "مداخلت کرنا / ٹوکنا" },
+  { word: "Introduce", pos: "v.", urdu: "تعارف کروانا" },
+  { word: "Invent", pos: "v.", urdu: "ایجاد کرنا" },
+  { word: "Invest", pos: "v.", urdu: "سرمایہ کاری کرنا" },
+  { word: "Investigate", pos: "v.", urdu: "تحقیقات کرنا" },
+  { word: "Invite", pos: "v.", urdu: "دعوت دینا" },
+  { word: "Involve", pos: "v.", urdu: "شامل کرنا / الجھانا" },
+  { word: "Issue", pos: "n.", urdu: "مسئلہ / معاملہ" },
+  // J
+  { word: "Jealous", pos: "adj.", urdu: "حاسد / جلنے والا" },
+  { word: "Job", pos: "n.", urdu: "نوکری / کام" },
+  { word: "Join", pos: "v.", urdu: "شامل ہونا / جڑنا" },
+  { word: "Journey", pos: "n.", urdu: "سفر / مسافت" },
+  { word: "Joy", pos: "n.", urdu: "خوشی / شادمانی" },
+  { word: "Judge", pos: "v.", urdu: "فیصلہ کرنا / پرکھنا" },
+  { word: "Judgment", pos: "n.", urdu: "فیصلہ / فہم" },
+  { word: "Justice", pos: "n.", urdu: "انصاف / عدل" },
+  { word: "Justify", pos: "v.", urdu: "جواز پیش کرنا" },
+  // K
+  { word: "Keen", pos: "adj.", urdu: "پر شوق / باریک بین" },
+  { word: "Keep", pos: "v.", urdu: "رکھنا / سنبھالنا" },
+  { word: "Kind", pos: "adj.", urdu: "مہربان / شفیق" },
+  { word: "Knowledge", pos: "n.", urdu: "علم / معلومات" },
+  // L
+  { word: "Labor", pos: "n.", urdu: "محنت / مزدوری" },
+  { word: "Lack", pos: "n.", urdu: "کمی / فقدان" },
+  { word: "Language", pos: "n.", urdu: "زبان / بولی" },
+  { word: "Large", pos: "adj.", urdu: "بڑا / وسیع" },
+  { word: "Last", pos: "adj.", urdu: "آخری / پچھلا" },
+  { word: "Late", pos: "adj.", urdu: "دیر سے / تاخیر" },
+  { word: "Laugh", pos: "v.", urdu: "ہنسنا / قہقہہ" },
+  { word: "Launch", pos: "v.", urdu: "شروع کرنا / داغنا" },
+  { word: "Law", pos: "n.", urdu: "قانون / ضابطہ" },
+  { word: "Lead", pos: "v.", urdu: "رہنمائی کرنا / آگے ہونا" },
+  { word: "Leader", pos: "n.", urdu: "رہنما / قائد" },
+  { word: "Learn", pos: "v.", urdu: "سیکھنا / علم حاصل کرنا" },
+  { word: "Leave", pos: "v.", urdu: "چھوڑنا / روانہ ہونا" },
+  { word: "Legal", pos: "adj.", urdu: "قانونی / جائز" },
+  { word: "Level", pos: "n.", urdu: "سطح / درجہ" },
+  { word: "Liberty", pos: "n.", urdu: "آزادی / خودمختاری" },
+  { word: "Life", pos: "n.", urdu: "زندگی / حیات" },
+  { word: "Light", pos: "n.", urdu: "روشنی / ہلکا" },
+  { word: "Limit", pos: "n.", urdu: "حد / انتہا" },
+  { word: "Listen", pos: "v.", urdu: "غور سے سننا" },
+  { word: "Live", pos: "v.", urdu: "جینا / رہنا" },
+  { word: "Logic", pos: "n.", urdu: "منطق / دلیل" },
+  { word: "Lonely", pos: "adj.", urdu: "تنہا / اداس" },
+  { word: "Long", pos: "adj.", urdu: "لمبا / طویل" },
+  { word: "Look", pos: "v.", urdu: "دیکھنا / نظر آنا" },
+  { word: "Lose", pos: "v.", urdu: "کھونا / ہارنا" },
+  { word: "Loss", pos: "n.", urdu: "نقصان / خسارہ" },
+  { word: "Love", pos: "n.", urdu: "محبت / پیار" },
+  { word: "Loyal", pos: "adj.", urdu: "وفادار / باوفا" },
+  { word: "Luck", pos: "n.", urdu: "قسمت / نصیب" },
+  // M
+  { word: "Machine", pos: "n.", urdu: "مشین / کل پرزے" },
+  { word: "Magic", pos: "n.", urdu: "جادو / سحر" },
+  { word: "Magnificent", pos: "adj.", urdu: "شاندار / پر شکوہ" },
+  { word: "Maintain", pos: "v.", urdu: "برقرار رکھنا / قائم رکھنا" },
+  { word: "Major", pos: "adj.", urdu: "بڑا / اہم" },
+  { word: "Manage", pos: "v.", urdu: "انتظام کرنا / نبھانا" },
+  { word: "Manner", pos: "n.", urdu: "انداز / طور طریقہ" },
+  { word: "Many", pos: "adj.", urdu: "بہت سارے / متعدد" },
+  { word: "Mark", pos: "n.", urdu: "نشان / علامت" },
+  { word: "Market", pos: "n.", urdu: "بازار / منڈی" },
+  { word: "Master", pos: "n.", urdu: "استاد / ماہر" },
+  { word: "Match", pos: "v.", urdu: "ملانا / ہم پلہ ہونا" },
+  { word: "Matter", pos: "n.", urdu: "معاملہ / مادہ" },
+  { word: "Mature", pos: "adj.", urdu: "بالغ / پختہ" },
+  { word: "Maximum", pos: "adj.", urdu: "زیادہ سے زیادہ" },
+  { word: "Meaning", pos: "n.", urdu: "معنی / مطلب" },
+  { word: "Measure", pos: "v.", urdu: "ناپنا / پیمائش" },
+  { word: "Meet", pos: "v.", urdu: "ملنا / ملاقات کرنا" },
+  { word: "Memory", pos: "n.", urdu: "یادداشت / حافظہ" },
+  { word: "Mental", pos: "adj.", urdu: "دماغی / ذہنی" },
+  { word: "Mention", pos: "v.", urdu: "ذکر کرنا / بیان کرنا" },
+  { word: "Mercy", pos: "n.", urdu: "رحم / کرم" },
+  { word: "Message", pos: "n.", urdu: "پیغام / اطلاع" },
+  { word: "Method", pos: "n.", urdu: "طریقہ / اسلوب" },
+  { word: "Meticulous", pos: "adj.", urdu: "باریک بین / انتہائی محتاط" },
+  { word: "Mind", pos: "n.", urdu: "دماغ / ذہن" },
+  { word: "Miracle", pos: "n.", urdu: "معجزہ / کرشمہ" },
+  { word: "Mistake", pos: "n.", urdu: "غلطی / خطاء" },
+  { word: "Modern", pos: "adj.", urdu: "جدید / دور حاضر کا" },
+  { word: "Modest", pos: "adj.", urdu: "شائستہ / با حیا" },
+  { word: "Modify", pos: "v.", urdu: "تبدیل کرنا / ترمیم کرنا" },
+  { word: "Moment", pos: "n.", urdu: "لمحہ / پل" },
+  { word: "Moral", pos: "adj.", urdu: "اخلاقی / نیکی" },
+  { word: "Motivation", pos: "n.", urdu: "حوصلہ / تحریک" },
+  { word: "Move", pos: "v.", urdu: "حرکت کرنا / منتقل ہونا" },
+  { word: "Mutual", pos: "adj.", urdu: "باہمی / آپسی" },
+  { word: "Mystery", pos: "n.", urdu: "راز / معمہ" },
+  // N
+  { word: "Narrow", pos: "adj.", urdu: "تنگ / باریک" },
+  { word: "Nation", pos: "n.", urdu: "قوم / ملک" },
+  { word: "Native", pos: "adj.", urdu: "مقامی / آبائی" },
+  { word: "Natural", pos: "adj.", urdu: "قدرتی / فطرتی" },
+  { word: "Nature", pos: "n.", urdu: "قدرت / فطرت" },
+  { word: "Necessary", pos: "adj.", urdu: "ضروری / لازمی" },
+  { word: "Negative", pos: "adj.", urdu: "منفی / نفی والا" },
+  { word: "Neglect", pos: "v.", urdu: "لاپرواہی برتنا" },
+  { word: "Negotiate", pos: "v.", urdu: "مذاکرات کرنا / سودا بازی" },
+  { word: "Neighbor", pos: "n.", urdu: "پڑوسی / ہمسایہ" },
+  { word: "Nervous", pos: "adj.", urdu: "گھبرایا ہوا / بے چین" },
+  { word: "Neutral", pos: "adj.", urdu: "غیر جانبدار" },
+  { word: "Never", pos: "adv.", urdu: "کبھی نہیں" },
+  { word: "Noble", pos: "adj.", urdu: "شریف / معزز" },
+  { word: "Normal", pos: "adj.", urdu: "معمول کے مطابق / عام" },
+  { word: "Notice", pos: "v.", urdu: "نوٹس لینا / توجہ دینا" },
+  { word: "Notion", pos: "n.", urdu: "تصور / خیال" },
+  { word: "Novel", pos: "n.", urdu: "ناول / نیا انداز" },
+  // O
+  { word: "Obey", pos: "v.", urdu: "حکم ماننا / اطاعت کرنا" },
+  { word: "Object", pos: "n.", urdu: "چیز / اعتراض کرنا" },
+  { word: "Objective", pos: "n.", urdu: "مقصد / غیر جانبدارانہ" },
+  { word: "Obvious", pos: "adj.", urdu: "واضح / عیاں" },
+  { word: "Occur", pos: "v.", urdu: "واقع ہونا / پیش آنا" },
+  { word: "Offer", pos: "v.", urdu: "پیشکش کرنا" },
+  { word: "Official", pos: "adj.", urdu: "سرکاری / باضابطہ" },
+  { word: "Often", pos: "adv.", urdu: "اکثر / بارہا" },
+  { word: "Opinion", pos: "n.", urdu: "رائے / نقطہ نظر" },
+  { word: "Opportunity", pos: "n.", urdu: "موقع / چانس" },
+  { word: "Oppose", pos: "v.", urdu: "مخالفت کرنا" },
+  { word: "Opposite", pos: "adj.", urdu: "مخالف / برعکس" },
+  { word: "Optimistic", pos: "adj.", urdu: "پر امید / رجائیت پسند" },
+  { word: "Option", pos: "n.", urdu: "اختیار / متبادل" },
+  { word: "Order", pos: "n.", urdu: "حکم / ترتیب" },
+  { word: "Ordinary", pos: "adj.", urdu: "معمولی / عام" },
+  { word: "Origin", pos: "n.", urdu: "اصل / ماخذ" },
+  { word: "Original", pos: "adj.", urdu: "اصلی / بنیاد" },
+  { word: "Outcome", pos: "n.", urdu: "نتیجہ / حاصل" },
+  { word: "Outline", pos: "n.", urdu: "خاکہ / خلاصہ" },
+  { word: "Outstanding", pos: "adj.", urdu: "نمایاں / غیر معمولی" },
+  { word: "Overcome", pos: "v.", urdu: "قابو پانا / غلبہ پانا" },
+  // P
+  { word: "Pain", pos: "n.", urdu: "درد / تکلیف" },
+  { word: "Patience", pos: "n.", urdu: "صبر / برداشت" },
+  { word: "Patient", pos: "adj.", urdu: "صابر / مریض" },
+  { word: "Pattern", pos: "n.", urdu: "نمونہ / طریقہ کار" },
+  { word: "Peace", pos: "n.", urdu: "امن / سکون" },
+  { word: "Peer", pos: "n.", urdu: "ہم عمر / ہم رتبہ" },
+  { word: "Perceive", pos: "v.", urdu: "محسوس کرنا / ادراک کرنا" },
+  { word: "Perfect", pos: "adj.", urdu: "مکمل / بے عیب" },
+  { word: "Perform", pos: "v.", urdu: "انجام دینا / اداکاری" },
+  { word: "Permanent", pos: "adj.", urdu: "مستقل / دائمی" },
+  { word: "Permission", pos: "n.", urdu: "اجازت / پروانہ" },
+  { word: "Persevere", pos: "v.", urdu: "ڈٹے رہنا / مسلسل کوشش" },
+  { word: "Personal", pos: "adj.", urdu: "ذاتی / انفرادی" },
+  { word: "Perspective", pos: "n.", urdu: "نقطہ نظر / زاویہ نگاہ" },
+  { word: "Persuade", pos: "v.", urdu: "قائل کرنا / ترغیب دینا" },
+  { word: "Phenomenon", pos: "n.", urdu: "مظہر / حیرت انگیز امر" },
+  { word: "Philosophy", pos: "n.", urdu: "فلسفہ / حکمت" },
+  { word: "Physical", pos: "adj.", urdu: "جسمانی / مادی" },
+  { word: "Plan", pos: "n.", urdu: "منصوبہ / ارادہ" },
+  { word: "Pleasant", pos: "adj.", urdu: "خوشگوار / دل پسند" },
+  { word: "Praise", pos: "v.", urdu: "تعریف کرنا / سراہنا" },
+  { word: "Predict", pos: "v.", urdu: "پیشین گوئی کرنا" },
+  { word: "Prefer", pos: "v.", urdu: "ترجیح دینا" },
+  { word: "Prepare", pos: "v.", urdu: "تیاری کرنا / تیار ہونا" },
+  { word: "Presence", pos: "n.", urdu: "موجودگی / حاضری" },
+  { word: "Preserve", pos: "v.", urdu: "محفوظ رکھنا" },
+  { word: "Prevent", pos: "v.", urdu: "روکنا / باز رکھنا" },
+  { word: "Price", pos: "n.", urdu: "قیمت / لاگت" },
+  { word: "Pride", pos: "n.", urdu: "فخر / غرور" },
+  { word: "Primary", pos: "adj.", urdu: "بنیادی / اولیں" },
+  { word: "Principle", pos: "n.", urdu: "اصول / ضابطہ" },
+  { word: "Priority", pos: "n.", urdu: "ترجیح / فوقیت" },
+  { word: "Privacy", pos: "n.", urdu: "تنہائی / پردہ داری" },
+  { word: "Privilege", pos: "n.", urdu: "امتیاز / خصوصی حق" },
+  { word: "Problem", pos: "n.", urdu: "مسئلہ / الجھن" },
+  { word: "Procrastinate", pos: "v.", urdu: "ٹال مٹول کرنا / سستی" },
+  { word: "Produce", pos: "v.", urdu: "پیدا کرنا / بنانا" },
+  { word: "Professional", pos: "adj.", urdu: "پیشہ ورانہ" },
+  { word: "Profit", pos: "n.", urdu: "منافع / نفع" },
+  { word: "Profound", pos: "adj.", urdu: "گہرا / با معنی" },
+  { word: "Progress", pos: "n.", urdu: "ترقی / پیش رفت" },
+  { word: "Prominent", pos: "adj.", urdu: "نمایاں / ممتاز" },
+  { word: "Promise", pos: "n.", urdu: "وعدہ / عہد" },
+  { word: "Promote", pos: "v.", urdu: "ترقی دینا / فروغ دینا" },
+  { word: "Prompt", pos: "adj.", urdu: "فوری / بر وقت" },
+  { word: "Proper", pos: "adj.", urdu: "مناسب / درست" },
+  { word: "Protect", pos: "v.", urdu: "حفاظت کرنا / بچانا" },
+  { word: "Proud", pos: "adj.", urdu: "فخرمند / نازاں" },
+  { word: "Prove", pos: "v.", urdu: "ثابت کرنا" },
+  { word: "Provide", pos: "v.", urdu: "مہیا کرنا / فراہم کرنا" },
+  { word: "Pure", pos: "adj.", urdu: "خالص / پاکیزہ" },
+  { word: "Purpose", pos: "n.", urdu: "مقصد / غرض" },
+  { word: "Pursue", pos: "v.", urdu: "پیچھا کرنا / تعاقب کرنا" },
+  // Q
+  { word: "Qualify", pos: "v.", urdu: "اہل ہونا / پورا اترنا" },
+  { word: "Quality", pos: "n.", urdu: "معیار / خوبی" },
+  { word: "Quantity", pos: "n.", urdu: "مقدار / تعداد" },
+  { word: "Question", pos: "n.", urdu: "سوال / استفسار" },
+  { word: "Quick", pos: "adj.", urdu: "تیز / جلد" },
+  { word: "Quiet", pos: "adj.", urdu: "خاموش / پرسکون" },
+  // R
+  { word: "Rare", pos: "adj.", urdu: "نایاب / شاذ و نادر" },
+  { word: "Rate", pos: "n.", urdu: "شرح / رفتار" },
+  { word: "Rational", pos: "adj.", urdu: "عقل مندانہ / معقول" },
+  { word: "Reach", pos: "v.", urdu: "پہنچنا / حاصل کرنا" },
+  { word: "React", pos: "v.", urdu: "ردعمل ظاہر کرنا" },
+  { word: "Reaction", pos: "n.", urdu: "ردعمل / رد عمل" },
+  { word: "Real", pos: "adj.", urdu: "حقیقی / اصلی" },
+  { word: "Reality", pos: "n.", urdu: "حقیقت / سچائی" },
+  { word: "Realize", pos: "v.", urdu: "احساس ہونا / سمجھنا" },
+  { word: "Reason", pos: "n.", urdu: "وجہ / عقل" },
+  { word: "Receive", pos: "v.", urdu: "وصول کرنا / پانا" },
+  { word: "Recent", pos: "adj.", urdu: "حالیہ / نیا" },
+  { word: "Recognize", pos: "v.", urdu: "پہچاننا / تسلیم کرنا" },
+  { word: "Recommend", pos: "v.", urdu: "سفارش کرنا / تجویز دینا" },
+  { word: "Record", pos: "n.", urdu: "ریکارڈ / اندراج" },
+  { word: "Recover", pos: "v.", urdu: "صحت یاب ہونا / واپس پانا" },
+  { word: "Reduce", pos: "v.", urdu: "کم کرنا / گھٹانا" },
+  { word: "Reflect", pos: "v.", urdu: "عکس ڈالنا / غور و خوض" },
+  { word: "Reform", pos: "v.", urdu: "اصلاح کرنا / سدھارنا" },
+  { word: "Refuse", pos: "v.", urdu: "انکار کرنا" },
+  { word: "Regard", pos: "v.", urdu: "خیال کرنا / احترام" },
+  { word: "Regular", pos: "adj.", urdu: "باقاعدہ / مستقل" },
+  { word: "Reject", pos: "v.", urdu: "مسترد کرنا / رد کرنا" },
+  { word: "Relate", pos: "v.", urdu: "تعلق رکھنا / بیان کرنا" },
+  { word: "Relation", pos: "n.", urdu: "رشتہ / تعلق" },
+  { word: "Relax", pos: "v.", urdu: "آرام کرنا / پرسکون ہونا" },
+  { word: "Release", pos: "v.", urdu: "رہا کرنا / جاری کرنا" },
+  { word: "Relevant", pos: "adj.", urdu: "متعلقہ / موزوں" },
+  { word: "Reliable", pos: "adj.", urdu: "قابلِ اعتماد / معتبر" },
+  { word: "Relief", pos: "n.", urdu: "سکون / راحت" },
+  { word: "Rely", pos: "v.", urdu: "بھروسہ کرنا / تکیہ کرنا" },
+  { word: "Remain", pos: "v.", urdu: "باقی رہنا / برقرار رہنا" },
+  { word: "Remarkable", pos: "adj.", urdu: "غیر معمولی / نمایاں" },
+  { word: "Remember", pos: "v.", urdu: "یاد رکھنا" },
+  { word: "Remind", pos: "v.", urdu: "یاد دلانا" },
+  { word: "Remote", pos: "adj.", urdu: "دور دراز / بعید" },
+  { word: "Remove", pos: "v.", urdu: "ہٹانا / دور کرنا" },
+  { word: "Repair", pos: "v.", urdu: "مرمت کرنا / ٹھیک کرنا" },
+  { word: "Repeat", pos: "v.", urdu: "دہرانا" },
+  { word: "Replace", pos: "v.", urdu: "بدلنا / متبادل لانا" },
+  { word: "Reply", pos: "v.", urdu: "جواب دینا" },
+  { word: "Report", pos: "n.", urdu: "رپورٹ / اطلاع" },
+  { word: "Represent", pos: "v.", urdu: "نمائندگی کرنا" },
+  { word: "Reputation", pos: "n.", urdu: "شہرت / ساکھ" },
+  { word: "Request", pos: "n.", urdu: "درخواست / التجا" },
+  { word: "Require", pos: "v.", urdu: "ضرورت ہونا / تقاضا" },
+  { word: "Rescue", pos: "v.", urdu: "بچانا / نجات دلانا" },
+  { word: "Research", pos: "n.", urdu: "تحقیق / کھوج" },
+  { word: "Reserve", pos: "v.", urdu: "محفوظ رکھنا / بکنگ" },
+  { word: "Resilient", pos: "adj.", urdu: "ثابت قدم / باحوصلہ" },
+  { word: "Resist", pos: "v.", urdu: "مزاحمت کرنا / رکاوٹ" },
+  { word: "Resolution", pos: "n.", urdu: "قرارداد / پکا ارادہ" },
+  { word: "Resolve", pos: "v.", urdu: "حل کرنا / مصمم ارادہ" },
+  { word: "Resource", pos: "n.", urdu: "وسیلہ / ذریعہ" },
+  { word: "Respect", pos: "n.", urdu: "عزت / احترام" },
+  { word: "Respond", pos: "v.", urdu: "جواب دینا / ردعمل" },
+  { word: "Responsible", pos: "adj.", urdu: "ذمہ دار / جوابدہ" },
+  { word: "Restore", pos: "v.", urdu: "بحال کرنا / دوبارہ قائم" },
+  { word: "Result", pos: "n.", urdu: "نتیجہ / انجام" },
+  { word: "Retain", pos: "v.", urdu: "برقرار رکھنا / یاد رکھنا" },
+  { word: "Reveal", pos: "v.", urdu: "فاش کرنا / ظاہر کرنا" },
+  { word: "Review", pos: "v.", urdu: "نظر ثانی کرنا" },
+  { word: "Reward", pos: "n.", urdu: "انعام / جزا" },
+  { word: "Rich", pos: "adj.", urdu: "امیر / دولت مند" },
+  { word: "Right", pos: "adj.", urdu: "صحیح / حق" },
+  { word: "Risk", pos: "n.", urdu: "خطرہ / جوکھم" },
+  { word: "Role", pos: "n.", urdu: "کردار / منصب" },
+  { word: "Rule", pos: "n.", urdu: "اصول / ضابطہ" },
+  // S
+  { word: "Sacrifice", pos: "v.", urdu: "قربانی دینا / ایثار" },
+  { word: "Safe", pos: "adj.", urdu: "محفوظ / بے خطر" },
+  { word: "Safety", pos: "n.", urdu: "سلامتی / تحفظ" },
+  { word: "Satisfy", pos: "v.", urdu: "مطمئن کرنا / تسلی دینا" },
+  { word: "Save", pos: "v.", urdu: "بچانا / محفوظ کرنا" },
+  { word: "Scale", pos: "n.", urdu: "پیمانہ / وسعت" },
+  { word: "Scared", pos: "adj.", urdu: "ڈرا ہوا / خوف زدہ" },
+  { word: "Scene", pos: "n.", urdu: "منظر / جائے وقوعہ" },
+  { word: "Schedule", pos: "n.", urdu: "اوقات نامہ / ٹائم ٹیبل" },
+  { word: "Scholar", pos: "n.", urdu: "عالم / محقق" },
+  { word: "Science", pos: "n.", urdu: "سائنس / علم" },
+  { word: "Scope", pos: "n.", urdu: "دائرہ کار / گنجائش" },
+  { word: "Search", pos: "v.", urdu: "تلاش کرنا / کھوج" },
+  { word: "Secret", pos: "n.", urdu: "راز / پوشیدہ بات" },
+  { word: "Section", pos: "n.", urdu: "حصہ / شعبہ" },
+  { word: "Secure", pos: "adj.", urdu: "محفوظ / بے فکر" },
+  { word: "Seek", pos: "v.", urdu: "تلاش کرنا / حاصل کرنا" },
+  { word: "Seem", pos: "v.", urdu: "معلوم ہونا / دکھائی دینا" },
+  { word: "Select", pos: "v.", urdu: "منتخب کرنا / چننا" },
+  { word: "Sense", pos: "n.", urdu: "حس / سمجھ بوجھ" },
+  { word: "Sensitive", pos: "adj.", urdu: "حساس / نازک" },
+  { word: "Sentence", pos: "n.", urdu: "جملہ / سزا" },
+  { word: "Separate", pos: "adj.", urdu: "الگ / جداگانہ" },
+  { word: "Serious", pos: "adj.", urdu: "سنجیدہ / سنگین" },
+  { word: "Serve", pos: "v.", urdu: "خدمت کرنا / پیش کرنا" },
+  { word: "Service", pos: "n.", urdu: "خدمت / نوکری" },
+  { word: "Settle", pos: "v.", urdu: "آباد ہونا / طے کرنا" },
+  { word: "Severe", pos: "adj.", urdu: "شدید / سخت" },
+  { word: "Share", pos: "v.", urdu: "بانٹنا / حصہ لینا" },
+  { word: "Sharp", pos: "adj.", urdu: "تیز / تیکھا" },
+  { word: "Show", pos: "v.", urdu: "دکھانا / ظاہر کرنا" },
+  { word: "Significant", pos: "adj.", urdu: "اہم / معنی خیز" },
+  { word: "Silence", pos: "n.", urdu: "خاموشی / سکوت" },
+  { word: "Silent", pos: "adj.", urdu: "خاموش / چپ" },
+  { word: "Similar", pos: "adj.", urdu: "ملتا جلتا / یکساں" },
+  { word: "Simple", pos: "adj.", urdu: "سادہ / آسان" },
+  { word: "Sincere", pos: "adj.", urdu: "مخلص / سچا" },
+  { word: "Situation", pos: "n.", urdu: "صورتحال / کیفیت" },
+  { word: "Skill", pos: "n.", urdu: "مہارت / ہنر" },
+  { word: "Smart", pos: "adj.", urdu: "ہوشیار / چست" },
+  { word: "Smile", pos: "n.", urdu: "مسکراہٹ / تبسم" },
+  { word: "Smooth", pos: "adj.", urdu: "ہموار / روانی والا" },
+  { word: "Social", pos: "adj.", urdu: "معاشرتی / سماجی" },
+  { word: "Society", pos: "n.", urdu: "معاشرہ / سماج" },
+  { word: "Solid", pos: "adj.", urdu: "ٹھوس / پختہ" },
+  { word: "Solution", pos: "n.", urdu: "حل / تدبیر" },
+  { word: "Solve", pos: "v.", urdu: "حل کرنا / سلجھانا" },
+  { word: "Source", pos: "n.", urdu: "ذریعہ / ماخذ" },
+  { word: "Special", pos: "adj.", urdu: "خاص / مخصوص" },
+  { word: "Specific", pos: "adj.", urdu: "واضح / مخصوص" },
+  { word: "Speed", pos: "n.", urdu: "رفتار / تیزی" },
+  { word: "Spend", pos: "v.", urdu: "خرچ کرنا / وقت گزارنا" },
+  { word: "Spirit", pos: "n.", urdu: "روح / جذبہ" },
+  { word: "Stable", pos: "adj.", urdu: "مستحکم / پائیدار" },
+  { word: "Standard", pos: "n.", urdu: "معیار / نمونہ" },
+  { word: "Start", pos: "v.", urdu: "شروع کرنا / آغاز" },
+  { word: "Status", pos: "n.", urdu: "حیثیت / رتبہ" },
+  { word: "Stay", pos: "v.", urdu: "ٹھہرنا / رکنا" },
+  { word: "Steady", pos: "adj.", urdu: "مستحکم / باقاعدہ" },
+  { word: "Strategy", pos: "n.", urdu: "حکمت عملی / منصوبہ بندی" },
+  { word: "Strength", pos: "n.", urdu: "طاقت / قوت" },
+  { word: "Stress", pos: "n.", urdu: "دباؤ / تناؤ" },
+  { word: "Strong", pos: "adj.", urdu: "مضبوط / طاقتور" },
+  { word: "Structure", pos: "n.", urdu: "ڈھانچہ / ساخت" },
+  { word: "Struggle", pos: "v.", urdu: "جدوجہد کرنا / کوشش" },
+  { word: "Stubborn", pos: "adj.", urdu: "ضدی / اڑیل" },
+  { word: "Study", pos: "v.", urdu: "مطالعہ کرنا / پڑھنا" },
+  { word: "Style", pos: "n.", urdu: "طرز / انداز" },
+  { word: "Subject", pos: "n.", urdu: "مضمون / موضوع" },
+  { word: "Subtle", pos: "adj.", urdu: "لطیف / باریک" },
+  { word: "Succeed", pos: "v.", urdu: "کامیاب ہونا" },
+  { word: "Success", pos: "n.", urdu: "کامیابی / کامرانی" },
+  { word: "Suggest", pos: "v.", urdu: "مشورہ دینا / تجویز" },
+  { word: "Summary", pos: "n.", urdu: "خلاصہ / لبِ لباب" },
+  { word: "Support", pos: "v.", urdu: "حمایت کرنا / مدد" },
+  { word: "Surprise", pos: "n.", urdu: "حیرت / تعجب" },
+  { word: "Survive", pos: "v.", urdu: "زندہ بچنا / باقی رہنا" },
+  { word: "Symbol", pos: "n.", urdu: "علامت / نشان" },
+  { word: "Sympathy", pos: "n.", urdu: "ہمدردی / دلسوزی" },
+  { word: "System", pos: "n.", urdu: "نظام / طریقہ کار" },
+  // T
+  { word: "Target", pos: "n.", urdu: "ہدف / نشانہ" },
+  { word: "Task", pos: "n.", urdu: "کام / فریضہ" },
+  { word: "Taste", pos: "n.", urdu: "ذائقہ / پسند" },
+  { word: "Teach", pos: "v.", urdu: "پڑھانا / سکھانا" },
+  { word: "Technology", pos: "n.", urdu: "ٹیکنالوجی / فنیات" },
+  { word: "Tell", pos: "v.", urdu: "بتانا / کہنا" },
+  { word: "Temporary", pos: "adj.", urdu: "عارضی / چند روزہ" },
+  { word: "Tendency", pos: "n.", urdu: "رجحان / میلان" },
+  { word: "Tender", pos: "adj.", urdu: "نرم / نازک" },
+  { word: "Theory", pos: "n.", urdu: "نظریہ / مفروضہ" },
+  { word: "Thick", pos: "adj.", urdu: "موٹا / گہرا" },
+  { word: "Think", pos: "v.", urdu: "سوچنا / غور کرنا" },
+  { word: "Thought", pos: "n.", urdu: "خیال / سوچ" },
+  { word: "Threat", pos: "n.", urdu: "دھمکی / خطرہ" },
+  { word: "Time", pos: "n.", urdu: "وقت / زمانہ" },
+  { word: "Timid", pos: "adj.", urdu: "ڈرپوک / بزدل" },
+  { word: "Tiny", pos: "adj.", urdu: "بہت چھوٹا / ننھا" },
+  { word: "Tired", pos: "adj.", urdu: "تھکا ہوا / ماندہ" },
+  { word: "Title", pos: "n.", urdu: "عنوان / لقب" },
+  { word: "Today", pos: "adv.", urdu: "آج کا دن" },
+  { word: "Tolerant", pos: "adj.", urdu: "بردبار / متحمل" },
+  { word: "Total", pos: "adj.", urdu: "کل / مجموعی" },
+  { word: "Touch", pos: "v.", urdu: "چھونا / لمس" },
+  { word: "Tough", pos: "adj.", urdu: "سخت / کٹھن" },
+  { word: "Tradition", pos: "n.", urdu: "روایت / رواج" },
+  { word: "Transfer", pos: "v.", urdu: "منتقل کرنا / تبادلہ" },
+  { word: "Transform", pos: "v.", urdu: "کایا پلٹنا / بدل دینا" },
+  { word: "Translate", pos: "v.", urdu: "ترجمہ کرنا" },
+  { word: "Transparent", pos: "adj.", urdu: "شفاف / صاف ظاہر" },
+  { word: "Treasure", pos: "n.", urdu: "خزانہ / بیش قیمت اثاثہ" },
+  { word: "Treat", pos: "v.", urdu: "برتاؤ کرنا / علاج" },
+  { word: "Trend", pos: "n.", urdu: "رجحان / فیشن" },
+  { word: "True", pos: "adj.", urdu: "سچا / درست" },
+  { word: "Trust", pos: "n.", urdu: "اعتماد / بھروسہ" },
+  { word: "Truth", pos: "n.", urdu: "سچ / حقیقت" },
+  { word: "Typical", pos: "adj.", urdu: "نمائندہ / روایتی" },
+  // U
+  { word: "Ultimate", pos: "adj.", urdu: "حتمی / آخری" },
+  { word: "Unable", pos: "adj.", urdu: "ناقابل / بے بس" },
+  { word: "Understand", pos: "v.", urdu: "سمجھنا / جاننا" },
+  { word: "Undertake", pos: "v.", urdu: "ذمہ داری لینا" },
+  { word: "Unique", pos: "adj.", urdu: "منفرد / یکتا" },
+  { word: "Unite", pos: "v.", urdu: "متحد ہونا / جوڑنا" },
+  { word: "Universal", pos: "adj.", urdu: "آفاقی / ہمہ گیر" },
+  { word: "Unknown", pos: "adj.", urdu: "نامعلوم / گمنام" },
+  { word: "Unlikely", pos: "adj.", urdu: "بعید از قیاس / غیر ممکن" },
+  { word: "Urgent", pos: "adj.", urdu: "فوری / ہنگامی" },
+  { word: "Useful", pos: "adj.", urdu: "مفید / کارآمد" },
+  { word: "Utility", pos: "n.", urdu: "افادیت / استعمال" },
+  // V
+  { word: "Vacant", pos: "adj.", urdu: "خالی / غیر مقبوضہ" },
+  { word: "Vague", pos: "adj.", urdu: "مبہم / غیر واضح" },
+  { word: "Valid", pos: "adj.", urdu: "درست / جائز" },
+  { word: "Valuable", pos: "adj.", urdu: "قیمتی / بیش بہا" },
+  { word: "Value", pos: "n.", urdu: "قدر / قیمت" },
+  { word: "Vanish", pos: "v.", urdu: "غائب ہو جانا" },
+  { word: "Variety", pos: "n.", urdu: "تنوع / اقسام" },
+  { word: "Various", pos: "adj.", urdu: "مختلف / متعدد" },
+  { word: "Vast", pos: "adj.", urdu: "وسیع / کشادہ" },
+  { word: "Verify", pos: "v.", urdu: "تصدیق کرنا / پڑتال" },
+  { word: "Versatile", pos: "adj.", urdu: "ہر فن مولا / ہمہ جہت" },
+  { word: "Victory", pos: "n.", urdu: "فتح / کامیابی" },
+  { word: "Vision", pos: "n.", urdu: "بصارت / مستقبل کی سوچ" },
+  { word: "Vital", pos: "adj.", urdu: "انتہائی اہم / حیاتی" },
+  { word: "Vivid", pos: "adj.", urdu: "روشن / واضح" },
+  { word: "Vocabulary", pos: "n.", urdu: "ذخیرہ الفاظ" },
+  { word: "Voice", pos: "n.", urdu: "آواز / صدا" },
+  { word: "Voluntary", pos: "adj.", urdu: "رضاکارانہ / اپنی خوشی سے" },
+  // W
+  { word: "Warm", pos: "adj.", urdu: "گرم / پرجوش" },
+  { word: "Warn", pos: "v.", urdu: "خبردار کرنا / تنبیہ" },
+  { word: "Waste", pos: "v.", urdu: "ضائع کرنا / برباد" },
+  { word: "Watch", pos: "v.", urdu: "دیکھنا / نگاہ رکھنا" },
+  { word: "Weak", pos: "adj.", urdu: "کمزور / ناتواں" },
+  { word: "Wealth", pos: "n.", urdu: "دولت / مال" },
+  { word: "Weight", pos: "n.", urdu: "وزن / بوجھ" },
+  { word: "Welcome", pos: "v.", urdu: "خوش آمدید کہنا" },
+  { word: "Widespread", pos: "adj.", urdu: "وسیع پیمانے پر پھیلا ہوا" },
+  { word: "Willing", pos: "adj.", urdu: "راضی / تیار" },
+  { word: "Win", pos: "v.", urdu: "جیتنا / فتح پانا" },
+  { word: "Wisdom", pos: "n.", urdu: "حکمت / دانائی" },
+  { word: "Wise", pos: "adj.", urdu: "دانا / عقل مند" },
+  { word: "Wish", pos: "n.", urdu: "خواہش / تمنا" },
+  { word: "Witness", pos: "n.", urdu: "گواہ / شاہد" },
+  { word: "Wonder", pos: "n.", urdu: "حیرت / عجوبہ" },
+  { word: "Wonderful", pos: "adj.", urdu: "شاندار / لاجواب" },
+  { word: "Work", pos: "n.", urdu: "کام / محنت" },
+  { word: "World", pos: "n.", urdu: "دنیا / کائنات" },
+  { word: "Worry", pos: "v.", urdu: "فکر مند ہونا / پریشانی" },
+  { word: "Worth", pos: "n.", urdu: "قیمت / قدر" },
+  { word: "Worthy", pos: "adj.", urdu: "لائق / قابلِ احترام" },
+  // Y
+  { word: "Yield", pos: "v.", urdu: "پیدا کرنا / جھک جانا" },
+  { word: "Young", pos: "adj.", urdu: "جوان / نو عمر" },
+  { word: "Youth", pos: "n.", urdu: "جوانی / شباب" },
+  // Z
+  { word: "Zeal", pos: "n.", urdu: "جذبہ / جوش و خروش" },
+  { word: "Zealous", pos: "adj.", urdu: "پر جوش / سرگرم" },
+  { word: "Zenith", pos: "n.", urdu: "عروج / بلندی" },
+  { word: "Zone", pos: "n.", urdu: "علاقہ / خطہ" }
 ];
 
 // ==========================================================
@@ -1179,6 +1999,9 @@ class VocabApp {
     this.dictVoiceBtn = document.getElementById('dict-voice-btn');
     this.langSwapBtn = document.getElementById('lang-swap-btn');
     this.dictAutocompleteDropdown = document.getElementById('dict-autocomplete-dropdown');
+    this.activeAutoIndex = -1;
+    this.autoDebounceTimer = null;
+    this.currentAutoList = [];
     this.refreshWordBtn = document.getElementById('refresh-word-btn');
     
     // AI Key Modal Elements
@@ -1340,11 +2163,32 @@ class VocabApp {
       });
 
       this.dictSearchInput.addEventListener('keydown', (e) => {
-        if (e.key === 'Enter') {
-          this.hideAutocomplete();
-          clearTimeout(this.searchDebounceTimer);
-          this.searchQuery = this.dictSearchInput.value.trim();
-          this.performSearch(this.searchQuery);
+        const items = this.dictAutocompleteDropdown ? this.dictAutocompleteDropdown.querySelectorAll('.dict-auto-item') : [];
+        const isDropdownOpen = this.dictAutocompleteDropdown && this.dictAutocompleteDropdown.style.display !== 'none';
+
+        if (e.key === 'ArrowDown') {
+          if (isDropdownOpen && items.length > 0) {
+            e.preventDefault();
+            this.activeAutoIndex = (this.activeAutoIndex + 1) % items.length;
+            this.updateAutoHighlight(items);
+          }
+        } else if (e.key === 'ArrowUp') {
+          if (isDropdownOpen && items.length > 0) {
+            e.preventDefault();
+            this.activeAutoIndex = (this.activeAutoIndex - 1 + items.length) % items.length;
+            this.updateAutoHighlight(items);
+          }
+        } else if (e.key === 'Enter') {
+          if (isDropdownOpen && this.activeAutoIndex >= 0 && items[this.activeAutoIndex]) {
+            e.preventDefault();
+            const word = items[this.activeAutoIndex].dataset.autoWord;
+            this.selectAutocompleteWord(word);
+          } else {
+            this.hideAutocomplete();
+            clearTimeout(this.searchDebounceTimer);
+            this.searchQuery = this.dictSearchInput.value.trim();
+            this.performSearch(this.searchQuery);
+          }
         } else if (e.key === 'Escape') {
           this.hideAutocomplete();
         }
@@ -1491,60 +2335,51 @@ class VocabApp {
     return sentence.replace(regex, '<span class="udict-word-highlight">$1</span>');
   }
 
-  renderAutocomplete(query) {
+  updateAutoHighlight(items) {
+    if (!items || items.length === 0) return;
+    items.forEach((item, idx) => {
+      if (idx === this.activeAutoIndex) {
+        item.classList.add('active');
+        item.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+      } else {
+        item.classList.remove('active');
+      }
+    });
+  }
+
+  displayAutocompleteItems(list, q, headerTitle) {
     if (!this.dictAutocompleteDropdown) return;
-    const q = (query || '').trim().toLowerCase();
-
-    let list = [];
-    if (!q) {
-      // Show Trending / Suggested Words (like U-Dictionary)
-      list = [
-        { word: "Diaspora", pos: "n.", urdu: "تارک وطن / انتشار" },
-        { word: "Inspire", pos: "v.", urdu: "انسپائر / متاثر کرنا" },
-        { word: "Courage", pos: "n.", urdu: "ہمت / حوصلہ" },
-        { word: "Resilient", pos: "adj.", urdu: "ثابت قدم / باحوصلہ" },
-        { word: "Great minds think alike.", pos: "phrase", urdu: "عظیم ذہن یکساں سوچتے ہیں" }
-      ];
-    } else {
-      // Pool from active words and quickAutocompleteIndex
-      const pool = new Map();
-      this.words.forEach(w => {
-        pool.set(w.word.toLowerCase(), { word: w.word, pos: w.posShort, urdu: w.urduMeaning.split('/')[0] });
-      });
-      quickAutocompleteIndex.forEach(item => {
-        if (!pool.has(item.word.toLowerCase())) {
-          pool.set(item.word.toLowerCase(), item);
-        }
-      });
-
-      const allEntries = Array.from(pool.values());
-      const prefixMatches = allEntries.filter(item => item.word.toLowerCase().startsWith(q));
-      const containsMatches = allEntries.filter(item => !item.word.toLowerCase().startsWith(q) && (item.word.toLowerCase().includes(q) || item.urdu.includes(q)));
-      list = [...prefixMatches, ...containsMatches].slice(0, 8);
-    }
-
-    if (list.length === 0) {
+    if (!list || list.length === 0) {
       this.dictAutocompleteDropdown.style.display = 'none';
       return;
     }
 
+    this.currentAutoList = list;
+    this.activeAutoIndex = -1;
+
     this.dictAutocompleteDropdown.innerHTML = `
-      <div class="dict-auto-header">${!q ? 'Suggestion' : 'Matching Words'}</div>
+      <div class="dict-auto-header">${headerTitle || 'Matching Words'}</div>
       ${list.map(item => {
         let highlightedWord = item.word;
         if (q && item.word.toLowerCase().startsWith(q)) {
           const prefix = item.word.substring(0, q.length);
           const rest = item.word.substring(q.length);
           highlightedWord = `<mark>${prefix}</mark>${rest}`;
+        } else if (q && item.word.toLowerCase().includes(q)) {
+          const idx = item.word.toLowerCase().indexOf(q);
+          const before = item.word.substring(0, idx);
+          const matched = item.word.substring(idx, idx + q.length);
+          const after = item.word.substring(idx + q.length);
+          highlightedWord = `${before}<mark>${matched}</mark>${after}`;
         }
         return `
           <div class="dict-auto-item" data-auto-word="${item.word}">
             <div class="dict-auto-left">
               <span class="dict-auto-badge">en</span>
               <span class="dict-auto-word">${highlightedWord}</span>
-              <span class="dict-auto-pos">${item.pos || ''}</span>
+              ${item.pos ? `<span class="dict-auto-pos">${item.pos}</span>` : ''}
             </div>
-            <div class="dict-auto-right urdu-text">${item.urdu}</div>
+            <div class="dict-auto-right urdu-text">${item.urdu || 'معنی دیکھیں'}</div>
           </div>
         `;
       }).join('')}
@@ -1559,6 +2394,91 @@ class VocabApp {
         this.selectAutocompleteWord(selected);
       });
     });
+  }
+
+  renderAutocomplete(query) {
+    if (!this.dictAutocompleteDropdown) return;
+    const q = (query || '').trim().toLowerCase();
+
+    if (!q) {
+      // Show Trending / Suggested Words (like U-Dictionary)
+      const suggestions = [
+        { word: "Diaspora", pos: "n.", urdu: "تارک وطن / انتشار" },
+        { word: "Inspire", pos: "v.", urdu: "انسپائر / متاثر کرنا" },
+        { word: "Courage", pos: "n.", urdu: "ہمت / حوصلہ" },
+        { word: "Resilient", pos: "adj.", urdu: "ثابت قدم / باحوصلہ" },
+        { word: "Great minds think alike.", pos: "phrase", urdu: "عظیم ذہن یکساں سوچتے ہیں" }
+      ];
+      this.displayAutocompleteItems(suggestions, '', 'Suggestions');
+      return;
+    }
+
+    // Step 1: Instant local pool lookup (0ms latency)
+    const pool = new Map();
+    this.words.forEach(w => {
+      pool.set(w.word.toLowerCase(), { word: w.word, pos: w.posShort, urdu: (w.urduMeaning || '').split('/')[0].trim() });
+    });
+    quickAutocompleteIndex.forEach(item => {
+      if (!pool.has(item.word.toLowerCase())) {
+        pool.set(item.word.toLowerCase(), item);
+      }
+    });
+
+    const allEntries = Array.from(pool.values());
+    const prefixMatches = allEntries.filter(item => item.word.toLowerCase().startsWith(q));
+    const containsMatches = allEntries.filter(item => !item.word.toLowerCase().startsWith(q) && (item.word.toLowerCase().includes(q) || (item.urdu && item.urdu.includes(q))));
+    let list = [...prefixMatches, ...containsMatches].slice(0, 8);
+
+    // Display instant local results
+    if (list.length > 0) {
+      this.displayAutocompleteItems(list, q, 'Matching Words');
+    } else {
+      this.dictAutocompleteDropdown.style.display = 'none';
+    }
+
+    // Step 2: Datamuse API prediction fallback (debounced 120ms)
+    clearTimeout(this.autoDebounceTimer);
+    if (q.length >= 2) {
+      this.autoDebounceTimer = setTimeout(async () => {
+        try {
+          const currentInput = (this.dictSearchInput ? this.dictSearchInput.value : '').trim().toLowerCase();
+          if (currentInput !== q) return;
+
+          const res = await fetch(`https://api.datamuse.com/sug?s=${encodeURIComponent(q)}&max=8`);
+          if (!res.ok) return;
+          const data = await res.json();
+          if (!Array.isArray(data) || data.length === 0) return;
+
+          const freshInput = (this.dictSearchInput ? this.dictSearchInput.value : '').trim().toLowerCase();
+          if (freshInput !== q) return;
+
+          const mergedPool = new Map();
+          list.forEach(item => mergedPool.set(item.word.toLowerCase(), item));
+
+          data.forEach(item => {
+            const w = item.word;
+            if (!w || mergedPool.has(w.toLowerCase())) return;
+            const local = pool.get(w.toLowerCase());
+            if (local) {
+              mergedPool.set(w.toLowerCase(), local);
+            } else {
+              mergedPool.set(w.toLowerCase(), {
+                word: w.charAt(0).toUpperCase() + w.slice(1),
+                pos: 'word',
+                urdu: 'معنی تلاش کریں'
+              });
+            }
+          });
+
+          const updatedList = Array.from(mergedPool.values()).slice(0, 8);
+          if (updatedList.length > 0) {
+            this.displayAutocompleteItems(updatedList, q, 'Matching Words');
+          }
+        } catch (e) {
+          // Datamuse offline or blocked; silently keep local matches
+        }
+      }, 120);
+    }
   }
 
   selectAutocompleteWord(word) {
