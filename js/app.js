@@ -2068,9 +2068,23 @@ class VocabApp {
       btn.addEventListener('click', (e) => {
         e.preventDefault();
         const tab = btn.dataset.tab;
+        if (tab === 'home') {
+          // Clicking/tapping Home tab resets search and clears the home screen
+          this.resetHomeScreen();
+        }
         this.switchTab(tab);
       });
     });
+
+    // Clicking top brand title also resets Home screen
+    const brandTitle = document.querySelector('.brand-title');
+    if (brandTitle) {
+      brandTitle.style.cursor = 'pointer';
+      brandTitle.addEventListener('click', () => {
+        this.resetHomeScreen();
+        this.switchTab('home');
+      });
+    }
 
     // Refresh Word of the Day
     if (this.refreshWordBtn) {
@@ -2652,6 +2666,25 @@ class VocabApp {
       this.aiStatusBadge.innerHTML = '⚡ Standard API Active';
       this.aiStatusBadge.style.color = 'var(--text-faint)';
     }
+  }
+
+  resetHomeScreen() {
+    if (this.dictSearchInput) {
+      this.dictSearchInput.value = '';
+    }
+    this.searchQuery = '';
+    this.unrecognizedTerm = null;
+    this.isSearchingOnline = false;
+    clearTimeout(this.searchDebounceTimer);
+    clearTimeout(this.autoDebounceTimer);
+    if (this.dictClearBtn) {
+      this.dictClearBtn.style.display = 'none';
+    }
+    this.hideAutocomplete();
+    this.renderDictionary();
+    try {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    } catch (e) {}
   }
 
   switchTab(tabName) {
