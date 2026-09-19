@@ -1644,9 +1644,9 @@ class VocabApp {
 
   renderHome() {
     this.renderDictionary();
-    if (!this.searchQuery) {
-      if (this.todayContainer) this.todayContainer.style.display = 'block';
-      this.renderTodayWord();
+    if (this.todayContainer) {
+      this.todayContainer.style.display = 'none';
+      this.todayContainer.innerHTML = '';
     }
   }
 
@@ -1676,97 +1676,10 @@ class VocabApp {
   }
 
   renderTodayWord() {
-    if (!this.todayContainer) return;
-    const word = this.words[this.todayIndex];
-    if (!word) return;
-
-    const isFav = storage.isFavorite(word.id);
-    const todayDate = new Date().toLocaleDateString('en-US', { day: 'numeric', month: 'long' });
-
-    this.todayContainer.innerHTML = `
-      <div class="notes-timestamp-row">
-        <span>Word of the Day • ${todayDate}</span>
-        <button class="refresh-pill-btn" id="today-refresh-trigger" title="Get another word">
-          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67"/></svg>
-          New Word
-        </button>
-      </div>
-
-      <div class="word-hero">
-        <div class="word-hero-row">
-          <div class="word-title-wrap">
-            <h1 class="word-main-title">${word.word}</h1>
-            <span class="word-pos-tag">[${word.posShort}]</span>
-          </div>
-          <div style="display: flex; align-items: center; gap: 8px;">
-            <button class="speaker-btn" data-speech-text="${word.word}" id="play-today-word" title="Listen to pronunciation">
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg>
-            </button>
-            <button class="heart-fav-btn ${isFav ? 'active' : ''}" id="fav-today-btn" title="Bookmark">
-              <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="${isFav ? 'currentColor' : 'none'}" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
-            </button>
-          </div>
-        </div>
-        
-        <div class="urdu-hero-text urdu-text">${word.urduMeaning}</div>
-      </div>
-
-      <div class="comparison-container">
-        <div>
-          <div class="comparison-header">Instead of</div>
-          <ul class="comparison-list">
-            ${word.insteadOf.map(item => `<li class="comparison-item old-word">${item}</li>`).join('')}
-          </ul>
-        </div>
-        <div>
-          <div class="comparison-header">Use this</div>
-          <ul class="comparison-list">
-            ${word.useThis.map(item => `<li class="comparison-item new-word">${item}</li>`).join('')}
-          </ul>
-        </div>
-      </div>
-
-      <div class="editorial-section">
-        <div class="editorial-section-title">Context & Usage</div>
-        <p class="editorial-body-text">${word.howToUse}</p>
-      </div>
-
-      <div class="editorial-section">
-        <div class="editorial-section-title">Example Sentence</div>
-        ${word.sentences.map(s => `
-          <div class="sentence-block">
-            <div style="display: flex; justify-content: space-between; align-items: baseline;">
-              <p class="sentence-en-text">"${s.en}"</p>
-              <button class="speaker-btn" data-speech-text="${s.en}" style="padding: 2px;" title="Listen to sentence">
-                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg>
-              </button>
-            </div>
-            <p class="sentence-ur-text urdu-text">${s.ur}</p>
-          </div>
-        `).join('')}
-      </div>
-    `;
-
-    document.getElementById('today-refresh-trigger').addEventListener('click', () => {
-      this.refreshWordOfTheDay();
-    });
-
-    document.getElementById('play-today-word').addEventListener('click', () => {
-      tts.speak(word.word);
-    });
-
-    document.querySelectorAll('#today-container .sentence-block .speaker-btn').forEach(btn => {
-      btn.addEventListener('click', (e) => {
-        e.stopPropagation();
-        tts.speak(btn.dataset.speechText, { rate: 0.9 });
-      });
-    });
-
-    document.getElementById('fav-today-btn').addEventListener('click', () => {
-      storage.toggleFavorite(word.id);
-      this.renderTodayWord();
-      this.renderFavorites();
-    });
+    if (this.todayContainer) {
+      this.todayContainer.style.display = 'none';
+      this.todayContainer.innerHTML = '';
+    }
   }
 
   // --- 2. SEARCH (GEMINI AI OR TRADITIONAL FALLBACK) ---
@@ -1936,8 +1849,11 @@ class VocabApp {
 
     if (!this.searchQuery) {
       this.dictionaryContainer.style.display = 'none';
-      if (this.todayContainer) this.todayContainer.style.display = 'block';
-      this.renderTodayWord();
+      this.dictionaryContainer.innerHTML = '';
+      if (this.todayContainer) {
+        this.todayContainer.style.display = 'none';
+        this.todayContainer.innerHTML = '';
+      }
       return;
     }
 
