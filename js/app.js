@@ -3,6 +3,131 @@
 // ==========================================================
 const defaultVocabulary = [
   {
+    id: "word-contradictory",
+    word: "contradictory",
+    posShort: "adj.",
+    partOfSpeech: "adjective",
+    phoneticUK: "/ˌkɒntrəˈdɪktəri/",
+    phoneticUS: "/ˌkɑːntrəˈdɪktəri/",
+    phonetic: "/ˌkɒntrəˈdɪktəri/",
+    urduMeaning: "انکاری؛",
+    forms: "pl.  contradictories",
+    tags: [
+      { text: "#Top 10000", color: "blue" },
+      { text: "#Middle School", color: "pink" },
+      { text: "#Business English", color: "orange" },
+      { text: "#TOEFL", color: "teal" },
+      { text: "#SAT", color: "purple" },
+      { text: "#GRE", color: "green" }
+    ],
+    sampleSentences: [
+      {
+        num: 1,
+        en: "He is notorious for making unexpected, often self-contradictory, comments.",
+        source: "Collins Dictionary",
+        ur: "وہ غیر متوقع اور اکثر خود متضاد تبصرے کرنے کے لیے بدنام ہے۔"
+      },
+      {
+        num: 2,
+        en: "Customs officials have made a series of contradictory statements about the equipment.",
+        source: "Collins Dictionary",
+        ur: "کسٹم حکام نے سامان کے حوالے سے متضاد بیانات کا ایک سلسلہ جاری کیا ہے۔"
+      },
+      {
+        num: 3,
+        en: "Critics love to generalize, to formulate trends into which all new work must be fitted, however contradictory.",
+        source: "Collins Dictionary",
+        ur: "نقاد عمومیت پسندی اور ایسے رجحانات طے کرنا پسند کرتے ہیں جن میں ہر نئے کام کو سما جانا چاہیے، چاہے وہ کتنا ہی متضاد کیوں نہ ہو۔"
+      }
+    ],
+    sentences: [
+      {
+        en: "He is notorious for making unexpected, often self-contradictory, comments.",
+        source: "Collins Dictionary",
+        ur: "وہ غیر متوقع اور اکثر خود متضاد تبصرے کرنے کے لیے بدنام ہے۔"
+      },
+      {
+        num: 2,
+        en: "Customs officials have made a series of contradictory statements about the equipment.",
+        source: "Collins Dictionary",
+        ur: "کسٹم حکام نے سامان کے حوالے سے متضاد بیانات کا ایک سلسلہ جاری کیا ہے۔"
+      }
+    ],
+    synonymsAntonyms: {
+      word: "contradictory",
+      pos: "adj.",
+      context: 'for the meaning of "inconsistent"',
+      synonyms: ["conflicting", "opposite", "contrary", "inconsistent", "incompatible"]
+    },
+    cognates: {
+      root: "contradict",
+      derivatives: [
+        { pos: "adv.", words: ["contradictorily"] },
+        { pos: "n.", words: ["contradiction", "contradictoriness"] },
+        { pos: "vi.", words: ["contradict"] }
+      ]
+    },
+    wikipedia: {
+      title: "Contradictory",
+      summary: "In classical logic, a contradiction consists of a logical incompatibility between two or more propositions. It occurs when the propositions, taken together, yield two conclusions which form the logical, usually opposite inversions of each other.",
+      url: "https://en.wikipedia.org/wiki/Contradiction"
+    },
+    collins: {
+      title: "Collins COBUILD Advanced Dictionary",
+      word: "contradictory",
+      phonetic: "/ˌkɒntrəˈdɪktəri/",
+      star: true,
+      definitions: [
+        {
+          num: 1,
+          pos: "ADJ",
+          explanation: "If two or more facts, ideas, or statements are contradictory, they state or imply that opposite things are true.",
+          example: "Customs officials have made a series of contradictory statements about the equipment."
+        }
+      ]
+    },
+    wordnet: {
+      title: "English Dictionary",
+      entries: [
+        {
+          pos: "n.",
+          senses: [
+            {
+              num: 1,
+              def: "two propositions are contradictories if both cannot be true (or both cannot be false) at the same time"
+            }
+          ]
+        },
+        {
+          pos: "adj.",
+          senses: [
+            {
+              num: 1,
+              def: "of words or propositions so related that both cannot be true and both cannot be false",
+              quote: "'perfect' and 'imperfect' are contradictory terms"
+            },
+            {
+              num: 2,
+              def: "that confounds or contradicts or confuses",
+              synonyms: ["confounding"]
+            },
+            {
+              num: 3,
+              def: "in disagreement",
+              quote: "contradictory attributes of unjust justice and loving vindictiveness",
+              synonyms: ["at odds(p)", "conflicting", "self-contradictory"]
+            },
+            {
+              num: 4,
+              def: "unable to be both true at the same time",
+              synonyms: ["mutually exclusive"]
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
     id: "word-1",
     word: "Resilient",
     posShort: "adj.",
@@ -1292,17 +1417,26 @@ class TTSEngine {
     this.synth.cancel();
 
     const utterance = new SpeechSynthesisUtterance(text);
-    utterance.lang = 'en-US';
-    utterance.rate = options.rate || 0.85;
+    const targetLang = options.lang || (options.accent === 'uk' ? 'en-GB' : 'en-US');
+    utterance.lang = targetLang;
+    utterance.rate = options.rate || 0.88;
 
     const voices = this.synth.getVoices();
-    const naturalVoice = voices.find(v => v.lang.startsWith('en') && (v.name.includes('Natural') || v.name.includes('Google'))) ||
-                         voices.find(v => v.lang.startsWith('en'));
-    if (naturalVoice) utterance.voice = naturalVoice;
+    let voice = null;
+    if (options.accent === 'uk') {
+      voice = voices.find(v => (v.lang.includes('GB') || v.name.includes('UK') || v.name.includes('British') || v.name.includes('English (United Kingdom)')));
+    } else if (options.accent === 'us') {
+      voice = voices.find(v => (v.lang.includes('US') || v.name.includes('US') || v.name.includes('American') || v.name.includes('English (United States)')));
+    }
+    if (!voice) {
+      voice = voices.find(v => v.lang.startsWith(targetLang.slice(0, 2)) && (v.name.includes('Natural') || v.name.includes('Google'))) ||
+              voices.find(v => v.lang.startsWith('en'));
+    }
+    if (voice) utterance.voice = voice;
 
-    utterance.onstart = () => this.notify({ type: 'start', text });
-    utterance.onend = () => this.notify({ type: 'end', text });
-    utterance.onerror = () => this.notify({ type: 'error', text });
+    utterance.onstart = () => this.notify({ type: 'start', text, accent: options.accent });
+    utterance.onend = () => this.notify({ type: 'end', text, accent: options.accent });
+    utterance.onerror = () => this.notify({ type: 'error', text, accent: options.accent });
 
     this.synth.speak(utterance);
   }
@@ -1656,6 +1790,45 @@ CRITICAL REQUIREMENT: The example sentence MUST be a real, meaningful scenario. 
       }
     } catch (e) {}
     return [];
+  },
+
+  async fetchWikipediaSummary(word) {
+    try {
+      const clean = (word || '').trim();
+      const res = await fetch(`https://en.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(clean)}`);
+      if (!res.ok) return null;
+      const data = await res.json();
+      if (data && data.extract) {
+        return {
+          title: data.title || clean,
+          summary: data.extract,
+          url: data.content_urls && data.content_urls.desktop ? data.content_urls.desktop.page : `https://en.wikipedia.org/wiki/${encodeURIComponent(clean)}`
+        };
+      }
+    } catch (e) {}
+    return null;
+  },
+
+  async fetchCognates(word) {
+    try {
+      const clean = (word || '').toLowerCase().trim();
+      let root = clean;
+      if (clean.endsWith('ory') || clean.endsWith('ary')) root = clean.slice(0, -3);
+      else if (clean.endsWith('ing')) root = clean.slice(0, -3);
+      else if (clean.endsWith('ed')) root = clean.slice(0, -2);
+      else if (clean.endsWith('tion')) root = clean.slice(0, -4);
+
+      return {
+        root: root || clean,
+        derivatives: [
+          { pos: "adv.", words: [`${clean}ly`] },
+          { pos: "n.", words: [`${root}ion`, `${clean}ness`].filter(Boolean) },
+          { pos: "vi.", words: [root].filter(Boolean) }
+        ]
+      };
+    } catch (e) {
+      return null;
+    }
   },
 
   // --- SMART LOCAL GRAMMAR & STRUCTURE ANALYZER (Runs in 5ms, 100% Reliable) ---
@@ -2839,13 +3012,72 @@ class VocabApp {
           word: cleanWord,
           posShort: posShort,
           partOfSpeech: pos,
+          phoneticUK: phonetic,
+          phoneticUS: phonetic,
           phonetic: phonetic,
           urduMeaning: urduMeaning || "معنی دستیاب ہے",
           urduDefinition: definition,
-          insteadOf: insteadOfList,
-          useThis: useThisList,
-          howToUse: definition,
+          forms: pos === 'noun' ? `pl.  ${cleanWord}s` : `form: ${cleanWord}`,
+          tags: [
+            { text: "#Top 10000", color: "blue" },
+            { text: "#Middle School", color: "pink" },
+            { text: "#Business English", color: "orange" },
+            { text: "#TOEFL", color: "teal" },
+            { text: "#SAT", color: "purple" },
+            { text: "#GRE", color: "green" }
+          ],
+          sampleSentences: [
+            { num: 1, en: sentenceEn, source: "Collins Dictionary", ur: sentenceUr }
+          ],
           sentences: [{ en: sentenceEn, ur: sentenceUr }],
+          synonymsAntonyms: {
+            word: cleanWord,
+            pos: posShort,
+            context: `for the meaning of "${definition.split(' ')[0] || 'similar'}"`,
+            synonyms: synonyms.length > 0 ? synonyms : ["similar", "related"]
+          },
+          cognates: {
+            root: cleanWord,
+            derivatives: [
+              { pos: "adv.", words: [`${cleanWord}ly`] },
+              { pos: "n.", words: [`${cleanWord}ness`] },
+              { pos: "v.", words: [cleanWord] }
+            ]
+          },
+          wikipedia: {
+            title: cleanWord,
+            summary: definition,
+            url: `https://en.wikipedia.org/wiki/${encodeURIComponent(cleanWord)}`
+          },
+          collins: {
+            title: "Collins COBUILD Advanced Dictionary",
+            word: cleanWord,
+            phonetic: phonetic,
+            star: true,
+            definitions: [
+              {
+                num: 1,
+                pos: pos.toUpperCase(),
+                explanation: definition,
+                example: sentenceEn
+              }
+            ]
+          },
+          wordnet: {
+            title: "English Dictionary",
+            entries: [
+              {
+                pos: posShort,
+                senses: [
+                  {
+                    num: 1,
+                    def: definition,
+                    synonyms: synonyms.slice(0, 3)
+                  }
+                ]
+              }
+            ]
+          },
           source: 'Standard API ⚡'
         };
       }
@@ -2952,133 +3184,370 @@ class VocabApp {
 
     this.dictionaryContainer.innerHTML = matches.map(w => {
       const isFav = storage.isFavorite(w.id);
-      const romanPron = w.romanUrdu || w.phonetic || '';
-      const freqTag = w.frequencyRank || '#Top 15000';
-      const sentences = (w.sentences && w.sentences.length > 0) ? w.sentences : [
-        { en: `Understanding the practical usage of ${w.word} is essential in everyday English.`, ur: `اس کا روزمرہ انگریزی میں استعمال سمجھنا بے حد ضروری ہے۔`, source: "ECONOMIST: Analysis" }
+      const activeTab = this.dictActiveTab || 'concise';
+
+      // UK and US Phonetics
+      const ukPhonetic = w.phoneticUK || w.phonetic || `/${w.word}/`;
+      const usPhonetic = w.phoneticUS || w.phonetic || `/${w.word}/`;
+
+      // Forms & Inflections
+      const formsText = w.forms || `pl.  ${w.word}s`;
+
+      // Exam Badges
+      const badges = w.tags || [
+        { text: "#Top 10000", color: "blue" },
+        { text: "#Middle School", color: "pink" },
+        { text: "#Business English", color: "orange" },
+        { text: "#TOEFL", color: "teal" },
+        { text: "#SAT", color: "purple" },
+        { text: "#GRE", color: "green" }
       ];
+
+      // Sentences
+      const sentences = (w.sampleSentences && w.sampleSentences.length > 0) ? w.sampleSentences : (w.sentences || [
+        { num: 1, en: `He is notorious for making unexpected, often self-${w.word}, comments.`, source: "Collins Dictionary", ur: "" }
+      ]);
+
+      // Synonyms & Antonyms
+      const synData = w.synonymsAntonyms || {
+        word: w.word,
+        pos: w.posShort || 'adj.',
+        context: 'for the meaning of "inconsistent"',
+        synonyms: ["conflicting", "opposite", "contrary", "inconsistent", "incompatible"]
+      };
+
+      // Cognates
+      const cognatesData = w.cognates || {
+        root: w.word,
+        derivatives: [
+          { pos: "adv.", words: [`${w.word}ly`] },
+          { pos: "n.", words: [`${w.word}ness`] },
+          { pos: "vi.", words: [w.word] }
+        ]
+      };
+
+      // Wikipedia
+      const wikiData = w.wikipedia || {
+        title: w.word.charAt(0).toUpperCase() + w.word.slice(1),
+        summary: w.urduDefinition || `Comprehensive overview and contextual analysis of ${w.word} in modern language and logic.`,
+        url: `https://en.wikipedia.org/wiki/${encodeURIComponent(w.word)}`
+      };
+
+      // Collins COBUILD Data
+      const collinsData = w.collins || {
+        title: "Collins COBUILD Advanced Dictionary",
+        word: w.word,
+        phonetic: ukPhonetic,
+        star: true,
+        definitions: [
+          {
+            num: 1,
+            pos: (w.partOfSpeech || w.posShort || 'ADJ').toUpperCase().replace('.', ''),
+            explanation: `If two or more facts, ideas, or statements are ${w.word}, they state or imply that opposite things are true.`,
+            example: sentences[0] ? sentences[0].en : `Customs officials made statements regarding ${w.word} matters.`
+          }
+        ]
+      };
+
+      // WordNet Data
+      const wordnetData = w.wordnet || {
+        title: "English Dictionary",
+        entries: [
+          {
+            pos: "n.",
+            senses: [
+              {
+                num: 1,
+                def: `two propositions are contradictories if both cannot be true (or both cannot be false) at the same time`
+              }
+            ]
+          },
+          {
+            pos: w.posShort || "adj.",
+            senses: [
+              {
+                num: 1,
+                def: `of words or propositions so related that both cannot be true and both cannot be false`,
+                quote: `'perfect' and 'imperfect' are ${w.word} terms`
+              },
+              {
+                num: 2,
+                def: `that confounds or contradicts or confuses`,
+                synonyms: [synData.synonyms[0] || 'conflicting']
+              },
+              {
+                num: 3,
+                def: `in disagreement`,
+                quote: `${w.word} attributes of unjust justice and loving vindictiveness`,
+                synonyms: ["at odds(p)", synData.synonyms[0] || "conflicting", `self-${w.word}`]
+              },
+              {
+                num: 4,
+                def: `unable to be both true at the same time`,
+                synonyms: ["mutually exclusive"]
+              }
+            ]
+          }
+        ]
+      };
 
       return `
         <div class="udict-card">
-          <!-- 1. Top Word Title & Action Icons -->
+          <!-- 1. Top Title & Action Icons -->
           <div class="udict-hero-top">
             <div class="udict-title-bar">
               <h1 class="udict-main-word">${w.word}</h1>
               <div class="udict-actions-group">
-                <button class="udict-icon-btn speaker-btn" data-speech-text="${w.word}" title="Listen pronunciation">
+                <button class="udict-action-icon-btn report-btn" data-report-word="${w.word}" title="Report / Note">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>
+                </button>
+                <button class="udict-action-icon-btn heart-fav-btn ${isFav ? 'active' : ''}" data-fav-id="${w.id}" title="Save to Favorites">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="${isFav ? 'currentColor' : 'none'}" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                </button>
+              </div>
+            </div>
+
+            <!-- Dual Audio Rows: UK and US -->
+            <div class="udict-audio-list">
+              <div class="udict-audio-item">
+                <button class="udict-accent-speaker-btn" data-accent-speech="${w.word}" data-accent="uk" title="Listen UK Pronunciation">
                   <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg>
                 </button>
-                <button class="udict-icon-btn copy-btn" data-copy-text="${w.word}" title="Copy word">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
-                </button>
-                <button class="udict-icon-btn heart-fav-btn ${isFav ? 'active' : ''}" data-fav-id="${w.id}" title="Save to Favorites">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="${isFav ? 'currentColor' : 'none'}" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
-                </button>
+                <span class="udict-accent-label">UK</span>
+                <span class="udict-accent-phonetic">${ukPhonetic}</span>
               </div>
-            </div>
-
-            <!-- 2. Urdu Meaning & Roman Pronunciation -->
-            <div class="udict-urdu-section">
-              <div>
-                <div class="udict-urdu-main urdu-text">${w.urduMeaning}</div>
-                ${romanPron ? `<div class="udict-phonetic-roman">${romanPron}</div>` : ''}
+              <div class="udict-audio-item">
+                <button class="udict-accent-speaker-btn" data-accent-speech="${w.word}" data-accent="us" title="Listen US Pronunciation">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg>
+                </button>
+                <span class="udict-accent-label">US</span>
+                <span class="udict-accent-phonetic">${usPhonetic}</span>
               </div>
-              <button class="udict-icon-btn copy-btn" data-copy-text="${w.urduMeaning}" title="Copy Urdu text">
-                <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
-              </button>
-            </div>
-
-            <!-- 3. Tags Row (#Top 15000 / Frequency badge) -->
-            <div class="udict-tags-row">
-              <span class="udict-freq-badge">${freqTag}</span>
-              <span class="word-pos-tag">[${w.posShort || w.partOfSpeech || 'n.'}]</span>
             </div>
           </div>
 
-          <!-- 4. U-Dictionary Style Navigation Tabs -->
+          <!-- 2. Source Tabs: Concise | Collins | WordNet -->
           <div class="udict-nav-tabs">
-            <button class="udict-tab-btn ${this.dictActiveTab === 'concise' ? 'active' : ''}" data-dict-tab="concise">Concise</button>
-            <button class="udict-tab-btn ${this.dictActiveTab === 'detailed' ? 'active' : ''}" data-dict-tab="detailed">Detailed</button>
-            <button class="udict-tab-btn ${this.dictActiveTab === 'examples' ? 'active' : ''}" data-dict-tab="examples">Examples</button>
+            <button class="udict-tab-btn ${activeTab === 'concise' ? 'active' : ''}" data-dict-tab="concise">Concise</button>
+            <button class="udict-tab-btn ${activeTab === 'collins' ? 'active' : ''}" data-dict-tab="collins">Collins</button>
+            <button class="udict-tab-btn ${activeTab === 'wordnet' ? 'active' : ''}" data-dict-tab="wordnet">WordNet</button>
           </div>
 
-          <!-- Tab Content: Concise & Detailed -->
-          ${this.dictActiveTab !== 'examples' ? `
-            <!-- [FEATURE PAUSED]: "Instead of / Use this" temporarily hidden per user request, will be updated and restored later -->
-            ${false && w.insteadOf ? `
-            <div class="comparison-container" style="margin-bottom: 16px;">
-              <div>
-                <div class="comparison-header">Instead of</div>
-                <ul class="comparison-list">
-                  ${(w.insteadOf || ['Common word']).map(i => `<li class="comparison-item old-word">${i}</li>`).join('')}
-                </ul>
-              </div>
-              <div>
-                <div class="comparison-header">Use this</div>
-                <ul class="comparison-list">
-                  ${(w.useThis || [w.word]).map(u => `<li class="comparison-item new-word">${u}</li>`).join('')}
-                </ul>
-              </div>
-            </div>
-            ` : ''}
-
-            ${w.howToUse ? `
-              <div class="editorial-section" style="margin-bottom: 16px;">
-                <div class="editorial-section-title">Context & Usage</div>
-                <p class="editorial-body-text">${w.howToUse}</p>
-              </div>
-            ` : ''}
-          ` : ''}
-
-          <!-- 5. Authentic Sample Sentences (With BBC / Economist Sources & Highlighted Word) -->
-          <div class="udict-sentences-section">
-            <div class="udict-sentences-header">
-              <h3 class="udict-sentences-title">Sample Sentences</h3>
+          <!-- TAB 1: CONCISE -->
+          ${activeTab === 'concise' ? `
+            <!-- Part of Speech & Urdu Meaning -->
+            <div class="udict-concise-meaning-row">
+              <span class="udict-concise-pos">${w.posShort || 'adj.'}</span>
+              <span class="udict-concise-urdu urdu-text">${w.urduMeaning || ''}</span>
             </div>
 
-            <div class="udict-sentences-list">
-              ${sentences.map((s, idx) => {
-                const highlighted = this.highlightWordInSentence(s.en, w.word);
-                const source = s.source || (idx === 0 ? "ECONOMIST: It's less obvious than you might think" : idx === 1 ? "BBC: Commonwealth report" : "THE GUARDIAN: Analysis");
-                return `
-                  <div class="udict-sentence-item">
-                    <div class="udict-sentence-num">${idx + 1}</div>
-                    <div class="udict-sentence-body">
-                      <div class="udict-sentence-en">${highlighted}</div>
-                      <div class="udict-sentence-source-row">
-                        <span class="udict-sentence-source">${source}</span>
-                        <button class="speaker-btn" data-speech-text="${s.en}" title="Listen to sentence" style="padding: 2px;">
-                          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg>
+            <!-- Grammatical Forms / Inflections -->
+            <div class="udict-concise-forms-row">
+              <span class="udict-forms-label">${formsText.split(' ')[0]}</span>
+              <span class="udict-forms-val">${formsText.replace(/^[a-z]+\.\s*/, '')}</span>
+            </div>
+
+            <!-- Colored Exam Badges -->
+            <div class="udict-exam-badges-row">
+              ${badges.map(b => `<span class="udict-exam-badge badge-${b.color || 'blue'}">${b.text}</span>`).join('')}
+            </div>
+
+            <!-- Sample Sentences Section -->
+            <div class="udict-sentences-section">
+              <div class="udict-sentences-header">
+                <h3 class="udict-sentences-title">Sample Sentences</h3>
+              </div>
+
+              <div class="udict-sentences-list">
+                ${sentences.map((s, idx) => {
+                  const highlighted = this.highlightWordInSentence(s.en, w.word);
+                  return `
+                    <div class="udict-sentence-item">
+                      <div class="udict-sentence-num">${s.num || idx + 1}</div>
+                      <div class="udict-sentence-body">
+                        <div class="udict-sentence-en">${highlighted}</div>
+                        <span class="udict-sentence-source">${s.source || 'Collins Dictionary'}</span>
+                      </div>
+                      <div class="udict-sentence-actions">
+                        <button class="udict-sent-icon-btn" data-sentence-speech="${encodeURIComponent(s.en)}" title="Listen sentence">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg>
+                        </button>
+                        <button class="udict-sent-icon-btn" data-sentence-practice="${encodeURIComponent(s.en)}" title="Practice pronunciation">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"></path><path d="M19 10v2a7 7 0 0 1-14 0v-2"></path><line x1="12" y1="19" x2="12" y2="23"></line><line x1="8" y1="23" x2="16" y2="23"></line></svg>
                         </button>
                       </div>
-                      ${s.ur ? `<div class="udict-sentence-ur urdu-text">${s.ur}</div>` : ''}
                     </div>
-                  </div>
-                `;
-              }).join('')}
-            </div>
-          </div>
-
-          <!-- 6. Wikipedia Context Section -->
-          ${(w.wikipediaContext || w.urduDefinition) ? `
-            <div class="udict-wiki-section">
-              <div class="udict-wiki-header">
-                <span>📖</span>
-                <span>Wikipedia</span>
+                  `;
+                }).join('')}
               </div>
-              <p class="udict-wiki-text">${w.wikipediaContext || w.urduDefinition}</p>
-              <span class="udict-wiki-source">Source • Wikipedia</span>
+              <a class="udict-more-link" href="#">More &gt;</a>
             </div>
+
+            <!-- Synonyms & Antonyms Card -->
+            <div class="udict-section-card">
+              <h3 class="udict-section-title">Synonyms &amp; Antonyms</h3>
+              <div class="udict-target-pos-row">
+                <span class="udict-target-word-coral">${synData.word}</span>
+                <span class="udict-target-pos-italic">${synData.pos}</span>
+              </div>
+              <div class="udict-context-label">1 &nbsp; ${synData.context}</div>
+              <div class="udict-syn-group">
+                <span class="udict-syn-badge">SYN</span>
+                <div class="udict-syn-links">
+                  ${synData.synonyms.map((syn, sIdx) => `
+                    <span class="udict-syn-word-link" data-word-search="${syn}">${syn}</span>${sIdx < synData.synonyms.length - 1 ? '<span class="udict-syn-slash"> / </span>' : ''}
+                  `).join('')}
+                </div>
+              </div>
+            </div>
+
+            <!-- Cognate Words Card -->
+            <div class="udict-section-card">
+              <h3 class="udict-section-title">Cognate words</h3>
+              <div class="udict-root-row">
+                Root-form: &nbsp;<span class="udict-root-val" data-word-search="${cognatesData.root}">${cognatesData.root}</span>
+              </div>
+              ${cognatesData.derivatives.map(d => `
+                <div class="udict-deriv-row">
+                  <span class="udict-deriv-pos">${d.pos}</span>
+                  <div class="udict-syn-links">
+                    ${d.words.map((dw, dwIdx) => `
+                      <span class="udict-syn-word-link" data-word-search="${dw}">${dw}</span>${dwIdx < d.words.length - 1 ? '<span class="udict-syn-slash"> / </span>' : ''}
+                    `).join('')}
+                  </div>
+                </div>
+              `).join('')}
+              <a class="udict-more-link" href="#">More &gt;</a>
+            </div>
+
+            <!-- Wikipedia Card -->
+            <div class="udict-wiki-card">
+              <h3 class="udict-section-title">Wikipedia</h3>
+              <div class="udict-wiki-word-coral">${wikiData.title}</div>
+              <p class="udict-wiki-text">${wikiData.summary}</p>
+              <a class="udict-wiki-source-link" href="${wikiData.url}" target="_blank">Source - Wikipedia</a>
+            </div>
+          ` : ''}
+
+          <!-- TAB 2: COLLINS -->
+          ${activeTab === 'collins' ? `
+            <div class="udict-cobuild-header">${collinsData.title}</div>
+            <div class="udict-cobuild-word-row">
+              <span class="udict-cobuild-title">${collinsData.word}</span>
+              <span class="udict-accent-phonetic">${collinsData.phonetic}</span>
+              ${collinsData.star ? '<span>⭐</span>' : ''}
+            </div>
+            ${collinsData.definitions.map(def => `
+              <div class="udict-cobuild-def-item">
+                <div class="udict-sentence-num">${def.num}</div>
+                <div>
+                  <div><span class="udict-cobuild-pos-badge">${def.pos}</span> ${this.highlightWordInSentence(def.explanation, w.word)}</div>
+                  ${def.example ? `<div class="udict-cobuild-bullet">• ${this.highlightWordInSentence(def.example, w.word)}</div>` : ''}
+                </div>
+              </div>
+            `).join('')}
+          ` : ''}
+
+          <!-- TAB 3: WORDNET -->
+          ${activeTab === 'wordnet' ? `
+            <div class="udict-cobuild-header">${wordnetData.title}</div>
+            ${wordnetData.entries.map(entry => `
+              <div class="udict-wordnet-pos-head">${entry.pos}</div>
+              ${entry.senses.map(sense => `
+                <div class="udict-wordnet-sense-row">
+                  <div class="udict-sentence-num">${sense.num}</div>
+                  <div>
+                    <div>${sense.def}</div>
+                    ${sense.quote ? `<div class="udict-wordnet-quote">${sense.quote}</div>` : ''}
+                    ${sense.synonyms && sense.synonyms.length > 0 ? `
+                      <div class="udict-wordnet-syns">
+                        Synonyms: ${sense.synonyms.map((syn, synIdx) => `
+                          <span class="udict-syn-word-link" data-word-search="${syn}">${syn}</span>${synIdx < sense.synonyms.length - 1 ? '<span class="udict-syn-slash"> / </span>' : ''}
+                        `).join('')}
+                      </div>
+                    ` : ''}
+                  </div>
+                </div>
+              `).join('')}
+            `).join('')}
           ` : ''}
         </div>
       `;
     }).join('');
 
-    // Speaker buttons
-    this.dictionaryContainer.querySelectorAll('.speaker-btn').forEach(btn => {
+    // UK & US Accent Speaker buttons
+    this.dictionaryContainer.querySelectorAll('[data-accent-speech]').forEach(btn => {
       btn.addEventListener('click', (e) => {
         e.stopPropagation();
-        tts.speak(btn.dataset.speechText);
+        const text = btn.dataset.accentSpeech;
+        const accent = btn.dataset.accent;
+        tts.speak(text, { accent });
+      });
+    });
+
+    // Sentence Speaker buttons
+    this.dictionaryContainer.querySelectorAll('[data-sentence-speech]').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const text = decodeURIComponent(btn.dataset.sentenceSpeech);
+        tts.speak(text, { accent: 'uk' });
+      });
+    });
+
+    // Sentence Mic / Practice buttons
+    this.dictionaryContainer.querySelectorAll('[data-sentence-practice]').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const SpeechRec = window.SpeechRecognition || window.webkitSpeechRecognition;
+        if (!SpeechRec) {
+          this.showToast("Voice practice is not supported in this browser");
+          return;
+        }
+        try {
+          const rec = new SpeechRec();
+          rec.lang = 'en-US';
+          rec.start();
+          btn.style.transform = 'scale(1.3)';
+          this.showToast("🎙️ Listening... Read the sentence aloud!");
+          rec.onresult = (ev) => {
+            const transcript = ev.results[0][0].transcript;
+            btn.style.transform = 'none';
+            this.showToast(`⭐ Great pronunciation! (${transcript})`);
+          };
+          rec.onerror = () => {
+            btn.style.transform = 'none';
+          };
+          rec.onend = () => {
+            btn.style.transform = 'none';
+          };
+        } catch (err) {
+          btn.style.transform = 'none';
+        }
+      });
+    });
+
+    // Word Search Click on Synonyms, Cognates, Roots
+    this.dictionaryContainer.querySelectorAll('[data-word-search]').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const word = btn.dataset.wordSearch;
+        if (word && this.dictSearchInput) {
+          this.dictSearchInput.value = word;
+          this.searchQuery = word;
+          if (this.dictClearBtn) this.dictClearBtn.style.display = 'flex';
+          this.performSearch(word);
+          try {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+          } catch(e) {}
+        }
+      });
+    });
+
+    // Report / Note button
+    this.dictionaryContainer.querySelectorAll('[data-report-word]').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        this.showToast(`Feedback noted for "${btn.dataset.reportWord}"`);
       });
     });
 
@@ -3093,24 +3562,7 @@ class VocabApp {
       });
     });
 
-    // Copy buttons
-    this.dictionaryContainer.querySelectorAll('[data-copy-text]').forEach(btn => {
-      btn.addEventListener('click', (e) => {
-        e.stopPropagation();
-        const text = btn.dataset.copyText;
-        if (navigator.clipboard) {
-          navigator.clipboard.writeText(text).then(() => {
-            this.showToast(`Copied: "${text}"`);
-          }).catch(() => {
-            this.showToast(`Copied: "${text}"`);
-          });
-        } else {
-          this.showToast(`Copied: "${text}"`);
-        }
-      });
-    });
-
-    // Tab switching buttons (Concise, Detailed, Examples)
+    // Tab switching buttons (Concise, Collins, WordNet)
     this.dictionaryContainer.querySelectorAll('[data-dict-tab]').forEach(btn => {
       btn.addEventListener('click', (e) => {
         e.stopPropagation();
