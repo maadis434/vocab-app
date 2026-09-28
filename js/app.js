@@ -1272,14 +1272,14 @@ class StorageManager {
       localStorage.removeItem(this.grammarCacheKey);
     } catch (e) {}
     this.grammarCache = {};
-    // Ensure reliable official Flash model
+    // Ensure reliable official Flash model (gemini-3.8-flash)
     const storedModel = localStorage.getItem('vocab_gemini_model_v5') || '';
-    if (!storedModel || storedModel.includes('pro') || storedModel.includes('8b')) {
-      localStorage.setItem('vocab_gemini_model_v5', 'gemini-2.5-flash');
+    if (!storedModel || storedModel.includes('2.5') || storedModel.includes('pro') || storedModel.includes('8b')) {
+      localStorage.setItem('vocab_gemini_model_v5', 'gemini-3.8-flash');
     }
     const verModel = localStorage.getItem('vocab_gemini_verified_model') || '';
-    if (!verModel || verModel.includes('pro') || verModel.includes('8b')) {
-      localStorage.setItem('vocab_gemini_verified_model', 'gemini-2.5-flash');
+    if (!verModel || verModel.includes('2.5') || verModel.includes('pro') || verModel.includes('8b')) {
+      localStorage.setItem('vocab_gemini_verified_model', 'gemini-3.8-flash');
     }
     this.themeKey = 'vocab_theme_v5';
     this.theme = this.getStoredTheme();
@@ -1341,9 +1341,9 @@ class StorageManager {
 
   getGeminiModel() {
     const m = localStorage.getItem('vocab_gemini_model_v5');
-    if (!m || m.includes('pro') || m.includes('8b')) {
-      localStorage.setItem('vocab_gemini_model_v5', 'gemini-2.5-flash');
-      return 'gemini-2.5-flash';
+    if (!m || m.includes('2.5') || m.includes('pro') || m.includes('8b')) {
+      localStorage.setItem('vocab_gemini_model_v5', 'gemini-3.8-flash');
+      return 'gemini-3.8-flash';
     }
     return m;
   }
@@ -1456,13 +1456,13 @@ const tts = new TTSEngine();
 // 4. GEMINI AI & TRADITIONAL API ENGINES
 // ==========================================================
 const OnlineLookupService = {
-  // --- DYNAMIC MODEL RESOLUTION (Official Gemini 3.6 Flash Engine) ---
+  // --- DYNAMIC MODEL RESOLUTION (Official Gemini 3.8 Flash Engine) ---
   async getAvailableGeminiModel(apiKey) {
     const key = (apiKey || '').trim();
-    if (!key) return 'gemini-3.6-flash';
+    if (!key) return 'gemini-3.8-flash';
 
     const cached = localStorage.getItem('vocab_gemini_verified_model');
-    if (cached && (cached.includes('3.6') || cached.includes('2.5'))) {
+    if (cached && (cached.includes('3.8') || cached.includes('3.6'))) {
       return cached;
     }
 
@@ -1481,61 +1481,83 @@ const OnlineLookupService = {
             .filter(m => m.supportedGenerationMethods && m.supportedGenerationMethods.includes('generateContent'))
             .map(m => m.name.replace(/^models\//, ''));
 
-          // Prioritize official current models instructed by Google API
-          const best = contentModels.find(m => m === 'gemini-3.6-flash') ||
+          // Prioritize latest official flash models
+          const best = contentModels.find(m => m === 'gemini-3.8-flash') ||
+                       contentModels.find(m => m.includes('3.8')) ||
+                       contentModels.find(m => m === 'gemini-3.6-flash') ||
                        contentModels.find(m => m.includes('3.6')) ||
-                       contentModels.find(m => m === 'gemini-2.5-flash') ||
-                       contentModels.find(m => m.includes('flash') && !m.includes('2.0') && !m.includes('1.5')) ||
-                       'gemini-3.6-flash';
+                       contentModels.find(m => m.includes('flash') && !m.includes('2.5') && !m.includes('1.5')) ||
+                       'gemini-3.8-flash';
 
           if (best) {
             localStorage.setItem('vocab_gemini_verified_model', best);
+            localStorage.setItem('vocab_gemini_model_v5', best);
             return best;
           }
         }
       }
     } catch (e) {}
 
-    return 'gemini-3.6-flash';
+    return 'gemini-3.8-flash';
   },
 
   // --- A. GOOGLE GEMINI AI ENGINE (Smartest & Most Natural) ---
   async testGeminiKey(apiKey) {
     const key = (apiKey || '').trim();
     if (!key) return { success: false, error: "Please enter an API key." };
-    try {
-      const model = 'gemini-3.6-flash';
-      const primaryUrl = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${key}`;
-      const controller = typeof AbortController !== 'undefined' ? new AbortController() : null;
-      const timer = controller ? setTimeout(() => controller.abort(), 5000) : null;
-      const res = await fetch(primaryUrl, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          contents: [{ parts: [{ text: "hi" }] }],
-          generationConfig: { maxOutputTokens: 1 }
-        }),
-        signal: controller ? controller.signal : undefined
-      });
-      if (timer) clearTimeout(timer);
 
-      if (res.ok) {
-        localStorage.setItem('vocab_gemini_verified_model', model);
-        localStorage.setItem('vocab_gemini_model_v5', model);
-        return { success: true, model: model };
+    const candidates = ['gemini-3.8-flash', 'gemini-3.6-flash', 'gemini-2.0-flash'];
+    let lastError = null;
+
+    for (let i = 0; i < candidates.length; i++) {
+      const model = candidates[i];
+      try {
+        const primaryUrl = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${key}`;
+        const controller = typeof AbortController !== 'undefined' ? new AbortController() : null;
+        const timer = controller ? setTimeout(() => controller.abort(), 5000) : null;
+        const res = await fetch(primaryUrl, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            contents: [{ parts: [{ text: "hi" }] }],
+            generationConfig: { maxOutputTokens: 1 }
+          }),
+          signal: controller ? controller.signal : undefined
+        });
+        if (timer) clearTimeout(timer);
+
+        if (res.ok) {
+          localStorage.setItem('vocab_gemini_verified_model', model);
+          localStorage.setItem('vocab_gemini_model_v5', model);
+          return { success: true, model: model };
+        }
+
+        const data = await res.json().catch(() => ({}));
+        const errMsg = data.error && data.error.message ? data.error.message : `HTTP ${res.status}`;
+
+        if (res.status === 400 && errMsg.includes("API key not valid")) {
+          return { success: false, error: "API key is invalid. Please copy the exact key from Google AI Studio." };
+        }
+
+        // Self-healing: Check if Google explicitly recommended a newer model
+        const suggestedMatch = errMsg.match(/use\s+models\/([a-zA-Z0-9._-]+)/i);
+        if (suggestedMatch && suggestedMatch[1]) {
+          const suggestedModel = suggestedMatch[1];
+          if (!candidates.includes(suggestedModel)) {
+            candidates.splice(i + 1, 0, suggestedModel);
+          }
+          continue;
+        }
+
+        lastError = errMsg;
+        continue;
+      } catch (e) {
+        lastError = e.message || "Network error. Check your internet connection.";
+        continue;
       }
-
-      const data = await res.json().catch(() => ({}));
-      const errMsg = data.error && data.error.message ? data.error.message : `HTTP ${res.status}`;
-
-      if (res.status === 400 && errMsg.includes("API key not valid")) {
-        return { success: false, error: "API key is invalid. Please copy the exact key from Google AI Studio." };
-      }
-
-      return { success: false, error: errMsg };
-    } catch (e) {
-      return { success: false, error: e.message || "Network error. Check your internet connection." };
     }
+
+    return { success: false, error: lastError || "Could not connect to Gemini service." };
   },
 
   async fetchWithGemini(query, apiKey) {
@@ -1583,12 +1605,13 @@ Return ONLY a valid JSON object matching this exact schema:
 }
 CRITICAL REQUIREMENT: The example sentence MUST be a real, meaningful scenario. NEVER generate meta sentences like 'Learning how to use...', 'Understanding how to use...', 'How to use...', or dictionary definitions. It must teach the user how native speakers speak.`;
 
-    const activeModel = storage.getGeminiModel() || 'gemini-2.5-flash';
-    const candidateModels = [activeModel, 'gemini-2.5-flash', 'gemini-3.6-flash'];
+    const activeModel = storage.getGeminiModel() || 'gemini-3.8-flash';
+    const candidateModels = [activeModel, 'gemini-3.8-flash', 'gemini-3.6-flash', 'gemini-2.0-flash'];
     const uniqueModels = [...new Set(candidateModels)];
     let lastError = null;
 
-    for (const model of uniqueModels) {
+    for (let i = 0; i < uniqueModels.length; i++) {
+      const model = uniqueModels[i];
       try {
         const url = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${apiKey.trim()}`;
         const controller = typeof AbortController !== 'undefined' ? new AbortController() : null;
@@ -1608,12 +1631,25 @@ CRITICAL REQUIREMENT: The example sentence MUST be a real, meaningful scenario. 
         if (!res.ok) {
           const errData = await res.json().catch(() => ({}));
           const msg = errData.error && errData.error.message ? errData.error.message : `HTTP ${res.status}`;
-          const isDemandSpike = msg.includes("high demand") || msg.includes("overloaded") || msg.includes("spikes in demand") || res.status === 503 || res.status === 429;
-          if (isDemandSpike) {
-            lastError = new Error(msg);
-            continue; // seamlessly try next candidate model
+
+          if (res.status === 400 && msg.includes("API key not valid")) {
+            throw new Error("API key is invalid. Please copy the exact key from Google AI Studio.");
           }
-          throw new Error(msg);
+
+          // Dynamic self-healing: Extract suggested model if Google recommends a newer one
+          const suggestedMatch = msg.match(/use\s+models\/([a-zA-Z0-9._-]+)/i);
+          if (suggestedMatch && suggestedMatch[1]) {
+            const suggestedModel = suggestedMatch[1];
+            localStorage.setItem('vocab_gemini_model_v5', suggestedModel);
+            localStorage.setItem('vocab_gemini_verified_model', suggestedModel);
+            if (!uniqueModels.includes(suggestedModel)) {
+              uniqueModels.splice(i + 1, 0, suggestedModel);
+            }
+            continue;
+          }
+
+          lastError = new Error(msg);
+          continue; // seamlessly try next candidate model
         }
 
         const data = await res.json();
@@ -1624,6 +1660,12 @@ CRITICAL REQUIREMENT: The example sentence MUST be a real, meaningful scenario. 
           jsonText = jsonText.replace(/^```/, '').replace(/```$/, '').trim();
         }
         const parsed = JSON.parse(jsonText);
+
+        // Update verified model on success
+        if (model !== activeModel) {
+          localStorage.setItem('vocab_gemini_verified_model', model);
+          localStorage.setItem('vocab_gemini_model_v5', model);
+        }
 
         return {
           id: `gemini-${Date.now()}`,
@@ -1644,6 +1686,7 @@ CRITICAL REQUIREMENT: The example sentence MUST be a real, meaningful scenario. 
         if (err.message && err.message.includes("API key not valid")) {
           throw err;
         }
+        continue;
       }
     }
 
@@ -1957,17 +2000,19 @@ If correct:
 If incorrect:
 {"status":"❌ Incorrect","correct_version":"corrected sentence","why_it_was_wrong":"1-2 line reason naming grammar rule","urdu_meaning":"Urdu translation"}`;
 
-    const activeModel = storage.getGeminiModel() || 'gemini-2.5-flash';
+    const activeModel = storage.getGeminiModel() || 'gemini-3.8-flash';
     // Strictly top-tier flagship models: highest accuracy, zero degraded quality
     const candidateModels = [
       activeModel,
-      'gemini-2.5-flash',
-      'gemini-3.6-flash'
+      'gemini-3.8-flash',
+      'gemini-3.6-flash',
+      'gemini-2.0-flash'
     ];
     const uniqueModels = [...new Set(candidateModels)];
     let lastError = null;
 
-    for (const model of uniqueModels) {
+    for (let i = 0; i < uniqueModels.length; i++) {
+      const model = uniqueModels[i];
       try {
         const url = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${key}`;
         const controller = typeof AbortController !== 'undefined' ? new AbortController() : null;
@@ -1996,15 +2041,20 @@ If incorrect:
             throw new Error("API key is invalid. Please copy the exact key from Google AI Studio.");
           }
 
-          // Detect Google server load / demand spikes
-          const isDemandSpike = msg.includes("high demand") || msg.includes("overloaded") || msg.includes("spikes in demand") || res.status === 503 || res.status === 429;
-          if (isDemandSpike) {
-            console.warn(`Gemini model ${model} demand spike detected. Switching to fallback standby model...`);
-            lastError = new Error(msg);
-            continue; // seamlessly try next model
+          // Dynamic self-healing: Extract suggested model if Google recommends a newer one
+          const suggestedMatch = msg.match(/use\s+models\/([a-zA-Z0-9._-]+)/i);
+          if (suggestedMatch && suggestedMatch[1]) {
+            const suggestedModel = suggestedMatch[1];
+            localStorage.setItem('vocab_gemini_model_v5', suggestedModel);
+            localStorage.setItem('vocab_gemini_verified_model', suggestedModel);
+            if (!uniqueModels.includes(suggestedModel)) {
+              uniqueModels.splice(i + 1, 0, suggestedModel);
+            }
+            continue;
           }
 
-          throw new Error(msg);
+          lastError = new Error(msg);
+          continue; // seamlessly try next candidate model
         }
 
         const data = await res.json();
@@ -2049,14 +2099,79 @@ If incorrect:
         if (err.message && err.message.includes("API key not valid")) {
           throw err;
         }
-        const isDemandSpikeOrTimeout = err.name === 'AbortError' || (err.message && (err.message.includes("high demand") || err.message.includes("overloaded") || err.message.includes("spikes in demand")));
-        if (isDemandSpikeOrTimeout) {
-          continue; // seamlessly try next candidate model
-        }
+        continue;
       }
     }
 
-    throw lastError || new Error("Google AI servers par is waqt temporary traffic zyada hai. Baraye meherbani thori dair baad dobara Check karein.");
+    throw lastError || new Error("Gemini AI check could not complete.");
+  },
+
+  // --- D. PERMANENT 100% FREE NO-KEY GRAMMAR ENGINE (LanguageTool + Google Translate) ---
+  async checkGrammarWithLanguageTool(sentence) {
+    try {
+      const cleanSentence = (sentence || '').trim();
+      if (!cleanSentence) return null;
+
+      const controller = typeof AbortController !== 'undefined' ? new AbortController() : null;
+      const timer = controller ? setTimeout(() => controller.abort(), 6500) : null;
+      const body = new URLSearchParams({ text: cleanSentence, language: 'en-US' });
+
+      const res = await fetch('https://api.languagetool.org/v2/check', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: body.toString(),
+        signal: controller ? controller.signal : undefined
+      });
+      if (timer) clearTimeout(timer);
+      if (!res.ok) return null;
+
+      const data = await res.json();
+      if (!data || !Array.isArray(data.matches)) return null;
+
+      const errorMatches = data.matches.filter(m => m.replacements && m.replacements.length > 0);
+
+      if (errorMatches.length === 0) {
+        // Sentence is grammatically correct!
+        let urdu = await this.translate(cleanSentence, 'en', 'ur');
+        return {
+          status: '✅ Correct',
+          urdu_meaning: urdu || 'یہ جملہ گرائمر اور ساخت کے اعتبار سے بالکل درست ہے۔'
+        };
+      }
+
+      // Sentence has grammatical errors - reconstruct clean corrected sentence
+      let corrected = cleanSentence;
+      const sorted = [...errorMatches].sort((a, b) => b.offset - a.offset);
+      const reasons = [];
+
+      for (const m of sorted) {
+        const replacement = m.replacements[0].value;
+        corrected = corrected.slice(0, m.offset) + replacement + corrected.slice(m.offset + m.length);
+        if (m.message) {
+          reasons.unshift(m.message.replace(/‘|’/g, "'").replace(/“|”/g, '"'));
+        }
+      }
+
+      // Format casing and punctuation
+      corrected = corrected.charAt(0).toUpperCase() + corrected.slice(1);
+      if (!/[.!?]$/.test(corrected)) corrected += '.';
+
+      // Get natural Urdu translation of the corrected sentence
+      let urdu = await this.translate(corrected, 'en', 'ur');
+      if (!urdu) {
+        urdu = 'اس جملے کی درستگی کر دی گئی ہے۔';
+      }
+
+      return {
+        status: '❌ Incorrect',
+        correct_version: corrected,
+        why_it_was_wrong: reasons.slice(0, 3).join(' ') || 'Grammar and sentence structure correction.',
+        urdu_meaning: urdu
+      };
+    } catch (e) {
+      console.warn("LanguageTool permanent engine check error:", e);
+      return null;
+    }
   }
 };
 
@@ -3990,8 +4105,8 @@ class VocabApp {
       ${!hasKey ? `
         <div style="background: #fdf4ff; border: 1px solid #f5d0fe; border-radius: 14px; padding: 12px 14px; margin-bottom: 14px; display: flex; justify-content: space-between; align-items: center; gap: 10px;">
           <div>
-            <div style="font-size: 0.84rem; font-weight: 700; color: #86198f;">✨ Connect Free Gemini AI</div>
-            <div style="font-size: 0.74rem; color: #701a75; line-height: 1.4;">Unlocks real-time AI checking for any sentence. Free sample tests work below.</div>
+            <div style="font-size: 0.84rem; font-weight: 700; color: #86198f;">✨ Optional: Connect Gemini AI</div>
+            <div style="font-size: 0.74rem; color: #701a75; line-height: 1.4;">Free standard grammar checking is active. Add Gemini key for advanced teacher insights.</div>
           </div>
           <button id="grammar-open-ai-key-btn" style="background: #86198f; color: white; border: none; border-radius: 10px; padding: 7px 12px; font-size: 0.75rem; font-weight: 700; cursor: pointer; white-space: nowrap;">
             Add Key 🔑
@@ -4013,14 +4128,13 @@ class VocabApp {
           <div class="grammar-loading-box">
             <div class="grammar-spinner"></div>
             <p style="font-size: 0.94rem; font-weight: 700; color: var(--text-title); margin-bottom: 3px;">Analyzing Grammar & Structure...</p>
-            <p style="font-size: 0.78rem; color: var(--text-faint);">Performing linguistic analysis with Gemini AI (approx. 3–5s)...</p>
+            <p style="font-size: 0.78rem; color: var(--text-faint);">Checking sentence structure, spelling and grammar rules...</p>
           </div>
         ` : ''}
 
         ${this.grammarError ? `
           <div style="background: #fef2f2; border: 1px solid #fee2e2; border-radius: 14px; padding: 14px; margin-top: 14px; color: #991b1b; font-size: 0.84rem; line-height: 1.5;">
             <strong>⚠️ Notice:</strong> ${this.grammarError}
-            ${!hasKey ? `<br><span style="font-size:0.78rem; color:#7f1d1d;">Please connect your free Gemini key in More › Google Gemini AI to check any sentence.</span>` : ''}
           </div>
         ` : ''}
 
@@ -4160,40 +4274,37 @@ class VocabApp {
 
     let finalResult = null;
 
-    // 2. Call Gemini AI (Authoritative Teacher Engine with 6.5s timeout)
+    // 2. Call Gemini AI (if key is set)
     if (storage.geminiApiKey) {
       try {
         finalResult = await OnlineLookupService.checkGrammarWithGemini(sentence, storage.geminiApiKey);
       } catch (err) {
-        console.warn("Gemini AI check error/timeout:", err.message);
-        // If Gemini failed or timed out, try local rule analyzer only for known grammatical patterns
-        try {
-          finalResult = await OnlineLookupService.analyzeSentenceLocally(sentence);
-        } catch (localErr) {}
+        console.warn("Gemini AI check failed, seamlessly falling back to permanent LanguageTool engine:", err.message);
+      }
+    }
 
-        // If neither Gemini nor verified local rules caught it, report honest status (NEVER fake a 'Correct' answer!)
-        if (!finalResult) {
-          this.isCheckingGrammar = false;
-          let errMsg = err.message || "AI service connection error. Please retry.";
-          if (err.name === 'AbortError') {
-            errMsg = "Sentence analysis took longer than expected due to network latency. Please tap Check again.";
-          } else if (errMsg.includes("high demand") || errMsg.includes("overloaded") || errMsg.includes("spikes in demand")) {
-            errMsg = "Google AI servers par is waqt temporary traffic zyada hai. Baraye meherbani 5-10 second baad dobara Check dabayein.";
-          }
-          this.grammarError = errMsg;
-          this.renderGrammarCheckView();
-          return;
-        }
+    // 3. Permanent 100% Free Fallback Engine: LanguageTool (No Key Needed, Never Deprecates)
+    if (!finalResult) {
+      try {
+        finalResult = await OnlineLookupService.checkGrammarWithLanguageTool(sentence);
+      } catch (ltErr) {
+        console.warn("LanguageTool fallback check failed:", ltErr);
       }
-    } else {
-      // If no API key is set, check local rule analyzer
-      finalResult = await OnlineLookupService.analyzeSentenceLocally(sentence);
-      if (!finalResult) {
-        this.isCheckingGrammar = false;
-        this.grammarError = "Please connect your free Google Gemini API key in 'Add Key 🔑' above to check complex sentences.";
-        this.renderGrammarCheckView();
-        return;
-      }
+    }
+
+    // 4. Local Rule Analyzer (0ms offline fallback for verified patterns)
+    if (!finalResult) {
+      try {
+        finalResult = await OnlineLookupService.analyzeSentenceLocally(sentence);
+      } catch (localErr) {}
+    }
+
+    // If still no result (e.g. completely offline with no network connection)
+    if (!finalResult) {
+      this.isCheckingGrammar = false;
+      this.grammarError = "Sentence analysis could not be completed. Please check your internet connection.";
+      this.renderGrammarCheckView();
+      return;
     }
 
     // Save verified result in cache so repeated lookups are instant
