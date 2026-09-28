@@ -1512,11 +1512,13 @@ body {
 }
 
 .dict-auto-pos-tag {
-  font-size: 0.74rem;
-  color: #f43f5e;
+  font-size: 0.84rem;
+  color: var(--text-muted);
   font-style: italic;
-  font-weight: 600;
-  margin: 0 4px;
+  font-weight: 500;
+  margin-left: 6px;
+  direction: ltr;
+  display: inline-block;
 }
 
 .dict-auto-right {
@@ -1749,6 +1751,30 @@ body {
   letter-spacing: -0.01em;
 }
 
+/* Bilingual Sentences Filter Pill (Screenshot 3) */
+.udict-filter-chips {
+  display: flex;
+  gap: 6px;
+}
+
+.udict-filter-chip {
+  font-size: 0.78rem;
+  font-weight: 700;
+  padding: 3px 14px;
+  border-radius: 9999px;
+  background: var(--bg-search);
+  color: var(--text-muted);
+  border: 1px solid var(--divider);
+  cursor: pointer;
+  letter-spacing: 0.02em;
+}
+
+.udict-filter-chip.active {
+  background: #f43f5e;
+  color: #ffffff;
+  border-color: #f43f5e;
+}
+
 .udict-sentence-item {
   display: flex;
   gap: 12px;
@@ -1780,6 +1806,17 @@ body {
   line-height: 1.55;
   color: var(--text-title);
   margin-bottom: 4px;
+}
+
+/* Authentic Bilingual Urdu Translation beneath English sentence (Screenshot 4) */
+.udict-sentence-ur {
+  font-size: 1.05rem;
+  line-height: 1.6;
+  color: var(--text-muted);
+  direction: rtl;
+  text-align: right;
+  margin-top: 4px;
+  font-family: inherit;
 }
 
 .udict-word-highlight {
@@ -1899,6 +1936,24 @@ body {
   border-color: #38bdf8;
 }
 
+/* Antonym Badge (Screenshot 5 & 6) */
+.udict-ant-badge {
+  background: #f1f5f9;
+  color: #475569;
+  font-size: 0.72rem;
+  font-weight: 800;
+  padding: 2px 7px;
+  border-radius: 4px;
+  letter-spacing: 0.04em;
+  border: 1px solid #cbd5e1;
+}
+
+[data-theme="dark"] .udict-ant-badge {
+  background: #334155;
+  color: #cbd5e1;
+  border-color: #475569;
+}
+
 .udict-syn-links {
   font-size: 0.95rem;
   line-height: 1.55;
@@ -1923,6 +1978,26 @@ body {
 .udict-syn-slash {
   color: var(--text-faint);
   margin: 0 4px;
+}
+
+/* Phrases Section (Screenshot 7) */
+.udict-phrases-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 6px;
+}
+
+.udict-phrase-item {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  font-size: 0.95rem;
+  color: #0284c7;
+}
+
+[data-theme="dark"] .udict-phrase-item {
+  color: #38bdf8;
 }
 
 /* Cognate words Card */
@@ -2008,6 +2083,40 @@ body {
   color: #f43f5e;
   font-size: 1.25rem;
   font-weight: 800;
+}
+
+/* Collins Star Frequency Rating (Screenshot 9) */
+.udict-stars-rating {
+  color: #eab308;
+  font-size: 1rem;
+  letter-spacing: 2px;
+  margin-left: 6px;
+}
+
+/* Modal Top Bar (Screenshots 3 & 4) */
+.udict-modal-top-bar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 16px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--divider-hairline);
+}
+
+.udict-modal-back-btn {
+  background: none;
+  border: none;
+  color: var(--text-title);
+  cursor: pointer;
+  padding: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.15s ease;
+}
+
+.udict-modal-back-btn:hover {
+  transform: translateX(-3px);
 }
 
 .udict-cobuild-pos-badge {
