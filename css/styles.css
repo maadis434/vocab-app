@@ -322,6 +322,26 @@ body {
   transform: scale(1.1);
 }
 
+.star-fav-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-faint);
+  transition: transform 0.15s, color 0.15s;
+}
+
+.star-fav-btn.active {
+  color: #eab308;
+}
+
+.star-fav-btn:hover {
+  transform: scale(1.15);
+}
+
 /* Urdu Title Section */
 .urdu-hero-text {
   font-size: 2rem;

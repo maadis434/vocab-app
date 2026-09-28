@@ -3836,94 +3836,322 @@ class VocabApp {
     });
   }
 
-  openWordModal(word) {
-    const modal = document.getElementById('discover-modal');
-    const modalBody = document.getElementById('discover-modal-body');
+  openWordModal(word, modalActiveTab = 'concise') {
+    const modal = document.getElementById('word-detail-modal') || document.getElementById('discover-modal');
+    const modalBody = document.getElementById('word-detail-modal-body') || document.getElementById('discover-modal-body');
+    if (!modal || !modalBody) return;
+
     const isFav = storage.isFavorite(word.id);
+    const ukPhonetic = word.phoneticUK || word.phonetic || `/${word.word}/`;
+    const usPhonetic = word.phoneticUS || word.phonetic || `/${word.word}/`;
+    const formsText = word.forms || `pl.  ${word.word}s`;
+    const badges = word.tags || [
+      { text: "#Top 10000", color: "blue" },
+      { text: "#Middle School", color: "pink" },
+      { text: "#Business English", color: "orange" },
+      { text: "#TOEFL", color: "teal" },
+      { text: "#SAT", color: "purple" },
+      { text: "#GRE", color: "green" }
+    ];
+    const sentences = (word.sampleSentences && word.sampleSentences.length > 0) ? word.sampleSentences : (word.sentences || [
+      { num: 1, en: `Learning the context of ${word.word} helps build speaking fluency.`, source: "Collins Dictionary", ur: word.urduMeaning || '' }
+    ]);
+    const synData = word.synonymsAntonyms || {
+      word: word.word,
+      pos: word.posShort || 'adj.',
+      context: 'for everyday usage',
+      synonyms: ["related", "similar"]
+    };
+    const cognatesData = word.cognates || {
+      root: word.word,
+      derivatives: [
+        { pos: "adv.", words: [`${word.word}ly`] },
+        { pos: "n.", words: [`${word.word}ness`] }
+      ]
+    };
+    const wikiData = word.wikipedia || {
+      title: word.word,
+      summary: word.urduDefinition || `${word.word} is an essential vocabulary term.`,
+      url: `https://en.wikipedia.org/wiki/${encodeURIComponent(word.word)}`
+    };
+    const collinsData = word.collins || {
+      title: "Collins COBUILD Advanced Dictionary",
+      word: word.word,
+      phonetic: ukPhonetic,
+      star: true,
+      definitions: [
+        {
+          num: 1,
+          pos: (word.partOfSpeech || word.posShort || 'ADJ').toUpperCase().replace('.', ''),
+          explanation: `Describes the contextual meaning and usage of ${word.word}.`,
+          example: sentences[0] ? sentences[0].en : `Daily usage of ${word.word}.`
+        }
+      ]
+    };
+    const wordnetData = word.wordnet || {
+      title: "English Dictionary",
+      entries: [
+        {
+          pos: word.posShort || "n.",
+          senses: [
+            {
+              num: 1,
+              def: `definition and semantic meaning of ${word.word}`,
+              synonyms: synData.synonyms.slice(0, 3)
+            }
+          ]
+        }
+      ]
+    };
 
     modalBody.innerHTML = `
-      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
-        <span style="font-size: 0.8rem; font-weight: 600; color: var(--text-faint);">Word Details</span>
-        <button id="close-modal-btn" style="background: none; border: none; font-size: 1.2rem; cursor: pointer; color: var(--text-muted); padding: 4px;">✕</button>
-      </div>
-
-      <div class="word-hero-row" style="margin-bottom: 6px;">
-        <div class="word-title-wrap">
-          <h2 class="word-main-title" style="font-size: 2rem;">${word.word}</h2>
-          <span class="word-pos-tag">[${word.posShort}]</span>
-        </div>
-        <div style="display: flex; align-items: center; gap: 8px;">
-          <button class="speaker-btn" id="modal-speech-btn" title="Listen">
-            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg>
-          </button>
-          <button class="heart-fav-btn ${isFav ? 'active' : ''}" id="modal-fav-btn" title="Save">
-            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="${isFav ? 'currentColor' : 'none'}" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
-          </button>
-        </div>
-      </div>
-
-      <div class="urdu-hero-text urdu-text" style="font-size: 1.8rem; margin: 4px 0 16px 0;">${word.urduMeaning}</div>
-
-      <!-- [FEATURE PAUSED]: "Instead of / Use this" temporarily hidden per user request, will be updated and restored later -->
-      ${false && word.insteadOf ? `
-      <div class="comparison-container" style="margin-bottom: 20px;">
-        <div>
-          <div class="comparison-header">Instead of</div>
-          <ul class="comparison-list">
-            ${word.insteadOf.map(i => `<li class="comparison-item old-word">${i}</li>`).join('')}
-          </ul>
-        </div>
-        <div>
-          <div class="comparison-header">Use this</div>
-          <ul class="comparison-list">
-            ${word.useThis.map(u => `<li class="comparison-item new-word">${u}</li>`).join('')}
-          </ul>
-        </div>
-      </div>
-      ` : ''}
-
-      <div class="editorial-section">
-        <div class="editorial-section-title">Context & Usage</div>
-        <p class="editorial-body-text">${word.howToUse}</p>
-      </div>
-
-      <div class="editorial-section">
-        <div class="editorial-section-title">Example Sentence</div>
-        <div class="sentence-block">
-          <div style="display: flex; justify-content: space-between; align-items: baseline;">
-            <p class="sentence-en-text">"${word.sentences[0].en}"</p>
-            <button class="speaker-btn" id="modal-sentence-speech" style="padding: 2px;">
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg>
-            </button>
+      <div class="udict-card" style="box-shadow: none; border: none; padding: 0; background: transparent;">
+        <!-- Top Hero Bar -->
+        <div class="udict-hero-top">
+          <div class="udict-title-bar">
+            <h1 class="udict-main-word" style="font-size: 1.85rem;">${word.word}</h1>
+            <div class="udict-actions-group">
+              <button class="star-fav-btn ${isFav ? 'active' : ''}" id="modal-fav-btn" title="${isFav ? 'Remove from favorites' : 'Add to favorites'}">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="${isFav ? '#eab308' : 'none'}" stroke="${isFav ? '#eab308' : 'currentColor'}" stroke-width="2">
+                  <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+                </svg>
+              </button>
+              <button id="close-modal-btn" style="background: none; border: none; font-size: 1.4rem; cursor: pointer; color: var(--text-muted); padding: 4px 6px; line-height: 1;" title="Close">✕</button>
+            </div>
           </div>
-          <p class="sentence-ur-text urdu-text">${word.sentences[0].ur}</p>
+
+          <!-- Dual Audio: UK and US -->
+          <div class="udict-audio-list">
+            <div class="udict-audio-item">
+              <button class="udict-accent-speaker-btn" data-accent-speech="${word.word}" data-accent="uk" title="Listen UK Pronunciation">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg>
+              </button>
+              <span class="udict-accent-label">UK</span>
+              <span class="udict-accent-phonetic">${ukPhonetic}</span>
+            </div>
+            <div class="udict-audio-item">
+              <button class="udict-accent-speaker-btn" data-accent-speech="${word.word}" data-accent="us" title="Listen US Pronunciation">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg>
+              </button>
+              <span class="udict-accent-label">US</span>
+              <span class="udict-accent-phonetic">${usPhonetic}</span>
+            </div>
+          </div>
         </div>
+
+        <!-- 3 Source Tabs: Concise | Collins | WordNet -->
+        <div class="udict-nav-tabs">
+          <button class="udict-tab-btn ${modalActiveTab === 'concise' ? 'active' : ''}" data-modal-dict-tab="concise">Concise</button>
+          <button class="udict-tab-btn ${modalActiveTab === 'collins' ? 'active' : ''}" data-modal-dict-tab="collins">Collins</button>
+          <button class="udict-tab-btn ${modalActiveTab === 'wordnet' ? 'active' : ''}" data-modal-dict-tab="wordnet">WordNet</button>
+        </div>
+
+        <!-- TAB 1: CONCISE -->
+        ${modalActiveTab === 'concise' ? `
+          <div class="udict-concise-meaning-row">
+            <span class="udict-concise-pos">${word.posShort || 'adj.'}</span>
+            <span class="udict-concise-urdu urdu-text">${word.urduMeaning || ''}</span>
+          </div>
+
+          <div class="udict-concise-forms-row">
+            <span class="udict-forms-label">${formsText.split(' ')[0]}</span>
+            <span class="udict-forms-val">${formsText.replace(/^[a-z]+\.\s*/, '')}</span>
+          </div>
+
+          <div class="udict-exam-badges-row">
+            ${badges.map(b => `<span class="udict-exam-badge badge-${b.color || 'blue'}">${b.text}</span>`).join('')}
+          </div>
+
+          <div class="udict-section-card">
+            <div class="udict-section-title">Sample Sentences</div>
+            <div class="udict-sample-sentences-list">
+              ${sentences.map((s, idx) => `
+                <div class="udict-sentence-item">
+                  <div class="udict-sentence-num">${s.num || idx + 1}</div>
+                  <div class="udict-sentence-content">
+                    <p class="udict-sentence-en">${this.highlightWordInSentence(s.en, word.word)}</p>
+                    <div class="udict-sentence-meta">
+                      <span class="udict-sentence-source">${s.source || 'Collins Dictionary'}</span>
+                      <div class="udict-sentence-actions">
+                        <button class="udict-sentence-audio-btn" data-speech-text="${s.en}" title="Listen">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              `).join('')}
+            </div>
+          </div>
+
+          <div class="udict-section-card">
+            <div class="udict-section-title">Synonyms & Antonyms</div>
+            <div class="udict-synonyms-context">
+              <span class="udict-syn-target-word">${synData.word}</span>
+              <span class="udict-syn-pos">${synData.pos}</span>
+              <span class="udict-syn-context-label">${synData.context}</span>
+            </div>
+            <div class="udict-syn-list-row">
+              <span class="udict-syn-pill">SYN</span>
+              <div class="udict-syn-words-wrap">
+                ${synData.synonyms.map(syn => `<span class="udict-syn-link" data-search-word="${syn}">${syn}</span>`).join('<span class="udict-syn-sep">/</span>')}
+              </div>
+            </div>
+          </div>
+
+          <div class="udict-section-card">
+            <div class="udict-section-title">Cognate Words</div>
+            <div class="udict-cognates-root">Root-form: <span class="udict-cognates-root-word">${cognatesData.root}</span></div>
+            <div class="udict-cognates-list">
+              ${cognatesData.derivatives.map(d => `
+                <div class="udict-cognate-row">
+                  <span class="udict-cognate-pos">${d.pos}</span>
+                  <div class="udict-cognate-items">
+                    ${d.words.map(wrd => `<span class="udict-cognate-link" data-search-word="${wrd}">${wrd}</span>`).join('<span class="udict-cognate-sep">/</span>')}
+                  </div>
+                </div>
+              `).join('')}
+            </div>
+          </div>
+
+          <div class="udict-section-card">
+            <div class="udict-section-title">Wikipedia</div>
+            <div class="udict-wiki-box">
+              <h3 class="udict-wiki-word">${wikiData.title}</h3>
+              <p class="udict-wiki-summary">${wikiData.summary}</p>
+              <a href="${wikiData.url}" target="_blank" class="udict-wiki-link">Source - Wikipedia ›</a>
+            </div>
+          </div>
+        ` : ''}
+
+        <!-- TAB 2: COLLINS -->
+        ${modalActiveTab === 'collins' ? `
+          <div class="udict-collins-section">
+            <div class="udict-collins-header">
+              <span class="udict-collins-title">${collinsData.title}</span>
+            </div>
+            <div class="udict-collins-word-row">
+              <span class="udict-collins-main-word">${collinsData.word}</span>
+              <span class="udict-collins-phonetic">${collinsData.phonetic}</span>
+              <span class="udict-collins-star">⭐</span>
+            </div>
+            <div class="udict-collins-defs-list">
+              ${collinsData.definitions.map(d => `
+                <div class="udict-collins-def-item">
+                  <div class="udict-collins-def-text">
+                    <span class="udict-collins-num">${d.num}</span>
+                    <span class="udict-collins-pos-badge">${d.pos}</span>
+                    <span>${this.highlightWordInSentence(d.explanation, collinsData.word)}</span>
+                  </div>
+                  <div class="udict-collins-example">
+                    <span class="udict-bullet">•</span>
+                    <span>${d.example}</span>
+                  </div>
+                </div>
+              `).join('')}
+            </div>
+          </div>
+        ` : ''}
+
+        <!-- TAB 3: WORDNET -->
+        ${modalActiveTab === 'wordnet' ? `
+          <div class="udict-wordnet-section">
+            <div class="udict-wordnet-header">
+              <span class="udict-wordnet-title">${wordnetData.title}</span>
+            </div>
+            <div class="udict-wordnet-entries">
+              ${wordnetData.entries.map(entry => `
+                <div class="udict-wordnet-pos-group">
+                  <div class="udict-wordnet-pos-tag">${entry.pos}</div>
+                  <div class="udict-wordnet-senses-list">
+                    ${entry.senses.map(sense => `
+                      <div class="udict-wordnet-sense-item">
+                        <span class="udict-wordnet-num">${sense.num}.</span>
+                        <div class="udict-wordnet-sense-body">
+                          <p class="udict-wordnet-def">${sense.def}</p>
+                          ${sense.quote ? `<p class="udict-wordnet-quote">"${sense.quote}"</p>` : ''}
+                          ${sense.synonyms && sense.synonyms.length > 0 ? `
+                            <div class="udict-wordnet-syns-row">
+                              <span class="udict-wordnet-syn-label">Synonyms:</span>
+                              ${sense.synonyms.map(s => `<span class="udict-wordnet-syn-link" data-search-word="${s}">${s}</span>`).join(', ')}
+                            </div>
+                          ` : ''}
+                        </div>
+                      </div>
+                    `).join('')}
+                  </div>
+                </div>
+              `).join('')}
+            </div>
+          </div>
+        ` : ''}
       </div>
     `;
 
     modal.style.display = 'flex';
 
-    document.getElementById('close-modal-btn').addEventListener('click', () => {
-      modal.style.display = 'none';
+    // Close buttons
+    const closeBtn = document.getElementById('close-modal-btn');
+    if (closeBtn) closeBtn.addEventListener('click', () => { modal.style.display = 'none'; });
+    modal.onclick = (e) => { if (e.target === modal) modal.style.display = 'none'; };
+
+    // Star favorite toggle button inside modal
+    const favBtn = document.getElementById('modal-fav-btn');
+    if (favBtn) {
+      favBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        storage.toggleFavorite(word.id);
+        const updatedFav = storage.isFavorite(word.id);
+        if (updatedFav) {
+          favBtn.classList.add('active');
+          favBtn.querySelector('svg').setAttribute('fill', '#eab308');
+          favBtn.querySelector('svg').setAttribute('stroke', '#eab308');
+          favBtn.setAttribute('title', 'Remove from favorites');
+        } else {
+          favBtn.classList.remove('active');
+          favBtn.querySelector('svg').setAttribute('fill', 'none');
+          favBtn.querySelector('svg').setAttribute('stroke', 'currentColor');
+          favBtn.setAttribute('title', 'Add to favorites');
+        }
+        this.renderFavoritesTab();
+        this.renderDictionary();
+      });
+    }
+
+    // Modal Tabs switching (Concise | Collins | WordNet)
+    modalBody.querySelectorAll('[data-modal-dict-tab]').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const tab = btn.dataset.modalDictTab;
+        this.openWordModal(word, tab);
+      });
     });
 
-    modal.addEventListener('click', (e) => {
-      if (e.target === modal) modal.style.display = 'none';
+    // Accent Speakers (UK / US)
+    modalBody.querySelectorAll('.udict-accent-speaker-btn').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        tts.speak(btn.dataset.accentSpeech, { accent: btn.dataset.accent });
+      });
     });
 
-    document.getElementById('modal-speech-btn').addEventListener('click', () => {
-      tts.speak(word.word);
+    // Sentence Speakers
+    modalBody.querySelectorAll('.udict-sentence-audio-btn').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        tts.speak(btn.dataset.speechText, { rate: 0.9 });
+      });
     });
 
-    document.getElementById('modal-sentence-speech').addEventListener('click', () => {
-      tts.speak(word.sentences[0].en, { rate: 0.9 });
-    });
-
-    document.getElementById('modal-fav-btn').addEventListener('click', () => {
-      storage.toggleFavorite(word.id);
-      this.openWordModal(word);
-      this.renderFavorites();
-      this.renderTodayWord();
+    // Clicking synonyms or cognates inside modal
+    modalBody.querySelectorAll('[data-search-word]').forEach(el => {
+      el.addEventListener('click', (e) => {
+        e.stopPropagation();
+        modal.style.display = 'none';
+        this.switchTab('home');
+        if (this.searchInput) this.searchInput.value = el.dataset.searchWord;
+        this.performSearch(el.dataset.searchWord);
+      });
     });
   }
 
@@ -3953,7 +4181,7 @@ class VocabApp {
         <div style="text-align: center; padding: 60px 20px; color: var(--text-muted);">
           <div style="font-size: 2.2rem; margin-bottom: 12px;">⭐</div>
           <p style="font-size: 1.1rem; font-weight: 700; color: var(--text-title); margin-bottom: 6px;">No Saved Words Yet</p>
-          <p style="font-size: 0.88rem; line-height: 1.5; margin-bottom: 20px;">Tap the star or heart icon on any word in Home, Dictionary, or Discover to build your personal vocabulary list.</p>
+          <p style="font-size: 0.88rem; line-height: 1.5; margin-bottom: 20px;">Tap the star icon on any word in Home, Dictionary, or Discover to build your personal vocabulary list.</p>
           <button class="notes-text-btn" style="margin: 0 auto; color: var(--text-title); text-decoration: underline;" id="fav-tab-goto-discover">
             Explore Discover Words →
           </button>
@@ -3966,10 +4194,15 @@ class VocabApp {
                 <span class="discover-word-text">${w.word}</span>
                 <span class="word-pos-tag">[${w.posShort || 'n.'}]</span>
               </div>
-              <div style="display: flex; align-items: center; gap: 14px;">
-                <span class="discover-row-right urdu-text">${w.urduMeaning.split('/')[0]}</span>
-                <button class="speaker-btn" data-speech-text="${w.word}" style="padding: 2px;" title="Listen to pronunciation">
+              <div style="display: flex; align-items: center; gap: 8px;">
+                <span class="discover-row-right urdu-text">${(w.urduMeaning || '').split('/')[0]}</span>
+                <button class="speaker-btn" data-speech-text="${w.word}" style="padding: 4px;" title="Listen to pronunciation">
                   <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg>
+                </button>
+                <button class="star-fav-btn active" data-fav-remove-id="${w.id}" style="padding: 4px;" title="Remove from favorites">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="#eab308" stroke="#eab308" stroke-width="2">
+                    <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+                  </svg>
                 </button>
               </div>
             </div>
@@ -3999,16 +4232,28 @@ class VocabApp {
       });
     });
 
+    // Direct Star Remove from Favorites list
+    this.favoritesContainer.querySelectorAll('[data-fav-remove-id]').forEach(starBtn => {
+      starBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const id = starBtn.dataset.favRemoveId;
+        storage.toggleFavorite(id);
+        this.renderFavoritesTab();
+        this.renderDictionary();
+      });
+    });
+
+    // Row Click: Opens full word data modal
     this.favoritesContainer.querySelectorAll('[data-fav-tab-open-id]').forEach(row => {
       row.addEventListener('click', (e) => {
-        if (e.target.closest('.speaker-btn')) return;
+        if (e.target.closest('.speaker-btn') || e.target.closest('[data-fav-remove-id]')) return;
         const w = this.words.find(item => item.id === row.dataset.favTabOpenId);
         if (w) this.openWordModal(w);
       });
     });
   }
 
-    renderMoreHub() {
+  renderMoreHub() {
     if (!this.moreContainer) return;
 
     if (this.moreSubView === 'my-words') {
@@ -4393,12 +4638,17 @@ class VocabApp {
             <div class="discover-list-row" data-fav-open-id="${w.id}">
               <div class="discover-row-left">
                 <span class="discover-word-text">${w.word}</span>
-                <span class="word-pos-tag">[${w.posShort}]</span>
+                <span class="word-pos-tag">[${w.posShort || 'n.'}]</span>
               </div>
-              <div style="display: flex; align-items: center; gap: 14px;">
-                <span class="discover-row-right urdu-text">${w.urduMeaning.split('/')[0]}</span>
-                <button class="speaker-btn" data-speech-text="${w.word}" style="padding: 2px;">
+              <div style="display: flex; align-items: center; gap: 8px;">
+                <span class="discover-row-right urdu-text">${(w.urduMeaning || '').split('/')[0]}</span>
+                <button class="speaker-btn" data-speech-text="${w.word}" style="padding: 4px;">
                   <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg>
+                </button>
+                <button class="star-fav-btn active" data-fav-remove-mywords-id="${w.id}" style="padding: 4px;" title="Remove from favorites">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="#eab308" stroke="#eab308" stroke-width="2">
+                    <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+                  </svg>
                 </button>
               </div>
             </div>
@@ -4436,9 +4686,20 @@ class VocabApp {
       });
     });
 
+    this.moreContainer.querySelectorAll('[data-fav-remove-mywords-id]').forEach(starBtn => {
+      starBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const id = starBtn.dataset.favRemoveMywordsId;
+        storage.toggleFavorite(id);
+        this.renderMyWordsView();
+        this.renderFavoritesTab();
+        this.renderDictionary();
+      });
+    });
+
     this.moreContainer.querySelectorAll('[data-fav-open-id]').forEach(row => {
       row.addEventListener('click', (e) => {
-        if (e.target.closest('.speaker-btn')) return;
+        if (e.target.closest('.speaker-btn') || e.target.closest('[data-fav-remove-mywords-id]')) return;
         const w = this.words.find(item => item.id === row.dataset.favOpenId);
         if (w) this.openWordModal(w);
       });
