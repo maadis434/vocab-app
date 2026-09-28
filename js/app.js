@@ -150,6 +150,289 @@ const defaultVocabulary = [
     }
   },
   {
+    id: "word-conclusion",
+    word: "conclusion",
+    posShort: "n.",
+    partOfSpeech: "noun",
+    phoneticUK: "/kən'klu:ʒn/",
+    phoneticUS: "/kən'klu:ʒn/",
+    phonetic: "/kən'klu:ʒn/",
+    urduMeaning: "آخری نتیجہ; نتیجہ;",
+    forms: "pl.  conclusions",
+    tags: [
+      { text: "#Top 1000", color: "blue" },
+      { text: "#Middle School", color: "pink" },
+      { text: "#Business English", color: "orange" },
+      { text: "#IELTS", color: "purple" },
+      { text: "#TOEFL", color: "teal" },
+      { text: "#SAT", color: "green" }
+    ],
+    bilingualSentences: [
+      {
+        num: 1,
+        en: "Draw a conclusion from premisses",
+        ur: "صغریٰ کبریٰ سے نتیجہ اخذ کرنا",
+        meaning: "نتیجہ"
+      },
+      {
+        num: 2,
+        en: "The conclusion of peace",
+        ur: "امن کا طے پانا",
+        meaning: "آخری نتیجہ"
+      },
+      {
+        num: 3,
+        en: "Hobbled lamely to his conclusion",
+        ur: "لشتم پشتم اپنے اختتام کو پہنچایا",
+        meaning: "آخری نتیجہ"
+      },
+      {
+        num: 4,
+        en: "What led you to that conclusion?",
+        ur: "تمہیں یہ خیال کس بنا پر آیا",
+        meaning: "نتیجہ"
+      },
+      {
+        num: 5,
+        en: "Tends to the same conclusion",
+        ur: "ایک ہی نتیجے پر پہنچتا ہے",
+        meaning: "نتیجہ"
+      },
+      {
+        num: 6,
+        en: "War conclusion 30000 Christiansen were murdered. That Counting limit Are arrested.",
+        ur: "اس جنگ کے نتیجہ میں تیس ہزار عیسائی ہلاک ہوئے اور اتنے ہی قیدی بنا لیے گئے۔",
+        meaning: "نتیجہ"
+      },
+      {
+        num: 7,
+        en: "A conclusion based on very slight observation",
+        ur: "سرسری مشاہدے پر مبنی فیصلہ",
+        meaning: "نتیجہ"
+      }
+    ],
+    sampleSentences: [
+      {
+        num: 1,
+        en: "Most voters believe the result is a foregone conclusion.",
+        source: "Collins Dictionary"
+      },
+      {
+        num: 2,
+        en: "The judge's conclusion was plainly wrong.",
+        source: "Collins Dictionary"
+      },
+      {
+        num: 3,
+        en: "My reflections brought forth no conclusion.",
+        source: "Collins Dictionary"
+      },
+      {
+        num: 4,
+        en: "He then goes on to pick holes in the article before reaching his conclusion.",
+        source: "Collins Dictionary"
+      },
+      {
+        num: 5,
+        en: "In conclusion, walking is a cheap, safe, enjoyable, and readily available form of exercise.",
+        source: "Collins Dictionary"
+      },
+      {
+        num: 6,
+        en: "The inescapable conclusion is that he was trying to avenge the death of his friend.",
+        source: "Collins Dictionary"
+      },
+      {
+        num: 7,
+        en: "This conclusion is unfounded because it depends on the results of a one-shot study.",
+        source: "Collins Dictionary"
+      },
+      {
+        num: 8,
+        en: "If the climate gets drier, then the logical conclusion is that even more drought will occur.",
+        source: "Collins Dictionary"
+      },
+      {
+        num: 9,
+        en: "\"Until I can speak to your husband I can't come to any conclusion about that,\" Manuel said evasively.",
+        source: "Collins Dictionary"
+      },
+      {
+        num: 10,
+        en: "The report comes to the conclusion that more investment in renewable energy is desperately needed.",
+        source: "The Economist"
+      },
+      {
+        num: 11,
+        en: "Investigators have yet to reach a definitive conclusion regarding the cause of the crash.",
+        source: "CNN"
+      },
+      {
+        num: 12,
+        en: "In conclusion, the company demonstrated remarkable resilience despite economic headwinds.",
+        source: "Forbes"
+      },
+      {
+        num: 13,
+        en: "Diplomats worked through the night to bring the negotiations to a successful conclusion.",
+        source: "BBC News"
+      },
+      {
+        num: 14,
+        en: "Scientists warned that drawing premature conclusions could undermine public trust.",
+        source: "Reuters"
+      },
+      {
+        num: 15,
+        en: "At the conclusion of the concert, the audience gave a standing ovation.",
+        source: "The Guardian"
+      }
+    ],
+    sentences: [
+      {
+        en: "Draw a conclusion from premisses",
+        ur: "صغریٰ کبریٰ سے نتیجہ اخذ کرنا",
+        source: "Collins Dictionary"
+      },
+      {
+        en: "Most voters believe the result is a foregone conclusion.",
+        ur: "زیادہ تر ووٹروں کا ماننا ہے کہ نتیجہ پہلے سے طے شدہ ہے۔",
+        source: "Collins Dictionary"
+      }
+    ],
+    synonymsAntonymsList: [
+      {
+        num: 1,
+        context: 'for the meaning of "decision"',
+        syns: ["agreement", "opinion", "conviction", "settlement", "verdict", "resolution"],
+        ants: ["beginning", "start", "prelude"]
+      },
+      {
+        num: 2,
+        context: 'for the meaning of "end"',
+        syns: ["finish", "termination", "close", "cessation", "finale", "outcome"],
+        ants: ["commencement", "introduction", "outset", "opening"]
+      }
+    ],
+    phrases: [
+      { num: 1, text: "come to a conclusion" },
+      { num: 2, text: "draw a conclusion" },
+      { num: 3, text: "in conclusion" },
+      { num: 4, text: "jump to conclusions" },
+      { num: 5, text: "foregone conclusion" }
+    ],
+    cognates: {
+      root: "conclude",
+      derivatives: [
+        { pos: "v.", words: ["conclude"] },
+        { pos: "adj.", words: ["conclusive", "concluding"] },
+        { pos: "adv.", words: ["conclusively"] },
+        { pos: "n.", words: ["conclusion", "conclusiveness"] }
+      ]
+    },
+    wikipedia: {
+      title: "Conclusion (logic)",
+      summary: "In logic and philosophy, an argument's conclusion is the proposition that is arrived at from preceding premises.",
+      url: "https://en.wikipedia.org/wiki/Logical_consequence"
+    },
+    collins: {
+      title: "Collins COBUILD Advanced Dictionary",
+      word: "conclusion",
+      phonetic: "/kən'klu:ʒn/",
+      stars: 3,
+      definitions: [
+        {
+          num: 1,
+          pos: "N-COUNT",
+          explanation: "When you come to a conclusion, you decide that something is true after thinking about it carefully, or having looked at other possibilities.",
+          example: "Over the years I've come to the conclusion that she's a very great woman."
+        },
+        {
+          num: 2,
+          pos: "N-SING",
+          explanation: "The conclusion of something is its end.",
+          example: "At the conclusion of the meeting, a small dinner was held."
+        },
+        {
+          num: 3,
+          pos: "N-COUNT",
+          explanation: "An essay or report's conclusion is its last section, in which the main points are summarized and final comments are made.",
+          example: "In the conclusion to this book, the author offers some practical advice."
+        },
+        {
+          num: 4,
+          pos: "PHRASE",
+          explanation: "You say 'in conclusion' to introduce the final part of what you are saying or writing.",
+          example: "In conclusion, I would like to thank our host for his hospitality."
+        }
+      ]
+    },
+    wordnet: {
+      title: "English Dictionary",
+      entries: [
+        {
+          pos: "n.",
+          senses: [
+            {
+              num: 1,
+              def: "a position or opinion or judgment reached after consideration",
+              quote: "his conclusion took the agreement into account",
+              synonyms: ["decision", "determination"]
+            },
+            {
+              num: 2,
+              def: "an intuitive assumption",
+              quote: "jump to a conclusion",
+              synonyms: ["assumption"]
+            },
+            {
+              num: 3,
+              def: "the temporal end; the concluding time",
+              quote: "the conclusion of the peace treaty",
+              synonyms: ["ending", "finish"]
+            },
+            {
+              num: 4,
+              def: "event whose occurrence ends something",
+              quote: "the conclusion of hostilities",
+              synonyms: ["ending", "termination"]
+            },
+            {
+              num: 5,
+              def: "the last section of a communication",
+              quote: "in conclusion I want to say...",
+              synonyms: ["ending", "finish", "finale"]
+            },
+            {
+              num: 6,
+              def: "the proposition arrived at by logical reasoning",
+              quote: "the premise and conclusion of a syllogism",
+              synonyms: ["ratiocination"]
+            },
+            {
+              num: 7,
+              def: "a final settlement",
+              quote: "the conclusion of a treaty",
+              synonyms: ["settlement"]
+            },
+            {
+              num: 8,
+              def: "the act of ending something",
+              quote: "the conclusion of the agreement",
+              synonyms: ["ending", "termination"]
+            },
+            {
+              num: 9,
+              def: "a decisive moment",
+              quote: "came to a dramatic conclusion",
+              synonyms: ["climax", "culmination"]
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
     id: "word-contradictory",
     word: "contradictory",
     posShort: "adj.",
@@ -646,6 +929,10 @@ const quickAutocompleteIndex = [
   { word: "Conceal", pos: "v.", urdu: "چھپانا / پوشیدہ رکھنا" },
   { word: "Concept", pos: "n.", urdu: "تصور / نظریہ" },
   { word: "Concern", pos: "n.", urdu: "تشویش / فکر" },
+  { word: "Conclude", pos: "v.", urdu: "نتیجہ نکالنا; ختم کرنا;" },
+  { word: "Conclusion", pos: "n.", urdu: "آخری نتیجہ; نتیجہ;" },
+  { word: "Conclusions", pos: "n.", urdu: "نتائج;" },
+  { word: "Conclusive", pos: "adj.", urdu: "حتمی; قطعی;" },
   { word: "Condition", pos: "n.", urdu: "حالت / شرط" },
   { word: "Confident", pos: "adj.", urdu: "پر اعتماد / پر یقین" },
   { word: "Confirm", pos: "v.", urdu: "تصدیق کرنا" },
@@ -2872,6 +3159,19 @@ class VocabApp {
     return sentence.replace(regex, '<span class="udict-word-highlight">$1</span>');
   }
 
+  highlightUrduWord(sentence, urduMeaning) {
+    if (!sentence || !urduMeaning) return sentence || '';
+    const cleanWords = urduMeaning.split(/[؛;,/]+/).map(w => w.trim()).filter(w => w.length >= 2);
+    if (cleanWords.length === 0) return sentence;
+    let result = sentence;
+    cleanWords.forEach(kw => {
+      const esc = kw.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+      const reg = new RegExp(`(${esc})`, 'g');
+      result = result.replace(reg, '<span class="udict-word-highlight">$1</span>');
+    });
+    return result;
+  }
+
   updateAutoHighlight(items) {
     if (!items || items.length === 0) return;
     items.forEach((item, idx) => {
@@ -3768,22 +4068,35 @@ class VocabApp {
 
         <!-- 1. Bilingual Sentences Section (Screenshots 3 & 4) -->
         <div class="udict-section-card" style="border-top: none; padding-top: 0; margin-top: 0;">
-          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px;">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; flex-wrap: wrap; gap: 8px;">
             <h3 class="udict-section-title" style="margin-bottom: 0;">Bilingual Sentences</h3>
-            <div class="udict-filter-chips">
-              <span class="udict-filter-chip active">All</span>
+            <div class="udict-filter-chips" data-card-bilingual-chips>
+              ${(() => {
+                const chipSet = new Set();
+                bilingualSentences.forEach(s => {
+                  if (s.meaning && s.meaning.trim()) chipSet.add(s.meaning.trim());
+                });
+                if (chipSet.size === 0 && w.urduMeaning) {
+                  w.urduMeaning.split(/[؛;,/]+/).map(p => p.trim()).filter(p => p.length >= 2).forEach(p => chipSet.add(p));
+                }
+                const chips = ['All', ...Array.from(chipSet)];
+                return chips.map((chip, cIdx) => `
+                  <span class="udict-filter-chip ${cIdx === 0 ? 'active' : ''}" data-card-bilingual-chip="${chip}">${chip}</span>
+                `).join('');
+              })()}
             </div>
           </div>
 
-          <div class="udict-sentences-list">
-            ${bilingualSentences.map((s, idx) => {
-              const highlighted = this.highlightWordInSentence(s.en, w.word);
+          <div class="udict-sentences-list" data-card-bilingual-list>
+            ${bilingualSentences.slice(0, 3).map((s, idx) => {
+              const highlightedEn = this.highlightWordInSentence(s.en, w.word);
+              const highlightedUr = this.highlightUrduWord(s.ur, w.urduMeaning);
               return `
-                <div class="udict-sentence-item">
+                <div class="udict-sentence-item udict-bilingual-item" data-sentence-meaning="${s.meaning || ''}">
                   <div class="udict-sentence-num">${s.num || idx + 1}</div>
                   <div class="udict-sentence-body">
-                    <div class="udict-sentence-en">${highlighted}</div>
-                    ${s.ur ? `<div class="udict-sentence-ur urdu-text">${s.ur}</div>` : ''}
+                    <div class="udict-sentence-en">${highlightedEn}</div>
+                    ${s.ur ? `<div class="udict-sentence-ur urdu-text">${highlightedUr}</div>` : ''}
                   </div>
                   <div class="udict-sentence-actions">
                     <button class="udict-sent-icon-btn" data-sentence-speech="${encodeURIComponent(s.en)}" title="Listen sentence">
@@ -3797,7 +4110,7 @@ class VocabApp {
               `;
             }).join('')}
           </div>
-          <a class="udict-more-link" href="#" onclick="event.preventDefault();">More &gt;</a>
+          <a class="udict-more-link" href="#" data-more-sentences="bilingual">More &gt;</a>
         </div>
 
         <!-- 2. Sample Sentences Section (Screenshots 4 & 5) -->
@@ -3807,7 +4120,7 @@ class VocabApp {
           </div>
 
           <div class="udict-sentences-list">
-            ${sampleSentences.map((s, idx) => {
+            ${sampleSentences.slice(0, 3).map((s, idx) => {
               const highlighted = this.highlightWordInSentence(s.en, w.word);
               return `
                 <div class="udict-sentence-item">
@@ -3828,7 +4141,7 @@ class VocabApp {
               `;
             }).join('')}
           </div>
-          <a class="udict-more-link" href="#" onclick="event.preventDefault();">More &gt;</a>
+          <a class="udict-more-link" href="#" data-more-sentences="sample">More &gt;</a>
         </div>
 
         <!-- 3. Synonyms & Antonyms Card (Screenshots 5 & 6) -->
@@ -4029,11 +4342,39 @@ class VocabApp {
       });
     });
 
-    // 5. Report / Note button
+    // 5. Report / Note button (Opens Report Problems bottom sheet)
     container.querySelectorAll('[data-report-word]').forEach(btn => {
       btn.addEventListener('click', (e) => {
         e.stopPropagation();
-        this.showToast(`Feedback noted for "${btn.dataset.reportWord}"`);
+        this.openReportModal(btn.dataset.reportWord);
+      });
+    });
+
+    // 5b. Meaning Filter chips on Card Bilingual Sentences
+    container.querySelectorAll('[data-card-bilingual-chips] [data-card-bilingual-chip]').forEach(chip => {
+      chip.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const selected = chip.dataset.cardBilingualChip;
+        container.querySelectorAll('[data-card-bilingual-chips] [data-card-bilingual-chip]').forEach(c => c.classList.toggle('active', c === chip));
+        const items = container.querySelectorAll('.udict-bilingual-item');
+        items.forEach(item => {
+          if (selected === 'All' || item.dataset.sentenceMeaning === selected || item.textContent.includes(selected)) {
+            item.style.display = 'flex';
+          } else {
+            item.style.display = 'none';
+          }
+        });
+      });
+    });
+
+    // 5c. More > for Bilingual or Sample Sentences
+    container.querySelectorAll('[data-more-sentences]').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        const type = btn.dataset.moreSentences;
+        const targetWordObj = currentWord || (this.words && this.words.find(x => x.word.toLowerCase() === (btn.dataset.reportWord || '').toLowerCase())) || this.lastSearchedWord;
+        this.openMoreSentencesModal(type, targetWordObj);
       });
     });
 
@@ -4119,7 +4460,7 @@ class VocabApp {
       </div>
     `).join('');
 
-    this.attachCardEventListeners(this.dictionaryContainer, false);
+    this.attachCardEventListeners(this.dictionaryContainer, false, matches && matches.length > 0 ? matches[0] : null);
   }
 
   // --- 3. DISCOVER ---
@@ -4193,6 +4534,196 @@ class VocabApp {
     modal.onclick = (e) => { if (e.target === modal) modal.style.display = 'none'; };
 
     this.attachCardEventListeners(modalBody, true, word);
+  }
+
+  openReportModal(word) {
+    const modal = document.getElementById('report-problem-modal');
+    if (!modal) return;
+    const targetWordDisplay = document.getElementById('report-target-word-display');
+    if (targetWordDisplay) {
+      targetWordDisplay.innerHTML = `Problem with: <strong>${word || 'this word'}</strong>`;
+    }
+    const commentInput = document.getElementById('report-comment-input');
+    if (commentInput) commentInput.value = '';
+
+    const firstRadio = modal.querySelector('input[name="report_reason"]');
+    if (firstRadio) firstRadio.checked = true;
+
+    modal.style.display = 'flex';
+
+    const closeBtn = document.getElementById('close-report-modal-btn');
+    if (closeBtn) {
+      closeBtn.onclick = () => { modal.style.display = 'none'; };
+    }
+    modal.onclick = (e) => {
+      if (e.target === modal) modal.style.display = 'none';
+    };
+
+    const submitBtn = document.getElementById('submit-report-btn');
+    if (submitBtn) {
+      submitBtn.onclick = () => {
+        const selectedRadio = modal.querySelector('input[name="report_reason"]:checked');
+        const reason = selectedRadio ? selectedRadio.value : 'Report other issues';
+        const comment = commentInput ? commentInput.value.trim() : '';
+
+        try {
+          const storedReports = JSON.parse(localStorage.getItem('reported_vocab_issues') || '[]');
+          storedReports.push({
+            word: word || 'word',
+            reason: reason,
+            comment: comment,
+            timestamp: new Date().toISOString()
+          });
+          localStorage.setItem('reported_vocab_issues', JSON.stringify(storedReports));
+        } catch (err) {
+          console.warn('LocalStorage error saving report', err);
+        }
+
+        modal.style.display = 'none';
+        this.showToast(`Thank you! Your feedback for "${word}" has been submitted.`);
+      };
+    }
+  }
+
+  openMoreSentencesModal(type, wordObj) {
+    const modal = document.getElementById('more-sentences-modal');
+    if (!modal) return;
+    const wordItem = wordObj || (this.words && this.words[0]) || { word: 'Word', urduMeaning: '' };
+
+    const titleEl = document.getElementById('more-sentences-title');
+    const filterBar = document.getElementById('more-sentences-filter-bar');
+    const listEl = document.getElementById('more-sentences-list');
+    const closeBtn = document.getElementById('close-more-sentences-btn');
+
+    if (closeBtn) {
+      closeBtn.onclick = () => { modal.style.display = 'none'; };
+    }
+    modal.onclick = (e) => {
+      if (e.target === modal) modal.style.display = 'none';
+    };
+
+    if (type === 'bilingual') {
+      if (titleEl) titleEl.textContent = 'Bilingual Sentences';
+
+      const bilingualSentences = (wordItem.bilingualSentences && wordItem.bilingualSentences.length > 0)
+        ? wordItem.bilingualSentences
+        : (wordItem.sentences && wordItem.sentences.length > 0)
+          ? wordItem.sentences
+          : [
+              { num: 1, en: `The word ${wordItem.word} is frequently used in modern literature.`, ur: `${wordItem.word} کا لفظ جدید ادب میں بکثرت استعمال ہوتا ہے۔`, meaning: wordItem.urduMeaning }
+            ];
+
+      // Extract unique meanings for chips
+      const chipSet = new Set();
+      bilingualSentences.forEach(s => {
+        if (s.meaning && s.meaning.trim()) chipSet.add(s.meaning.trim());
+      });
+      if (chipSet.size === 0 && wordItem.urduMeaning) {
+        wordItem.urduMeaning.split(/[؛;,/]+/).map(p => p.trim()).filter(p => p.length >= 2).forEach(p => chipSet.add(p));
+      }
+      const filterChips = ['All', ...Array.from(chipSet)];
+
+      if (filterBar) {
+        filterBar.style.display = 'flex';
+        filterBar.innerHTML = filterChips.map((chip, idx) => `
+          <button type="button" class="more-filter-chip ${idx === 0 ? 'active' : ''}" data-filter-chip="${chip}">${chip}</button>
+        `).join('');
+
+        filterBar.querySelectorAll('[data-filter-chip]').forEach(chipBtn => {
+          chipBtn.onclick = () => {
+            const val = chipBtn.dataset.filterChip;
+            filterBar.querySelectorAll('[data-filter-chip]').forEach(b => b.classList.toggle('active', b === chipBtn));
+            listEl.querySelectorAll('.more-sent-item').forEach(item => {
+              if (val === 'All' || item.dataset.meaning === val || item.textContent.includes(val)) {
+                item.style.display = 'flex';
+              } else {
+                item.style.display = 'none';
+              }
+            });
+          };
+        });
+      }
+
+      if (listEl) {
+        listEl.innerHTML = bilingualSentences.map((s, idx) => {
+          const highlightedEn = this.highlightWordInSentence(s.en, wordItem.word);
+          const highlightedUr = this.highlightUrduWord(s.ur, wordItem.urduMeaning);
+          return `
+            <div class="more-sent-item" data-meaning="${s.meaning || ''}">
+              <div class="more-sent-num">${s.num || idx + 1}</div>
+              <div class="more-sent-body">
+                <div class="more-sent-en">${highlightedEn}</div>
+                ${s.ur ? `<div class="more-sent-ur urdu-text">${highlightedUr}</div>` : ''}
+              </div>
+              <div class="more-sent-actions">
+                <button class="more-sent-btn" data-sentence-speech="${encodeURIComponent(s.en)}" title="Listen sentence">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg>
+                </button>
+                <button class="more-sent-btn" data-sentence-practice="${encodeURIComponent(s.en)}" title="Practice pronunciation">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"></path><path d="M19 10v2a7 7 0 0 1-14 0v-2"></path><line x1="12" y1="19" x2="12" y2="23"></line><line x1="8" y1="23" x2="16" y2="23"></line></svg>
+                </button>
+              </div>
+            </div>
+          `;
+        }).join('');
+      }
+
+    } else if (type === 'sample') {
+      if (titleEl) titleEl.textContent = 'Sample Sentences';
+      if (filterBar) filterBar.style.display = 'none';
+
+      const sampleSentences = (wordItem.sampleSentences && wordItem.sampleSentences.length > 0)
+        ? wordItem.sampleSentences
+        : (wordItem.sentences && wordItem.sentences.length > 0)
+          ? wordItem.sentences.map((s, i) => ({ num: s.num || i + 1, en: s.en, source: s.source || 'Collins Dictionary' }))
+          : [
+              { num: 1, en: `The term ${wordItem.word} has widespread usage in global publications.`, source: "Collins Dictionary" }
+            ];
+
+      if (listEl) {
+        listEl.innerHTML = sampleSentences.map((s, idx) => {
+          const highlightedEn = this.highlightWordInSentence(s.en, wordItem.word);
+          return `
+            <div class="more-sent-item">
+              <div class="more-sent-num">${s.num || idx + 1}</div>
+              <div class="more-sent-body">
+                <div class="more-sent-en">${highlightedEn}</div>
+                <span class="more-sent-source">${s.source || 'Collins Dictionary'}</span>
+              </div>
+              <div class="more-sent-actions">
+                <button class="more-sent-btn" data-sentence-speech="${encodeURIComponent(s.en)}" title="Listen sentence">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg>
+                </button>
+                <button class="more-sent-btn" data-sentence-practice="${encodeURIComponent(s.en)}" title="Practice pronunciation">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"></path><path d="M19 10v2a7 7 0 0 1-14 0v-2"></path><line x1="12" y1="19" x2="12" y2="23"></line><line x1="8" y1="23" x2="16" y2="23"></line></svg>
+                </button>
+              </div>
+            </div>
+          `;
+        }).join('');
+      }
+    }
+
+    // Bind audio and practice listeners in the more sentences list
+    if (listEl) {
+      listEl.querySelectorAll('[data-sentence-speech]').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          const text = decodeURIComponent(btn.dataset.sentenceSpeech);
+          this.speakText(text, 'en');
+        });
+      });
+
+      listEl.querySelectorAll('[data-sentence-practice]').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          const text = decodeURIComponent(btn.dataset.sentencePractice);
+          this.startVoicePractice(text, btn);
+        });
+      });
+    }
+
+    modal.style.display = 'flex';
   }
 
   // --- 4. MORE HUB & FAVORITES ---

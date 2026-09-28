@@ -190,6 +190,64 @@
       <div class="word-modal-content" id="word-detail-modal-body" style="padding: 20px 18px 32px 18px;"></div>
     </div>
 
+    <!-- Interactive Report Problems Modal (From Competitor Spec Video 12) -->
+    <div class="word-modal-backdrop" id="report-problem-modal" style="display: none; z-index: 100010;">
+      <div class="report-problem-sheet" id="report-problem-sheet">
+        <div class="report-header">
+          <h3 class="report-title">Report Problems</h3>
+          <button type="button" class="report-close-btn" id="close-report-modal-btn" aria-label="Close">✕</button>
+        </div>
+        <div class="report-word-sub" id="report-target-word-display">Problem with: <strong>word</strong></div>
+
+        <form id="report-problem-form" class="report-form" onsubmit="event.preventDefault();">
+          <div class="report-options-group">
+            <label class="report-option-label">
+              <input type="radio" name="report_reason" value="Wrong definition or translation" checked>
+              <span class="report-radio-custom"></span>
+              <span class="report-option-text">Wrong definition or translation</span>
+            </label>
+            <label class="report-option-label">
+              <input type="radio" name="report_reason" value="Bad example sentences">
+              <span class="report-radio-custom"></span>
+              <span class="report-option-text">Bad example sentences</span>
+            </label>
+            <label class="report-option-label">
+              <input type="radio" name="report_reason" value="Report other issues">
+              <span class="report-radio-custom"></span>
+              <span class="report-option-text">Report other issues</span>
+            </label>
+          </div>
+
+          <div class="report-input-wrapper">
+            <textarea id="report-comment-input" class="report-textarea" placeholder="Optional" rows="3"></textarea>
+          </div>
+
+          <button type="button" id="submit-report-btn" class="report-submit-btn">Report</button>
+        </form>
+      </div>
+    </div>
+
+    <!-- Dedicated Full Modal for More Sentences (Bilingual & Sample Sentences) -->
+    <div class="word-modal-backdrop more-sentences-backdrop" id="more-sentences-modal" style="display: none; z-index: 100005;">
+      <div class="more-sentences-view">
+        <div class="more-sentences-topbar">
+          <button type="button" class="more-back-btn" id="close-more-sentences-btn" aria-label="Back">
+            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+          </button>
+          <h2 class="more-sentences-title" id="more-sentences-title">Bilingual Sentences</h2>
+          <div style="width: 24px;"></div>
+        </div>
+
+        <div id="more-sentences-filter-bar" class="more-filter-bar" style="display: none;">
+          <!-- Filter chips dynamically injected here -->
+        </div>
+
+        <div class="more-sentences-scroll" id="more-sentences-list">
+          <!-- Rendered sentence items -->
+        </div>
+      </div>
+    </div>
+
   </main>
 
   <!-- Dynamic Anti-Cache Script Loader -->
