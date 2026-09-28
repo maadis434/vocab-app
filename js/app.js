@@ -1875,40 +1875,49 @@ CRITICAL REQUIREMENT: The example sentence MUST be a real, meaningful scenario. 
   },
 
   // --- SMART LOCAL GRAMMAR & STRUCTURE ANALYZER (Runs in 5ms, 100% Reliable) ---
-  async analyzeSentenceLocally(raw) {
+  applyLocalGrammarRules(raw) {
     let s = (raw || '').trim();
-    if (!s) return null;
+    if (!s) return { changed: false, text: s, reasons: [] };
 
     let clean = s.charAt(0).toUpperCase() + s.slice(1);
-    if (!/[.!?]$/.test(clean)) clean += '.';
-
     let corrected = clean;
     let reasons = [];
 
-    // 0. Weather expressions & Demonstrative agreement: 'this were raining' / 'this was raining' / 'it were raining'
-    if (/\bthis\s+were\s+raining\b/i.test(corrected)) {
-      corrected = corrected.replace(/\bthis\s+were\s+raining\b/i, 'It was raining');
-      reasons.push("Weather conditions require impersonal subject 'It' (not 'This') and singular past auxiliary 'was' (not 'were')");
-    } else if (/\bthis\s+was\s+raining\b/i.test(corrected)) {
-      corrected = corrected.replace(/\bthis\s+was\s+raining\b/i, 'It was raining');
-      reasons.push("Weather expressions use impersonal pronoun 'It' ('It was raining'), not demonstrative 'This'");
+    // 1. 'There is/was many [noun]' -> 'There are/were many [nouns]'
+    if (/\bthere\s+is\s+many\b/i.test(corrected)) {
+      corrected = corrected.replace(/\bthere\s+is\s+many\b/gi, 'There are many');
+      reasons.push("Use 'there are' instead of 'there is' before plural 'many'");
+    }
+    if (/\bthere\s+was\s+many\b/i.test(corrected)) {
+      corrected = corrected.replace(/\bthere\s+was\s+many\b/gi, 'There were many');
+      reasons.push("Use 'there were' instead of 'there was' before plural 'many'");
+    }
+
+    // 2. Weather expressions: 'this were/was raining' -> 'It was raining'
+    if (/\bthis\s+(were|was)\s+raining\b/i.test(corrected)) {
+      corrected = corrected.replace(/\bthis\s+(were|was)\s+raining\b/gi, 'It was raining');
+      reasons.push("Weather expressions require impersonal pronoun 'It' ('It was raining'), not demonstrative 'This'");
     } else if (/\bit\s+were\s+raining\b/i.test(corrected)) {
-      corrected = corrected.replace(/\bit\s+were\s+raining\b/i, 'It was raining');
-      reasons.push("Singular subject 'It' takes singular auxiliary verb 'was', not plural 'were'");
+      corrected = corrected.replace(/\bit\s+were\s+raining\b/gi, 'It was raining');
+      reasons.push("Singular subject 'It' takes singular auxiliary 'was'");
     } else if (/\b(this|that|he|she|it)\s+were\b/i.test(corrected)) {
-      corrected = corrected.replace(/\b(this|that|he|she|it)\s+were\b/i, '$1 was');
+      corrected = corrected.replace(/\b(this|that|he|she|it)\s+were\b/gi, '$1 was');
       reasons.push("Singular subject takes singular past auxiliary 'was' instead of plural 'were'");
     }
 
-    // 1. 'There is many [noun]' -> 'There are many [nouns]'
-    if (/there\s+is\s+many/i.test(corrected)) {
-      corrected = corrected.replace(/there\s+is\s+many/i, 'There are many');
-      reasons.push("Use 'there are' instead of 'there is' for plural quantities ('many')");
+    // 3. Subject-verb agreement: 'they was' -> 'they were', 'we was' -> 'we were'
+    if (/\bthey\s+was\b/i.test(corrected)) {
+      corrected = corrected.replace(/\bthey\s+was\b/gi, 'They were');
+      reasons.push("Plural subject 'they' takes plural auxiliary 'were' (not 'was')");
+    }
+    if (/\bwe\s+was\b/i.test(corrected)) {
+      corrected = corrected.replace(/\bwe\s+was\b/gi, 'We were');
+      reasons.push("Plural subject 'we' takes plural auxiliary 'were' (not 'was')");
     }
 
-    // 2. Quantifiers: 'many problem' -> 'many problems'
+    // 4. Quantifier plurals: 'many problem' -> 'many problems'
     if (/many\s+problem(\b|\s)/i.test(corrected)) {
-      corrected = corrected.replace(/many\s+problem/i, 'many problems');
+      corrected = corrected.replace(/many\s+problem\b/gi, 'many problems');
       reasons.push("Pluralize 'problem' to 'problems' after quantifier 'many'");
     }
     corrected = corrected.replace(/\bmany\s+(car|house|person|child|system|thing|mistake|issue)\b/gi, (m, word) => {
@@ -1918,53 +1927,59 @@ CRITICAL REQUIREMENT: The example sentence MUST be a real, meaningful scenario. 
       return `many ${word}s`;
     });
 
-    // 3. 'in it system' / 'it [noun]' -> 'its [noun]'
+    // 5. 'in it system' / 'it [noun]' -> 'its [noun]'
     if (/\b(in|of|on|for|with|about)\s+it\s+([a-z]+)\b/i.test(corrected)) {
-      corrected = corrected.replace(/\b(in|of|on|for|with|about)\s+it\s+([a-z]+)\b/i, '$1 its $2');
+      corrected = corrected.replace(/\b(in|of|on|for|with|about)\s+it\s+([a-z]+)\b/gi, '$1 its $2');
       reasons.push("Use possessive pronoun 'its' instead of object pronoun 'it'");
     }
 
-    // 4. 'they all were' -> 'they were all'
+    // 6. 'they all were' -> 'they were all'
     if (/\bthey\s+all\s+were\b/i.test(corrected)) {
-      corrected = corrected.replace(/\bthey\s+all\s+were\b/i, 'They were all');
-      reasons.push("'All' comes after auxiliary verb 'were' (mid-position quantifier placement)");
+      corrected = corrected.replace(/\bthey\s+all\s+were\b/gi, 'They were all');
+      reasons.push("'All' comes after auxiliary verb 'were'");
     }
 
-    // 5. 'she/he do not knows' -> 'she/he does not know'
+    // 7. 'she/he do not knows' -> 'she/he does not know'
     if (/\b(she|he|it)\s+do\s+not\s+knows?\b/i.test(corrected)) {
-      corrected = corrected.replace(/\b(she|he|it)\s+do\s+not\s+knows?\b/i, '$1 does not know');
+      corrected = corrected.replace(/\b(she|he|it)\s+do\s+not\s+knows?\b/gi, '$1 does not know');
       reasons.push("With third-person singular subjects, use 'does not' and base verb 'know'");
-    }
-    if (/\b(she|he|it)\s+do\s+not\b/i.test(corrected)) {
-      corrected = corrected.replace(/\b(she|he|it)\s+do\s+not\b/i, '$1 does not');
+    } else if (/\b(she|he|it)\s+do\s+not\b/i.test(corrected)) {
+      corrected = corrected.replace(/\b(she|he|it)\s+do\s+not\b/gi, '$1 does not');
       reasons.push("With third-person singular subjects, use 'does not' instead of 'do not'");
     }
 
-    // 6. 'i am agree' -> 'i agree'
+    // 8. 'i am agree' -> 'I agree'
     if (/\bi\s+am\s+agree\b/i.test(corrected)) {
-      corrected = corrected.replace(/\bi\s+am\s+agree\b/i, 'I agree');
-      reasons.push("'Agree' is already a main verb; do not use auxiliary 'am' before it");
+      corrected = corrected.replace(/\bi\s+am\s+agree\b/gi, 'I agree');
+      reasons.push("'Agree' is already a main verb; do not use 'am' before it");
     }
 
-    // 7. 'didn't came' -> 'didn't come'
+    // 9. 'didn't came' -> "didn't come"
     if (/\bdidn'?t\s+came\b/i.test(corrected)) {
-      corrected = corrected.replace(/\bdidn'?t\s+came\b/i, "didn't come");
+      corrected = corrected.replace(/\bdidn'?t\s+came\b/gi, "didn't come");
       reasons.push("After auxiliary 'didn't', always use base form of verb ('come')");
     }
 
-    // 8. 'he/she go' -> 'he/she goes'
+    // 10. 'he/she go' -> 'he/she goes'
     if (/\b(he|she)\s+go\s+(to|\b)/i.test(corrected)) {
-      corrected = corrected.replace(/\b(he|she)\s+go\s+/i, '$1 goes ');
+      corrected = corrected.replace(/\b(he|she)\s+go\s+/gi, '$1 goes ');
       reasons.push("Third-person singular subjects take 'goes' in simple present tense");
     }
 
-    const isIncorrect = corrected.toLowerCase().trim() !== clean.toLowerCase().trim();
+    const changed = corrected.toLowerCase().trim() !== s.toLowerCase().trim();
+    return { changed, text: corrected, reasons };
+  },
 
-    // CRITICAL: If no specific grammatical rule was triggered, do NOT guess that the sentence is 'Correct'.
-    // Only return a result if a definite, verified error was detected.
-    if (!isIncorrect) {
-      return null;
-    }
+  async analyzeSentenceLocally(raw) {
+    let s = (raw || '').trim();
+    if (!s) return null;
+
+    const res = this.applyLocalGrammarRules(s);
+    if (!res.changed) return null;
+
+    let corrected = res.text;
+    corrected = corrected.charAt(0).toUpperCase() + corrected.slice(1);
+    if (!/[.!?]$/.test(corrected)) corrected += '.';
 
     let urduMeaning = await this.translate(corrected, 'en', 'ur');
     if (!urduMeaning) {
@@ -1974,7 +1989,7 @@ CRITICAL REQUIREMENT: The example sentence MUST be a real, meaningful scenario. 
     return {
       status: '❌ Incorrect',
       correct_version: corrected,
-      why_it_was_wrong: reasons.join('; ') + '.',
+      why_it_was_wrong: res.reasons.join('; ') + '.',
       urdu_meaning: urduMeaning
     };
   },
@@ -2112,64 +2127,92 @@ If incorrect:
       const cleanSentence = (sentence || '').trim();
       if (!cleanSentence) return null;
 
-      const controller = typeof AbortController !== 'undefined' ? new AbortController() : null;
-      const timer = controller ? setTimeout(() => controller.abort(), 6500) : null;
-      const body = new URLSearchParams({ text: cleanSentence, language: 'en-US' });
+      // 1. First Pass: Apply verified grammatical rules
+      let localCheck = this.applyLocalGrammarRules(cleanSentence);
+      let workingSentence = localCheck.text;
+      let allReasons = [...localCheck.reasons];
+      let isChanged = localCheck.changed;
 
-      const res = await fetch('https://api.languagetool.org/v2/check', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        body: body.toString(),
-        signal: controller ? controller.signal : undefined
-      });
-      if (timer) clearTimeout(timer);
-      if (!res.ok) return null;
+      // 2. Second & Third Pass: Multi-pass LanguageTool to catch cascading dependencies
+      for (let pass = 0; pass < 3; pass++) {
+        const controller = typeof AbortController !== 'undefined' ? new AbortController() : null;
+        const timer = controller ? setTimeout(() => controller.abort(), 6500) : null;
+        const body = new URLSearchParams({ text: workingSentence, language: 'en-US' });
 
-      const data = await res.json();
-      if (!data || !Array.isArray(data.matches)) return null;
+        const res = await fetch('https://api.languagetool.org/v2/check', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+          body: body.toString(),
+          signal: controller ? controller.signal : undefined
+        });
+        if (timer) clearTimeout(timer);
+        if (!res.ok) break;
 
-      const errorMatches = data.matches.filter(m => m.replacements && m.replacements.length > 0);
+        const data = await res.json();
+        if (!data || !Array.isArray(data.matches)) break;
 
-      if (errorMatches.length === 0) {
-        // Sentence is grammatically correct!
-        let urdu = await this.translate(cleanSentence, 'en', 'ur');
+        const errorMatches = data.matches.filter(m => m.replacements && m.replacements.length > 0);
+        if (errorMatches.length === 0) break;
+
+        isChanged = true;
+        const sorted = [...errorMatches].sort((a, b) => b.offset - a.offset);
+        for (const m of sorted) {
+          const replacement = m.replacements[0].value;
+          workingSentence = workingSentence.slice(0, m.offset) + replacement + workingSentence.slice(m.offset + m.length);
+          if (m.message) {
+            const cleanMsg = m.message.replace(/[\u2018\u2019]/g, "'").replace(/[\u201C\u201D]/g, '"');
+            if (!allReasons.includes(cleanMsg)) {
+              allReasons.push(cleanMsg);
+            }
+          }
+        }
+      }
+
+      // 3. Final Pass: Apply local rules again on the combined output
+      let finalCheck = this.applyLocalGrammarRules(workingSentence);
+      if (finalCheck.changed) {
+        workingSentence = finalCheck.text;
+        allReasons.push(...finalCheck.reasons);
+        isChanged = true;
+      }
+
+      // 4. Ensure proper casing and final punctuation
+      workingSentence = workingSentence.charAt(0).toUpperCase() + workingSentence.slice(1);
+      if (!/[.!?]$/.test(workingSentence)) workingSentence += '.';
+
+      // If sentence was completely correct from the start
+      if (!isChanged && workingSentence.toLowerCase().trim() === (cleanSentence.charAt(0).toUpperCase() + cleanSentence.slice(1)).toLowerCase().trim()) {
+        let urdu = await this.translate(workingSentence, 'en', 'ur');
         return {
           status: '✅ Correct',
           urdu_meaning: urdu || 'یہ جملہ گرائمر اور ساخت کے اعتبار سے بالکل درست ہے۔'
         };
       }
 
-      // Sentence has grammatical errors - reconstruct clean corrected sentence
-      let corrected = cleanSentence;
-      const sorted = [...errorMatches].sort((a, b) => b.offset - a.offset);
-      const reasons = [];
-
-      for (const m of sorted) {
-        const replacement = m.replacements[0].value;
-        corrected = corrected.slice(0, m.offset) + replacement + corrected.slice(m.offset + m.length);
-        if (m.message) {
-          reasons.unshift(m.message.replace(/‘|’/g, "'").replace(/“|”/g, '"'));
-        }
-      }
-
-      // Format casing and punctuation
-      corrected = corrected.charAt(0).toUpperCase() + corrected.slice(1);
-      if (!/[.!?]$/.test(corrected)) corrected += '.';
+      // Filter out low-level casing/whitespace noise from reasons if grammar errors exist
+      const grammarReasons = allReasons.filter(r => 
+        !r.toLowerCase().includes('uppercase') &&
+        !r.toLowerCase().includes('whitespace')
+      );
+      const finalReasons = grammarReasons.length > 0 ? grammarReasons : allReasons;
+      const explanation = finalReasons.length > 0 
+        ? [...new Set(finalReasons)].slice(0, 3).join('; ') + '.' 
+        : 'Corrected subject-verb agreement and sentence structure.';
 
       // Get natural Urdu translation of the corrected sentence
-      let urdu = await this.translate(corrected, 'en', 'ur');
+      let urdu = await this.translate(workingSentence, 'en', 'ur');
       if (!urdu) {
         urdu = 'اس جملے کی درستگی کر دی گئی ہے۔';
       }
 
       return {
         status: '❌ Incorrect',
-        correct_version: corrected,
-        why_it_was_wrong: reasons.slice(0, 3).join(' ') || 'Grammar and sentence structure correction.',
+        correct_version: workingSentence,
+        why_it_was_wrong: explanation,
         urdu_meaning: urdu
       };
     } catch (e) {
-      console.warn("LanguageTool permanent engine check error:", e);
+      console.warn("LanguageTool comprehensive check error:", e);
       return null;
     }
   }
