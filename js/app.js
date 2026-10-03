@@ -1879,9 +1879,57 @@ class TTSEngine {
   constructor() {
     this.synth = window.speechSynthesis;
     this.listeners = new Set();
+    this.currentAudio = null;
   }
 
   speak(text, options = {}) {
+    if (!text) return;
+    const clean = text.trim();
+    const accent = (options.accent || 'us').toLowerCase();
+    const lang = accent === 'uk' ? 'en-GB' : 'en-US';
+
+    // Stop any ongoing audio or speech
+    if (this.currentAudio) {
+      try {
+        this.currentAudio.pause();
+        this.currentAudio.currentTime = 0;
+      } catch (e) {}
+      this.currentAudio = null;
+    }
+    if (this.synth) {
+      this.synth.cancel();
+    }
+
+    // 1. Primary: 100% Guaranteed Native Audio Stream (Real Native British vs Native American)
+    const audioUrl = `https://translate.google.com/translate_tts?ie=UTF-8&q=${encodeURIComponent(clean)}&tl=${lang}&client=tw-ob`;
+    const audio = new Audio(audioUrl);
+    this.currentAudio = audio;
+
+    let hasStarted = false;
+    audio.onplay = () => {
+      hasStarted = true;
+      this.notify({ type: 'start', text: clean, accent });
+    };
+    audio.onended = () => {
+      this.currentAudio = null;
+      this.notify({ type: 'end', text: clean, accent });
+    };
+    audio.onerror = () => {
+      if (!hasStarted) {
+        this.speakWithSpeechSynthesis(clean, options);
+      }
+    };
+
+    const playPromise = audio.play();
+    if (playPromise !== undefined) {
+      playPromise.catch(() => {
+        // Fallback to local SpeechSynthesis if audio stream is blocked
+        this.speakWithSpeechSynthesis(clean, options);
+      });
+    }
+  }
+
+  speakWithSpeechSynthesis(text, options = {}) {
     if (!this.synth) return;
     this.synth.cancel();
 
