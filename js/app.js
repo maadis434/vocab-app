@@ -2963,6 +2963,37 @@ class VocabApp {
       });
     }
 
+    // U-Dictionary Home Dashboard Feature Tiles
+    const btnMagic = document.getElementById('btn-home-magic');
+    if (btnMagic) {
+      btnMagic.addEventListener('click', () => {
+        this.openAiSettings();
+      });
+    }
+
+    const btnCamera = document.getElementById('btn-home-camera');
+    if (btnCamera) {
+      btnCamera.addEventListener('click', () => {
+        this.showToast('📷 Camera Translation: Point camera at text to translate');
+      });
+    }
+
+    const btnConversation = document.getElementById('btn-home-conversation');
+    if (btnConversation) {
+      btnConversation.addEventListener('click', () => {
+        this.showToast('🎙️ Voice Conversation: Real-time English & Urdu translation');
+      });
+    }
+
+    const btnGrammar = document.getElementById('btn-home-grammar');
+    if (btnGrammar) {
+      btnGrammar.addEventListener('click', () => {
+        this.switchTab('more');
+        this.moreSubView = 'grammar';
+        this.renderMoreHub();
+      });
+    }
+
     // Dictionary Search Input & Live Autocomplete
     if (this.dictSearchInput) {
       this.dictSearchInput.addEventListener('input', (e) => {
@@ -3782,8 +3813,10 @@ class VocabApp {
 
   renderDictionary() {
     if (!this.dictionaryContainer) return;
+    const dashboardGrid = document.getElementById('home-dashboard-grid');
 
     if (this.isSearchingOnline) {
+      if (dashboardGrid) dashboardGrid.style.display = 'none';
       this.dictionaryContainer.style.display = 'block';
       if (this.todayContainer) this.todayContainer.style.display = 'none';
       this.dictionaryContainer.innerHTML = `
@@ -3796,6 +3829,7 @@ class VocabApp {
     }
 
     if (this.unrecognizedTerm) {
+      if (dashboardGrid) dashboardGrid.style.display = 'none';
       this.dictionaryContainer.style.display = 'block';
       if (this.todayContainer) this.todayContainer.style.display = 'none';
       const { query, geminiError } = this.unrecognizedTerm;
@@ -3832,6 +3866,7 @@ class VocabApp {
     if (!this.searchQuery) {
       this.dictionaryContainer.style.display = 'none';
       this.dictionaryContainer.innerHTML = '';
+      if (dashboardGrid) dashboardGrid.style.display = 'grid';
       if (this.todayContainer) {
         this.todayContainer.style.display = 'none';
         this.todayContainer.innerHTML = '';
@@ -3839,6 +3874,7 @@ class VocabApp {
       return;
     }
 
+    if (dashboardGrid) dashboardGrid.style.display = 'none';
     this.dictionaryContainer.style.display = 'block';
     if (this.todayContainer) this.todayContainer.style.display = 'none';
 

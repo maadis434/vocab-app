@@ -1,69 +1,67 @@
 /* ==========================================================
-   VOCAB — 100% APPLE NOTES JOURNAL AESTHETIC
-   Inspired by Apple Notes on iOS (Paper texture, pure typography,
-   clean two-column editorial layout, refined Nastaliq Urdu)
+   VOCAB — AUTHENTIC U-DICTIONARY MATTE DARK DESIGN SYSTEM
+   Inspired by U-Dictionary (Matte Charcoal, Coral Red, Cyan Blue)
    ========================================================== */
 
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Noto+Nastaliq+Urdu:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Noto+Nastaliq+Urdu:wght@400;600;700&display=swap');
 
 :root {
-  /* Apple Notes Paper Palette (Light Mode) */
-  --bg-app: #f8f7f5;
-  --bg-canvas: #f8f7f5;
-  --bg-card: #ffffff;
-  --bg-outer: #e5e5ea;
-  --bg-search: #eeeff1;
-  --bg-chip: #ffffff;
-  --bg-sentence: rgba(255, 255, 255, 0.85);
-  --bg-bottom-bar: rgba(248, 247, 245, 0.92);
-  --app-bezel: #d1d1d6;
+  /* Solid Matte Dark Palette (Default) */
+  --bg-app: #121316;
+  --bg-canvas: #0c0d10;
+  --bg-card: #181a20;
+  --bg-outer: #090a0d;
+  --bg-search: #1a1d24;
+  --bg-chip: #1e2129;
+  --bg-sentence: #15171d;
+  --bg-bottom-bar: #0f1014;
+  --app-bezel: #20222a;
   
   /* Typography Colors */
-  --text-title: #1c1c1e;
-  --text-body: #3a3a3c;
-  --text-muted: #636366;
-  --text-faint: #8e8e93;
-  --text-date: #98989d;
+  --text-title: #ffffff;
+  --text-body: #d1d5db;
+  --text-muted: #9ca3af;
+  --text-faint: #64748b;
+  --text-date: #64748b;
   
   /* Accents */
-  --accent-apple-gold: #c4881c;
-  --accent-apple-gold-light: #fef8ee;
-  --accent-heart: #ff3b30;
-  --accent-blue: #007aff;
-  --divider: rgba(60, 60, 67, 0.12);
-  --divider-hairline: rgba(60, 60, 67, 0.08);
+  --accent-red: #f43f5e;
+  --accent-heart: #f43f5e;
+  --accent-blue: #0284c7;
+  --accent-cyan: #38bdf8;
+  --accent-apple-gold: #eab308;
+  --divider: #22252e;
+  --divider-hairline: #1c1e25;
 
   /* Fonts */
   --font-main: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   --font-urdu: 'Noto Nastaliq Urdu', 'Amiri', serif;
 }
 
-/* ==========================================================
-   APPLE NOTES DARK MODE (iOS Deep Obsidian Journal)
-   ========================================================== */
 [data-theme="dark"] {
-  --bg-app: #1c1c1e;
-  --bg-canvas: #1c1c1e;
-  --bg-card: #2c2c2e;
-  --bg-outer: #09090b;
-  --bg-search: #2c2c2e;
-  --bg-chip: #2c2c2e;
-  --bg-sentence: rgba(44, 44, 46, 0.9);
-  --bg-bottom-bar: rgba(28, 28, 30, 0.92);
-  --app-bezel: #38383a;
+  --bg-app: #121316;
+  --bg-canvas: #0c0d10;
+  --bg-card: #181a20;
+  --bg-outer: #090a0d;
+  --bg-search: #1a1d24;
+  --bg-chip: #1e2129;
+  --bg-sentence: #15171d;
+  --bg-bottom-bar: #0f1014;
+  --app-bezel: #20222a;
   
-  --text-title: #f2f2f7;
-  --text-body: #e5e5ea;
-  --text-muted: #aeaeb2;
-  --text-faint: #8e8e93;
-  --text-date: #8e8e93;
+  --text-title: #ffffff;
+  --text-body: #d1d5db;
+  --text-muted: #9ca3af;
+  --text-faint: #64748b;
+  --text-date: #64748b;
   
-  --accent-apple-gold: #e5b85a;
-  --accent-apple-gold-light: rgba(229, 184, 90, 0.18);
-  --accent-heart: #ff453a;
-  --accent-blue: #0a84ff;
-  --divider: rgba(255, 255, 255, 0.15);
-  --divider-hairline: rgba(255, 255, 255, 0.10);
+  --accent-red: #f43f5e;
+  --accent-heart: #f43f5e;
+  --accent-blue: #0284c7;
+  --accent-cyan: #38bdf8;
+  --accent-apple-gold: #eab308;
+  --divider: #22252e;
+  --divider-hairline: #1c1e25;
 }
 
 * {
@@ -95,21 +93,21 @@ body {
 }
 
 /* ==========================================================
-   APP SHELL (iPhone Bezel on Desktop, Native Edge-to-Edge on Mobile)
+   APP SHELL (Clean Smartphone Device Frame on Desktop, Native Edge-to-Edge on Mobile)
    ========================================================== */
 .app-wrapper {
   width: 100%;
-  max-width: 420px;
+  max-width: 440px;
   height: 100vh;
-  max-height: 890px;
+  max-height: 900px;
   background: var(--bg-app);
   display: flex;
   flex-direction: column;
   position: relative;
   overflow: hidden;
-  box-shadow: 0 25px 60px -15px rgba(0, 0, 0, 0.22), 0 0 1px 1px rgba(0, 0, 0, 0.08);
-  border-radius: 46px;
-  border: 4px solid var(--app-bezel);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.7);
+  border-radius: 28px;
+  border: 1px solid var(--divider);
 }
 
 @media (max-width: 480px) {
@@ -124,23 +122,23 @@ body {
 }
 
 /* ==========================================================
-   TOP ACTION HEADER (Apple Notes Style)
+   TOP ACTION HEADER (U-Dictionary Style)
    ========================================================== */
 .app-header {
-  padding: 16px 22px 10px 22px;
+  padding: 16px 20px 12px 20px;
   background: var(--bg-app);
   display: flex;
   align-items: center;
   justify-content: space-between;
   z-index: 10;
-  border-bottom: 0.5px solid var(--divider-hairline);
+  border-bottom: 1px solid var(--divider-hairline);
 }
 
 .brand-title {
-  font-size: 1.45rem;
+  font-size: 1.5rem;
   font-weight: 800;
-  letter-spacing: -0.03em;
-  color: var(--text-title);
+  letter-spacing: -0.02em;
+  color: #ffffff;
   font-family: var(--font-main);
 }
 
@@ -780,48 +778,47 @@ body {
   bottom: 0;
   left: 0;
   right: 0;
-  height: 60px;
-  background: var(--bg-bottom-bar);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border-top: 0.5px solid var(--divider-hairline);
+  height: 64px;
+  background: #0f1014;
+  border-top: 1px solid var(--divider-hairline);
   display: flex;
   justify-content: space-around;
   align-items: center;
   z-index: 25;
-  padding: 0 6px;
+  padding: 0 8px;
 }
 
 .bottom-tab-btn {
   background: none;
   border: none;
-  color: var(--text-faint);
+  color: #64748b;
   cursor: pointer;
   padding: 6px 12px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 3px;
-  font-size: 0.66rem;
+  gap: 4px;
+  font-size: 0.72rem;
   font-weight: 500;
-  transition: color 0.15s;
+  transition: color 0.15s ease;
 }
 
 .bottom-tab-btn svg {
-  width: 20px;
-  height: 20px;
-  stroke-width: 1.7;
+  width: 22px;
+  height: 22px;
+  stroke-width: 1.8;
 }
 
 .bottom-tab-btn:hover {
-  color: var(--text-body);
+  color: #94a3b8;
 }
 
 .bottom-tab-btn.active {
-  color: var(--accent-apple-gold);
+  color: #ffffff;
 }
 
 .bottom-tab-btn.active svg {
+  stroke: #ffffff;
   stroke-width: 2.2;
 }
 
@@ -2204,35 +2201,33 @@ body {
 }
 
 /* ==========================================================
-   U-DICTIONARY HOME SCREEN (Search Card & Dictionary Tile)
+   U-DICTIONARY HOME SCREEN (Search Card & Dashboard Grid)
    ========================================================== */
 .udict-search-card {
   position: relative;
-  background: var(--bg-card);
-  border: 1.5px solid #2b70b8;
+  background: #161820;
+  border: 1.5px solid #0284c7;
   border-radius: 20px;
-  padding: 16px 18px 16px 18px;
-  margin-bottom: 20px;
-  box-shadow: 0 4px 20px rgba(43, 112, 184, 0.12);
-  transition: all 0.2s ease;
+  padding: 14px 16px 16px 16px;
+  margin-bottom: 16px;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
 [data-theme="dark"] .udict-search-card {
-  background: #11141a;
-  border-color: #2b70b8;
-  box-shadow: 0 4px 24px rgba(37, 99, 235, 0.15);
+  background: #161820;
+  border-color: #0284c7;
 }
 
 .udict-search-card:focus-within {
   border-color: #38bdf8;
-  box-shadow: 0 6px 28px rgba(56, 189, 248, 0.2);
+  box-shadow: 0 0 16px rgba(2, 132, 199, 0.25);
 }
 
 .udict-lang-row {
   display: flex;
   align-items: center;
-  gap: 14px;
-  margin-bottom: 18px;
+  gap: 12px;
+  margin-bottom: 14px;
 }
 
 .udict-lang-chip {
@@ -2372,75 +2367,97 @@ body {
   to { transform: scale(1.25); filter: drop-shadow(0 0 6px #ef4444); }
 }
 
-/* Dictionary Tile */
-.udict-home-tiles-wrap {
+/* ==========================================================
+   FEATURE DASHBOARD GRID (From Competitor frame_000s.jpg)
+   ========================================================== */
+.udict-dashboard-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
   margin-bottom: 22px;
 }
 
-.udict-feature-tile {
-  background: var(--bg-card);
-  border: 1px solid var(--divider-hairline);
+.udict-magic-card {
+  background: #181b22;
   border-radius: 18px;
-  padding: 16px 18px;
+  padding: 16px 14px;
   display: flex;
-  align-items: center;
+  flex-direction: column;
   justify-content: space-between;
+  min-height: 156px;
   cursor: pointer;
-  transition: all 0.2s ease;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  transition: transform 0.15s ease, background 0.15s ease;
 }
 
-[data-theme="dark"] .udict-feature-tile {
-  background: #171a21;
-  border-color: rgba(255, 255, 255, 0.07);
+.udict-magic-card:hover {
+  background: #1d212b;
 }
 
-.udict-feature-tile:hover, .udict-feature-tile:active {
-  transform: translateY(-2px);
-  border-color: #38bdf8;
-  box-shadow: 0 4px 16px rgba(56, 189, 248, 0.15);
+.udict-magic-card:active {
+  transform: scale(0.97);
 }
 
-.udict-tile-left {
+.udict-magic-top {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.udict-diamond-icon {
+  font-size: 1rem;
+}
+
+.udict-magic-emblem {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 4px 0;
+}
+
+.udict-magic-label {
+  text-align: center;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #ffffff;
+}
+
+.udict-feature-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.udict-stack-card {
+  background: #181b22;
+  border-radius: 14px;
+  padding: 12px 14px;
   display: flex;
   align-items: center;
-  gap: 14px;
+  gap: 12px;
+  cursor: pointer;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  flex: 1;
+  transition: transform 0.15s ease, background 0.15s ease;
 }
 
-.udict-tile-emblem {
-  width: 44px;
-  height: 44px;
-  border-radius: 14px;
-  background: linear-gradient(135deg, #1d4ed8, #0284c7);
-  color: #ffffff;
+.udict-stack-card:hover {
+  background: #1d212b;
+}
+
+.udict-stack-card:active {
+  transform: scale(0.97);
+}
+
+.udict-stack-icon {
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 3px 10px rgba(2, 132, 199, 0.3);
 }
 
-.udict-tile-content {
-  display: flex;
-  flex-direction: column;
-  gap: 3px;
-}
-
-.udict-tile-heading {
-  font-size: 1.05rem;
-  font-weight: 700;
-  color: var(--text-title);
-  letter-spacing: -0.01em;
-}
-
-.udict-tile-desc {
-  font-size: 0.78rem;
-  color: var(--text-muted);
-}
-
-.udict-tile-arrow {
-  font-size: 1.3rem;
-  color: var(--text-faint);
-  font-weight: 300;
+.udict-stack-title {
+  font-size: 0.92rem;
+  font-weight: 600;
+  color: #ffffff;
 }
 
 /* ==========================================================
