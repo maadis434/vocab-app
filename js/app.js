@@ -1767,7 +1767,16 @@ class StorageManager {
   save(key, val) {
     try {
       localStorage.setItem(key, JSON.stringify(val));
-    } catch (e) {}
+    } catch (e) {
+      if (e && (e.name === 'QuotaExceededError' || e.code === 22)) {
+        if (Array.isArray(val) && val.length > 50) {
+          const trimmed = val.slice(0, Math.floor(val.length * 0.85));
+          try {
+            localStorage.setItem(key, JSON.stringify(trimmed));
+          } catch (e2) {}
+        }
+      }
+    }
   }
 
   getRecentSearches() {
@@ -1848,9 +1857,8 @@ class StorageManager {
 
   saveWordToCache(wordObj) {
     if (!wordObj || !wordObj.word) return;
-    this.cachedWords = this.cachedWords.filter(w => w.word.toLowerCase() !== wordObj.word.toLowerCase());
+    this.cachedWords = this.cachedWords.filter(w => w && w.word && w.word.toLowerCase() !== wordObj.word.toLowerCase());
     this.cachedWords.unshift(wordObj);
-    if (this.cachedWords.length > 500) this.cachedWords.pop();
     this.save(this.cacheKey, this.cachedWords);
   }
 
