@@ -4168,13 +4168,43 @@ class VocabApp {
           `;
           this.attachCardEventListeners(container, false, fetched);
         } else {
+          // Check for spelling suggestions (Did you mean?)
+          let didYouMean = [];
+          try {
+            const spRes = await fetch(`https://api.datamuse.com/words?sp=${encodeURIComponent(term)}&max=3`);
+            if (spRes.ok) {
+              const spData = await spRes.json();
+              if (Array.isArray(spData)) {
+                didYouMean = spData.map(s => s.word).filter(Boolean);
+              }
+            }
+          } catch (e) {}
+
           container.innerHTML = `
             <div class="recents-empty-state" style="margin-top: 16px;">
               <div class="recents-empty-icon">📖</div>
               <div class="recents-empty-title">Word Not Found</div>
-              <p class="recents-empty-desc">No definition could be found for "${term}". Please check the spelling.</p>
+              <p class="recents-empty-desc">No definition could be found for "<strong>${term}</strong>". Please check the spelling.</p>
+              ${didYouMean.length > 0 ? `
+                <div style="margin-top: 16px; padding-top: 14px; border-top: 1px solid var(--divider);">
+                  <div style="font-size: 0.8rem; color: var(--text-faint); margin-bottom: 8px; font-weight: 600;">Did you mean?</div>
+                  <div style="display: flex; gap: 8px; justify-content: center; flex-wrap: wrap;">
+                    ${didYouMean.map(w => `
+                      <button type="button" class="clear-history-link" data-search-suggestion="${w}" style="font-size: 0.88rem; padding: 6px 14px; background: var(--bg-hover); border-radius: 20px; color: var(--accent-primary); border: 1px solid var(--divider); cursor: pointer;">
+                        ${w}
+                      </button>
+                    `).join('')}
+                  </div>
+                </div>
+              ` : ''}
             </div>
           `;
+
+          container.querySelectorAll('[data-search-suggestion]').forEach(btn => {
+            btn.addEventListener('click', () => {
+              this.selectWordFromSearch(btn.dataset.searchSuggestion);
+            });
+          });
         }
       } catch (err) {
         container.innerHTML = `
