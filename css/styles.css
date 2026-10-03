@@ -5,33 +5,35 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Noto+Nastaliq+Urdu:wght@400;600;700&display=swap');
 
-:root {
-  /* Solid Matte Dark Palette (Default) */
-  --bg-app: #121316;
-  --bg-canvas: #0c0d10;
-  --bg-card: #181a20;
-  --bg-outer: #090a0d;
-  --bg-search: #1a1d24;
-  --bg-chip: #1e2129;
-  --bg-sentence: #15171d;
-  --bg-bottom-bar: #0f1014;
-  --app-bezel: #20222a;
+:root,
+[data-theme="light"] {
+  /* Crisp Minimalist Light Palette (Notion / Linear / Clean Modern iOS) */
+  --bg-app: #f8fafc;
+  --bg-canvas: #f1f5f9;
+  --bg-card: #ffffff;
+  --bg-outer: #e2e8f0;
+  --bg-search: #f1f5f9;
+  --bg-chip: #f1f5f9;
+  --bg-sentence: #f8fafc;
+  --bg-bottom-bar: #ffffff;
+  --app-bezel: #cbd5e1;
+  --card-shadow: 0 2px 10px rgba(15, 23, 42, 0.05);
   
   /* Typography Colors */
-  --text-title: #ffffff;
-  --text-body: #d1d5db;
-  --text-muted: #9ca3af;
-  --text-faint: #64748b;
-  --text-date: #64748b;
+  --text-title: #0f172a;
+  --text-body: #334155;
+  --text-muted: #64748b;
+  --text-faint: #94a3b8;
+  --text-date: #94a3b8;
   
   /* Accents */
   --accent-red: #f43f5e;
   --accent-heart: #f43f5e;
   --accent-blue: #0284c7;
-  --accent-cyan: #38bdf8;
-  --accent-apple-gold: #eab308;
-  --divider: #22252e;
-  --divider-hairline: #1c1e25;
+  --accent-cyan: #0284c7;
+  --accent-apple-gold: #d97706;
+  --divider: #e2e8f0;
+  --divider-hairline: #f1f5f9;
 
   /* Fonts */
   --font-main: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
@@ -39,29 +41,33 @@
 }
 
 [data-theme="dark"] {
-  --bg-app: #121316;
-  --bg-canvas: #0c0d10;
-  --bg-card: #181a20;
-  --bg-outer: #090a0d;
-  --bg-search: #1a1d24;
-  --bg-chip: #1e2129;
-  --bg-sentence: #15171d;
-  --bg-bottom-bar: #0f1014;
-  --app-bezel: #20222a;
+  /* Matte Obsidian Dark Palette (Linear / Raycast / Modern Dark) */
+  --bg-app: #0f1117;
+  --bg-canvas: #090a0f;
+  --bg-card: #161922;
+  --bg-outer: #07080b;
+  --bg-search: #1b1e2a;
+  --bg-chip: #1e2230;
+  --bg-sentence: #141720;
+  --bg-bottom-bar: #0f1117;
+  --app-bezel: #202533;
+  --card-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
   
-  --text-title: #ffffff;
-  --text-body: #d1d5db;
-  --text-muted: #9ca3af;
+  /* Typography Colors */
+  --text-title: #f8fafc;
+  --text-body: #cbd5e1;
+  --text-muted: #94a3b8;
   --text-faint: #64748b;
   --text-date: #64748b;
   
+  /* Accents */
   --accent-red: #f43f5e;
   --accent-heart: #f43f5e;
-  --accent-blue: #0284c7;
+  --accent-blue: #38bdf8;
   --accent-cyan: #38bdf8;
   --accent-apple-gold: #eab308;
-  --divider: #22252e;
-  --divider-hairline: #1c1e25;
+  --divider: #232838;
+  --divider-hairline: #1c202e;
 }
 
 * {
@@ -134,12 +140,48 @@ body {
   border-bottom: 1px solid var(--divider-hairline);
 }
 
+.header-brand-wrap {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
 .brand-title {
   font-size: 1.5rem;
   font-weight: 800;
   letter-spacing: -0.02em;
-  color: #ffffff;
+  color: var(--text-title);
   font-family: var(--font-main);
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.theme-toggle-btn {
+  background: var(--bg-card);
+  border: 1px solid var(--divider);
+  color: var(--text-title);
+  cursor: pointer;
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: var(--card-shadow);
+  transition: all 0.18s ease;
+}
+
+.theme-toggle-btn:hover {
+  background: var(--bg-chip);
+  transform: scale(1.06);
+}
+
+.theme-toggle-btn:active {
+  transform: scale(0.95);
 }
 
 .header-icon-btn {
@@ -779,19 +821,21 @@ body {
   left: 0;
   right: 0;
   height: 64px;
-  background: #0f1014;
-  border-top: 1px solid var(--divider-hairline);
+  background: var(--bg-bottom-bar);
+  border-top: 1px solid var(--divider);
   display: flex;
   justify-content: space-around;
   align-items: center;
   z-index: 25;
   padding: 0 8px;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
 }
 
 .bottom-tab-btn {
   background: none;
   border: none;
-  color: #64748b;
+  color: var(--text-muted);
   cursor: pointer;
   padding: 6px 12px;
   display: flex;
@@ -799,22 +843,28 @@ body {
   align-items: center;
   gap: 4px;
   font-size: 0.72rem;
-  font-weight: 500;
+  font-weight: 600;
   transition: color 0.15s ease;
 }
 
 .bottom-tab-btn svg {
   width: 22px;
   height: 22px;
+  stroke: currentColor;
   stroke-width: 1.8;
 }
 
 .bottom-tab-btn:hover {
-  color: #94a3b8;
+  color: var(--text-title);
 }
 
 .bottom-tab-btn.active {
-  color: #ffffff;
+  color: var(--accent-red);
+}
+
+.bottom-tab-btn.active svg {
+  stroke: var(--accent-red);
+  stroke-width: 2.2;
 }
 
 .bottom-tab-btn.active svg {
@@ -2205,11 +2255,12 @@ body {
    ========================================================== */
 .udict-search-card {
   position: relative;
-  background: #161820;
-  border: 1.5px solid #0284c7;
+  background: var(--bg-card);
+  border: 1.5px solid var(--accent-blue);
   border-radius: 20px;
   padding: 14px 16px 16px 16px;
   margin-bottom: 16px;
+  box-shadow: var(--card-shadow);
   transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
@@ -2307,12 +2358,8 @@ body {
 }
 
 .udict-main-search-input::placeholder {
-  color: #4a729c;
+  color: var(--text-faint);
   opacity: 0.85;
-}
-
-[data-theme="dark"] .udict-main-search-input::placeholder {
-  color: #3b6594;
 }
 
 .udict-input-actions {
@@ -2338,7 +2385,7 @@ body {
 .udict-action-icon-btn {
   background: none;
   border: none;
-  color: #38bdf8;
+  color: #0284c7;
   cursor: pointer;
   padding: 6px;
   display: flex;
@@ -2346,6 +2393,10 @@ body {
   justify-content: center;
   border-radius: 8px;
   transition: transform 0.15s ease, color 0.15s ease;
+}
+
+[data-theme="dark"] .udict-action-icon-btn {
+  color: #38bdf8;
 }
 
 .udict-action-icon-btn:hover {
@@ -2378,7 +2429,7 @@ body {
 }
 
 .udict-magic-card {
-  background: #181b22;
+  background: var(--bg-card);
   border-radius: 18px;
   padding: 16px 14px;
   display: flex;
@@ -2386,12 +2437,13 @@ body {
   justify-content: space-between;
   min-height: 156px;
   cursor: pointer;
-  border: 1px solid rgba(255, 255, 255, 0.06);
-  transition: transform 0.15s ease, background 0.15s ease;
+  border: 1px solid var(--divider);
+  box-shadow: var(--card-shadow);
+  transition: transform 0.15s ease, background 0.15s ease, border-color 0.15s ease;
 }
 
 .udict-magic-card:hover {
-  background: #1d212b;
+  background: var(--bg-chip);
 }
 
 .udict-magic-card:active {
@@ -2418,7 +2470,7 @@ body {
   text-align: center;
   font-size: 0.95rem;
   font-weight: 600;
-  color: #ffffff;
+  color: var(--text-title);
 }
 
 .udict-feature-stack {
@@ -2428,20 +2480,21 @@ body {
 }
 
 .udict-stack-card {
-  background: #181b22;
+  background: var(--bg-card);
   border-radius: 14px;
   padding: 12px 14px;
   display: flex;
   align-items: center;
   gap: 12px;
   cursor: pointer;
-  border: 1px solid rgba(255, 255, 255, 0.06);
+  border: 1px solid var(--divider);
+  box-shadow: var(--card-shadow);
   flex: 1;
-  transition: transform 0.15s ease, background 0.15s ease;
+  transition: transform 0.15s ease, background 0.15s ease, border-color 0.15s ease;
 }
 
 .udict-stack-card:hover {
-  background: #1d212b;
+  background: var(--bg-chip);
 }
 
 .udict-stack-card:active {
@@ -2457,7 +2510,7 @@ body {
 .udict-stack-title {
   font-size: 0.92rem;
   font-weight: 600;
-  color: #ffffff;
+  color: var(--text-title);
 }
 
 /* ==========================================================
