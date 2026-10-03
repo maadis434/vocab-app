@@ -3419,15 +3419,7 @@ class VocabApp {
     const q = (query || '').trim().toLowerCase();
 
     if (!q) {
-      // Show Trending / Suggested Words (like U-Dictionary)
-      const suggestions = [
-        { word: "Diaspora", pos: "n.", urdu: "تارک وطن / انتشار n." },
-        { word: "Inspire", pos: "v.", urdu: "انسپائر / متاثر کرنا v." },
-        { word: "Courage", pos: "n.", urdu: "ہمت / حوصلہ n." },
-        { word: "Resilient", pos: "adj.", urdu: "ثابت قدم / باحوصلہ adj." },
-        { word: "Great minds think alike.", pos: "phrase", urdu: "عظیم ذہن یکساں سوچتے ہیں" }
-      ];
-      this.displayAutocompleteItems(suggestions, '', 'Suggestions');
+      this.hideAutocomplete();
       return;
     }
 
