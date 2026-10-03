@@ -3655,13 +3655,7 @@ class VocabApp {
     const recents = storage.getRecentSearches();
 
     if (recents.length === 0) {
-      container.innerHTML = `
-        <div class="recents-empty-state">
-          <div class="recents-empty-icon">🕒</div>
-          <div class="recents-empty-title">No Search History</div>
-          <p class="recents-empty-desc">Your searched words will appear here for quick access.</p>
-        </div>
-      `;
+      container.innerHTML = '';
       return;
     }
 
