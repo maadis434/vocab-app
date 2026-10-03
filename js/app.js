@@ -1847,9 +1847,10 @@ class StorageManager {
   }
 
   saveWordToCache(wordObj) {
+    if (!wordObj || !wordObj.word) return;
     this.cachedWords = this.cachedWords.filter(w => w.word.toLowerCase() !== wordObj.word.toLowerCase());
     this.cachedWords.unshift(wordObj);
-    if (this.cachedWords.length > 200) this.cachedWords.pop();
+    if (this.cachedWords.length > 500) this.cachedWords.pop();
     this.save(this.cacheKey, this.cachedWords);
   }
 
@@ -4127,6 +4128,11 @@ class VocabApp {
         if (phones.uk) match.phoneticUK = phones.uk;
         if (phones.us) match.phoneticUS = phones.us;
       }
+      if (!this.words.some(w => w.word.toLowerCase() === match.word.toLowerCase())) {
+        this.words.push(match);
+      }
+      storage.saveWordToCache(match);
+
       container.innerHTML = `
         <div class="udict-card" style="margin-top: 6px;">
           ${this.buildDictionaryCardBodyHtml(match, this.dictActiveTab || 'concise', false)}
