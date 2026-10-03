@@ -5737,54 +5737,85 @@ class VocabApp {
   renderDiscover() {
     if (!this.discoverContainer) return;
 
-    const categories = [
-      { id: 'all', label: 'All Words', title: 'All Vocabulary', desc: 'Complete vocabulary index & personal study list' },
-      { id: 'ielts-core', label: '🎓 IELTS Band 8+', title: 'IELTS Band 8+ Academic Essentials', desc: 'High-scoring academic collocations for Writing Task 2 & Speaking' },
-      { id: 'ielts-environment', label: '🌍 Environment', title: 'Environment & Climate Change', desc: 'Key terminology for ecology, conservation, and sustainability' },
-      { id: 'ielts-technology', label: '💻 Technology', title: 'Technology, AI & Automation', desc: 'Vocabulary for digital innovation, automation, and modern tech' },
-      { id: 'ielts-education', label: '🎓 Education', title: 'Education & Cognitive Growth', desc: 'Academic terms for learning methodologies, curriculum, and youth' },
-      { id: 'ielts-health', label: '🏥 Health', title: 'Health, Diet & Well-being', desc: 'High-band collocations for modern lifestyles, medicine, and longevity' },
-      { id: 'ielts-crime', label: '🏛️ Crime & Law', title: 'Crime, Justice & Rehabilitation', desc: 'Formal vocabulary for legal systems, deterrence, and social policy' }
-    ];
-
-    const currentCatId = this.discoverFilter || 'all';
-    const activeCat = categories.find(c => c.id === currentCatId) || categories[0];
-
-    const getCount = (catId) => {
-      if (catId === 'all') return this.words.length;
-      if (catId === 'ielts-core') return this.words.filter(w => w.category === 'ielts-core' || w.band).length;
-      return this.words.filter(w => w.category === catId).length;
-    };
-
-    let filteredWords = this.words;
-    if (currentCatId === 'ielts-core') {
-      filteredWords = this.words.filter(w => w.category === 'ielts-core' || w.band);
-    } else if (currentCatId !== 'all') {
-      filteredWords = this.words.filter(w => w.category === currentCatId);
+    if (!this.discoverMainSection) {
+      this.discoverMainSection = 'ielts';
+    }
+    if (!this.discoverIeltsTopic) {
+      this.discoverIeltsTopic = 'all';
     }
 
+    const ieltsTopics = [
+      { id: 'all', label: '🌟 All IELTS', title: 'IELTS Band 8+ Vocabulary', desc: 'Cambridge Academic & General topic collocations' },
+      { id: 'ielts-environment', label: '🌍 Environment', title: 'Environment & Climate Change', desc: 'Ecology, global warming, conservation & sustainability' },
+      { id: 'ielts-technology', label: '💻 Technology', title: 'Technology, AI & Automation', desc: 'Digital innovation, AI disruption & future of work' },
+      { id: 'ielts-education', label: '🎓 Education', title: 'Education & Cognitive Growth', desc: 'Academic pedagogy, school curriculum & learning methods' },
+      { id: 'ielts-health', label: '🏥 Health', title: 'Health, Diet & Well-being', desc: 'Modern sedentary lifestyle, longevity & healthcare' },
+      { id: 'ielts-crime', label: '🏛️ Crime & Law', title: 'Crime, Justice & Rehabilitation', desc: 'Legal deterrents, juvenile delinquency & penal reforms' },
+      { id: 'ielts-core', label: '⭐ Academic Core', title: 'Core Academic Discourse', desc: 'Universal Band 8+ vocabulary for argumentation & solutions' }
+    ];
+
+    const allIeltsWords = this.words.filter(w => w.band || (w.category && w.category.startsWith('ielts-')));
+    const generalWords = this.words.filter(w => !w.band && !(w.category && w.category.startsWith('ielts-')));
+
+    let displayedWords = [];
+    let bannerTitle = '';
+    let bannerDesc = '';
+
+    if (this.discoverMainSection === 'ielts') {
+      const activeTopic = ieltsTopics.find(t => t.id === this.discoverIeltsTopic) || ieltsTopics[0];
+      bannerTitle = activeTopic.title;
+      bannerDesc = activeTopic.desc;
+
+      if (this.discoverIeltsTopic === 'all') {
+        displayedWords = allIeltsWords;
+      } else {
+        displayedWords = allIeltsWords.filter(w => w.category === this.discoverIeltsTopic);
+      }
+    } else {
+      bannerTitle = 'General English Vocabulary';
+      bannerDesc = 'Everyday practical vocabulary with Urdu meanings & usage';
+      displayedWords = generalWords;
+    }
+
+    const getIeltsTopicCount = (topicId) => {
+      if (topicId === 'all') return allIeltsWords.length;
+      return allIeltsWords.filter(w => w.category === topicId).length;
+    };
+
     this.discoverContainer.innerHTML = `
-      <!-- 1. IELTS Category Chips Bar -->
-      <div class="discover-filter-bar">
-        ${categories.map(c => `
-          <button class="discover-chip ${c.id === currentCatId ? 'active' : ''}" data-discover-cat="${c.id}">
-            ${c.label} (${getCount(c.id)})
-          </button>
-        `).join('')}
+      <!-- 1. Top Level Segmented Switch: IELTS vs General -->
+      <div class="discover-main-switch">
+        <button class="discover-main-btn ${this.discoverMainSection === 'ielts' ? 'active' : ''}" data-discover-main="ielts">
+          🎓 IELTS Band 8+ (${allIeltsWords.length})
+        </button>
+        <button class="discover-main-btn ${this.discoverMainSection === 'general' ? 'active' : ''}" data-discover-main="general">
+          📚 General Words (${generalWords.length})
+        </button>
       </div>
 
-      <!-- 2. Topic Banner / Info Header -->
+      <!-- 2. IELTS Sub-Categories Bar (ONLY inside IELTS section) -->
+      ${this.discoverMainSection === 'ielts' ? `
+        <div class="ielts-topics-bar">
+          ${ieltsTopics.map(t => `
+            <button class="ielts-sub-chip ${t.id === this.discoverIeltsTopic ? 'active' : ''}" data-ielts-topic="${t.id}">
+              ${t.label} (${getIeltsTopicCount(t.id)})
+            </button>
+          `).join('')}
+        </div>
+      ` : ''}
+
+      <!-- 3. Topic Banner / Info Header -->
       <div class="discover-topic-banner">
         <div>
-          <div class="discover-topic-title">${activeCat.title}</div>
-          <div class="discover-topic-desc">${activeCat.desc}</div>
+          <div class="discover-topic-title">${bannerTitle}</div>
+          <div class="discover-topic-desc">${bannerDesc}</div>
         </div>
-        <span class="discover-topic-count">${filteredWords.length} Words</span>
+        <span class="discover-topic-count">${displayedWords.length} Words</span>
       </div>
 
-      <!-- 3. Words List -->
+      <!-- 4. Words List -->
       <div class="discover-list">
-        ${filteredWords.map(w => `
+        ${displayedWords.map(w => `
           <div class="discover-list-row" data-open-word-id="${w.id}">
             <div class="discover-row-left">
               <span class="discover-word-text">${w.word}</span>
@@ -5803,11 +5834,20 @@ class VocabApp {
       </div>
     `;
 
-    // Category Chip click listeners
-    this.discoverContainer.querySelectorAll('[data-discover-cat]').forEach(btn => {
+    // Top Level Switch listeners
+    this.discoverContainer.querySelectorAll('[data-discover-main]').forEach(btn => {
       btn.addEventListener('click', (e) => {
         e.preventDefault();
-        this.discoverFilter = btn.dataset.discoverCat;
+        this.discoverMainSection = btn.dataset.discoverMain;
+        this.renderDiscover();
+      });
+    });
+
+    // IELTS Sub-topic Chip listeners
+    this.discoverContainer.querySelectorAll('[data-ielts-topic]').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        e.preventDefault();
+        this.discoverIeltsTopic = btn.dataset.ieltsTopic;
         this.renderDiscover();
       });
     });
