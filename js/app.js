@@ -4400,6 +4400,7 @@ class VocabApp {
   }
 
   resetHomeScreen() {
+    this.closeDedicatedSearchScreen();
     if (this.dictSearchInput) {
       this.dictSearchInput.value = '';
     }
@@ -4736,9 +4737,22 @@ class VocabApp {
 
   switchTab(tabName) {
     this.activeTab = tabName;
-    this.tabButtons.forEach(btn => {
-      btn.classList.toggle('active', btn.dataset.tab === tabName);
+
+    // 1. Close dedicated search screen overlay if open
+    this.closeDedicatedSearchScreen();
+
+    // 2. Dismiss any open modals/sheets
+    ['word-detail-modal', 'discover-modal', 'more-sentences-modal', 'report-problem-modal', 'ai-key-modal'].forEach(id => {
+      const el = document.getElementById(id);
+      if (el) el.style.display = 'none';
     });
+
+    // 3. Highlight the active tab button (if practicing, keep favorites highlighted)
+    const activeBtnKey = tabName === 'practice' ? 'favorites' : tabName;
+    this.tabButtons.forEach(btn => {
+      btn.classList.toggle('active', btn.dataset.tab === activeBtnKey);
+    });
+
     this.tabViews.forEach(view => {
       view.classList.toggle('active', view.id === `${tabName}-tab`);
     });
