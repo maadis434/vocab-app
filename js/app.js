@@ -4817,11 +4817,6 @@ class VocabApp {
           <span class="udict-forms-val">${formsText.replace(/^[a-z]+\.\s*/, '')}</span>
         </div>
 
-        <!-- Colored Exam Badges (Screenshot 3) -->
-        <div class="udict-exam-badges-row">
-          ${badges.map(b => `<span class="udict-exam-badge badge-${b.color || 'blue'}">${b.text}</span>`).join('')}
-        </div>
-
         <!-- 1. Bilingual Sentences Section (Screenshots 3 & 4) -->
         <div class="udict-section-card" style="border-top: none; padding-top: 0; margin-top: 0;">
           <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; flex-wrap: wrap; gap: 8px;">
