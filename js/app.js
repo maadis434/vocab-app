@@ -5172,27 +5172,39 @@ class VocabApp {
       });
     }
 
-    // 7. Favorite button
+    // 7. Favorite button with pop animation
+    const animateStar = (btn, isNowFav) => {
+      btn.classList.remove('star-pop-anim', 'star-unpop-anim');
+      void btn.offsetWidth; // Force CSS reflow to re-trigger keyframe animation
+      const svg = btn.querySelector('svg');
+
+      if (isNowFav) {
+        btn.classList.add('active', 'star-pop-anim');
+        btn.setAttribute('title', 'Remove from favorites');
+        if (svg) {
+          svg.setAttribute('fill', '#f59e0b');
+          svg.setAttribute('stroke', '#f59e0b');
+        }
+      } else {
+        btn.classList.remove('active');
+        btn.classList.add('star-unpop-anim');
+        btn.setAttribute('title', 'Add to favorites');
+        if (svg) {
+          svg.setAttribute('fill', 'none');
+          svg.setAttribute('stroke', 'currentColor');
+        }
+      }
+    };
+
     if (isModal && currentWord) {
       const favBtn = container.querySelector('#modal-fav-btn');
       if (favBtn) {
         favBtn.addEventListener('click', (e) => {
           e.stopPropagation();
-          storage.toggleFavorite(currentWord.id);
-          const updatedFav = storage.isFavorite(currentWord.id);
-          if (updatedFav) {
-            favBtn.classList.add('active');
-            favBtn.querySelector('svg').setAttribute('fill', '#eab308');
-            favBtn.querySelector('svg').setAttribute('stroke', '#eab308');
-            favBtn.setAttribute('title', 'Remove from favorites');
-          } else {
-            favBtn.classList.remove('active');
-            favBtn.querySelector('svg').setAttribute('fill', 'none');
-            favBtn.querySelector('svg').setAttribute('stroke', 'currentColor');
-            favBtn.setAttribute('title', 'Add to favorites');
-          }
+          const updatedFav = storage.toggleFavorite(currentWord.id);
+          animateStar(favBtn, updatedFav);
+          this.showToast(updatedFav ? 'Saved to Favorites ⭐' : 'Removed from Favorites');
           this.renderFavoritesTab();
-          this.renderDictionary();
         });
       }
 
@@ -5209,9 +5221,14 @@ class VocabApp {
         btn.addEventListener('click', (e) => {
           e.stopPropagation();
           const wordId = btn.dataset.favId;
-          storage.toggleFavorite(wordId);
+          const updatedFav = storage.toggleFavorite(wordId);
+
+          document.querySelectorAll(`[data-fav-id="${wordId}"]`).forEach(b => {
+            animateStar(b, updatedFav);
+          });
+
+          this.showToast(updatedFav ? 'Saved to Favorites ⭐' : 'Removed from Favorites');
           this.renderFavoritesTab();
-          this.renderDictionary();
           this.renderTodayWord();
         });
       });
