@@ -1225,8 +1225,8 @@ const quickAutocompleteIndex = [
   { word: "Investigate", pos: "v.", urdu: "تحقیقات کرنا" },
   { word: "Invite", pos: "v.", urdu: "دعوت دینا" },
   { word: "Involve", pos: "v.", urdu: "شامل کرنا / الجھانا" },
-  { word: "Issue", pos: "n.", urdu: "مسئلہ / معاملہ" },
   // J
+  { word: "jungle", pos: "n.", urdu: "جنگل;" },
   { word: "Jealous", pos: "adj.", urdu: "حاسد / جلنے والا" },
   { word: "Job", pos: "n.", urdu: "نوکری / کام" },
   { word: "Join", pos: "v.", urdu: "شامل ہونا / جڑنا" },
@@ -1581,6 +1581,7 @@ const quickAutocompleteIndex = [
   { word: "Support", pos: "v.", urdu: "حمایت کرنا / مدد" },
   { word: "Surprise", pos: "n.", urdu: "حیرت / تعجب" },
   { word: "Survive", pos: "v.", urdu: "زندہ بچنا / باقی رہنا" },
+  { word: "sustainability", pos: "n.", urdu: "دست گیری کرنا؛تاب لانا؛برداشت کرنا؛سہارا دینا" },
   { word: "Symbol", pos: "n.", urdu: "علامت / نشان" },
   { word: "Sympathy", pos: "n.", urdu: "ہمدردی / دلسوزی" },
   { word: "System", pos: "n.", urdu: "نظام / طریقہ کار" },
@@ -1771,7 +1772,7 @@ class StorageManager {
 
   getRecentSearches() {
     return this.load('vocab_recent_searches_v1', [
-      'Adverse', 'Benevolent', 'Consequence', 'Diligent', 'Empathy'
+      'jungle', 'sustainability'
     ]);
   }
 
@@ -2937,6 +2938,19 @@ class VocabApp {
       });
     }
 
+    const searchScreenSwap = document.getElementById('search-screen-lang-swap');
+    if (searchScreenSwap) {
+      searchScreenSwap.addEventListener('click', () => {
+        const from = document.getElementById('search-lang-from');
+        const to = document.getElementById('search-lang-to');
+        if (from && to) {
+          const temp = from.textContent;
+          from.textContent = to.textContent;
+          to.textContent = temp;
+        }
+      });
+    }
+
     // Dedicated Search Input typing & enter
     if (this.activeSearchInput) {
       this.activeSearchInput.addEventListener('input', (e) => {
@@ -3644,54 +3658,47 @@ class VocabApp {
       container.innerHTML = `
         <div class="recents-empty-state">
           <div class="recents-empty-icon">🕒</div>
-          <div class="recents-empty-title">No Recent Searches</div>
+          <div class="recents-empty-title">No Search History</div>
           <p class="recents-empty-desc">Your searched words will appear here for quick access.</p>
         </div>
       `;
       return;
     }
 
-    container.innerHTML = `
-      <div class="recents-header-row">
-        <div class="recents-header-title">
-          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
-          <span>Recent Searches</span>
-        </div>
-        <span class="recents-count-badge">${recents.length} words</span>
-      </div>
+    const recentsData = recents.map(word => {
+      const qLower = word.toLowerCase();
+      const match = this.words.find(w => w.word && w.word.toLowerCase() === qLower) ||
+                    (typeof quickAutocompleteIndex !== 'undefined' ? quickAutocompleteIndex.find(item => item.word && item.word.toLowerCase() === qLower) : null);
+      return {
+        word: word,
+        pos: match ? (match.posShort || match.pos || '') : '',
+        urdu: match ? (match.urduMeaning || match.urdu || '') : ''
+      };
+    });
 
-      <div class="recents-list">
-        ${recents.map(word => `
-          <div class="recent-item-row" data-search-recent="${word}">
-            <div class="recent-item-left">
-              <svg class="recent-item-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
-              <span class="recent-item-word">${word}</span>
-            </div>
-            <button class="recent-item-delete-btn" data-delete-recent="${word}" title="Remove from recents">✕</button>
+    container.innerHTML = `
+      <div class="recents-list-minimal">
+        ${recentsData.map(item => `
+          <div class="recent-row-minimal" data-search-recent="${item.word}">
+            <span class="recent-word-text">${item.word}</span>
+            ${item.pos || item.urdu ? `
+              <div class="recent-meaning-text">
+                ${item.pos ? `<span class="recent-pos-text">${item.pos}</span>` : ''}
+                ${item.urdu ? `<span class="recent-urdu-text urdu-text">${item.urdu}</span>` : ''}
+              </div>
+            ` : ''}
           </div>
         `).join('')}
       </div>
 
-      <div class="recents-footer">
-        <button class="clear-recents-btn" id="btn-clear-recent-searches">
-          <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>
-          <span>Clear Recent Searches</span>
-        </button>
+      <div class="clear-history-wrap">
+        <button class="clear-history-link" id="btn-clear-recent-searches">Clear all history</button>
       </div>
     `;
 
     container.querySelectorAll('[data-search-recent]').forEach(row => {
-      row.addEventListener('click', (e) => {
-        if (e.target.closest('[data-delete-recent]')) return;
+      row.addEventListener('click', () => {
         this.selectWordFromSearch(row.dataset.searchRecent);
-      });
-    });
-
-    container.querySelectorAll('[data-delete-recent]').forEach(btn => {
-      btn.addEventListener('click', (e) => {
-        e.stopPropagation();
-        storage.removeRecentSearch(btn.dataset.deleteRecent);
-        this.renderRecentSearches();
       });
     });
 
@@ -3701,7 +3708,7 @@ class VocabApp {
         e.stopPropagation();
         storage.clearRecentSearches();
         this.renderRecentSearches();
-        this.showToast('Recent searches cleared');
+        this.showToast('Search history cleared');
       });
     }
   }

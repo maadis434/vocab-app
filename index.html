@@ -110,13 +110,26 @@
 
       <!-- DEDICATED SEARCH SCREEN (Opens when clicking Dictionary text box) -->
       <div id="dedicated-search-screen" class="search-screen-overlay" style="display: none;">
-        <div class="search-screen-header">
+        <!-- Top bar with Back Arrow and Language Selector (matching screenshot) -->
+        <div class="search-screen-topbar">
           <button class="search-screen-back-btn" id="search-screen-back-btn" title="Back to Home">
             <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
           </button>
 
-          <div class="search-screen-input-wrap">
-            <input type="text" id="active-search-input" class="search-screen-input" placeholder="Search English or Urdu word..." autocomplete="off" spellcheck="false">
+          <div class="search-screen-lang-picker">
+            <span class="search-lang-label" id="search-lang-from">English ▾</span>
+            <button class="search-lang-swap-btn" id="search-screen-lang-swap" title="Swap languages">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M7 16V4M7 4L3 8M7 4L11 8M17 8V20M17 20L21 16M17 20L13 16"/></svg>
+            </button>
+            <span class="search-lang-label" id="search-lang-to">Urdu ▾</span>
+          </div>
+          <div style="width: 32px;"></div>
+        </div>
+
+        <!-- Input Box Row (matching screenshot) -->
+        <div class="search-screen-input-row">
+          <div class="search-screen-input-card">
+            <input type="text" id="active-search-input" class="search-screen-input" placeholder="Enter Words or Sentences" autocomplete="off" spellcheck="false">
             <button id="active-search-clear-btn" class="search-screen-clear-btn" style="display: none;" title="Clear search">✕</button>
             <button id="active-search-voice-btn" class="search-screen-voice-btn" title="Voice search">
               <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#38bdf8" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"></path><path d="M19 10v2a7 7 0 0 1-14 0v-2"></path><line x1="12" y1="19" x2="12" y2="23"></line><line x1="8" y1="23" x2="16" y2="23"></line></svg>
