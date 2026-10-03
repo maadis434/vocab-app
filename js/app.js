@@ -5189,9 +5189,6 @@ class VocabApp {
     if (!this.discoverContainer) return;
 
     this.discoverContainer.innerHTML = `
-      <div style="margin-bottom: 12px; font-size: 0.78rem; font-weight: 700; color: var(--text-faint); letter-spacing: 0.05em; text-transform: uppercase;">
-        All Vocabulary (${this.words.length} Words)
-      </div>
       <div>
         ${this.words.map(w => `
           <div class="discover-list-row" data-open-word-id="${w.id}">
