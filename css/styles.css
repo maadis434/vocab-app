@@ -3158,6 +3158,28 @@ body {
   color: var(--text-title);
 }
 
+.search-screen-submit-btn {
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  cursor: pointer;
+  padding: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  transition: transform 0.15s ease, color 0.15s ease;
+}
+
+.search-screen-submit-btn:hover {
+  color: #38bdf8;
+  transform: scale(1.1);
+}
+
+.search-screen-submit-btn:active {
+  transform: scale(0.92);
+}
+
 .search-screen-voice-btn {
   background: none;
   border: none;

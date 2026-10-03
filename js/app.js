@@ -2115,9 +2115,12 @@ Return ONLY a valid JSON object matching this exact schema:
   ]
 }
 CRITICAL REQUIREMENT: The example sentence MUST be a real, meaningful scenario. NEVER generate meta sentences like 'Learning how to use...', 'Understanding how to use...', 'How to use...', or dictionary definitions. It must teach the user how native speakers speak.`
-      : `You are an expert English-Urdu vocabulary coach. Provide details for the word, phrase, slang, or idiom: "${query}".
-Even if it is modern slang (like "mogged", "rizz", "cap"), an internet term, or colloquial phrasing, explain its actual meaning in authentic Urdu Nastaliq and provide natural usage.
-Return ONLY a valid JSON object matching this exact schema:
+      : `You are an expert English-Urdu vocabulary coach. You are analyzing the user's input: "${query}".
+CRITICAL VALIDATION RULE:
+If "${query}" is random keyboard typing/mash (e.g., "kisadjr", "asdfgh"), a meaningless typo, or NOT an authentic English word, slang, phrase, or idiom, you MUST return ONLY:
+{"notFound": true}
+
+If and ONLY IF it is a real English word, recognized slang, phrase, or idiom, return ONLY a valid JSON object matching this schema:
 {
   "word": "Capitalized Word",
   "posShort": "short POS like n., adj., v., or slang",
@@ -2192,6 +2195,10 @@ CRITICAL REQUIREMENT: The example sentence MUST be a real, meaningful scenario. 
           jsonText = jsonText.replace(/^```/, '').replace(/```$/, '').trim();
         }
         const parsed = JSON.parse(jsonText);
+
+        if (parsed.notFound === true || !parsed.word || parsed.word.toLowerCase() === 'not found') {
+          return null;
+        }
 
         // Update verified model on success
         if (model !== activeModel) {
@@ -2567,6 +2574,8 @@ CRITICAL REQUIREMENT: The example sentence MUST be a real, meaningful scenario. 
       try {
         const aiWord = await this.fetchWithGemini(cleanWord, apiKey);
         if (aiWord) return aiWord;
+        // If Gemini explicitly determined it's not a real word (returned null), return null directly
+        return null;
       } catch (geminiErr) {
         console.warn('Gemini lookup fallback to dictionary service:', geminiErr);
       }
@@ -2588,8 +2597,12 @@ CRITICAL REQUIREMENT: The example sentence MUST be a real, meaningful scenario. 
       const wikiData = (wikiResult.status === 'fulfilled' && wikiResult.value) ? wikiResult.value : null;
       const phones = (phonesResult.status === 'fulfilled' && phonesResult.value) ? phonesResult.value : { uk: `/${cleanWord.toLowerCase()}/`, us: `/${cleanWord.toLowerCase()}/` };
 
-      // If word is completely unfindable in dictionary, translation, and synonyms
-      if (!dictData && synonyms.length === 0 && (!urduMeaning || urduMeaning.toLowerCase() === cleanWord.toLowerCase())) {
+      // If word is unfindable in Oxford/Google dictionary AND has no synonyms in Datamuse, it's not an English word
+      if (!dictData && (!synonyms || synonyms.length === 0)) {
+        return null;
+      }
+
+      if (!dictData && (!urduMeaning || urduMeaning.toLowerCase() === cleanWord.toLowerCase())) {
         return null;
       }
 
@@ -3138,8 +3151,10 @@ class VocabApp {
 
     // Dedicated Search Screen Elements
     this.dedicatedSearchScreen = document.getElementById('dedicated-search-screen');
+    this.activeSearchForm = document.getElementById('active-search-form');
     this.activeSearchInput = document.getElementById('active-search-input');
     this.activeSearchClearBtn = document.getElementById('active-search-clear-btn');
+    this.activeSearchSubmitBtn = document.getElementById('active-search-submit-btn');
     this.activeSearchVoiceBtn = document.getElementById('active-search-voice-btn');
     this.searchScreenBackBtn = document.getElementById('search-screen-back-btn');
     this.recentSearchesContainer = document.getElementById('recent-searches-container');
@@ -3240,6 +3255,27 @@ class VocabApp {
           const temp = from.textContent;
           from.textContent = to.textContent;
           to.textContent = temp;
+        }
+      });
+    }
+
+    // Dedicated Search Form Submit & Button Click
+    if (this.activeSearchForm) {
+      this.activeSearchForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const q = this.activeSearchInput ? this.activeSearchInput.value.trim() : '';
+        if (q) {
+          this.selectWordFromSearch(q);
+        }
+      });
+    }
+
+    if (this.activeSearchSubmitBtn) {
+      this.activeSearchSubmitBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        const q = this.activeSearchInput ? this.activeSearchInput.value.trim() : '';
+        if (q) {
+          this.selectWordFromSearch(q);
         }
       });
     }
@@ -4033,12 +4069,12 @@ class VocabApp {
 
     if (limited.length === 0) {
       autoBox.innerHTML = `
-        <div class="search-auto-item search-auto-online-prompt" data-execute-search="${q}">
+        <div class="search-auto-item search-auto-online-prompt" data-execute-search="${q}" role="button" tabindex="0">
           <div class="search-auto-left">
-            <span class="search-auto-icon">🔍</span>
-            <span class="search-auto-word">Search Dictionary for "<strong>${q}</strong>"</span>
+            <span class="search-auto-icon" style="color: #38bdf8;">🔍</span>
+            <span class="search-auto-word">Search Dictionary for "<strong style="color: #38bdf8;">${q}</strong>"</span>
           </div>
-          <span class="search-auto-key">Enter ↵</span>
+          <span class="search-auto-key">Search ↵</span>
         </div>
       `;
     } else {
@@ -4072,8 +4108,9 @@ class VocabApp {
 
     const onlinePrompt = autoBox.querySelector('[data-execute-search]');
     if (onlinePrompt) {
-      onlinePrompt.addEventListener('click', () => {
-        this.selectWordFromSearch(onlinePrompt.dataset.executeSearch);
+      onlinePrompt.addEventListener('click', (e) => {
+        e.preventDefault();
+        this.selectWordFromSearch(onlinePrompt.dataset.executeSearch || q);
       });
     }
   }
@@ -4081,7 +4118,6 @@ class VocabApp {
   selectWordFromSearch(term) {
     if (!term) return;
     const clean = term.trim();
-    storage.addRecentSearch(clean);
 
     if (this.activeSearchInput) this.activeSearchInput.value = clean;
     if (this.activeSearchClearBtn) this.activeSearchClearBtn.style.display = 'flex';
@@ -4118,11 +4154,7 @@ class VocabApp {
           urduMeaning: auto.urdu || '',
           urduDefinition: `${auto.word} ka Urdu tarjuma: ${auto.urdu}`,
           forms: `adv.  ${auto.word}ly`,
-          tags: [
-            { text: "#Top 3500", color: "blue" },
-            { text: "#Business English", color: "orange" },
-            { text: "#IELTS", color: "purple" }
-          ],
+          tags: [],
           sentences: [
             { en: `We learned how to use ${auto.word} accurately in everyday context.`, ur: `ہم نے روزمرہ کے سیاق و سباق میں اس کا درست استعمال سیکھا۔` }
           ]
@@ -4131,6 +4163,7 @@ class VocabApp {
     }
 
     if (match) {
+      storage.addRecentSearch(match.word);
       if (!match.phoneticUK || !match.phoneticUS || match.phoneticUK === match.phoneticUS || match.phoneticUK === `/${match.word.toLowerCase()}/`) {
         const phones = await OnlineLookupService.fetchDualPhonetics(match.word);
         if (phones.uk) match.phoneticUK = phones.uk;
@@ -4157,6 +4190,7 @@ class VocabApp {
       try {
         const fetched = await OnlineLookupService.fetchWordDetails(term, storage.geminiApiKey);
         if (fetched) {
+          storage.addRecentSearch(fetched.word);
           if (!this.words.some(w => w.id === fetched.id)) {
             this.words.push(fetched);
             storage.saveWordToCache(fetched);
@@ -4168,50 +4202,25 @@ class VocabApp {
           `;
           this.attachCardEventListeners(container, false, fetched);
         } else {
-          // Check for spelling suggestions (Did you mean?)
-          let didYouMean = [];
-          try {
-            const spRes = await fetch(`https://api.datamuse.com/words?sp=${encodeURIComponent(term)}&max=3`);
-            if (spRes.ok) {
-              const spData = await spRes.json();
-              if (Array.isArray(spData)) {
-                didYouMean = spData.map(s => s.word).filter(Boolean);
-              }
-            }
-          } catch (e) {}
-
+          // Feature 1: Clean, uncluttered "Word Not Found" state
           container.innerHTML = `
-            <div class="recents-empty-state" style="margin-top: 16px;">
-              <div class="recents-empty-icon">📖</div>
-              <div class="recents-empty-title">Word Not Found</div>
-              <p class="recents-empty-desc">No definition could be found for "<strong>${term}</strong>". Please check the spelling.</p>
-              ${didYouMean.length > 0 ? `
-                <div style="margin-top: 16px; padding-top: 14px; border-top: 1px solid var(--divider);">
-                  <div style="font-size: 0.8rem; color: var(--text-faint); margin-bottom: 8px; font-weight: 600;">Did you mean?</div>
-                  <div style="display: flex; gap: 8px; justify-content: center; flex-wrap: wrap;">
-                    ${didYouMean.map(w => `
-                      <button type="button" class="clear-history-link" data-search-suggestion="${w}" style="font-size: 0.88rem; padding: 6px 14px; background: var(--bg-hover); border-radius: 20px; color: var(--accent-primary); border: 1px solid var(--divider); cursor: pointer;">
-                        ${w}
-                      </button>
-                    `).join('')}
-                  </div>
-                </div>
-              ` : ''}
+            <div class="recents-empty-state" style="margin-top: 24px; padding: 36px 20px;">
+              <div class="recents-empty-icon" style="font-size: 3.2rem; margin-bottom: 14px;">📖</div>
+              <div class="recents-empty-title" style="font-size: 1.25rem; font-weight: 700; color: var(--text-title); margin-bottom: 8px;">Word Not Found</div>
+              <p class="recents-empty-desc" style="font-size: 0.95rem; color: var(--text-muted); max-width: 320px; margin: 0 auto; line-height: 1.5;">
+                No definition could be found for "<strong>${term}</strong>". Please check the spelling.
+              </p>
             </div>
           `;
-
-          container.querySelectorAll('[data-search-suggestion]').forEach(btn => {
-            btn.addEventListener('click', () => {
-              this.selectWordFromSearch(btn.dataset.searchSuggestion);
-            });
-          });
         }
       } catch (err) {
         container.innerHTML = `
-          <div class="recents-empty-state" style="margin-top: 16px;">
-            <div class="recents-empty-icon">⚠️</div>
-            <div class="recents-empty-title">Lookup Error</div>
-            <p class="recents-empty-desc">${err.message || 'Please check your internet connection.'}</p>
+          <div class="recents-empty-state" style="margin-top: 24px; padding: 36px 20px;">
+            <div class="recents-empty-icon" style="font-size: 3.2rem; margin-bottom: 14px;">📖</div>
+            <div class="recents-empty-title" style="font-size: 1.25rem; font-weight: 700; color: var(--text-title); margin-bottom: 8px;">Word Not Found</div>
+            <p class="recents-empty-desc" style="font-size: 0.95rem; color: var(--text-muted); max-width: 320px; margin: 0 auto; line-height: 1.5;">
+              No definition could be found for "<strong>${term}</strong>". Please check the spelling.
+            </p>
           </div>
         `;
       }
