@@ -1769,6 +1769,33 @@ class StorageManager {
     } catch (e) {}
   }
 
+  getRecentSearches() {
+    return this.load('vocab_recent_searches_v1', [
+      'Adverse', 'Benevolent', 'Consequence', 'Diligent', 'Empathy'
+    ]);
+  }
+
+  addRecentSearch(term) {
+    if (!term || typeof term !== 'string') return;
+    const clean = term.trim();
+    if (!clean) return;
+    let recents = this.getRecentSearches();
+    recents = recents.filter(item => item.toLowerCase() !== clean.toLowerCase());
+    recents.unshift(clean);
+    if (recents.length > 6) recents = recents.slice(0, 6);
+    this.save('vocab_recent_searches_v1', recents);
+  }
+
+  removeRecentSearch(term) {
+    let recents = this.getRecentSearches();
+    recents = recents.filter(item => item.toLowerCase() !== term.toLowerCase());
+    this.save('vocab_recent_searches_v1', recents);
+  }
+
+  clearRecentSearches() {
+    this.save('vocab_recent_searches_v1', []);
+  }
+
   setGeminiKey(key, model = '') {
     this.geminiApiKey = key.trim();
     if (this.geminiApiKey) {
@@ -2788,6 +2815,7 @@ class VocabApp {
 
     this.initElements();
     this.initEvents();
+    this.initSplashScreen();
     this.render();
   }
 
@@ -2813,6 +2841,17 @@ class VocabApp {
     this.autoDebounceTimer = null;
     this.currentAutoList = [];
     this.refreshWordBtn = document.getElementById('refresh-word-btn');
+
+    // Dedicated Search Screen Elements
+    this.dedicatedSearchScreen = document.getElementById('dedicated-search-screen');
+    this.activeSearchInput = document.getElementById('active-search-input');
+    this.activeSearchClearBtn = document.getElementById('active-search-clear-btn');
+    this.activeSearchVoiceBtn = document.getElementById('active-search-voice-btn');
+    this.searchScreenBackBtn = document.getElementById('search-screen-back-btn');
+    this.recentSearchesContainer = document.getElementById('recent-searches-container');
+    this.searchAutocompleteBox = document.getElementById('search-autocomplete-box');
+    this.searchResultBox = document.getElementById('search-result-box');
+    this.homeSearchTrigger = document.getElementById('home-search-trigger');
     
     // AI Key Modal Elements
     this.themeToggleBtn = document.getElementById('theme-toggle-btn');
@@ -2862,6 +2901,74 @@ class VocabApp {
     if (this.refreshWordBtn) {
       this.refreshWordBtn.addEventListener('click', () => {
         this.refreshWordOfTheDay();
+      });
+    }
+
+    // Home Dictionary Box Click -> Opens Dedicated Search Screen
+    if (this.homeSearchTrigger) {
+      this.homeSearchTrigger.addEventListener('click', (e) => {
+        e.preventDefault();
+        this.openDedicatedSearchScreen();
+      });
+    }
+    const dictCardWrap = document.getElementById('dict-search-wrap');
+    if (dictCardWrap) {
+      dictCardWrap.addEventListener('click', (e) => {
+        if (e.target.closest('#lang-from-chip') || e.target.closest('#lang-to-chip') || e.target.closest('#lang-swap-btn')) return;
+        this.openDedicatedSearchScreen();
+      });
+    }
+    if (this.dictSearchInput) {
+      this.dictSearchInput.addEventListener('click', (e) => {
+        e.preventDefault();
+        this.openDedicatedSearchScreen();
+      });
+    }
+
+    // Dedicated Search Screen Back Button
+    if (this.searchScreenBackBtn) {
+      this.searchScreenBackBtn.addEventListener('click', () => {
+        if (this.searchResultBox && this.searchResultBox.style.display !== 'none') {
+          if (this.activeSearchInput) this.activeSearchInput.value = '';
+          this.handleActiveSearchInput('');
+        } else {
+          this.closeDedicatedSearchScreen();
+        }
+      });
+    }
+
+    // Dedicated Search Input typing & enter
+    if (this.activeSearchInput) {
+      this.activeSearchInput.addEventListener('input', (e) => {
+        this.handleActiveSearchInput(e.target.value);
+      });
+
+      this.activeSearchInput.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') {
+          e.preventDefault();
+          const q = this.activeSearchInput.value.trim();
+          if (q) {
+            this.selectWordFromSearch(q);
+          }
+        }
+      });
+    }
+
+    // Dedicated Search Clear Button
+    if (this.activeSearchClearBtn) {
+      this.activeSearchClearBtn.addEventListener('click', () => {
+        if (this.activeSearchInput) {
+          this.activeSearchInput.value = '';
+          this.activeSearchInput.focus();
+        }
+        this.handleActiveSearchInput('');
+      });
+    }
+
+    // Dedicated Search Voice Button
+    if (this.activeSearchVoiceBtn) {
+      this.activeSearchVoiceBtn.addEventListener('click', () => {
+        this.triggerSearchVoiceInput();
       });
     }
 
@@ -3471,6 +3578,357 @@ class VocabApp {
     try {
       window.scrollTo({ top: 0, behavior: 'smooth' });
     } catch (e) {}
+  }
+
+  // --- SPLASH SCREEN CONTROLLER ---
+  initSplashScreen() {
+    const splash = document.getElementById('app-splash-screen');
+    if (!splash) return;
+    setTimeout(() => {
+      splash.classList.add('fade-out');
+      setTimeout(() => {
+        splash.style.display = 'none';
+      }, 400);
+    }, 1200);
+  }
+
+  // --- DEDICATED SEARCH SCREEN CONTROLLER ---
+  openDedicatedSearchScreen() {
+    if (!this.dedicatedSearchScreen) return;
+    this.dedicatedSearchScreen.style.display = 'flex';
+    if (this.activeSearchInput) {
+      this.activeSearchInput.value = '';
+      setTimeout(() => this.activeSearchInput.focus(), 60);
+    }
+    this.handleActiveSearchInput('');
+  }
+
+  closeDedicatedSearchScreen() {
+    if (!this.dedicatedSearchScreen) return;
+    this.dedicatedSearchScreen.style.display = 'none';
+  }
+
+  handleActiveSearchInput(text) {
+    const q = (text || '').trim();
+    const recentsBox = this.recentSearchesContainer || document.getElementById('recent-searches-container');
+    const autoBox = this.searchAutocompleteBox || document.getElementById('search-autocomplete-box');
+    const resultBox = this.searchResultBox || document.getElementById('search-result-box');
+    const clearBtn = this.activeSearchClearBtn || document.getElementById('active-search-clear-btn');
+
+    if (clearBtn) {
+      clearBtn.style.display = text.length > 0 ? 'flex' : 'none';
+    }
+
+    if (!q) {
+      if (recentsBox) recentsBox.style.display = 'block';
+      if (autoBox) { autoBox.style.display = 'none'; autoBox.innerHTML = ''; }
+      if (resultBox) { resultBox.style.display = 'none'; resultBox.innerHTML = ''; }
+      this.renderRecentSearches();
+      return;
+    }
+
+    if (recentsBox) recentsBox.style.display = 'none';
+    if (resultBox) { resultBox.style.display = 'none'; resultBox.innerHTML = ''; }
+    if (autoBox) {
+      autoBox.style.display = 'block';
+      this.renderActiveSearchAutocomplete(q);
+    }
+  }
+
+  renderRecentSearches() {
+    const container = this.recentSearchesContainer || document.getElementById('recent-searches-container');
+    if (!container) return;
+    const recents = storage.getRecentSearches();
+
+    if (recents.length === 0) {
+      container.innerHTML = `
+        <div class="recents-empty-state">
+          <div class="recents-empty-icon">🕒</div>
+          <div class="recents-empty-title">No Recent Searches</div>
+          <p class="recents-empty-desc">Your searched words will appear here for quick access.</p>
+        </div>
+      `;
+      return;
+    }
+
+    container.innerHTML = `
+      <div class="recents-header-row">
+        <div class="recents-header-title">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+          <span>Recent Searches</span>
+        </div>
+        <span class="recents-count-badge">${recents.length} words</span>
+      </div>
+
+      <div class="recents-list">
+        ${recents.map(word => `
+          <div class="recent-item-row" data-search-recent="${word}">
+            <div class="recent-item-left">
+              <svg class="recent-item-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+              <span class="recent-item-word">${word}</span>
+            </div>
+            <button class="recent-item-delete-btn" data-delete-recent="${word}" title="Remove from recents">✕</button>
+          </div>
+        `).join('')}
+      </div>
+
+      <div class="recents-footer">
+        <button class="clear-recents-btn" id="btn-clear-recent-searches">
+          <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>
+          <span>Clear Recent Searches</span>
+        </button>
+      </div>
+    `;
+
+    container.querySelectorAll('[data-search-recent]').forEach(row => {
+      row.addEventListener('click', (e) => {
+        if (e.target.closest('[data-delete-recent]')) return;
+        this.selectWordFromSearch(row.dataset.searchRecent);
+      });
+    });
+
+    container.querySelectorAll('[data-delete-recent]').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        storage.removeRecentSearch(btn.dataset.deleteRecent);
+        this.renderRecentSearches();
+      });
+    });
+
+    const clearBtn = container.querySelector('#btn-clear-recent-searches');
+    if (clearBtn) {
+      clearBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        storage.clearRecentSearches();
+        this.renderRecentSearches();
+        this.showToast('Recent searches cleared');
+      });
+    }
+  }
+
+  renderActiveSearchAutocomplete(q) {
+    const autoBox = this.searchAutocompleteBox || document.getElementById('search-autocomplete-box');
+    if (!autoBox) return;
+
+    const qLower = q.toLowerCase();
+    const matches = [];
+    const seen = new Set();
+
+    this.words.forEach(w => {
+      if (w.word && w.word.toLowerCase().startsWith(qLower)) {
+        if (!seen.has(w.word.toLowerCase())) {
+          seen.add(w.word.toLowerCase());
+          matches.push({ word: w.word, pos: w.posShort || 'adj.', urdu: w.urduMeaning || '' });
+        }
+      }
+    });
+
+    if (typeof quickAutocompleteIndex !== 'undefined') {
+      quickAutocompleteIndex.forEach(item => {
+        if (item.word && item.word.toLowerCase().startsWith(qLower)) {
+          if (!seen.has(item.word.toLowerCase())) {
+            seen.add(item.word.toLowerCase());
+            matches.push(item);
+          }
+        }
+      });
+    }
+
+    if (matches.length < 5) {
+      this.words.forEach(w => {
+        if (w.word && w.word.toLowerCase().includes(qLower) && !seen.has(w.word.toLowerCase())) {
+          seen.add(w.word.toLowerCase());
+          matches.push({ word: w.word, pos: w.posShort || 'adj.', urdu: w.urduMeaning || '' });
+        }
+      });
+    }
+
+    const limited = matches.slice(0, 10);
+
+    if (limited.length === 0) {
+      autoBox.innerHTML = `
+        <div class="search-auto-item search-auto-online-prompt" data-execute-search="${q}">
+          <div class="search-auto-left">
+            <span class="search-auto-icon">🔍</span>
+            <span class="search-auto-word">Search Dictionary for "<strong>${q}</strong>"</span>
+          </div>
+          <span class="search-auto-key">Enter ↵</span>
+        </div>
+      `;
+    } else {
+      autoBox.innerHTML = limited.map(item => {
+        const matchIdx = item.word.toLowerCase().indexOf(qLower);
+        let formattedWord = item.word;
+        if (matchIdx !== -1) {
+          const prefix = item.word.slice(0, matchIdx);
+          const match = item.word.slice(matchIdx, matchIdx + q.length);
+          const rest = item.word.slice(matchIdx + q.length);
+          formattedWord = `${prefix}<strong class="auto-highlight">${match}</strong>${rest}`;
+        }
+        return `
+          <div class="search-auto-item" data-select-word="${item.word}">
+            <div class="search-auto-left">
+              <span class="search-auto-icon">🔍</span>
+              <span class="search-auto-word">${formattedWord}</span>
+              ${item.pos ? `<span class="search-auto-pos">${item.pos}</span>` : ''}
+            </div>
+            ${item.urdu ? `<span class="search-auto-urdu urdu-text">${item.urdu.split('/')[0]}</span>` : ''}
+          </div>
+        `;
+      }).join('');
+    }
+
+    autoBox.querySelectorAll('[data-select-word]').forEach(el => {
+      el.addEventListener('click', () => {
+        this.selectWordFromSearch(el.dataset.selectWord);
+      });
+    });
+
+    const onlinePrompt = autoBox.querySelector('[data-execute-search]');
+    if (onlinePrompt) {
+      onlinePrompt.addEventListener('click', () => {
+        this.selectWordFromSearch(onlinePrompt.dataset.executeSearch);
+      });
+    }
+  }
+
+  selectWordFromSearch(term) {
+    if (!term) return;
+    const clean = term.trim();
+    storage.addRecentSearch(clean);
+
+    if (this.activeSearchInput) this.activeSearchInput.value = clean;
+    if (this.activeSearchClearBtn) this.activeSearchClearBtn.style.display = 'flex';
+
+    const autoBox = this.searchAutocompleteBox || document.getElementById('search-autocomplete-box');
+    if (autoBox) { autoBox.style.display = 'none'; autoBox.innerHTML = ''; }
+
+    const recentsBox = this.recentSearchesContainer || document.getElementById('recent-searches-container');
+    if (recentsBox) recentsBox.style.display = 'none';
+
+    const resultBox = this.searchResultBox || document.getElementById('search-result-box');
+    if (resultBox) {
+      resultBox.style.display = 'block';
+      this.renderSearchResultInsideSearchScreen(clean, resultBox);
+    }
+  }
+
+  async renderSearchResultInsideSearchScreen(term, container) {
+    if (!container) return;
+    const qLower = term.toLowerCase();
+
+    let match = this.words.find(w => w.word && w.word.toLowerCase() === qLower);
+
+    if (!match && typeof quickAutocompleteIndex !== 'undefined') {
+      const auto = quickAutocompleteIndex.find(item => item.word && item.word.toLowerCase() === qLower);
+      if (auto) {
+        match = {
+          id: `search-${Date.now()}`,
+          word: auto.word,
+          posShort: auto.pos || 'adj.',
+          phoneticUK: `/${auto.word.toLowerCase()}/`,
+          phoneticUS: `/${auto.word.toLowerCase()}/`,
+          urduMeaning: auto.urdu || '',
+          urduDefinition: `${auto.word} ka Urdu tarjuma: ${auto.urdu}`,
+          forms: `adv.  ${auto.word}ly`,
+          tags: [
+            { text: "#Top 3500", color: "blue" },
+            { text: "#Business English", color: "orange" },
+            { text: "#IELTS", color: "purple" }
+          ],
+          sentences: [
+            { en: `We learned how to use ${auto.word} accurately in everyday context.`, ur: `ہم نے روزمرہ کے سیاق و سباق میں اس کا درست استعمال سیکھا۔` }
+          ]
+        };
+      }
+    }
+
+    if (match) {
+      container.innerHTML = `
+        <div class="udict-card" style="margin-top: 6px;">
+          ${this.buildDictionaryCardBodyHtml(match, this.dictActiveTab || 'concise', false)}
+        </div>
+      `;
+      this.attachCardEvents(container, match, false);
+    } else {
+      container.innerHTML = `
+        <div class="search-loading-row" style="padding: 24px 0;">
+          <div class="apple-spinner"></div>
+          <span>Looking up "<strong>${term}</strong>" in dictionary...</span>
+        </div>
+      `;
+      try {
+        const fetched = await OnlineLookupService.fetchWordDetails(term, storage.geminiApiKey);
+        if (fetched) {
+          if (!this.words.some(w => w.id === fetched.id)) {
+            this.words.push(fetched);
+            storage.saveWordToCache(fetched);
+          }
+          container.innerHTML = `
+            <div class="udict-card" style="margin-top: 6px;">
+              ${this.buildDictionaryCardBodyHtml(fetched, this.dictActiveTab || 'concise', false)}
+            </div>
+          `;
+          this.attachCardEvents(container, fetched, false);
+        } else {
+          container.innerHTML = `
+            <div class="recents-empty-state" style="margin-top: 16px;">
+              <div class="recents-empty-icon">📖</div>
+              <div class="recents-empty-title">Word Not Found</div>
+              <p class="recents-empty-desc">No definition could be found for "${term}". Please check the spelling.</p>
+            </div>
+          `;
+        }
+      } catch (err) {
+        container.innerHTML = `
+          <div class="recents-empty-state" style="margin-top: 16px;">
+            <div class="recents-empty-icon">⚠️</div>
+            <div class="recents-empty-title">Lookup Error</div>
+            <p class="recents-empty-desc">${err.message || 'Please check your internet connection.'}</p>
+          </div>
+        `;
+      }
+    }
+  }
+
+  triggerSearchVoiceInput() {
+    const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+    if (!SpeechRecognition) {
+      this.showToast('Voice recognition is not supported in this browser.');
+      return;
+    }
+    try {
+      const recognition = new SpeechRecognition();
+      recognition.lang = 'en-US';
+      recognition.interimResults = false;
+      recognition.maxAlternatives = 1;
+
+      const voiceBtn = this.activeSearchVoiceBtn || this.dictVoiceBtn;
+      if (voiceBtn) voiceBtn.classList.add('recording-pulse');
+      this.showToast('🎙️ Listening... Speak a word');
+
+      recognition.onresult = (event) => {
+        const spoken = event.results[0][0].transcript.trim().replace(/[.,!?;:]/g, '');
+        if (voiceBtn) voiceBtn.classList.remove('recording-pulse');
+        if (spoken) {
+          if (this.activeSearchInput) this.activeSearchInput.value = spoken;
+          this.selectWordFromSearch(spoken);
+        }
+      };
+
+      recognition.onerror = () => {
+        if (voiceBtn) voiceBtn.classList.remove('recording-pulse');
+        this.showToast('Could not hear clearly. Please try again.');
+      };
+
+      recognition.onend = () => {
+        if (voiceBtn) voiceBtn.classList.remove('recording-pulse');
+      };
+
+      recognition.start();
+    } catch (e) {
+      this.showToast('Microphone access denied or unavailable.');
+    }
   }
 
   switchTab(tabName) {
