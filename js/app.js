@@ -3141,7 +3141,6 @@ class VocabApp {
     this.dictSearchBtn = document.getElementById('dict-search-btn');
     this.dictClearBtn = document.getElementById('dict-clear-btn');
     this.dictPasteBtn = document.getElementById('dict-paste-btn');
-    this.dictVoiceBtn = document.getElementById('dict-voice-btn');
     this.langSwapBtn = document.getElementById('lang-swap-btn');
     this.dictAutocompleteDropdown = document.getElementById('dict-autocomplete-dropdown');
     this.activeAutoIndex = -1;
@@ -3155,7 +3154,6 @@ class VocabApp {
     this.activeSearchInput = document.getElementById('active-search-input');
     this.activeSearchClearBtn = document.getElementById('active-search-clear-btn');
     this.activeSearchSubmitBtn = document.getElementById('active-search-submit-btn');
-    this.activeSearchVoiceBtn = document.getElementById('active-search-voice-btn');
     this.searchScreenBackBtn = document.getElementById('search-screen-back-btn');
     this.recentSearchesContainer = document.getElementById('recent-searches-container');
     this.searchAutocompleteBox = document.getElementById('search-autocomplete-box');
@@ -3305,13 +3303,6 @@ class VocabApp {
           this.activeSearchInput.focus();
         }
         this.handleActiveSearchInput('');
-      });
-    }
-
-    // Dedicated Search Voice Button
-    if (this.activeSearchVoiceBtn) {
-      this.activeSearchVoiceBtn.addEventListener('click', () => {
-        this.triggerSearchVoiceInput();
       });
     }
 
@@ -3518,42 +3509,6 @@ class VocabApp {
           } else {
             if (this.dictSearchInput) this.dictSearchInput.focus();
           }
-        } catch (err) {
-          if (this.dictSearchInput) this.dictSearchInput.focus();
-        }
-      });
-    }
-
-    // U-Dictionary Voice Search Button
-    if (this.dictVoiceBtn) {
-      this.dictVoiceBtn.addEventListener('click', () => {
-        const SpeechRec = window.SpeechRecognition || window.webkitSpeechRecognition;
-        if (!SpeechRec) {
-          this.showToast("Voice search not supported in this browser");
-          if (this.dictSearchInput) this.dictSearchInput.focus();
-          return;
-        }
-        try {
-          const rec = new SpeechRec();
-          rec.lang = 'en-US';
-          rec.start();
-          this.dictVoiceBtn.classList.add('recording-pulse');
-          this.showToast("Listening... Speak now");
-          rec.onresult = (e) => {
-            const transcript = e.results[0][0].transcript;
-            if (transcript) {
-              this.dictSearchInput.value = transcript.trim();
-              this.searchQuery = transcript.trim();
-              if (this.dictClearBtn) this.dictClearBtn.style.display = 'flex';
-              this.performSearch(this.searchQuery);
-            }
-          };
-          rec.onerror = () => {
-            this.dictVoiceBtn.classList.remove('recording-pulse');
-          };
-          rec.onend = () => {
-            this.dictVoiceBtn.classList.remove('recording-pulse');
-          };
         } catch (err) {
           if (this.dictSearchInput) this.dictSearchInput.focus();
         }
@@ -4231,46 +4186,6 @@ class VocabApp {
     this.attachCardEventListeners(container, isModal, word);
   }
 
-  triggerSearchVoiceInput() {
-    const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
-    if (!SpeechRecognition) {
-      this.showToast('Voice recognition is not supported in this browser.');
-      return;
-    }
-    try {
-      const recognition = new SpeechRecognition();
-      recognition.lang = 'en-US';
-      recognition.interimResults = false;
-      recognition.maxAlternatives = 1;
-
-      const voiceBtn = this.activeSearchVoiceBtn || this.dictVoiceBtn;
-      if (voiceBtn) voiceBtn.classList.add('recording-pulse');
-      this.showToast('🎙️ Listening... Speak a word');
-
-      recognition.onresult = (event) => {
-        const spoken = event.results[0][0].transcript.trim().replace(/[.,!?;:]/g, '');
-        if (voiceBtn) voiceBtn.classList.remove('recording-pulse');
-        if (spoken) {
-          if (this.activeSearchInput) this.activeSearchInput.value = spoken;
-          this.selectWordFromSearch(spoken);
-        }
-      };
-
-      recognition.onerror = () => {
-        if (voiceBtn) voiceBtn.classList.remove('recording-pulse');
-        this.showToast('Could not hear clearly. Please try again.');
-      };
-
-      recognition.onend = () => {
-        if (voiceBtn) voiceBtn.classList.remove('recording-pulse');
-      };
-
-      recognition.start();
-    } catch (e) {
-      this.showToast('Microphone access denied or unavailable.');
-    }
-  }
-
   switchTab(tabName) {
     this.activeTab = tabName;
     this.tabButtons.forEach(btn => {
@@ -4892,9 +4807,6 @@ class VocabApp {
                     <button class="udict-sent-icon-btn" data-sentence-speech="${encodeURIComponent(s.en)}" title="Listen sentence">
                       <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg>
                     </button>
-                    <button class="udict-sent-icon-btn" data-sentence-practice="${encodeURIComponent(s.en)}" title="Practice pronunciation">
-                      <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"></path><path d="M19 10v2a7 7 0 0 1-14 0v-2"></path><line x1="12" y1="19" x2="12" y2="23"></line><line x1="8" y1="23" x2="16" y2="23"></line></svg>
-                    </button>
                   </div>
                 </div>
               `;
@@ -4922,9 +4834,6 @@ class VocabApp {
                   <div class="udict-sentence-actions">
                     <button class="udict-sent-icon-btn" data-sentence-speech="${encodeURIComponent(s.en)}" title="Listen sentence">
                       <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg>
-                    </button>
-                    <button class="udict-sent-icon-btn" data-sentence-practice="${encodeURIComponent(s.en)}" title="Practice pronunciation">
-                      <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"></path><path d="M19 10v2a7 7 0 0 1-14 0v-2"></path><line x1="12" y1="19" x2="12" y2="23"></line><line x1="8" y1="23" x2="16" y2="23"></line></svg>
                     </button>
                   </div>
                 </div>
@@ -5095,34 +5004,6 @@ class VocabApp {
         e.stopPropagation();
         const text = decodeURIComponent(btn.dataset.sentenceSpeech);
         tts.speak(text, { accent: 'uk' });
-      });
-    });
-
-    // 3. Sentence Mic / Practice buttons
-    container.querySelectorAll('[data-sentence-practice]').forEach(btn => {
-      btn.addEventListener('click', (e) => {
-        e.stopPropagation();
-        const SpeechRec = window.SpeechRecognition || window.webkitSpeechRecognition;
-        if (!SpeechRec) {
-          this.showToast("Voice practice is not supported in this browser");
-          return;
-        }
-        try {
-          const rec = new SpeechRec();
-          rec.lang = 'en-US';
-          rec.start();
-          btn.style.transform = 'scale(1.3)';
-          this.showToast("🎙️ Listening... Read the sentence aloud!");
-          rec.onresult = (ev) => {
-            const transcript = ev.results[0][0].transcript;
-            btn.style.transform = 'none';
-            this.showToast(`⭐ Great pronunciation! (${transcript})`);
-          };
-          rec.onerror = () => { btn.style.transform = 'none'; };
-          rec.onend = () => { btn.style.transform = 'none'; };
-        } catch (err) {
-          btn.style.transform = 'none';
-        }
       });
     });
 
@@ -5485,9 +5366,6 @@ class VocabApp {
                 <button class="more-sent-btn" data-sentence-speech="${encodeURIComponent(s.en)}" title="Listen sentence">
                   <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg>
                 </button>
-                <button class="more-sent-btn" data-sentence-practice="${encodeURIComponent(s.en)}" title="Practice pronunciation">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"></path><path d="M19 10v2a7 7 0 0 1-14 0v-2"></path><line x1="12" y1="19" x2="12" y2="23"></line><line x1="8" y1="23" x2="16" y2="23"></line></svg>
-                </button>
               </div>
             </div>
           `;
@@ -5520,9 +5398,6 @@ class VocabApp {
                 <button class="more-sent-btn" data-sentence-speech="${encodeURIComponent(s.en)}" title="Listen sentence">
                   <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg>
                 </button>
-                <button class="more-sent-btn" data-sentence-practice="${encodeURIComponent(s.en)}" title="Practice pronunciation">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"></path><path d="M19 10v2a7 7 0 0 1-14 0v-2"></path><line x1="12" y1="19" x2="12" y2="23"></line><line x1="8" y1="23" x2="16" y2="23"></line></svg>
-                </button>
               </div>
             </div>
           `;
@@ -5530,21 +5405,13 @@ class VocabApp {
       }
     }
 
-    // Bind audio and practice listeners in the more sentences list
+    // Bind audio listeners in the more sentences list
     if (listEl) {
       listEl.querySelectorAll('[data-sentence-speech]').forEach(btn => {
         btn.addEventListener('click', (e) => {
           e.stopPropagation();
           const text = decodeURIComponent(btn.dataset.sentenceSpeech);
           this.speakText(text, 'en');
-        });
-      });
-
-      listEl.querySelectorAll('[data-sentence-practice]').forEach(btn => {
-        btn.addEventListener('click', (e) => {
-          e.stopPropagation();
-          const text = decodeURIComponent(btn.dataset.sentencePractice);
-          this.startVoicePractice(text, btn);
         });
       });
     }
