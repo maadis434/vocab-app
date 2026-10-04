@@ -562,7 +562,11 @@ const defaultVocabulary = [
     word: "Resilient",
     posShort: "adj.",
     partOfSpeech: "adjective",
+    phoneticUK: "/rɪˈzɪl.jənt/",
+    phoneticUS: "/rɪˈzɪl.jənt/",
     phonetic: "/rɪˈzɪl.jənt/",
+    respelling: "ri-ZIL-yuhnt",
+    urduPhonetic: "رِزِل یینٹ",
     urduMeaning: "ثابت قدم / باحوصلہ",
     urduDefinition: "مشکل حالات یا صدمے کے بعد جلد سنبھل جانے والا اور ہمت نہ ہارنے والا۔",
     insteadOf: ["Weak / Fragile", "Giving up easily"],
@@ -580,7 +584,11 @@ const defaultVocabulary = [
     word: "Eloquent",
     posShort: "adj.",
     partOfSpeech: "adjective",
+    phoneticUK: "/ˈel.ə.kwənt/",
+    phoneticUS: "/ˈel.ə.kwənt/",
     phonetic: "/ˈel.ə.kwənt/",
+    respelling: "EH-luh-kwuhnt",
+    urduPhonetic: "ایلوکوینٹ",
     urduMeaning: "خوش گفتار / فصیح و بلیغ",
     urduDefinition: "ایسا شخص جو بہت روانی اور اثر انگیز انداز میں بات یا تقریر کر سکے۔",
     insteadOf: ["Good speaker", "Fluent talker"],
@@ -598,7 +606,11 @@ const defaultVocabulary = [
     word: "Pragmatic",
     posShort: "adj.",
     partOfSpeech: "adjective",
+    phoneticUK: "/præɡˈmæt.ɪk/",
+    phoneticUS: "/præɡˈmæt̬.ɪk/",
     phonetic: "/præɡˈmæt.ɪk/",
+    respelling: "prag-MAT-ik",
+    urduPhonetic: "پریگ میٹِک",
     urduMeaning: "عملی پسند / حقیقت پسندانہ",
     urduDefinition: "خیالی باتوں کے بجائے زمینی حقائق اور عملی نتائج پر فیصلے کرنے والا۔",
     insteadOf: ["Practical person", "Realistic thinking"],
@@ -616,7 +628,11 @@ const defaultVocabulary = [
     word: "Meticulous",
     posShort: "adj.",
     partOfSpeech: "adjective",
+    phoneticUK: "/məˈtɪk.jə.ləs/",
+    phoneticUS: "/məˈtɪk.jə.ləs/",
     phonetic: "/məˈtɪk.jə.ləs/",
+    respelling: "muh-TIK-yuh-luhs",
+    urduPhonetic: "مَیٹِکیولس",
     urduMeaning: "باریک بین / انتہائی محتاط",
     urduDefinition: "جو ہر چھوٹی سے چھوٹی تفصیل کا باریکی سے جائزہ لے کر کام کرے۔",
     insteadOf: ["Very careful", "Detail-oriented"],
@@ -634,7 +650,11 @@ const defaultVocabulary = [
     word: "Empathy",
     posShort: "n.",
     partOfSpeech: "noun",
+    phoneticUK: "/ˈem.pə.θi/",
+    phoneticUS: "/ˈem.pə.θi/",
     phonetic: "/ˈem.pə.θi/",
+    respelling: "EM-puh-thee",
+    urduPhonetic: "ایم پَتھی",
     urduMeaning: "احساسِ ہمدردی / دلی شناسائی",
     urduDefinition: "دوسرے کے دکھ درد کو اپنے اندر گہرائی سے محسوس کرنے کی صلاحیت۔",
     insteadOf: ["Feeling pity", "Sympathy"],
@@ -652,7 +672,11 @@ const defaultVocabulary = [
     word: "Persevere",
     posShort: "v.",
     partOfSpeech: "verb",
+    phoneticUK: "/ˌpɜː.sɪˈvɪər/",
+    phoneticUS: "/ˌpɜːr.səˈvɪr/",
     phonetic: "/ˌpɜː.sɪˈvɪər/",
+    respelling: "pur-suh-VEER",
+    urduPhonetic: "پَرسِویر",
     urduMeaning: "ڈٹے رہنا / مسلسل محنت کرنا",
     urduDefinition: "مشکلات یا ناکامیوں کے باوجود ہمت نہ ہارنا اور لگے رہنا۔",
     insteadOf: ["Keep trying", "Don't quit"],
@@ -670,7 +694,11 @@ const defaultVocabulary = [
     word: "Candid",
     posShort: "adj.",
     partOfSpeech: "adjective",
+    phoneticUK: "/ˈkæn.dɪd/",
+    phoneticUS: "/ˈkæn.dɪd/",
     phonetic: "/ˈkæn.dɪd/",
+    respelling: "KAN-did",
+    urduPhonetic: "کین ڈِڈ",
     urduMeaning: "کھرا / صاف گو / بے باک",
     urduDefinition: "ایسی بات یا رویہ جو بالکل سچا، کھرا اور بغیر بناوٹ کے ہو۔",
     insteadOf: ["Very honest", "Direct talker"],
@@ -688,7 +716,11 @@ const defaultVocabulary = [
     word: "Procrastinate",
     posShort: "v.",
     partOfSpeech: "verb",
-    phonetic: "/prəˈkræs.tɪ.neɪt/",
+    phoneticUK: "/prəʊˈkræs.tɪ.neɪt/",
+    phoneticUS: "/proʊˈkræs.tə.neɪt/",
+    phonetic: "/prəʊˈkræs.tɪ.neɪt/",
+    respelling: "proh-KRAS-tuh-nayt",
+    urduPhonetic: "پرو کریسٹینیٹ",
     urduMeaning: "ٹال مٹول کرنا / سستی کرنا",
     urduDefinition: "سستی کی وجہ سے ضروری کام کو آگے ٹالتے رہنا۔",
     insteadOf: ["Wasting time", "Delaying work"],
@@ -706,7 +738,11 @@ const defaultVocabulary = [
     word: "Lucid",
     posShort: "adj.",
     partOfSpeech: "adjective",
+    phoneticUK: "/ˈluː.sɪd/",
+    phoneticUS: "/ˈluː.sɪd/",
     phonetic: "/ˈluː.sɪd/",
+    respelling: "LOO-sid",
+    urduPhonetic: "لُوسِڈ",
     urduMeaning: "صاف اور واضح / آسان فہم",
     urduDefinition: "جو بالکل صاف، سلجھا ہوا اور آسانی سے سمجھ آنے والا ہو۔",
     insteadOf: ["Very clear", "Simple idea"],
@@ -724,7 +760,11 @@ const defaultVocabulary = [
     word: "Serene",
     posShort: "adj.",
     partOfSpeech: "adjective",
-    phonetic: "/səˈriːn/",
+    phoneticUK: "/sɪˈriːn/",
+    phoneticUS: "/səˈriːn/",
+    phonetic: "/sɪˈriːn/",
+    respelling: "suh-REEN",
+    urduPhonetic: "سِرین",
     urduMeaning: "پُرسکون / بے اضطراب",
     urduDefinition: "جو اندرونی اور بیرونی طور پر پرسکون اور ہر بے چینی سے پاک ہو۔",
     insteadOf: ["Very calm", "Quiet place"],
@@ -742,7 +782,11 @@ const defaultVocabulary = [
     word: "Diligent",
     posShort: "adj.",
     partOfSpeech: "adjective",
+    phoneticUK: "/ˈdɪl.ɪ.dʒənt/",
+    phoneticUS: "/ˈdɪl.ə.dʒənt/",
     phonetic: "/ˈdɪl.ɪ.dʒənt/",
+    respelling: "DIL-uh-juhnt",
+    urduPhonetic: "ڈِلی جنٹ",
     urduMeaning: "محنتی / انتھک / باقاعدہ",
     urduDefinition: "جو اپنے کام میں لگن اور باقاعدگی سے محنت کرے۔",
     insteadOf: ["Hardworking", "Dedicated"],
@@ -760,7 +804,11 @@ const defaultVocabulary = [
     word: "Ambiguous",
     posShort: "adj.",
     partOfSpeech: "adjective",
+    phoneticUK: "/æmˈbɪɡ.ju.əs/",
+    phoneticUS: "/æmˈbɪɡ.ju.əs/",
     phonetic: "/æmˈbɪɡ.ju.əs/",
+    respelling: "am-BIG-yoo-uhs",
+    urduPhonetic: "ایم بگ یو اس",
     urduMeaning: "مبہم / غیر واضح",
     urduDefinition: "ایسی بات جس کے ایک سے زیادہ معنی نکلتے ہوں اور صاف نہ ہو۔",
     insteadOf: ["Confusing statement", "Not clear"],
@@ -778,7 +826,11 @@ const defaultVocabulary = [
     word: "Diaspora",
     posShort: "n.",
     partOfSpeech: "noun",
+    phoneticUK: "/daɪˈæs.pər.ə/",
+    phoneticUS: "/daɪˈæs.pɚ.ə/",
     phonetic: "/daɪˈæs.pər.ə/",
+    respelling: "dye-AS-pur-uh",
+    urduPhonetic: "ڈائیسپورا",
     urduMeaning: "تارک وطن / انتشار",
     romanUrdu: "tāraka vatana",
     urduDefinition: "اپنے آبائی وطن کو چھوڑ کر دنیا کے دوسرے ملکوں میں منتشر ہو کر آباد ہونے والے افراد کا گروہ۔",
@@ -2284,7 +2336,7 @@ CRITICAL REQUIREMENT: The example sentence MUST be a real, meaningful scenario. 
             pos: pos || 'noun',
             definition: definition,
             example: example,
-            phonetic: `/${cleanWord}/`
+            phonetic: this.ruleBasedIPA(cleanWord, 'us')
           };
         }
       }
@@ -2316,7 +2368,7 @@ CRITICAL REQUIREMENT: The example sentence MUST be a real, meaningful scenario. 
               pos: pos,
               definition: definition,
               example: example,
-              phonetic: `/${cleanWord}/`
+              phonetic: this.ruleBasedIPA(cleanWord, 'us')
             };
           }
         }
@@ -2462,60 +2514,298 @@ CRITICAL REQUIREMENT: The example sentence MUST be a real, meaningful scenario. 
     }
   },
 
-  // --- REAL DUAL-DIALECT PHONETICS (Authentic UK Oxford vs US Merriam IPA) ---
-  async fetchDualPhonetics(word) {
-    const clean = (word || '').trim().toLowerCase();
-    if (!clean) return { uk: '', us: '' };
+  // --- AUTHENTIC DUAL-DIALECT PHONETICS & PRONUNCIATION RESPELLING ENGINE ---
+  curatedPhonetics: {
+    'resilient': { uk: '/rɪˈzɪl.jənt/', us: '/rɪˈzɪl.jənt/', respelling: 'ri-ZIL-yuhnt', urduPhonetic: 'رِزِل یینٹ' },
+    'detrimental': { uk: '/ˌdet.rɪˈmen.təl/', us: '/ˌdet.rəˈmen.t̬əl/', respelling: 'deh-truh-MEN-tuhl', urduPhonetic: 'ڈیٹری مینٹل' },
+    'eloquent': { uk: '/ˈel.ə.kwənt/', us: '/ˈel.ə.kwənt/', respelling: 'EH-luh-kwuhnt', urduPhonetic: 'ایلوکوینٹ' },
+    'pragmatic': { uk: '/præɡˈmæt.ɪk/', us: '/præɡˈmæt̬.ɪk/', respelling: 'prag-MAT-ik', urduPhonetic: 'پریگ میٹک' },
+    'meticulous': { uk: '/məˈtɪk.jə.ləs/', us: '/məˈtɪk.jə.ləs/', respelling: 'muh-TIK-yuh-luhs', urduPhonetic: 'میٹی کیولس' },
+    'empathy': { uk: '/ˈem.pə.θi/', us: '/ˈem.pə.θi/', respelling: 'EM-puh-thee', urduPhonetic: 'ایم پیتھی' },
+    'persevere': { uk: '/ˌpɜː.sɪˈvɪər/', us: '/ˌpɝː.səˈvɪr/', respelling: 'pur-suh-VEER', urduPhonetic: 'پرسویر' },
+    'candid': { uk: '/ˈkæn.dɪd/', us: '/ˈkæn.dɪd/', respelling: 'KAN-did', urduPhonetic: 'کینڈڈ' },
+    'procrastinate': { uk: '/prəˈkræs.tɪ.neɪt/', us: '/proʊˈkræs.tə.neɪt/', respelling: 'proh-KRAS-tuh-nayt', urduPhonetic: 'پروکرسٹینیٹ' },
+    'lucid': { uk: '/ˈluː.sɪd/', us: '/ˈluː.sɪd/', respelling: 'LOO-sid', urduPhonetic: 'لو سِڈ' },
+    'serene': { uk: '/səˈriːn/', us: '/səˈriːn/', respelling: 'suh-REEN', urduPhonetic: 'سرین' },
+    'diligent': { uk: '/ˈdɪl.ɪ.dʒənt/', us: '/ˈdɪl.ə.dʒənt/', respelling: 'DIL-uh-juhnt', urduPhonetic: 'ڈلیجنٹ' },
+    'ambiguous': { uk: '/æmˈbɪɡ.ju.əs/', us: '/æmˈbɪɡ.ju.əs/', respelling: 'am-BIG-yoo-uhs', urduPhonetic: 'ایمبیگوئس' },
+    'diaspora': { uk: '/daɪˈæs.pər.ə/', us: '/daɪˈæs.pɚ.ə/', respelling: 'dye-AS-pur-uh', urduPhonetic: 'ڈائیسپورا' },
+    'adverse': { uk: '/ˈæd.vɜːs/', us: '/ædˈvɝːs/', respelling: 'ad-VURS', urduPhonetic: 'ایڈورس' },
+    'conclusion': { uk: '/kənˈkluː.ʒən/', us: '/kənˈkluː.ʒən/', respelling: 'kuhn-KLOO-zhuhn', urduPhonetic: 'کنکلوژن' },
+    'contradictory': { uk: '/ˌkɒn.trəˈdɪk.tər.i/', us: '/ˌkɑːn.trəˈdɪk.tɚ.i/', respelling: 'kon-truh-DIK-tuh-ree', urduPhonetic: 'کنٹراڈکٹری' },
+    'schedule': { uk: '/ˈʃed.juːl/', us: '/ˈskedʒ.uːl/', respelling: 'SKED-jool', urduPhonetic: 'شیڈول' },
+    'privacy': { uk: '/ˈprɪv.ə.si/', us: '/ˈpraɪ.və.si/', respelling: 'PRYE-vuh-see', urduPhonetic: 'پرائیویسی' },
+    'advertisement': { uk: '/ədˈvɜː.tɪs.mənt/', us: '/ˌæd.vɚˈtaɪz.mənt/', respelling: 'ad-ver-TYZE-muhnt', urduPhonetic: 'ایڈورٹائزمنٹ' },
+    'water': { uk: '/ˈwɔː.tər/', us: '/ˈwɑː.t̬ɚ/', respelling: 'WAH-tur', urduPhonetic: 'واٹر' },
+    'neither': { uk: '/ˈnaɪ.ðər/', us: '/ˈniː.ðɚ/', respelling: 'NEE-thur', urduPhonetic: 'نیدر' },
+    'either': { uk: '/ˈaɪ.ðər/', us: '/ˈiː.ðɚ/', respelling: 'EE-thur', urduPhonetic: 'ایدر' },
+    'vitamin': { uk: '/ˈvɪt.ə.mɪn/', us: '/ˈvaɪ.t̬ə.mɪn/', respelling: 'VYE-tuh-min', urduPhonetic: 'وٹامن' },
+    'tomato': { uk: '/təˈmɑː.təʊ/', us: '/təˈmeɪ.t̬oʊ/', respelling: 'tuh-MAY-toh', urduPhonetic: 'ٹماٹر' },
+    'herb': { uk: '/hɜːb/', us: '/ɜːrb/', respelling: 'urb', urduPhonetic: 'ہرب' },
+    'leisure': { uk: '/ˈleʒ.ər/', us: '/ˈliː.ʒɚ/', respelling: 'LEE-zhur', urduPhonetic: 'لیژر' },
+    'route': { uk: '/ruːt/', us: '/raʊt/', respelling: 'root', urduPhonetic: 'روٹ' },
+    'garage': { uk: '/ˈɡær.ɑːʒ/', us: '/ɡəˈrɑːʒ/', respelling: 'guh-RAHZH', urduPhonetic: 'گیراج' },
+    'vase': { uk: '/vɑːz/', us: '/veɪs/', respelling: 'vays', urduPhonetic: 'واز' },
+    'ballet': { uk: '/ˈbæleɪ/', us: '/bæˈleɪ/', respelling: 'ba-LAY', urduPhonetic: 'بیلے' },
+    'aluminum': { uk: '/ˌæljʊˈmɪn.i.əm/', us: '/əˈluː.mɪ.nəm/', respelling: 'uh-LOO-mi-nuhm', urduPhonetic: 'ایلومینیم' },
+    'ephemeral': { uk: '/ɪˈfem.ər.əl/', us: '/əˈfem.ɚ.əl/', respelling: 'ih-FEM-er-uhl', urduPhonetic: 'افیمرل' },
+    'ubiquitous': { uk: '/juːˈbɪk.wɪ.təs/', us: '/juːˈbɪk.wə.t̬əs/', respelling: 'yoo-BIK-wuh-tuhs', urduPhonetic: 'یوبیکوٹَس' },
+    'serendipity': { uk: '/ˌser.ənˈdɪp.ə.ti/', us: '/ˌser.ənˈdɪp.ə.t̬i/', respelling: 'sehr-uhn-DIP-i-tee', urduPhonetic: 'سیرینڈیپیٹی' },
+    'anomaly': { uk: '/əˈnɒm.ə.li/', us: '/əˈnɑː.mə.li/', respelling: 'uh-NOM-uh-lee', urduPhonetic: 'انوملی' },
+    'paradigm': { uk: '/ˈpær.ə.daɪm/', us: '/ˈper.ə.daɪm/', respelling: 'PAIR-uh-dyme', urduPhonetic: 'پیراڈائم' },
+    'enigma': { uk: '/ɪˈnɪɡ.mə/', us: '/əˈnɪɡ.mə/', respelling: 'ih-NIG-muh', urduPhonetic: 'انِگما' },
+    'garrulous': { uk: '/ˈɡær.əl.əs/', us: '/ˈɡer.ə.ləs/', respelling: 'GAIR-uh-luhs', urduPhonetic: 'گیرولس' },
+    'loquacious': { uk: '/ləˈkweɪ.ʃəs/', us: '/loʊˈkweɪ.ʃəs/', respelling: 'loh-KWAY-shuhs', urduPhonetic: 'لوکویشس' },
+    'mitigate': { uk: '/ˈmɪt.ɪ.ɡeɪt/', us: '/ˈmɪt̬.ə.ɡeɪt/', respelling: 'MIT-i-gayt', urduPhonetic: 'مٹیگیٹ' },
+    'quintessential': { uk: '/ˌkwɪn.tɪˈsen.ʃəl/', us: '/ˌkwɪn.təˈsen.ʃəl/', respelling: 'kwin-tuh-SEN-shuhl', urduPhonetic: 'کونٹیسینشل' }
+  },
 
-    const cacheKey = `vocab_phones_${clean}`;
+  arpaToRespelling(arpaStr) {
+    if (!arpaStr || typeof arpaStr !== 'string') return '';
+    const tokens = arpaStr.trim().split(/\s+/);
+    if (!tokens.length) return '';
+    const vMap = {
+      'AA': 'ah', 'AE': 'a', 'AH': 'uh', 'AO': 'aw', 'AW': 'ow',
+      'AY': 'eye', 'B': 'b', 'CH': 'ch', 'D': 'd', 'DH': 'th',
+      'EH': 'e', 'ER': 'ur', 'EY': 'ay', 'F': 'f', 'G': 'g',
+      'HH': 'h', 'IH': 'i', 'IY': 'ee', 'JH': 'j', 'K': 'k',
+      'L': 'l', 'M': 'm', 'N': 'n', 'NG': 'ng', 'OW': 'oh',
+      'OY': 'oy', 'P': 'p', 'R': 'r', 'S': 's', 'SH': 'sh',
+      'T': 't', 'TH': 'th', 'UH': 'oo', 'UW': 'oo', 'V': 'v',
+      'W': 'w', 'Y': 'y', 'Z': 'z', 'ZH': 'zh'
+    };
+    const vowels = new Set(['AA','AE','AH','AO','AW','AY','EH','ER','EY','IH','IY','OW','OY','UH','UW']);
+    const phonemes = [];
+    for (const tok of tokens) {
+      const base = tok.replace(/[0-9]/g, '');
+      const numMatch = tok.match(/[0-9]/);
+      const stress = numMatch ? parseInt(numMatch[0], 10) : null;
+      const isVowel = stress !== null || vowels.has(base);
+      phonemes.push({
+        base,
+        sound: vMap[base] || base.toLowerCase(),
+        isVowel,
+        stress
+      });
+    }
+    const vIndices = [];
+    phonemes.forEach((p, idx) => { if (p.isVowel) vIndices.push(idx); });
+    if (vIndices.length === 0) return phonemes.map(p => p.sound).join('');
+
+    const splitIndices = new Set();
+    const clusters = new Set(['TR', 'KW', 'PR', 'BL', 'CL', 'PL', 'FL', 'GL', 'KR', 'BR', 'DR', 'TH', 'SH', 'CH']);
+    for (let k = 0; k < vIndices.length - 1; k++) {
+      const v1 = vIndices[k];
+      const v2 = vIndices[k + 1];
+      const cCount = v2 - v1 - 1;
+      if (cCount <= 0) {
+        splitIndices.add(v2);
+      } else if (cCount === 1) {
+        splitIndices.add(v1 + 1);
+      } else if (cCount === 2) {
+        const c1 = phonemes[v1 + 1].base;
+        const c2 = phonemes[v1 + 2].base;
+        if (clusters.has(c1 + c2)) {
+          splitIndices.add(v1 + 1);
+        } else {
+          splitIndices.add(v1 + 2);
+        }
+      } else {
+        splitIndices.add(v2 - 1);
+      }
+    }
+
+    const syllables = [];
+    let cur = [];
+    phonemes.forEach((p, i) => {
+      if (splitIndices.has(i) && cur.length > 0) {
+        syllables.push(cur);
+        cur = [];
+      }
+      cur.push(p);
+    });
+    if (cur.length > 0) syllables.push(cur);
+
+    const res = [];
+    for (const syl of syllables) {
+      const stress = syl.find(p => p.stress !== null)?.stress || 0;
+      let txt = syl.map(p => p.sound).join('');
+      if (txt === 'e') txt = 'eh';
+      txt = txt.replace(/eh$/, 'e');
+      if (txt === 'e') txt = 'eh';
+      if (stress === 1) {
+        res.push(txt.toUpperCase());
+      } else {
+        res.push(txt.toLowerCase());
+      }
+    }
+    return res.join('-');
+  },
+
+  ruleBasedRespelling(word) {
+    if (!word) return '';
+    const clean = word.toLowerCase().trim();
+    if (this.curatedPhonetics && this.curatedPhonetics[clean] && this.curatedPhonetics[clean].respelling) {
+      return this.curatedPhonetics[clean].respelling;
+    }
+
+    const vowels = 'aeiouy';
+    let syls = [];
+    let cur = '';
+    for (let i = 0; i < clean.length; i++) {
+      cur += clean[i];
+      const isV = vowels.includes(clean[i]);
+      const nextIsV = i + 1 < clean.length && vowels.includes(clean[i + 1]);
+      const nextNextIsV = i + 2 < clean.length && vowels.includes(clean[i + 2]);
+      if (isV && !nextIsV && nextNextIsV && cur.length >= 2 && i < clean.length - 2) {
+        syls.push(cur);
+        cur = '';
+      } else if (isV && !nextIsV && !nextNextIsV && i + 2 < clean.length && cur.length >= 3) {
+        cur += clean[++i];
+        syls.push(cur);
+        cur = '';
+      }
+    }
+    if (cur) syls.push(cur);
+    if (!syls.length) syls = [clean];
+
+    const stressIdx = syls.length >= 3 ? syls.length - 2 : (syls.length === 2 ? 0 : 0);
+    return syls.map((s, idx) => {
+      let r = s.replace(/tion/g, 'shuhn').replace(/sion/g, 'zhuhn')
+               .replace(/ph/g, 'f').replace(/ous/g, 'uhs')
+               .replace(/able/g, 'uh-buhl').replace(/ment/g, 'muhnt')
+               .replace(/al$/g, 'uhl').replace(/ic$/g, 'ik');
+      return idx === stressIdx ? r.toUpperCase() : r.toLowerCase();
+    }).join('-');
+  },
+
+  ruleBasedIPA(word, dialect = 'us') {
+    if (!word) return '';
+    const clean = word.toLowerCase().trim();
+    if (this.curatedPhonetics && this.curatedPhonetics[clean]) {
+      return dialect === 'uk' ? this.curatedPhonetics[clean].uk : this.curatedPhonetics[clean].us;
+    }
+
+    let ipa = clean
+      .replace(/tion/g, 'ʃən')
+      .replace(/sion/g, 'ʒən')
+      .replace(/ous/g, 'əs')
+      .replace(/ph/g, 'f')
+      .replace(/ck/g, 'k')
+      .replace(/th/g, 'θ')
+      .replace(/ch/g, 'tʃ')
+      .replace(/sh/g, 'ʃ')
+      .replace(/wh/g, 'w')
+      .replace(/ee/g, 'iː')
+      .replace(/oo/g, 'uː')
+      .replace(/ea/g, 'iː')
+      .replace(/ai|ay/g, 'eɪ')
+      .replace(/ou|ow/g, 'aʊ')
+      .replace(/ar/g, dialect === 'uk' ? 'ɑː' : 'ɑːr')
+      .replace(/er|ir|ur/g, dialect === 'uk' ? 'ɜː' : 'ɝː')
+      .replace(/or/g, dialect === 'uk' ? 'ɔː' : 'ɔːr');
+
+    if (ipa.length > 5) {
+      const mid = Math.floor(ipa.length / 2);
+      ipa = ipa.slice(0, mid) + 'ˈ' + ipa.slice(mid);
+    } else {
+      ipa = 'ˈ' + ipa;
+    }
+
+    return `/${ipa}/`;
+  },
+
+  getQuickPhonetics(word) {
+    if (!word) return null;
+    const clean = word.toLowerCase().trim();
+    if (this.curatedPhonetics && this.curatedPhonetics[clean]) {
+      return { ...this.curatedPhonetics[clean] };
+    }
+    const cacheKey = `vocab_phones_v3_${clean}`;
     try {
       const cached = localStorage.getItem(cacheKey);
       if (cached) {
         const parsed = JSON.parse(cached);
-        if (parsed.uk && parsed.us) return parsed;
+        if (parsed.uk && parsed.us && parsed.uk !== `/${clean}/`) return parsed;
       }
     } catch (e) {}
 
-    // Verified dialect divergence dictionary for common divergent words (0ms)
-    const knownDialects = {
-      'schedule': { uk: '/ˈʃedjuːl/', us: '/ˈskedʒuːl/' },
-      'privacy': { uk: '/ˈprɪvəsi/', us: '/ˈpraɪvəsi/' },
-      'advertisement': { uk: '/ədˈvɜːtɪsmənt/', us: '/ˌædvərˈtaɪzmənt/' },
-      'water': { uk: '/ˈwɔːtə(r)/', us: '/ˈwɔːtər/' },
-      'neither': { uk: '/ˈnaɪðə(r)/', us: '/ˈniːðər/' },
-      'either': { uk: '/ˈaɪðə(r)/', us: '/ˈiːðər/' },
-      'vitamin': { uk: '/ˈvɪtəmɪn/', us: '/ˈvaɪtəmɪn/' },
-      'tomato': { uk: '/təˈmɑːtəʊ/', us: '/təˈmeɪtoʊ/' },
-      'herb': { uk: '/hɜːb/', us: '/ɜːrb/' },
-      'leisure': { uk: '/ˈleʒə(r)/', us: '/ˈliːʒər/' },
-      'serene': { uk: '/sɪˈriːn/', us: '/səˈriːn/' },
-      'route': { uk: '/ruːt/', us: '/raʊt/' },
-      'garage': { uk: '/ˈɡærɑːʒ/', us: '/ɡəˈrɑːʒ/' },
-      'vase': { uk: '/vɑːz/', us: '/veɪs/' },
-      'ballet': { uk: '/ˈbæleɪ/', us: '/bæˈleɪ/' },
-      'aluminum': { uk: '/ˌæljʊˈmɪniəm/', us: '/əˈluːmɪnəm/' },
-      'lieutenant': { uk: '/lefˈtenənt/', us: '/luːˈtenənt/' },
-      'often': { uk: '/ˈɒf(t)ən/', us: '/ˈɔːfən/' },
-      'dance': { uk: '/dɑːns/', us: '/dæns/' },
-      'fast': { uk: '/fɑːst/', us: '/fæst/' },
-      'ask': { uk: '/ɑːsk/', us: '/æsk/' },
-      'path': { uk: '/pɑːθ/', us: '/pæθ/' },
-      'half': { uk: '/hɑːf/', us: '/hæf/' },
-      'class': { uk: '/klɑːs/', us: '/klæs/' },
-      'after': { uk: '/ˈɑːftə(r)/', us: '/ˈæftər/' },
-      'better': { uk: '/ˈbetə(r)/', us: '/ˈbetər/' },
-      'car': { uk: '/kɑː(r)/', us: '/kɑːr/' }
+    return {
+      uk: this.ruleBasedIPA(clean, 'uk'),
+      us: this.ruleBasedIPA(clean, 'us'),
+      respelling: this.ruleBasedRespelling(clean),
+      urduPhonetic: ''
     };
+  },
 
-    if (knownDialects[clean]) {
-      try { localStorage.setItem(cacheKey, JSON.stringify(knownDialects[clean])); } catch (e) {}
-      return knownDialects[clean];
+  async fetchDualPhonetics(word) {
+    const clean = (word || '').trim().toLowerCase();
+    if (!clean) return { uk: '', us: '', respelling: '', urduPhonetic: '' };
+
+    if (this.curatedPhonetics && this.curatedPhonetics[clean]) {
+      return { ...this.curatedPhonetics[clean] };
     }
 
-    // Live studio dictionary lookup with strict timeout
+    const cacheKey = `vocab_phones_v3_${clean}`;
+    try {
+      const cached = localStorage.getItem(cacheKey);
+      if (cached) {
+        const parsed = JSON.parse(cached);
+        if (parsed.uk && parsed.us && parsed.uk !== `/${clean}/` && parsed.respelling) {
+          return parsed;
+        }
+      }
+    } catch (e) {}
+
+    // 1. Primary: High-speed Datamuse API (Provides CMU ARPAbet + real IPA without CORS issues)
     try {
       const controller = typeof AbortController !== 'undefined' ? new AbortController() : null;
-      const timer = controller ? setTimeout(() => controller.abort(), 1800) : null;
+      const timer = controller ? setTimeout(() => controller.abort(), 2200) : null;
+      const dUrl = `https://api.datamuse.com/words?sp=${encodeURIComponent(clean)}&qe=sp&md=r&ipa=1`;
+      const dRes = await fetch(dUrl, { signal: controller ? controller.signal : undefined });
+      if (timer) clearTimeout(timer);
+
+      if (dRes && dRes.ok) {
+        const dData = await dRes.json();
+        const match = Array.isArray(dData) ? dData.find(item => item.word && item.word.toLowerCase() === clean) || dData[0] : null;
+        if (match && match.tags) {
+          const pronTag = match.tags.find(t => t.startsWith('pron:'));
+          const ipaTag = match.tags.find(t => t.startsWith('ipa_pron:'));
+          const rawPron = pronTag ? pronTag.replace(/^pron:\s*/, '').trim() : '';
+          const rawIpa = ipaTag ? ipaTag.replace(/^ipa_pron:\s*/, '').trim() : '';
+
+          const respelling = this.arpaToRespelling(rawPron) || this.ruleBasedRespelling(clean);
+          let ukIpa = '';
+          let usIpa = '';
+
+          if (rawIpa) {
+            const formattedIpa = rawIpa.startsWith('/') ? rawIpa : `/${rawIpa}/`;
+            usIpa = formattedIpa;
+            ukIpa = formattedIpa.replace(/ɝː?|ɚ/g, 'ɜː').replace(/r(?=[^aeiouy]|$)/g, '');
+            if (ukIpa === usIpa) {
+              ukIpa = formattedIpa;
+            }
+          }
+
+          if (!ukIpa) ukIpa = this.ruleBasedIPA(clean, 'uk');
+          if (!usIpa) usIpa = this.ruleBasedIPA(clean, 'us');
+
+          const result = {
+            uk: ukIpa,
+            us: usIpa,
+            respelling: respelling,
+            urduPhonetic: ''
+          };
+          try { localStorage.setItem(cacheKey, JSON.stringify(result)); } catch (e) {}
+          return result;
+        }
+      }
+    } catch (e) {}
+
+    // 2. Secondary: Live FreeDictionary API with strict 1.5s timeout
+    try {
+      const controller = typeof AbortController !== 'undefined' ? new AbortController() : null;
+      const timer = controller ? setTimeout(() => controller.abort(), 1500) : null;
       const res2 = await fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${encodeURIComponent(clean)}`, { signal: controller ? controller.signal : undefined });
       if (timer) clearTimeout(timer);
       if (res2 && res2.ok) {
@@ -2530,9 +2820,13 @@ CRITICAL REQUIREMENT: The example sentence MUST be a real, meaningful scenario. 
             }
           }
           if (uk || us) {
+            const cleanUk = uk ? (uk.startsWith('/') ? uk : `/${uk}/`) : (us ? (us.startsWith('/') ? us : `/${us}/`) : this.ruleBasedIPA(clean, 'uk'));
+            const cleanUs = us ? (us.startsWith('/') ? us : `/${us}/`) : (uk ? (uk.startsWith('/') ? uk : `/${uk}/`) : this.ruleBasedIPA(clean, 'us'));
             const result = {
-              uk: uk ? (uk.startsWith('/') ? uk : `/${uk}/`) : (us ? (us.startsWith('/') ? us : `/${us}/`) : `/${clean}/`),
-              us: us ? (us.startsWith('/') ? us : `/${us}/`) : (uk ? (uk.startsWith('/') ? uk : `/${uk}/`) : `/${clean}/`)
+              uk: cleanUk !== `/${clean}/` ? cleanUk : this.ruleBasedIPA(clean, 'uk'),
+              us: cleanUs !== `/${clean}/` ? cleanUs : this.ruleBasedIPA(clean, 'us'),
+              respelling: this.ruleBasedRespelling(clean),
+              urduPhonetic: ''
             };
             try { localStorage.setItem(cacheKey, JSON.stringify(result)); } catch (e) {}
             return result;
@@ -2541,8 +2835,17 @@ CRITICAL REQUIREMENT: The example sentence MUST be a real, meaningful scenario. 
       }
     } catch (e) {}
 
-    return { uk: `/${clean}/`, us: `/${clean}/` };
+    // 3. Fallback: Rule-based Authentic IPA and Respelling (NEVER return /${clean}/)
+    const fallback = {
+      uk: this.ruleBasedIPA(clean, 'uk'),
+      us: this.ruleBasedIPA(clean, 'us'),
+      respelling: this.ruleBasedRespelling(clean),
+      urduPhonetic: ''
+    };
+    try { localStorage.setItem(cacheKey, JSON.stringify(fallback)); } catch (e) {}
+    return fallback;
   },
+
 
   // --- AUTHENTIC CURATED COLLINS COBUILD ADVANCED DICTIONARY ENTRIES ---
   curatedCollins: {
@@ -2930,7 +3233,14 @@ CRITICAL REQUIREMENT: The example sentence MUST be a real, meaningful scenario. 
       const dictData = (dictResult.status === 'fulfilled' && dictResult.value) ? dictResult.value : null;
       const synonyms = (synsResult.status === 'fulfilled' && synsResult.value) ? synsResult.value : [];
       const wikiData = (wikiResult.status === 'fulfilled' && wikiResult.value) ? wikiResult.value : null;
-      const phones = (phonesResult.status === 'fulfilled' && phonesResult.value) ? phonesResult.value : { uk: `/${cleanWord.toLowerCase()}/`, us: `/${cleanWord.toLowerCase()}/` };
+      const phones = (phonesResult.status === 'fulfilled' && phonesResult.value)
+        ? phonesResult.value
+        : {
+            uk: this.ruleBasedIPA(cleanWord, 'uk'),
+            us: this.ruleBasedIPA(cleanWord, 'us'),
+            respelling: this.ruleBasedRespelling(cleanWord),
+            urduPhonetic: ''
+          };
       const collinsData = (collinsResult.status === 'fulfilled' && collinsResult.value) ? collinsResult.value : null;
 
       // If word is unfindable in Oxford/Google dictionary AND has no synonyms AND has no Collins, it's not an English word
@@ -2945,8 +3255,10 @@ CRITICAL REQUIREMENT: The example sentence MUST be a real, meaningful scenario. 
       const capitalizedWord = cleanWord.charAt(0).toUpperCase() + cleanWord.slice(1);
       const pos = (dictData && dictData.pos) ? dictData.pos : (collinsData && collinsData.definitions[0]?.pos ? collinsData.definitions[0].pos.toLowerCase() : "adj");
       const posShort = (pos.length > 4 ? pos.substring(0, 3) : pos) + '.';
-      const phoneticUK = phones.uk || (collinsData && collinsData.phonetic ? collinsData.phonetic : (dictData && dictData.phonetic ? dictData.phonetic : `/${cleanWord.toLowerCase()}/`));
+      const phoneticUK = phones.uk || (collinsData && collinsData.phonetic ? collinsData.phonetic : this.ruleBasedIPA(cleanWord, 'uk'));
       const phoneticUS = phones.us || phoneticUK;
+      const respelling = phones.respelling || this.ruleBasedRespelling(cleanWord);
+      const urduPhonetic = phones.urduPhonetic || '';
       const definition = (dictData && dictData.definition) ? dictData.definition : (collinsData && collinsData.definitions[0]?.explanation ? collinsData.definitions[0].explanation : `Meaning of "${capitalizedWord}".`);
       const sentenceEn = (dictData && dictData.example) ? dictData.example : (collinsData && collinsData.definitions[0]?.example ? collinsData.definitions[0].example : await this.getMeaningfulSentence(cleanWord, dictData));
       const sentenceUr = urduMeaning ? `اس جملے سے "${urduMeaning}" کا حقیقی اور روزمرہ استعمال واضح ہوتا ہے۔` : `Authentic sentence showing natural usage.`;
@@ -2959,6 +3271,8 @@ CRITICAL REQUIREMENT: The example sentence MUST be a real, meaningful scenario. 
         phoneticUK: phoneticUK,
         phoneticUS: phoneticUS,
         phonetic: phoneticUS,
+        respelling: respelling,
+        urduPhonetic: urduPhonetic,
         urduMeaning: urduMeaning || "معنی دستیاب ہے",
         urduDefinition: definition,
         forms: pos === 'noun' ? `pl.  ${capitalizedWord}s` : `form: ${capitalizedWord}`,
@@ -4455,8 +4769,11 @@ class VocabApp {
           id: `search-${Date.now()}`,
           word: auto.word,
           posShort: auto.pos || 'adj.',
-          phoneticUK: phones.uk || `/${auto.word.toLowerCase()}/`,
-          phoneticUS: phones.us || `/${auto.word.toLowerCase()}/`,
+          phoneticUK: phones.uk || OnlineLookupService.ruleBasedIPA(auto.word, 'uk'),
+          phoneticUS: phones.us || OnlineLookupService.ruleBasedIPA(auto.word, 'us'),
+          phonetic: phones.us || OnlineLookupService.ruleBasedIPA(auto.word, 'us'),
+          respelling: phones.respelling || OnlineLookupService.ruleBasedRespelling(auto.word),
+          urduPhonetic: phones.urduPhonetic || '',
           urduMeaning: auto.urdu || '',
           urduDefinition: (collins && collins.definitions[0]?.explanation) ? collins.definitions[0].explanation : `${auto.word} ka Urdu tarjuma: ${auto.urdu}`,
           forms: auto.pos === 'noun' ? `pl.  ${auto.word}s` : `form: ${auto.word}`,
@@ -4488,14 +4805,25 @@ class VocabApp {
       `;
       this.attachCardEventListeners(container, false, match);
 
-      if (!match.phoneticUK || !match.phoneticUS || match.phoneticUK === match.phoneticUS || match.phoneticUK === `/${match.word.toLowerCase()}/`) {
+      const cleanW = match.word.toLowerCase();
+      if (!match.phoneticUK || !match.phoneticUS || !match.respelling || match.phoneticUK === `/${cleanW}/` || match.phoneticUS === `/${cleanW}/`) {
         OnlineLookupService.fetchDualPhonetics(match.word).then(phones => {
-          if (phones && phones.uk) match.phoneticUK = phones.uk;
-          if (phones && phones.us) match.phoneticUS = phones.us;
-          const ukEl = container.querySelector('[data-phonetic-display="uk"]');
-          const usEl = container.querySelector('[data-phonetic-display="us"]');
-          if (ukEl && phones && phones.uk) ukEl.textContent = phones.uk;
-          if (usEl && phones && phones.us) usEl.textContent = phones.us;
+          if (phones) {
+            if (phones.uk && phones.uk !== `/${cleanW}/`) match.phoneticUK = phones.uk;
+            if (phones.us && phones.us !== `/${cleanW}/`) match.phoneticUS = phones.us;
+            if (phones.respelling) match.respelling = phones.respelling;
+            if (phones.urduPhonetic) match.urduPhonetic = phones.urduPhonetic;
+            const ukEl = container.querySelector('[data-phonetic-display="uk"]');
+            const usEl = container.querySelector('[data-phonetic-display="us"]');
+            const respEl = container.querySelector('[data-phonetic-display="respelling"]');
+            const audioRespEl = container.querySelector('[data-phonetic-display="audio-respelling"]');
+            const urduEl = container.querySelector('[data-phonetic-display="urdu"]');
+            if (ukEl && match.phoneticUK) ukEl.textContent = match.phoneticUK;
+            if (usEl && match.phoneticUS) usEl.textContent = match.phoneticUS;
+            if (respEl && match.respelling) respEl.textContent = `[ ${match.respelling} ]`;
+            if (audioRespEl && match.respelling) audioRespEl.textContent = `• [ ${match.respelling} ]`;
+            if (urduEl && match.urduPhonetic) urduEl.textContent = `(${match.urduPhonetic})`;
+          }
         });
       }
     } else {
@@ -4635,6 +4963,14 @@ class VocabApp {
 
     const isFav = storage.isFavorite(word.id);
     const todayDate = new Date().toLocaleDateString('en-US', { day: 'numeric', month: 'long' });
+    const cleanWord = (word.word || '').toLowerCase();
+    const quick = OnlineLookupService.getQuickPhonetics ? OnlineLookupService.getQuickPhonetics(word.word) : null;
+    const respelling = word.respelling || (quick ? quick.respelling : '') || (OnlineLookupService.ruleBasedRespelling ? OnlineLookupService.ruleBasedRespelling(word.word) : '');
+    const urduPhonetic = word.urduPhonetic || (quick ? quick.urduPhonetic : '');
+    let phoneticUS = word.phoneticUS || word.phonetic;
+    if (!phoneticUS || phoneticUS === `/${cleanWord}/`) {
+      phoneticUS = (quick && quick.us) ? quick.us : (OnlineLookupService.ruleBasedIPA ? OnlineLookupService.ruleBasedIPA(word.word, 'us') : '');
+    }
 
     this.todayContainer.innerHTML = `
       <div class="word-of-day-card">
@@ -4654,9 +4990,12 @@ class VocabApp {
 
         <div class="word-hero" style="margin-bottom: 12px;">
           <div class="word-hero-row">
-            <div class="word-title-wrap">
+            <div class="word-title-wrap" style="display: flex; align-items: baseline; gap: 8px; flex-wrap: wrap;">
               <h1 class="word-main-title" style="font-size: 1.85rem;">${word.word}</h1>
               <span class="word-pos-tag">[${word.posShort || 'n.'}]</span>
+              ${respelling ? `<span class="udict-respelling-badge" style="font-size: 0.88rem; padding: 2px 8px;">[ ${respelling} ]</span>` : ''}
+              ${urduPhonetic ? `<span class="udict-urdu-phonetic-badge" style="font-size: 0.92rem; padding: 1px 8px;">(${urduPhonetic})</span>` : ''}
+              ${phoneticUS ? `<span style="font-size: 0.88rem; color: var(--text-muted); font-weight: 500;">${phoneticUS}</span>` : ''}
             </div>
             <div style="display: flex; align-items: center; gap: 8px;">
               <button class="speaker-btn" data-speech-text="${word.word}" id="play-today-word" title="Listen to pronunciation">
@@ -4879,17 +5218,26 @@ class VocabApp {
       }
 
       if (!newWordObj) {
-        const [urduResult, dictResult, synsResult, wikiResult] = await Promise.allSettled([
+        const [urduResult, dictResult, synsResult, wikiResult, phonesResult] = await Promise.allSettled([
           OnlineLookupService.translate(query, 'auto', 'ur'),
           OnlineLookupService.getDictionaryData(query),
           OnlineLookupService.getSynonyms(query),
-          OnlineLookupService.fetchWikipediaSummary(query)
+          OnlineLookupService.fetchWikipediaSummary(query),
+          OnlineLookupService.fetchDualPhonetics(query)
         ]);
 
         const urduMeaning = (urduResult.status === 'fulfilled' && urduResult.value) ? urduResult.value.trim() : "";
         const dictData = (dictResult.status === 'fulfilled' && dictResult.value) ? dictResult.value : null;
         const synonyms = (synsResult.status === 'fulfilled' && synsResult.value) ? synsResult.value : [];
         const wikiData = (wikiResult.status === 'fulfilled' && wikiResult.value) ? wikiResult.value : null;
+        const phones = (phonesResult.status === 'fulfilled' && phonesResult.value)
+          ? phonesResult.value
+          : {
+              uk: OnlineLookupService.ruleBasedIPA(query, 'uk'),
+              us: OnlineLookupService.ruleBasedIPA(query, 'us'),
+              respelling: OnlineLookupService.ruleBasedRespelling(query),
+              urduPhonetic: ''
+            };
         const cleanWord = query.charAt(0).toUpperCase() + query.slice(1);
 
         const isUnknown = !dictData && synonyms.length === 0 && (!urduMeaning || urduMeaning.toLowerCase() === query.toLowerCase());
@@ -4907,7 +5255,10 @@ class VocabApp {
 
         const pos = dictData ? dictData.pos : "word";
         const posShort = pos.substring(0, 3) + '.';
-        const phonetic = dictData ? dictData.phonetic : `/${query}/`;
+        const phoneticUK = phones.uk || (dictData && dictData.phonetic ? dictData.phonetic : OnlineLookupService.ruleBasedIPA(cleanWord, 'uk'));
+        const phoneticUS = phones.us || phoneticUK;
+        const respelling = phones.respelling || OnlineLookupService.ruleBasedRespelling(cleanWord);
+        const urduPhonetic = phones.urduPhonetic || '';
         const definition = dictData && dictData.definition ? dictData.definition : `Contextual definition and usage of "${cleanWord}".`;
         const sentenceEn = (dictData && dictData.example) ? dictData.example : `Learning how native speakers use "${cleanWord}" helps improve spoken fluency.`;
         const sentenceUr = `اس جملے سے "${urduMeaning || cleanWord}" کا حقیقی اور روزمرہ استعمال واضح ہوتا ہے۔`;
@@ -4917,9 +5268,11 @@ class VocabApp {
           word: cleanWord,
           posShort: posShort,
           partOfSpeech: pos,
-          phoneticUK: phonetic,
-          phoneticUS: phonetic,
-          phonetic: phonetic,
+          phoneticUK: phoneticUK,
+          phoneticUS: phoneticUS,
+          phonetic: phoneticUS,
+          respelling: respelling,
+          urduPhonetic: urduPhonetic,
           urduMeaning: urduMeaning || "معنی دستیاب ہے",
           urduDefinition: definition,
           forms: pos === 'noun' ? `pl.  ${cleanWord}s` : `form: ${cleanWord}`,
@@ -5091,8 +5444,19 @@ class VocabApp {
 
   buildDictionaryCardBodyHtml(w, activeTab = 'concise', isModal = false) {
     const isFav = storage.isFavorite(w.id);
-    const ukPhonetic = w.phoneticUK || w.phonetic || `/${w.word}/`;
-    const usPhonetic = w.phoneticUS || w.phonetic || `/${w.word}/`;
+    const cleanWord = (w.word || '').toLowerCase();
+    const quick = OnlineLookupService.getQuickPhonetics ? OnlineLookupService.getQuickPhonetics(w.word) : null;
+    const respelling = w.respelling || (quick ? quick.respelling : '') || (OnlineLookupService.ruleBasedRespelling ? OnlineLookupService.ruleBasedRespelling(w.word) : '');
+    const urduPhonetic = w.urduPhonetic || (quick ? quick.urduPhonetic : '');
+
+    let ukPhonetic = w.phoneticUK;
+    if (!ukPhonetic || ukPhonetic === `/${cleanWord}/` || ukPhonetic === `/${w.word}/`) {
+      ukPhonetic = (quick && quick.uk && quick.uk !== `/${cleanWord}/`) ? quick.uk : (OnlineLookupService.ruleBasedIPA ? OnlineLookupService.ruleBasedIPA(w.word, 'uk') : '');
+    }
+    let usPhonetic = w.phoneticUS;
+    if (!usPhonetic || usPhonetic === `/${cleanWord}/` || usPhonetic === `/${w.word}/`) {
+      usPhonetic = (quick && quick.us && quick.us !== `/${cleanWord}/`) ? quick.us : (OnlineLookupService.ruleBasedIPA ? OnlineLookupService.ruleBasedIPA(w.word, 'us') : '');
+    }
     const formsText = w.forms || `adv.  ${w.word}ly`;
 
     const badges = (w.tags && w.tags.length > 0) ? w.tags : [
@@ -5195,7 +5559,11 @@ class VocabApp {
       <!-- Hero Top Bar (Screenshot 3) -->
       <div class="udict-hero-top">
         <div class="udict-title-bar">
-          <h1 class="udict-main-word">${w.word}</h1>
+          <div class="udict-word-header-wrap">
+            <h1 class="udict-main-word">${w.word}</h1>
+            ${respelling ? `<span class="udict-respelling-badge" data-phonetic-display="respelling">[ ${respelling} ]</span>` : ''}
+            ${urduPhonetic ? `<span class="udict-urdu-phonetic-badge" data-phonetic-display="urdu">(${urduPhonetic})</span>` : ''}
+          </div>
           <div class="udict-actions-group">
             <button class="udict-action-icon-btn star-fav-btn ${isFav ? 'active' : ''}" ${isModal ? 'id="modal-fav-btn"' : `data-fav-id="${w.id}"`} title="${isFav ? 'Remove from favorites' : 'Add to favorites'}">
               <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="${isFav ? '#eab308' : 'none'}" stroke="${isFav ? '#eab308' : 'currentColor'}" stroke-width="2">
@@ -5221,6 +5589,7 @@ class VocabApp {
             </button>
             <span class="udict-accent-label">US</span>
             <span class="udict-accent-phonetic" data-phonetic-display="us">${usPhonetic}</span>
+            ${respelling ? `<span class="udict-accent-respelling" data-phonetic-display="audio-respelling">• [ ${respelling} ]</span>` : ''}
           </div>
         </div>
       </div>
@@ -5400,20 +5769,30 @@ class VocabApp {
   attachCardEventListeners(container, isModal = false, currentWord = null) {
     if (!container) return;
 
-    // Auto-enrich distinct UK and US phonetics if identical or placeholder
+    // Auto-enrich distinct UK and US phonetics and respelling if missing or placeholder
     if (currentWord && currentWord.word) {
-      const isMissingOrSame = !currentWord.phoneticUK || !currentWord.phoneticUS || 
-                              currentWord.phoneticUK === currentWord.phoneticUS || 
-                              currentWord.phoneticUK === `/${currentWord.word.toLowerCase()}/`;
-      if (isMissingOrSame) {
+      const cleanW = currentWord.word.toLowerCase();
+      const isMissingOrPlaceholder = !currentWord.phoneticUK || !currentWord.phoneticUS || !currentWord.respelling ||
+                                     currentWord.phoneticUK === `/${cleanW}/` || currentWord.phoneticUS === `/${cleanW}/`;
+      if (isMissingOrPlaceholder) {
         OnlineLookupService.fetchDualPhonetics(currentWord.word).then(phones => {
-          if (phones && (phones.uk || phones.us)) {
-            currentWord.phoneticUK = phones.uk || currentWord.phoneticUK;
-            currentWord.phoneticUS = phones.us || currentWord.phoneticUS;
+          if (phones) {
+            if (phones.uk && phones.uk !== `/${cleanW}/`) currentWord.phoneticUK = phones.uk;
+            if (phones.us && phones.us !== `/${cleanW}/`) currentWord.phoneticUS = phones.us;
+            if (phones.respelling) currentWord.respelling = phones.respelling;
+            if (phones.urduPhonetic) currentWord.urduPhonetic = phones.urduPhonetic;
+
             const ukEl = container.querySelector('[data-phonetic-display="uk"]');
             const usEl = container.querySelector('[data-phonetic-display="us"]');
-            if (ukEl && phones.uk) ukEl.textContent = phones.uk;
-            if (usEl && phones.us) usEl.textContent = phones.us;
+            const respEl = container.querySelector('[data-phonetic-display="respelling"]');
+            const audioRespEl = container.querySelector('[data-phonetic-display="audio-respelling"]');
+            const urduEl = container.querySelector('[data-phonetic-display="urdu"]');
+
+            if (ukEl && currentWord.phoneticUK) ukEl.textContent = currentWord.phoneticUK;
+            if (usEl && currentWord.phoneticUS) usEl.textContent = currentWord.phoneticUS;
+            if (respEl && currentWord.respelling) respEl.textContent = `[ ${currentWord.respelling} ]`;
+            if (audioRespEl && currentWord.respelling) audioRespEl.textContent = `• [ ${currentWord.respelling} ]`;
+            if (urduEl && currentWord.urduPhonetic) urduEl.textContent = `(${currentWord.urduPhonetic})`;
           }
         });
       }
