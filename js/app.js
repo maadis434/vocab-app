@@ -4834,30 +4834,7 @@ class VocabApp {
       ]
     };
 
-    // 8. WordNet Data
-    const wordnetData = w.wordnet || {
-      title: "English Dictionary",
-      entries: [
-        {
-          pos: w.posShort || "adj.",
-          senses: [
-            {
-              num: 1,
-              def: "contrary to your interests or welfare",
-              quote: `${w.word} circumstances`,
-              synonyms: ["harmful", "inauspicious", "untoward"]
-            },
-            {
-              num: 2,
-              def: "in an opposing direction",
-              quote: `${w.word} currents`,
-              synonyms: ["contrary"]
-            }
-          ]
-        }
-      ]
-    };
-
+    if (activeTab === 'wordnet') activeTab = 'concise';
     const tabAttr = isModal ? 'data-modal-dict-tab' : 'data-dict-tab';
 
     return `
@@ -4894,11 +4871,10 @@ class VocabApp {
         </div>
       </div>
 
-      <!-- 3 Source Tabs: Concise | Collins | WordNet (Screenshot 3) -->
+      <!-- 2 Source Tabs: Concise | Collins -->
       <div class="udict-nav-tabs">
         <button class="udict-tab-btn ${activeTab === 'concise' ? 'active' : ''}" ${tabAttr}="concise">Concise</button>
         <button class="udict-tab-btn ${activeTab === 'collins' ? 'active' : ''}" ${tabAttr}="collins">Collins</button>
-        <button class="udict-tab-btn ${activeTab === 'wordnet' ? 'active' : ''}" ${tabAttr}="wordnet">WordNet</button>
       </div>
 
       <!-- TAB 1: CONCISE (Screenshots 3-8) -->
@@ -5062,30 +5038,6 @@ class VocabApp {
               ${def.example ? `<div class="udict-cobuild-bullet">• ${this.highlightWordInSentence(def.example, w.word)}</div>` : ''}
             </div>
           </div>
-        `).join('')}
-      ` : ''}
-
-      <!-- TAB 3: WORDNET (Screenshot 10) -->
-      ${activeTab === 'wordnet' ? `
-        <div class="udict-cobuild-header">${wordnetData.title}</div>
-        ${wordnetData.entries.map(entry => `
-          <div class="udict-wordnet-pos-head">${entry.pos}</div>
-          ${entry.senses.map(sense => `
-            <div class="udict-wordnet-sense-row">
-              <div class="udict-sentence-num">${sense.num}</div>
-              <div>
-                <div>${sense.def}</div>
-                ${sense.quote ? `<div class="udict-wordnet-quote">${sense.quote}</div>` : ''}
-                ${sense.synonyms && sense.synonyms.length > 0 ? `
-                  <div class="udict-wordnet-syns">
-                    Synonyms: ${sense.synonyms.map((syn, synIdx) => `
-                      <span class="udict-syn-word-link" data-word-search="${syn}">${syn}</span>${synIdx < sense.synonyms.length - 1 ? '<span class="udict-syn-slash"> / </span>' : ''}
-                    `).join('')}
-                  </div>
-                ` : ''}
-              </div>
-            </div>
-          `).join('')}
         `).join('')}
       ` : ''}
     `;

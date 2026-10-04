@@ -2307,37 +2307,6 @@ body {
   color: var(--text-muted);
 }
 
-/* WordNet Tab Content */
-.udict-wordnet-pos-head {
-  font-style: italic;
-  font-size: 1.1rem;
-  color: var(--text-faint);
-  margin: 16px 0 8px 0;
-  font-weight: 700;
-}
-
-.udict-wordnet-sense-row {
-  display: flex;
-  gap: 10px;
-  margin-bottom: 14px;
-  font-size: 0.94rem;
-  line-height: 1.55;
-  color: var(--text-title);
-}
-
-.udict-wordnet-quote {
-  font-size: 0.9rem;
-  color: var(--text-muted);
-  font-style: italic;
-  margin-top: 4px;
-}
-
-.udict-wordnet-syns {
-  font-size: 0.86rem;
-  margin-top: 4px;
-  color: var(--text-muted);
-}
-
 /* Copy Toast Indicator */
 .toast-notice {
   position: fixed;
