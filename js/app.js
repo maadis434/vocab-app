@@ -3120,6 +3120,10 @@ class VocabApp {
     this.grammarError = null;
     this.grammarLastCheckedSentence = '';
 
+    // Discover Tab Dynamic Batch
+    this.discoverWords = [];
+    this.generateDiscoverBatch(true);
+
     this.initElements();
     this.initEvents();
     this.initSplashScreen();
@@ -3533,6 +3537,9 @@ class VocabApp {
         }
       });
     });
+
+    // Discover Tab Pull-To-Refresh Gesture
+    this.initDiscoverPullToRefresh();
   }
 
   hideAutocomplete() {
@@ -5185,19 +5192,251 @@ class VocabApp {
   }
 
   // --- 3. DISCOVER ---
+  generateDiscoverBatch(forceNew = false) {
+    const pool = [];
+    const poolSeen = new Set();
+
+    // 1. Add default comprehensive words first
+    if (typeof defaultVocabulary !== 'undefined' && Array.isArray(defaultVocabulary)) {
+      defaultVocabulary.forEach(w => {
+        if (!w || !w.word) return;
+        const k = w.word.toLowerCase();
+        if (!poolSeen.has(k)) {
+          poolSeen.add(k);
+          pool.push(w);
+        }
+      });
+    }
+
+    // 2. Add words from quickAutocompleteIndex (850+ words with Urdu meanings)
+    if (typeof quickAutocompleteIndex !== 'undefined' && Array.isArray(quickAutocompleteIndex)) {
+      quickAutocompleteIndex.forEach(item => {
+        if (!item || !item.word || !item.urdu) return;
+        const k = item.word.toLowerCase();
+        if (!poolSeen.has(k) && k.length >= 3) {
+          poolSeen.add(k);
+          const capitalized = item.word.charAt(0).toUpperCase() + item.word.slice(1);
+          pool.push({
+            id: 'disc-' + k,
+            word: capitalized,
+            posShort: item.pos || 'n.',
+            urduMeaning: item.urdu,
+            phonetic: `/${k}/`,
+            sentences: [
+              {
+                en: `Developing a deeper understanding of ${item.word} is valuable.`,
+                ur: `${item.urdu.split('/')[0]} کے بارے میں تفصیلی سمجھ بوجھ فائدہ مند ہے۔`
+              }
+            ]
+          });
+        }
+      });
+    }
+
+    // 3. Track seen words in sessionStorage so each new pull/session gives totally new words
+    let seenKeys = [];
+    try {
+      seenKeys = JSON.parse(sessionStorage.getItem('seen_discover_words') || '[]');
+    } catch(e) {
+      seenKeys = [];
+    }
+
+    let candidates = pool.filter(w => !seenKeys.includes(w.word.toLowerCase()));
+
+    // Reset if pool is exhausted or fewer than 20 left
+    if (candidates.length < 20) {
+      seenKeys = [];
+      candidates = [...pool];
+    }
+
+    // Fisher-Yates Shuffle
+    for (let i = candidates.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [candidates[i], candidates[j]] = [candidates[j], candidates[i]];
+    }
+
+    const batch = candidates.slice(0, 20);
+
+    // Save seen keys in sessionStorage
+    batch.forEach(w => seenKeys.push(w.word.toLowerCase()));
+    try {
+      sessionStorage.setItem('seen_discover_words', JSON.stringify(seenKeys));
+    } catch(e) {}
+
+    this.discoverWords = batch;
+
+    // Register all batch words in this.words for modal lookup and favorites
+    batch.forEach(w => {
+      if (!this.words.some(x => x.id === w.id || x.word.toLowerCase() === w.word.toLowerCase())) {
+        this.words.push(w);
+      }
+    });
+
+    return batch;
+  }
+
+  async triggerDiscoverRefresh() {
+    const indicator = document.getElementById('discover-pull-indicator');
+    const pullText = document.getElementById('discover-pull-text');
+    if (indicator) {
+      indicator.classList.remove('pulling', 'ready');
+      indicator.classList.add('refreshing');
+      if (pullText) pullText.textContent = 'Generating new words...';
+      indicator.style.height = '44px';
+    }
+
+    await new Promise(r => setTimeout(r, 400));
+
+    this.generateDiscoverBatch(true);
+    this.renderDiscover();
+
+    if (indicator) {
+      setTimeout(() => {
+        indicator.classList.remove('refreshing', 'visible');
+        indicator.style.height = '0px';
+        if (pullText) pullText.textContent = 'Pull down to refresh';
+      }, 200);
+    }
+  }
+
+  initDiscoverPullToRefresh() {
+    const discoverTab = document.getElementById('discover-tab');
+    const appBody = document.querySelector('.app-body');
+    const indicator = document.getElementById('discover-pull-indicator');
+    const pullText = document.getElementById('discover-pull-text');
+    if (!discoverTab || !appBody || !indicator) return;
+
+    let startY = 0;
+    let startX = 0;
+    let isPulling = false;
+    let pullDistance = 0;
+    const threshold = 46;
+    const maxPull = 75;
+
+    const resetIndicator = () => {
+      indicator.classList.remove('pulling', 'ready');
+      indicator.style.height = '0px';
+      setTimeout(() => {
+        if (!indicator.classList.contains('refreshing')) {
+          indicator.classList.remove('visible');
+          if (pullText) pullText.textContent = 'Pull down to refresh';
+        }
+      }, 200);
+    };
+
+    // Touch Handlers for Mobile Devices
+    appBody.addEventListener('touchstart', (e) => {
+      if (this.activeTab !== 'discover') return;
+      if (appBody.scrollTop > 2) return;
+      startY = e.touches[0].pageY;
+      startX = e.touches[0].pageX;
+      isPulling = true;
+      pullDistance = 0;
+    }, { passive: true });
+
+    appBody.addEventListener('touchmove', (e) => {
+      if (!isPulling || this.activeTab !== 'discover') return;
+      if (appBody.scrollTop > 2) {
+        isPulling = false;
+        resetIndicator();
+        return;
+      }
+      const currentY = e.touches[0].pageY;
+      const currentX = e.touches[0].pageX;
+      const deltaY = currentY - startY;
+      const deltaX = currentX - startX;
+
+      if (deltaY > 0 && Math.abs(deltaY) > Math.abs(deltaX)) {
+        pullDistance = Math.min(deltaY * 0.42, maxPull);
+        indicator.classList.add('visible', 'pulling');
+        indicator.style.height = `${pullDistance}px`;
+
+        if (pullDistance >= threshold) {
+          indicator.classList.add('ready');
+          if (pullText) pullText.textContent = 'Release to refresh';
+        } else {
+          indicator.classList.remove('ready');
+          if (pullText) pullText.textContent = 'Pull down to refresh';
+        }
+      }
+    }, { passive: true });
+
+    const finishPull = async () => {
+      if (!isPulling || this.activeTab !== 'discover') return;
+      isPulling = false;
+      if (pullDistance >= threshold) {
+        await this.triggerDiscoverRefresh();
+      } else {
+        resetIndicator();
+      }
+      pullDistance = 0;
+    };
+
+    appBody.addEventListener('touchend', finishPull);
+    appBody.addEventListener('touchcancel', () => {
+      isPulling = false;
+      resetIndicator();
+      pullDistance = 0;
+    });
+
+    // Mouse Drag Handlers for Desktop Testing
+    let isMouseDown = false;
+    appBody.addEventListener('mousedown', (e) => {
+      if (e.button !== 0 || this.activeTab !== 'discover') return;
+      if (appBody.scrollTop > 2) return;
+      startY = e.pageY;
+      isMouseDown = true;
+      pullDistance = 0;
+    });
+
+    window.addEventListener('mousemove', (e) => {
+      if (!isMouseDown || this.activeTab !== 'discover') return;
+      if (appBody.scrollTop > 2) {
+        isMouseDown = false;
+        resetIndicator();
+        return;
+      }
+      const deltaY = e.pageY - startY;
+      if (deltaY > 0) {
+        pullDistance = Math.min(deltaY * 0.42, maxPull);
+        indicator.classList.add('visible', 'pulling');
+        indicator.style.height = `${pullDistance}px`;
+
+        if (pullDistance >= threshold) {
+          indicator.classList.add('ready');
+          if (pullText) pullText.textContent = 'Release to refresh';
+        } else {
+          indicator.classList.remove('ready');
+          if (pullText) pullText.textContent = 'Pull down to refresh';
+        }
+      }
+    });
+
+    window.addEventListener('mouseup', () => {
+      if (isMouseDown && this.activeTab === 'discover') {
+        isMouseDown = false;
+        finishPull();
+      }
+    });
+  }
+
   renderDiscover() {
     if (!this.discoverContainer) return;
 
+    if (!this.discoverWords || this.discoverWords.length === 0) {
+      this.generateDiscoverBatch(false);
+    }
+
     this.discoverContainer.innerHTML = `
-      <div>
-        ${this.words.map(w => `
+      <div class="discover-list-fade-in">
+        ${this.discoverWords.map(w => `
           <div class="discover-list-row" data-open-word-id="${w.id}">
             <div class="discover-row-left">
               <span class="discover-word-text">${w.word}</span>
-              <span class="word-pos-tag" style="font-size: 0.82rem;">[${w.posShort}]</span>
+              <span class="word-pos-tag" style="font-size: 0.82rem;">[${w.posShort || 'n.'}]</span>
             </div>
             <div class="discover-row-right urdu-text">
-              ${w.urduMeaning.split('/')[0]}
+              ${(w.urduMeaning || '').split('/')[0]}
             </div>
           </div>
         `).join('')}

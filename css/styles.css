@@ -671,6 +671,71 @@ body {
 }
 
 /* ==========================================================
+   DISCOVER PULL-TO-REFRESH INDICATOR (Apple Native Feel)
+   ========================================================== */
+.discover-pull-indicator {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  height: 0px;
+  overflow: hidden;
+  opacity: 0;
+  transition: height 0.22s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.2s ease;
+  color: var(--text-muted);
+  font-size: 0.82rem;
+  font-weight: 600;
+  user-select: none;
+  pointer-events: none;
+  margin-bottom: 4px;
+}
+
+.discover-pull-indicator.pulling {
+  transition: none;
+}
+
+.discover-pull-indicator.visible {
+  opacity: 1;
+}
+
+.discover-pull-indicator.refreshing {
+  height: 44px;
+  opacity: 1;
+}
+
+.discover-pull-spinner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.discover-pull-icon {
+  color: #0284c7;
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+[data-theme="dark"] .discover-pull-icon {
+  color: #38bdf8;
+}
+
+.discover-pull-indicator.ready .discover-pull-icon {
+  transform: rotate(180deg);
+}
+
+.discover-pull-indicator.refreshing .discover-pull-icon {
+  animation: appleSpin 0.75s linear infinite;
+}
+
+@keyframes appleSpin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.discover-list-fade-in {
+  animation: appleFadeIn 0.25s ease-out;
+}
+
+/* ==========================================================
    MODAL BOTTOM SHEET (Apple Notes Detail Card)
    ========================================================== */
 .word-modal-backdrop {
