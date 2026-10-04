@@ -5457,7 +5457,6 @@ class VocabApp {
     if (!usPhonetic || usPhonetic === `/${cleanWord}/` || usPhonetic === `/${w.word}/`) {
       usPhonetic = (quick && quick.us && quick.us !== `/${cleanWord}/`) ? quick.us : (OnlineLookupService.ruleBasedIPA ? OnlineLookupService.ruleBasedIPA(w.word, 'us') : '');
     }
-    const formsText = w.forms || `adv.  ${w.word}ly`;
 
     const badges = (w.tags && w.tags.length > 0) ? w.tags : [
       { text: "#Top 3500", color: "blue" },
@@ -5606,12 +5605,6 @@ class VocabApp {
         <div class="udict-concise-meaning-row">
           <span class="udict-concise-pos">${w.posShort || 'adj.'}</span>
           <span class="udict-concise-urdu urdu-text">${w.urduMeaning || ''}</span>
-        </div>
-
-        <!-- Grammatical Forms / Inflections -->
-        <div class="udict-concise-forms-row">
-          <span class="udict-forms-label">${formsText.split(' ')[0]}</span>
-          <span class="udict-forms-val">${formsText.replace(/^[a-z]+\.\s*/, '')}</span>
         </div>
 
         <!-- 1. Bilingual Sentences Section (Screenshots 3 & 4) -->
