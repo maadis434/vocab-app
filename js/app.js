@@ -5468,26 +5468,29 @@ class VocabApp {
       { text: "#GMAT", color: "coral" }
     ];
 
-    // 1. Bilingual Sentences (Dual English with target word highlighted + Urdu translation beneath)
-    const bilingualSentences = (w.bilingualSentences && w.bilingualSentences.length > 0)
+    // 1. Unified Example Sentences (English + Urdu Translation, Zero Clutter)
+    const exampleSentences = (w.bilingualSentences && w.bilingualSentences.length > 0)
       ? w.bilingualSentences
       : (w.sentences && w.sentences.length > 0 && w.sentences[0].ur)
-        ? w.sentences.map((s, i) => ({ num: s.num || i + 1, en: s.en, ur: s.ur }))
-        : [
-            { num: 1, en: `There were no ${w.word} toxicological effects.`, ur: `کوئی منفی زہریلا اثرات نہیں تھے ۔` },
-            { num: 2, en: `The improper use of medicine could lead to severe ${w.word} reactions.`, ur: `دوا کا غلط استعمال شدید منفی ردعمل کا باعث بن سکتا ہے۔` }
-          ];
+        ? w.sentences.map((s, i) => ({ num: s.num || i + 1, en: s.en, ur: s.ur, meaning: s.meaning || '' }))
+        : (w.sampleSentences && w.sampleSentences.length > 0)
+          ? w.sampleSentences.map((s, i) => ({ num: s.num || i + 1, en: s.en, ur: s.ur || (w.urduMeaning ? `اس جملے سے "${w.urduMeaning}" کا حقیقی اور روزمرہ استعمال واضح ہوتا ہے۔` : ''), meaning: s.meaning || '' }))
+          : (w.sentences && w.sentences.length > 0)
+            ? w.sentences.map((s, i) => ({ num: s.num || i + 1, en: s.en, ur: s.ur || (w.urduMeaning ? `اس جملے سے "${w.urduMeaning}" کا حقیقی اور روزمرہ استعمال واضح ہوتا ہے۔` : ''), meaning: s.meaning || '' }))
+            : [
+                { num: 1, en: `There were no ${w.word} toxicological effects.`, ur: `اس کے کوئی منفی زہریلے اثرات نہیں تھے ۔`, meaning: 'منفی' },
+                { num: 2, en: `The improper use of medicine could lead to severe ${w.word} reactions.`, ur: `دوا کا غلط استعمال شدید نقصان دہ ردعمل کا باعث بن سکتا ہے۔`, meaning: 'نقصان دہ' }
+              ];
 
-    // 2. Sample Sentences (English sentences with Collins / authentic source attribution)
-    const sampleSentences = (w.sampleSentences && w.sampleSentences.length > 0)
-      ? w.sampleSentences
-      : (w.sentences && w.sentences.length > 0)
-        ? w.sentences.map((s, i) => ({ num: s.num || i + 1, en: s.en, source: s.source || "Collins Dictionary" }))
-        : [
-            { num: 1, en: `There were no ${w.word} toxicological effects.`, source: "Collins Dictionary" },
-            { num: 2, en: `The improper use of medicine could lead to severe ${w.word} reactions.`, source: "Collins Dictionary" },
-            { num: 3, en: `Inflation is considered to be undesirable because of its ${w.word} effects on income distribution.`, source: "Collins Dictionary" }
-          ];
+    // Extract unique meanings for chips (only show chips if more than 1 distinct meaning exists)
+    const chipSet = new Set();
+    exampleSentences.forEach(s => {
+      if (s.meaning && s.meaning.trim()) chipSet.add(s.meaning.trim());
+    });
+    if (chipSet.size === 0 && w.urduMeaning) {
+      w.urduMeaning.split(/[؛;,/]+/).map(p => p.trim()).filter(p => p.length >= 2).forEach(p => chipSet.add(p));
+    }
+    const filterChips = chipSet.size > 1 ? ['All', ...Array.from(chipSet)] : [];
 
     // 3. Synonyms & Antonyms (Multiple senses with SYN and ANT badges)
     const synAntList = (w.synonymsAntonymsList && w.synonymsAntonymsList.length > 0)
@@ -5607,76 +5610,35 @@ class VocabApp {
           <span class="udict-concise-urdu urdu-text">${w.urduMeaning || ''}</span>
         </div>
 
-        <!-- 1. Bilingual Sentences Section (Screenshots 3 & 4) -->
+        <!-- 1. Unified Example Sentences Section (Tareeqa 1 + 3 Combined) -->
         <div class="udict-section-card" style="border-top: none; padding-top: 0; margin-top: 0;">
           <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; flex-wrap: wrap; gap: 8px;">
-            <h3 class="udict-section-title" style="margin-bottom: 0;">Bilingual Sentences</h3>
-            <div class="udict-filter-chips" data-card-bilingual-chips>
-              ${(() => {
-                const chipSet = new Set();
-                bilingualSentences.forEach(s => {
-                  if (s.meaning && s.meaning.trim()) chipSet.add(s.meaning.trim());
-                });
-                if (chipSet.size === 0 && w.urduMeaning) {
-                  w.urduMeaning.split(/[؛;,/]+/).map(p => p.trim()).filter(p => p.length >= 2).forEach(p => chipSet.add(p));
-                }
-                const chips = ['All', ...Array.from(chipSet)];
-                return chips.map((chip, cIdx) => `
+            <h3 class="udict-section-title" style="margin-bottom: 0;">Example Sentences</h3>
+            ${filterChips.length > 0 ? `
+              <div class="udict-filter-chips" data-card-bilingual-chips>
+                ${filterChips.map((chip, cIdx) => `
                   <span class="udict-filter-chip ${cIdx === 0 ? 'active' : ''}" data-card-bilingual-chip="${chip}">${chip}</span>
-                `).join('');
-              })()}
-            </div>
+                `).join('')}
+              </div>
+            ` : ''}
           </div>
 
           <div class="udict-sentences-list" data-card-bilingual-list>
-            ${bilingualSentences.slice(0, 3).map((s, idx) => {
+            ${exampleSentences.slice(0, 3).map((s, idx) => {
               const highlightedEn = this.highlightWordInSentence(s.en, w.word);
-              const highlightedUr = this.highlightUrduWord(s.ur, w.urduMeaning);
+              const highlightedUr = s.ur ? this.highlightUrduWord(s.ur, w.urduMeaning) : '';
               return `
                 <div class="udict-sentence-item udict-bilingual-item" data-sentence-meaning="${s.meaning || ''}">
                   <div class="udict-sentence-num">${s.num || idx + 1}</div>
-                  <div class="udict-sentence-body">
+                  <div class="udict-sentence-body" style="padding-right: 0;">
                     <div class="udict-sentence-en">${highlightedEn}</div>
-                    ${s.ur ? `<div class="udict-sentence-ur urdu-text">${highlightedUr}</div>` : ''}
-                  </div>
-                  <div class="udict-sentence-actions">
-                    <button class="udict-sent-icon-btn" data-sentence-speech="${encodeURIComponent(s.en)}" title="Listen sentence">
-                      <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg>
-                    </button>
+                    ${highlightedUr ? `<div class="udict-sentence-ur urdu-text">${highlightedUr}</div>` : ''}
                   </div>
                 </div>
               `;
             }).join('')}
           </div>
-          <a class="udict-more-link" href="#" data-more-sentences="bilingual">More &gt;</a>
-        </div>
-
-        <!-- 2. Sample Sentences Section (Screenshots 4 & 5) -->
-        <div class="udict-section-card">
-          <div class="udict-sentences-header">
-            <h3 class="udict-section-title">Sample Sentences</h3>
-          </div>
-
-          <div class="udict-sentences-list">
-            ${sampleSentences.slice(0, 3).map((s, idx) => {
-              const highlighted = this.highlightWordInSentence(s.en, w.word);
-              return `
-                <div class="udict-sentence-item">
-                  <div class="udict-sentence-num">${s.num || idx + 1}</div>
-                  <div class="udict-sentence-body">
-                    <div class="udict-sentence-en">${highlighted}</div>
-                    <span class="udict-sentence-source">${s.source || 'Collins Dictionary'}</span>
-                  </div>
-                  <div class="udict-sentence-actions">
-                    <button class="udict-sent-icon-btn" data-sentence-speech="${encodeURIComponent(s.en)}" title="Listen sentence">
-                      <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg>
-                    </button>
-                  </div>
-                </div>
-              `;
-            }).join('')}
-          </div>
-          <a class="udict-more-link" href="#" data-more-sentences="sample">More &gt;</a>
+          <a class="udict-more-link" href="#" data-more-sentences="all">More &gt;</a>
         </div>
 
         <!-- 3. Synonyms & Antonyms Card (Screenshots 5 & 6) -->
@@ -6398,28 +6360,37 @@ class VocabApp {
       if (e.target === modal) modal.style.display = 'none';
     };
 
-    if (type === 'bilingual') {
-      if (titleEl) titleEl.textContent = 'Bilingual Sentences';
+    if (titleEl) titleEl.textContent = 'Example Sentences';
 
-      const bilingualSentences = (wordItem.bilingualSentences && wordItem.bilingualSentences.length > 0)
-        ? wordItem.bilingualSentences
-        : (wordItem.sentences && wordItem.sentences.length > 0)
-          ? wordItem.sentences
+    const rawList = (wordItem.bilingualSentences && wordItem.bilingualSentences.length > 0)
+      ? wordItem.bilingualSentences
+      : (wordItem.sentences && wordItem.sentences.length > 0)
+        ? wordItem.sentences
+        : (wordItem.sampleSentences && wordItem.sampleSentences.length > 0)
+          ? wordItem.sampleSentences
           : [
               { num: 1, en: `The word ${wordItem.word} is frequently used in modern literature.`, ur: `${wordItem.word} کا لفظ جدید ادب میں بکثرت استعمال ہوتا ہے۔`, meaning: wordItem.urduMeaning }
             ];
 
-      // Extract unique meanings for chips
-      const chipSet = new Set();
-      bilingualSentences.forEach(s => {
-        if (s.meaning && s.meaning.trim()) chipSet.add(s.meaning.trim());
-      });
-      if (chipSet.size === 0 && wordItem.urduMeaning) {
-        wordItem.urduMeaning.split(/[؛;,/]+/).map(p => p.trim()).filter(p => p.length >= 2).forEach(p => chipSet.add(p));
-      }
-      const filterChips = ['All', ...Array.from(chipSet)];
+    const allSentences = rawList.map((s, idx) => ({
+      num: s.num || idx + 1,
+      en: s.en,
+      ur: s.ur || (wordItem.urduMeaning ? `اس جملے سے "${wordItem.urduMeaning}" کا حقیقی اور روزمرہ استعمال واضح ہوتا ہے۔` : ''),
+      meaning: s.meaning || ''
+    }));
 
-      if (filterBar) {
+    // Extract unique meanings for chips
+    const chipSet = new Set();
+    allSentences.forEach(s => {
+      if (s.meaning && s.meaning.trim()) chipSet.add(s.meaning.trim());
+    });
+    if (chipSet.size === 0 && wordItem.urduMeaning) {
+      wordItem.urduMeaning.split(/[؛;,/]+/).map(p => p.trim()).filter(p => p.length >= 2).forEach(p => chipSet.add(p));
+    }
+    const filterChips = chipSet.size > 1 ? ['All', ...Array.from(chipSet)] : [];
+
+    if (filterBar) {
+      if (filterChips.length > 0) {
         filterBar.style.display = 'flex';
         filterBar.innerHTML = filterChips.map((chip, idx) => `
           <button type="button" class="more-filter-chip ${idx === 0 ? 'active' : ''}" data-filter-chip="${chip}">${chip}</button>
@@ -6438,71 +6409,25 @@ class VocabApp {
             });
           };
         });
-      }
-
-      if (listEl) {
-        listEl.innerHTML = bilingualSentences.map((s, idx) => {
-          const highlightedEn = this.highlightWordInSentence(s.en, wordItem.word);
-          const highlightedUr = this.highlightUrduWord(s.ur, wordItem.urduMeaning);
-          return `
-            <div class="more-sent-item" data-meaning="${s.meaning || ''}">
-              <div class="more-sent-num">${s.num || idx + 1}</div>
-              <div class="more-sent-body">
-                <div class="more-sent-en">${highlightedEn}</div>
-                ${s.ur ? `<div class="more-sent-ur urdu-text">${highlightedUr}</div>` : ''}
-              </div>
-              <div class="more-sent-actions">
-                <button class="more-sent-btn" data-sentence-speech="${encodeURIComponent(s.en)}" title="Listen sentence">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg>
-                </button>
-              </div>
-            </div>
-          `;
-        }).join('');
-      }
-
-    } else if (type === 'sample') {
-      if (titleEl) titleEl.textContent = 'Sample Sentences';
-      if (filterBar) filterBar.style.display = 'none';
-
-      const sampleSentences = (wordItem.sampleSentences && wordItem.sampleSentences.length > 0)
-        ? wordItem.sampleSentences
-        : (wordItem.sentences && wordItem.sentences.length > 0)
-          ? wordItem.sentences.map((s, i) => ({ num: s.num || i + 1, en: s.en, source: s.source || 'Collins Dictionary' }))
-          : [
-              { num: 1, en: `The term ${wordItem.word} has widespread usage in global publications.`, source: "Collins Dictionary" }
-            ];
-
-      if (listEl) {
-        listEl.innerHTML = sampleSentences.map((s, idx) => {
-          const highlightedEn = this.highlightWordInSentence(s.en, wordItem.word);
-          return `
-            <div class="more-sent-item">
-              <div class="more-sent-num">${s.num || idx + 1}</div>
-              <div class="more-sent-body">
-                <div class="more-sent-en">${highlightedEn}</div>
-                <span class="more-sent-source">${s.source || 'Collins Dictionary'}</span>
-              </div>
-              <div class="more-sent-actions">
-                <button class="more-sent-btn" data-sentence-speech="${encodeURIComponent(s.en)}" title="Listen sentence">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg>
-                </button>
-              </div>
-            </div>
-          `;
-        }).join('');
+      } else {
+        filterBar.style.display = 'none';
       }
     }
 
-    // Bind audio listeners in the more sentences list
     if (listEl) {
-      listEl.querySelectorAll('[data-sentence-speech]').forEach(btn => {
-        btn.addEventListener('click', (e) => {
-          e.stopPropagation();
-          const text = decodeURIComponent(btn.dataset.sentenceSpeech);
-          this.speakText(text, 'en');
-        });
-      });
+      listEl.innerHTML = allSentences.map((s, idx) => {
+        const highlightedEn = this.highlightWordInSentence(s.en, wordItem.word);
+        const highlightedUr = s.ur ? this.highlightUrduWord(s.ur, wordItem.urduMeaning) : '';
+        return `
+          <div class="more-sent-item" data-meaning="${s.meaning || ''}">
+            <div class="more-sent-num">${s.num || idx + 1}</div>
+            <div class="more-sent-body" style="padding-right: 0;">
+              <div class="more-sent-en">${highlightedEn}</div>
+              ${highlightedUr ? `<div class="more-sent-ur urdu-text">${highlightedUr}</div>` : ''}
+            </div>
+          </div>
+        `;
+      }).join('');
     }
 
     modal.style.display = 'flex';
