@@ -5408,26 +5408,39 @@ class VocabApp {
   }
 
   async triggerDiscoverRefresh() {
+    if (this.isDiscoverRefreshing) return;
+    this.isDiscoverRefreshing = true;
+
     const indicator = document.getElementById('discover-pull-indicator');
     const pullText = document.getElementById('discover-pull-text');
-    if (indicator) {
-      indicator.classList.remove('pulling', 'ready');
-      indicator.classList.add('refreshing');
-      if (pullText) pullText.textContent = 'Generating new words...';
-      indicator.style.height = '44px';
-    }
 
-    await new Promise(r => setTimeout(r, 400));
+    try {
+      if (indicator) {
+        indicator.classList.remove('pulling', 'ready');
+        indicator.classList.add('visible', 'refreshing');
+        indicator.style.height = '44px';
+        if (pullText) pullText.textContent = 'Generating new words...';
+      }
 
-    this.generateDiscoverBatch(true);
-    this.renderDiscover();
+      await new Promise(r => setTimeout(r, 450));
 
-    if (indicator) {
-      setTimeout(() => {
-        indicator.classList.remove('refreshing', 'visible');
+      this.generateDiscoverBatch(true);
+      this.renderDiscover();
+
+      if (pullText) pullText.textContent = 'Words updated!';
+      await new Promise(r => setTimeout(r, 220));
+    } catch (err) {
+      console.error('Error during discover refresh:', err);
+    } finally {
+      if (indicator) {
+        indicator.classList.remove('refreshing');
         indicator.style.height = '0px';
-        if (pullText) pullText.textContent = 'Pull down to refresh';
-      }, 200);
+        setTimeout(() => {
+          indicator.classList.remove('visible', 'ready', 'pulling');
+          if (pullText) pullText.textContent = 'Pull down to refresh';
+        }, 240);
+      }
+      this.isDiscoverRefreshing = false;
     }
   }
 
@@ -5440,46 +5453,44 @@ class VocabApp {
 
     let startY = 0;
     let startX = 0;
-    let isPulling = false;
+    let isDragging = false;
     let pullDistance = 0;
-    const threshold = 46;
-    const maxPull = 75;
+    const threshold = 44;
+    const maxPull = 72;
 
     const resetIndicator = () => {
       indicator.classList.remove('pulling', 'ready');
       indicator.style.height = '0px';
       setTimeout(() => {
-        if (!indicator.classList.contains('refreshing')) {
+        if (!this.isDiscoverRefreshing) {
           indicator.classList.remove('visible');
           if (pullText) pullText.textContent = 'Pull down to refresh';
         }
-      }, 200);
+      }, 220);
     };
 
-    // Touch Handlers for Mobile Devices
-    appBody.addEventListener('touchstart', (e) => {
-      if (this.activeTab !== 'discover') return;
+    const handleStart = (pageY, pageX) => {
+      if (this.activeTab !== 'discover' || this.isDiscoverRefreshing) return;
       if (appBody.scrollTop > 2) return;
-      startY = e.touches[0].pageY;
-      startX = e.touches[0].pageX;
-      isPulling = true;
+      startY = pageY;
+      startX = pageX || 0;
+      isDragging = true;
       pullDistance = 0;
-    }, { passive: true });
+    };
 
-    appBody.addEventListener('touchmove', (e) => {
-      if (!isPulling || this.activeTab !== 'discover') return;
+    const handleMove = (pageY, pageX, e) => {
+      if (!isDragging || this.activeTab !== 'discover' || this.isDiscoverRefreshing) return;
       if (appBody.scrollTop > 2) {
-        isPulling = false;
+        isDragging = false;
         resetIndicator();
         return;
       }
-      const currentY = e.touches[0].pageY;
-      const currentX = e.touches[0].pageX;
-      const deltaY = currentY - startY;
-      const deltaX = currentX - startX;
+      const deltaY = pageY - startY;
+      const deltaX = pageX ? pageX - startX : 0;
 
       if (deltaY > 0 && Math.abs(deltaY) > Math.abs(deltaX)) {
-        pullDistance = Math.min(deltaY * 0.42, maxPull);
+        if (e && e.cancelable) e.preventDefault();
+        pullDistance = Math.min(deltaY * 0.44, maxPull);
         indicator.classList.add('visible', 'pulling');
         indicator.style.height = `${pullDistance}px`;
 
@@ -5490,64 +5501,69 @@ class VocabApp {
           indicator.classList.remove('ready');
           if (pullText) pullText.textContent = 'Pull down to refresh';
         }
+      } else if (deltaY < -6) {
+        isDragging = false;
+        resetIndicator();
       }
-    }, { passive: true });
+    };
 
-    const finishPull = async () => {
-      if (!isPulling || this.activeTab !== 'discover') return;
-      isPulling = false;
-      if (pullDistance >= threshold) {
+    const handleEnd = async () => {
+      if (!isDragging || this.activeTab !== 'discover') {
+        isDragging = false;
+        return;
+      }
+      isDragging = false;
+      const reached = pullDistance >= threshold;
+      pullDistance = 0;
+
+      if (reached && !this.isDiscoverRefreshing) {
         await this.triggerDiscoverRefresh();
       } else {
         resetIndicator();
       }
-      pullDistance = 0;
     };
 
-    appBody.addEventListener('touchend', finishPull);
-    appBody.addEventListener('touchcancel', () => {
-      isPulling = false;
-      resetIndicator();
-      pullDistance = 0;
+    // Touch Handlers for Mobile Devices
+    appBody.addEventListener('touchstart', (e) => {
+      if (e.touches.length === 1) {
+        handleStart(e.touches[0].pageY, e.touches[0].pageX);
+      }
+    }, { passive: true });
+
+    appBody.addEventListener('touchmove', (e) => {
+      if (e.touches.length === 1) {
+        handleMove(e.touches[0].pageY, e.touches[0].pageX, e);
+      }
+    }, { passive: false });
+
+    window.addEventListener('touchend', () => {
+      if (isDragging) handleEnd();
     });
 
-    // Mouse Drag Handlers for Desktop Testing
-    let isMouseDown = false;
+    window.addEventListener('touchcancel', () => {
+      if (isDragging) {
+        isDragging = false;
+        resetIndicator();
+        pullDistance = 0;
+      }
+    });
+
+    // Mouse Drag Handlers for Desktop / Testing
     appBody.addEventListener('mousedown', (e) => {
-      if (e.button !== 0 || this.activeTab !== 'discover') return;
-      if (appBody.scrollTop > 2) return;
-      startY = e.pageY;
-      isMouseDown = true;
-      pullDistance = 0;
+      if (e.button === 0) {
+        handleStart(e.pageY, e.pageX);
+      }
     });
 
     window.addEventListener('mousemove', (e) => {
-      if (!isMouseDown || this.activeTab !== 'discover') return;
-      if (appBody.scrollTop > 2) {
-        isMouseDown = false;
-        resetIndicator();
-        return;
-      }
-      const deltaY = e.pageY - startY;
-      if (deltaY > 0) {
-        pullDistance = Math.min(deltaY * 0.42, maxPull);
-        indicator.classList.add('visible', 'pulling');
-        indicator.style.height = `${pullDistance}px`;
-
-        if (pullDistance >= threshold) {
-          indicator.classList.add('ready');
-          if (pullText) pullText.textContent = 'Release to refresh';
-        } else {
-          indicator.classList.remove('ready');
-          if (pullText) pullText.textContent = 'Pull down to refresh';
-        }
+      if (isDragging) {
+        handleMove(e.pageY, e.pageX, e);
       }
     });
 
     window.addEventListener('mouseup', () => {
-      if (isMouseDown && this.activeTab === 'discover') {
-        isMouseDown = false;
-        finishPull();
+      if (isDragging) {
+        handleEnd();
       }
     });
   }
