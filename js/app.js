@@ -1880,6 +1880,7 @@ class StorageManager {
   }
 }
 const storage = new StorageManager();
+window.storage = storage;
 
 // ==========================================================
 // 3. TEXT-TO-SPEECH (TTS) ENGINE
@@ -5917,16 +5918,7 @@ class VocabApp {
       </div>
 
       <div class="journal-menu-list">
-        <!-- 1. My Words -->
-        <div class="journal-menu-row" id="more-nav-my-words">
-          <span class="journal-row-title">My Words (Saved)</span>
-          <div class="journal-row-right">
-            <span class="journal-count">${favCount}</span>
-            <span class="journal-chevron">›</span>
-          </div>
-        </div>
-
-        <!-- 2. Flashcard Practice -->
+        <!-- 1. Flashcard Practice -->
         <div class="journal-menu-row" id="more-nav-practice">
           <span class="journal-row-title">Flashcard Practice</span>
           <div class="journal-row-right">
@@ -5971,11 +5963,6 @@ class VocabApp {
         </div>
       </div>
     `;
-
-    document.getElementById('more-nav-my-words').addEventListener('click', () => {
-      this.moreSubView = 'my-words';
-      this.renderMoreHub();
-    });
 
     document.getElementById('more-nav-practice').addEventListener('click', () => {
       this.switchTab('practice');
@@ -6445,8 +6432,7 @@ class VocabApp {
     });
 
     document.getElementById('exit-practice-btn').addEventListener('click', () => {
-      this.moreSubView = 'my-words';
-      this.switchTab('more');
+      this.switchTab('favorites');
     });
   }
 
