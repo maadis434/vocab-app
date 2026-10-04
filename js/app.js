@@ -4231,9 +4231,14 @@ class VocabApp {
 
   renderHome() {
     this.renderDictionary();
-    if (this.todayContainer) {
-      this.todayContainer.style.display = 'none';
-      this.todayContainer.innerHTML = '';
+    if (!this.searchQuery) {
+      if (this.todayContainer) this.todayContainer.style.display = 'block';
+      this.renderTodayWord();
+    } else {
+      if (this.todayContainer) {
+        this.todayContainer.style.display = 'none';
+        this.todayContainer.innerHTML = '';
+      }
     }
   }
 
@@ -4248,24 +4253,151 @@ class VocabApp {
 
   // --- 1. WORD OF THE DAY ---
   refreshWordOfTheDay() {
+    const richWords = this.words.filter(w => w.urduMeaning && ((w.sentences && w.sentences.length > 0) || w.insteadOf));
+    const pool = richWords.length > 0 ? richWords : this.words;
+    if (pool.length === 0) return;
+
     let nextIndex;
     do {
-      nextIndex = Math.floor(Math.random() * this.words.length);
-    } while (nextIndex === this.todayIndex && this.words.length > 1);
+      nextIndex = Math.floor(Math.random() * pool.length);
+    } while (pool[nextIndex].id === (this.currentTodayWord && this.currentTodayWord.id) && pool.length > 1);
 
+    this.currentTodayWord = pool[nextIndex];
     this.todayIndex = nextIndex;
     this.renderTodayWord();
-
-    if (this.refreshWordBtn) {
-      this.refreshWordBtn.classList.add('spin-anim');
-      setTimeout(() => this.refreshWordBtn.classList.remove('spin-anim'), 400);
-    }
   }
 
   renderTodayWord() {
-    if (this.todayContainer) {
-      this.todayContainer.style.display = 'none';
-      this.todayContainer.innerHTML = '';
+    if (!this.todayContainer) return;
+
+    if (!this.currentTodayWord) {
+      const richWords = this.words.filter(w => w.urduMeaning && ((w.sentences && w.sentences.length > 0) || w.insteadOf));
+      const pool = richWords.length > 0 ? richWords : this.words;
+      this.currentTodayWord = pool[this.todayIndex % pool.length] || pool[0];
+    }
+    const word = this.currentTodayWord;
+    if (!word) return;
+
+    const isFav = storage.isFavorite(word.id);
+    const todayDate = new Date().toLocaleDateString('en-US', { day: 'numeric', month: 'long' });
+
+    this.todayContainer.innerHTML = `
+      <div class="word-of-day-card">
+        <div class="notes-timestamp-row">
+          <div style="display: flex; align-items: center; gap: 6px;">
+            <span style="font-size: 1rem;">🌟</span>
+            <span style="font-weight: 700; color: var(--text-title); font-size: 0.88rem;">Word of the Day</span>
+            <span style="color: var(--text-faint); font-size: 0.76rem;">• ${todayDate}</span>
+          </div>
+          <button class="refresh-pill-btn" id="today-refresh-trigger" title="Get another word">
+            <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67"/>
+            </svg>
+            <span>New Word</span>
+          </button>
+        </div>
+
+        <div class="word-hero" style="margin-bottom: 12px;">
+          <div class="word-hero-row">
+            <div class="word-title-wrap">
+              <h1 class="word-main-title" style="font-size: 1.85rem;">${word.word}</h1>
+              <span class="word-pos-tag">[${word.posShort || 'n.'}]</span>
+            </div>
+            <div style="display: flex; align-items: center; gap: 8px;">
+              <button class="speaker-btn" data-speech-text="${word.word}" id="play-today-word" title="Listen to pronunciation">
+                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+                  <path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path>
+                </svg>
+              </button>
+              <button class="star-fav-btn ${isFav ? 'active' : ''}" id="fav-today-btn" title="Save to favorites">
+                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="${isFav ? '#eab308' : 'none'}" stroke="${isFav ? '#eab308' : 'currentColor'}" stroke-width="2">
+                  <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+                </svg>
+              </button>
+            </div>
+          </div>
+          
+          <div class="urdu-hero-text urdu-text" style="font-size: 1.45rem; line-height: 1.8; margin-top: 4px; color: var(--text-title);">${word.urduMeaning}</div>
+          ${word.urduDefinition ? `<p class="urdu-text" style="font-size: 0.94rem; color: var(--text-body); line-height: 1.7; margin-top: 2px;">${word.urduDefinition}</p>` : ''}
+        </div>
+
+        ${(word.insteadOf && word.insteadOf.length > 0 && word.useThis && word.useThis.length > 0) ? `
+          <div class="comparison-container" style="margin: 10px 0 14px 0; background: var(--bg-search); border: 1px solid var(--divider-hairline); border-radius: 12px; padding: 10px 14px;">
+            <div>
+              <div class="comparison-header" style="color: #ef4444; font-size: 0.72rem;">Instead of</div>
+              <ul class="comparison-list" style="margin-top: 4px;">
+                ${word.insteadOf.slice(0, 2).map(item => `<li class="comparison-item old-word" style="font-size: 0.84rem;"><s>${item}</s></li>`).join('')}
+              </ul>
+            </div>
+            <div>
+              <div class="comparison-header" style="color: #10b981; font-size: 0.72rem;">Use this</div>
+              <ul class="comparison-list" style="margin-top: 4px;">
+                ${word.useThis.slice(0, 2).map(item => `<li class="comparison-item new-word" style="font-size: 0.84rem; font-weight: 700;">${item}</li>`).join('')}
+              </ul>
+            </div>
+          </div>
+        ` : ''}
+
+        ${(word.sentences && word.sentences.length > 0) ? `
+          <div class="editorial-section" style="margin-bottom: 0; padding-top: 10px; border-top: 0.5px solid var(--divider-hairline);">
+            <div class="editorial-section-title" style="margin-bottom: 8px;">Example Sentence</div>
+            ${word.sentences.slice(0, 1).map(s => `
+              <div class="sentence-block" style="background: var(--bg-search); border: 1px solid var(--divider-hairline); border-radius: 12px; padding: 10px 14px;">
+                <div style="display: flex; justify-content: space-between; align-items: baseline; gap: 8px;">
+                  <p class="sentence-en-text" style="font-size: 0.92rem; font-weight: 600; color: var(--text-title); line-height: 1.45;">"${s.en}"</p>
+                  <button class="speaker-btn" data-speech-text="${s.en}" style="padding: 2px; flex-shrink: 0;" title="Listen to sentence">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+                      <path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path>
+                    </svg>
+                  </button>
+                </div>
+                ${s.ur ? `<p class="sentence-ur-text urdu-text" style="font-size: 1.05rem; line-height: 1.8; margin-top: 4px; color: var(--text-body);">${s.ur}</p>` : ''}
+              </div>
+            `).join('')}
+          </div>
+        ` : ''}
+      </div>
+    `;
+
+    const refreshBtn = document.getElementById('today-refresh-trigger');
+    if (refreshBtn) {
+      refreshBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        this.refreshWordOfTheDay();
+      });
+    }
+
+    const playBtn = document.getElementById('play-today-word');
+    if (playBtn) {
+      playBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        tts.speak(word.word);
+      });
+    }
+
+    this.todayContainer.querySelectorAll('.sentence-block .speaker-btn').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        tts.speak(btn.dataset.speechText, { rate: 0.9 });
+      });
+    });
+
+    const favBtn = document.getElementById('fav-today-btn');
+    if (favBtn) {
+      favBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const updatedFav = storage.toggleFavorite(word.id);
+        const svg = favBtn.querySelector('svg');
+        if (svg) {
+          svg.setAttribute('fill', updatedFav ? '#eab308' : 'none');
+          svg.setAttribute('stroke', updatedFav ? '#eab308' : 'currentColor');
+        }
+        favBtn.classList.toggle('active', updatedFav);
+        this.showToast(updatedFav ? 'Saved to Favorites ⭐' : 'Removed from Favorites');
+        this.renderFavoritesTab();
+      });
     }
   }
 
@@ -4567,8 +4699,8 @@ class VocabApp {
       this.dictionaryContainer.style.display = 'none';
       this.dictionaryContainer.innerHTML = '';
       if (this.todayContainer) {
-        this.todayContainer.style.display = 'none';
-        this.todayContainer.innerHTML = '';
+        this.todayContainer.style.display = 'block';
+        this.renderTodayWord();
       }
       return;
     }

@@ -241,8 +241,24 @@ body {
 }
 
 /* ==========================================================
-   APPLE NOTES DATE & TIMESTAMP
+   WORD OF THE DAY CARD (Home Screen Editorial Card)
    ========================================================== */
+.word-of-day-card {
+  background: var(--bg-card);
+  border: 1px solid var(--divider-hairline);
+  border-radius: 20px;
+  padding: 18px 18px 20px 18px;
+  margin-top: 16px;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.04);
+  animation: appleFadeIn 0.25s ease-out;
+}
+
+[data-theme="dark"] .word-of-day-card {
+  background: #171922;
+  border-color: rgba(255, 255, 255, 0.07);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.28);
+}
+
 .notes-timestamp-row {
   display: flex;
   align-items: center;
