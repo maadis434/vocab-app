@@ -5613,7 +5613,7 @@ class VocabApp {
         <!-- 1. Unified Example Sentences Section (Tareeqa 1 + 3 Combined) -->
         <div class="udict-section-card" style="border-top: none; padding-top: 0; margin-top: 0;">
           <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; flex-wrap: wrap; gap: 8px;">
-            <h3 class="udict-section-title" style="margin-bottom: 0;">Example Sentences</h3>
+            <h3 class="udict-section-title" style="margin-bottom: 0;">Sample Sentences</h3>
             ${filterChips.length > 0 ? `
               <div class="udict-filter-chips" data-card-bilingual-chips>
                 ${filterChips.map((chip, cIdx) => `
@@ -6360,7 +6360,7 @@ class VocabApp {
       if (e.target === modal) modal.style.display = 'none';
     };
 
-    if (titleEl) titleEl.textContent = 'Example Sentences';
+    if (titleEl) titleEl.textContent = 'Sample Sentences';
 
     const rawList = (wordItem.bilingualSentences && wordItem.bilingualSentences.length > 0)
       ? wordItem.bilingualSentences
