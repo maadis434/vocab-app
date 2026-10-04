@@ -4880,7 +4880,7 @@ class VocabApp {
                 <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
               </svg>
             </button>
-            ${isModal ? `<button id="close-modal-btn" style="background: none; border: none; font-size: 1.4rem; cursor: pointer; color: var(--text-muted); padding: 4px 6px; line-height: 1;" title="Close">✕</button>` : ''}
+            ${isModal ? `<button type="button" class="close-modal-action close-modal-cross" id="close-modal-cross-btn" style="background: none; border: none; font-size: 1.4rem; cursor: pointer; color: var(--text-muted); padding: 4px 6px; line-height: 1; display: flex; align-items: center; justify-content: center;" title="Close" aria-label="Close">✕</button>` : ''}
           </div>
         </div>
 
@@ -5276,14 +5276,17 @@ class VocabApp {
         });
       }
 
-      const closeBtn = container.querySelector('#close-modal-btn');
-      if (closeBtn) {
-        closeBtn.addEventListener('click', (e) => {
+      const closeButtons = container.querySelectorAll('.close-modal-action, #close-modal-btn, #close-modal-cross-btn, #close-modal-back-btn, .udict-modal-back-btn');
+      closeButtons.forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          e.preventDefault();
           e.stopPropagation();
-          const modal = document.getElementById('word-detail-modal') || document.getElementById('discover-modal');
-          if (modal) modal.style.display = 'none';
+          const modal1 = document.getElementById('word-detail-modal');
+          if (modal1) modal1.style.display = 'none';
+          const modal2 = document.getElementById('discover-modal');
+          if (modal2) modal2.style.display = 'none';
         });
-      }
+      });
     } else {
       container.querySelectorAll('[data-fav-id]').forEach(btn => {
         btn.addEventListener('click', (e) => {
@@ -5612,7 +5615,7 @@ class VocabApp {
     modalBody.innerHTML = `
       <!-- Top Language Row & Back Bar (Screenshot 3 & 4) -->
       <div class="udict-modal-top-bar">
-        <button id="close-modal-btn" class="udict-modal-back-btn" title="Back">
+        <button id="close-modal-back-btn" class="udict-modal-back-btn close-modal-action" title="Back" aria-label="Back">
           <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
         </button>
         <div class="udict-lang-row" style="margin: 0; gap: 8px;">
@@ -5636,7 +5639,13 @@ class VocabApp {
     `;
 
     modal.style.display = 'flex';
-    modal.onclick = (e) => { if (e.target === modal) modal.style.display = 'none'; };
+    modal.onclick = (e) => { 
+      if (e.target === modal) {
+        modal.style.display = 'none';
+        const discoverModal = document.getElementById('discover-modal');
+        if (discoverModal) discoverModal.style.display = 'none';
+      }
+    };
 
     this.attachCardEventListeners(modalBody, true, word);
   }

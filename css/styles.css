@@ -2299,6 +2299,21 @@ body {
   transform: translateX(-3px);
 }
 
+.close-modal-cross {
+  transition: transform 0.15s ease, opacity 0.15s ease, color 0.15s ease;
+  user-select: none;
+}
+
+.close-modal-cross:hover {
+  opacity: 0.75;
+  transform: scale(1.12);
+  color: var(--text-title) !important;
+}
+
+.close-modal-cross:active {
+  transform: scale(0.92);
+}
+
 .udict-cobuild-pos-badge {
   font-style: italic;
   font-weight: 700;
