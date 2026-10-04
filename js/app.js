@@ -4804,17 +4804,7 @@ class VocabApp {
           { num: 3, text: `${w.word} reaction` }
         ];
 
-    // 5. Cognates
-    const cognatesData = w.cognates || {
-      root: w.word,
-      derivatives: [
-        { pos: "adj.", words: [`${w.word}ative`] },
-        { pos: "adv.", words: [`${w.word}ly`] },
-        { pos: "n.", words: [`${w.word}ative`] }
-      ]
-    };
-
-    // 6. Wikipedia
+    // 5. Wikipedia
     const wikiData = w.wikipedia || {
       title: w.word.charAt(0).toUpperCase() + w.word.slice(1),
       summary: w.urduDefinition || `${w.word} or ${w.word} interest, in literature and logic, is anything that functions contrary to an expectation or interest.`,
@@ -5043,25 +5033,6 @@ class VocabApp {
               </div>
             `).join('')}
           </div>
-          <a class="udict-more-link" href="#" onclick="event.preventDefault();">More &gt;</a>
-        </div>
-
-        <!-- 5. Cognate Words Card (Screenshots 7 & 8) -->
-        <div class="udict-section-card">
-          <h3 class="udict-section-title">Cognate words</h3>
-          <div class="udict-root-row">
-            Root-form: &nbsp;<span class="udict-root-val" data-word-search="${cognatesData.root}">${cognatesData.root}</span>
-          </div>
-          ${cognatesData.derivatives.map(d => `
-            <div class="udict-deriv-row">
-              <span class="udict-deriv-pos">${d.pos}</span>
-              <div class="udict-syn-links">
-                ${d.words.map((dw, dwIdx) => `
-                  <span class="udict-syn-word-link" data-word-search="${dw}">${dw}</span>${dwIdx < d.words.length - 1 ? '<span class="udict-syn-slash"> / </span>' : ''}
-                `).join('')}
-              </div>
-            </div>
-          `).join('')}
           <a class="udict-more-link" href="#" onclick="event.preventDefault();">More &gt;</a>
         </div>
 

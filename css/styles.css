@@ -2180,37 +2180,6 @@ body {
   color: #38bdf8;
 }
 
-/* Cognate words Card */
-.udict-root-row {
-  font-size: 0.95rem;
-  margin-bottom: 12px;
-  color: var(--text-muted);
-}
-
-.udict-root-val {
-  color: #f43f5e;
-  font-weight: 700;
-  cursor: pointer;
-}
-
-.udict-root-val:hover {
-  text-decoration: underline;
-}
-
-.udict-deriv-row {
-  display: flex;
-  align-items: baseline;
-  gap: 12px;
-  margin-bottom: 8px;
-  font-size: 0.94rem;
-}
-
-.udict-deriv-pos {
-  font-style: italic;
-  color: var(--text-faint);
-  min-width: 32px;
-}
-
 /* Wikipedia Card */
 .udict-wiki-card {
   border-top: 1px solid var(--divider-hairline);
