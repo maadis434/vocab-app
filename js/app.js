@@ -4607,7 +4607,6 @@ class VocabApp {
     this.discoverContainer = document.getElementById('discover-container');
     this.favoritesContainer = document.getElementById('favorites-container');
     this.moreContainer = document.getElementById('more-container');
-    this.practiceContainer = document.getElementById('practice-container');
 
     this.dictSearchInput = document.getElementById('dict-search-input');
     this.dictSearchBtn = document.getElementById('dict-search-btn');
@@ -4632,8 +4631,17 @@ class VocabApp {
     this.searchResultBox = document.getElementById('search-result-box');
     this.homeSearchTrigger = document.getElementById('home-search-trigger');
     
-    // AI Key Modal Elements
+    // AI Key & Settings Modal Elements
     this.themeToggleBtn = document.getElementById('theme-toggle-btn');
+    this.headerSettingsBtn = document.getElementById('header-settings-btn');
+    this.settingsModal = document.getElementById('settings-modal');
+    this.closeSettingsModalBtn = document.getElementById('close-settings-modal-btn');
+    this.settingsModalGemini = document.getElementById('settings-modal-gemini');
+    this.settingsModalClearCache = document.getElementById('settings-modal-clear-cache');
+    this.settingsAiBadge = document.getElementById('settings-ai-badge');
+    this.modalClearCacheStatus = document.getElementById('modal-clear-cache-status');
+    this.modalClearCacheChevron = document.getElementById('modal-clear-cache-chevron');
+
     this.openAiModalBtn = document.getElementById('open-ai-modal-btn');
     this.aiModal = document.getElementById('ai-key-modal');
     this.aiKeyInput = document.getElementById('ai-key-input');
@@ -4650,6 +4658,41 @@ class VocabApp {
       this.themeToggleBtn.addEventListener('click', (e) => {
         e.preventDefault();
         this.toggleTheme();
+      });
+    }
+
+    // Top Header Settings & Cache Button
+    if (this.headerSettingsBtn) {
+      this.headerSettingsBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        this.openSettingsModal();
+      });
+    }
+
+    if (this.closeSettingsModalBtn) {
+      this.closeSettingsModalBtn.addEventListener('click', () => {
+        this.closeSettingsModal();
+      });
+    }
+
+    if (this.settingsModal) {
+      this.settingsModal.addEventListener('click', (e) => {
+        if (e.target === this.settingsModal) {
+          this.closeSettingsModal();
+        }
+      });
+    }
+
+    if (this.settingsModalGemini) {
+      this.settingsModalGemini.addEventListener('click', () => {
+        this.closeSettingsModal();
+        this.openAiSettings();
+      });
+    }
+
+    if (this.settingsModalClearCache) {
+      this.settingsModalClearCache.addEventListener('click', () => {
+        this.handleClearCache();
       });
     }
 
@@ -5351,6 +5394,55 @@ class VocabApp {
     this.performSearch(word);
   }
 
+  openSettingsModal() {
+    if (!this.settingsModal) return;
+    if (this.settingsAiBadge) {
+      const aiActive = !!storage.geminiApiKey;
+      this.settingsAiBadge.textContent = aiActive ? 'Active' : 'Setup';
+      this.settingsAiBadge.className = `journal-badge ${aiActive ? 'active' : ''}`;
+    }
+    this.settingsModal.style.display = 'flex';
+  }
+
+  closeSettingsModal() {
+    if (this.settingsModal) {
+      this.settingsModal.style.display = 'none';
+    }
+  }
+
+  handleClearCache() {
+    storage.clearAllCache();
+    this.words = (typeof defaultVocabulary !== 'undefined' && Array.isArray(defaultVocabulary)) ? [...defaultVocabulary] : [];
+    this.renderDictionary();
+    if (typeof this.renderRecentSearches === 'function') {
+      this.renderRecentSearches();
+    }
+
+    if (this.modalClearCacheStatus) {
+      this.modalClearCacheStatus.textContent = 'Cache Cleared ✓';
+      this.modalClearCacheStatus.style.display = 'inline-block';
+      if (this.modalClearCacheChevron) this.modalClearCacheChevron.style.display = 'none';
+      setTimeout(() => {
+        if (this.modalClearCacheStatus) this.modalClearCacheStatus.style.display = 'none';
+        if (this.modalClearCacheChevron) this.modalClearCacheChevron.style.display = 'inline-block';
+      }, 3000);
+    }
+
+    const hubStatusEl = document.getElementById('clear-cache-status');
+    const hubChevronEl = document.getElementById('clear-cache-chevron');
+    if (hubStatusEl) {
+      hubStatusEl.textContent = 'Cache Cleared ✓';
+      hubStatusEl.style.display = 'inline-block';
+      if (hubChevronEl) hubChevronEl.style.display = 'none';
+      setTimeout(() => {
+        if (hubStatusEl) hubStatusEl.style.display = 'none';
+        if (hubChevronEl) hubChevronEl.style.display = 'inline-block';
+      }, 3000);
+    }
+
+    this.showToast('Cache Cleared');
+  }
+
   openAiSettings() {
     if (!this.aiModal) return;
     if (this.aiKeyInput) {
@@ -5935,15 +6027,14 @@ class VocabApp {
     this.closeDedicatedSearchScreen();
 
     // 2. Dismiss any open modals/sheets
-    ['word-detail-modal', 'discover-modal', 'more-sentences-modal', 'report-problem-modal', 'ai-key-modal'].forEach(id => {
+    ['word-detail-modal', 'discover-modal', 'more-sentences-modal', 'report-problem-modal', 'ai-key-modal', 'settings-modal'].forEach(id => {
       const el = document.getElementById(id);
       if (el) el.style.display = 'none';
     });
 
-    // 3. Highlight the active tab button (if practicing, keep favorites highlighted)
-    const activeBtnKey = tabName === 'practice' ? 'favorites' : tabName;
+    // 3. Highlight the active tab button
     this.tabButtons.forEach(btn => {
-      btn.classList.toggle('active', btn.dataset.tab === activeBtnKey);
+      btn.classList.toggle('active', btn.dataset.tab === tabName);
     });
 
     this.tabViews.forEach(view => {
@@ -5958,8 +6049,6 @@ class VocabApp {
       this.renderFavoritesTab();
     } else if (tabName === 'more') {
       this.renderMoreHub();
-    } else if (tabName === 'practice') {
-      this.startRevisionSession();
     }
   }
 
@@ -6842,7 +6931,6 @@ class VocabApp {
               `;
             }).join('')}
           </div>
-          <a class="udict-more-link" href="#" data-more-sentences="all">More &gt;</a>
         </div>
 
         <!-- 3. Synonyms & Antonyms Card (Screenshots 5 & 6) -->
@@ -6884,7 +6972,6 @@ class VocabApp {
               </div>
             `}
           </div>
-          <a class="udict-more-link" href="#" onclick="event.preventDefault();">More &gt;</a>
         </div>
 
         <!-- 4. Phrases Card (Screenshot 7) -->
@@ -6898,7 +6985,6 @@ class VocabApp {
               </div>
             `).join('')}
           </div>
-          <a class="udict-more-link" href="#" onclick="event.preventDefault();">More &gt;</a>
         </div>
 
         <!-- 6. Wikipedia Card (Screenshot 8) -->
@@ -7933,11 +8019,6 @@ class VocabApp {
     this.favoritesContainer.innerHTML = `
       <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 16px; border-bottom: 1px solid var(--divider); padding-bottom: 8px;">
         <span style="font-size: 0.88rem; font-weight: 700; color: var(--text-title); letter-spacing: 0.05em; text-transform: uppercase;">Saved Words (${favWords.length})</span>
-        ${favWords.length > 0 ? `
-          <button class="notes-text-btn" id="fav-tab-start-practice-btn" style="color: var(--text-title); font-weight: 700;">
-            Start Practice ▶
-          </button>
-        ` : ''}
       </div>
 
       ${favWords.length === 0 ? `
@@ -7973,13 +8054,6 @@ class VocabApp {
         </div>
       `}
     `;
-
-    const startPracticeBtn = document.getElementById('fav-tab-start-practice-btn');
-    if (startPracticeBtn) {
-      startPracticeBtn.addEventListener('click', () => {
-        this.switchTab('practice');
-      });
-    }
 
     const gotoDiscoverBtn = document.getElementById('fav-tab-goto-discover');
     if (gotoDiscoverBtn) {
@@ -8038,14 +8112,6 @@ class VocabApp {
       </div>
 
       <div class="journal-menu-list">
-        <!-- 1. Flashcard Practice -->
-        <div class="journal-menu-row" id="more-nav-practice">
-          <span class="journal-row-title">Flashcard Practice</span>
-          <div class="journal-row-right">
-            <span class="journal-chevron">›</span>
-          </div>
-        </div>
-
         <!-- 3. Grammar Check -->
         <div class="journal-menu-row" id="more-nav-grammar">
           <span class="journal-row-title">Grammar Check</span>
@@ -8092,10 +8158,6 @@ class VocabApp {
         </div>
       </div>
     `;
-
-    document.getElementById('more-nav-practice').addEventListener('click', () => {
-      this.switchTab('practice');
-    });
 
     document.getElementById('more-nav-grammar').addEventListener('click', () => {
       this.resetGrammarState();
@@ -8401,11 +8463,6 @@ class VocabApp {
 
       <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 16px; border-bottom: 1px solid var(--divider); padding-bottom: 8px;">
         <span style="font-size: 0.88rem; font-weight: 700; color: var(--text-title);">MY WORDS (${favWords.length})</span>
-        ${favWords.length > 0 ? `
-          <button class="notes-text-btn" id="start-practice-btn" style="color: var(--text-title); font-weight: 700;">
-            Start Practice ▶
-          </button>
-        ` : ''}
       </div>
 
       ${favWords.length === 0 ? `
@@ -8446,13 +8503,6 @@ class VocabApp {
       this.renderMoreHub();
     });
 
-    const startPracticeBtn = document.getElementById('start-practice-btn');
-    if (startPracticeBtn) {
-      startPracticeBtn.addEventListener('click', () => {
-        this.switchTab('practice');
-      });
-    }
-
     const gotoDictBtn = document.getElementById('my-words-goto-dict');
     if (gotoDictBtn) {
       gotoDictBtn.addEventListener('click', () => {
@@ -8487,107 +8537,6 @@ class VocabApp {
         const w = this.words.find(item => item.id === row.dataset.favOpenId);
         if (w) this.openWordModal(w);
       });
-    });
-  }
-
-  // --- 5. FLASHCARD PRACTICE ---
-  startRevisionSession() {
-    const favIds = storage.favorites;
-    this.revisionCards = this.words.filter(w => favIds.includes(w.id));
-    if (this.revisionCards.length === 0) {
-      this.revisionCards = this.words.slice(0, 5);
-    }
-    this.currentRevisionIndex = 0;
-    this.isCardFlipped = false;
-    this.renderRevisionCard();
-  }
-
-  renderRevisionCard() {
-    if (!this.practiceContainer) return;
-
-    if (this.currentRevisionIndex >= this.revisionCards.length) {
-      this.practiceContainer.innerHTML = `
-        <div style="text-align: center; padding: 60px 20px;">
-          <div style="font-size: 2.2rem; margin-bottom: 8px;">✨</div>
-          <h2 style="font-size: 1.4rem; font-weight: 800; color: var(--text-title); margin-bottom: 4px;">Practice Complete</h2>
-          <p style="font-size: 0.88rem; color: var(--text-muted); margin-bottom: 24px;">You have revised ${this.revisionCards.length} vocabulary words.</p>
-          <button class="notes-text-btn" style="margin: 0 auto; color: var(--text-title); text-decoration: underline;" id="restart-practice-btn">
-            Practice Again →
-          </button>
-        </div>
-      `;
-      document.getElementById('restart-practice-btn').addEventListener('click', () => {
-        this.currentRevisionIndex = 0;
-        this.renderRevisionCard();
-      });
-      return;
-    }
-
-    const word = this.revisionCards[this.currentRevisionIndex];
-
-    this.practiceContainer.innerHTML = `
-      <div style="display: flex; justify-content: space-between; align-items: center; color: var(--text-faint); font-size: 0.78rem; font-weight: 600;">
-        <span>CARD ${this.currentRevisionIndex + 1} OF ${this.revisionCards.length}</span>
-        <button id="exit-practice-btn" style="background: none; border: none; color: var(--text-muted); cursor: pointer; font-size: 0.8rem;">Exit ✕</button>
-      </div>
-
-      <div class="minimal-flashcard-box" id="flashcard-box">
-        ${!this.isCardFlipped ? `
-          <div style="font-size: 0.8rem; font-style: italic; color: var(--text-muted); margin-bottom: 14px;">Tap to reveal meaning</div>
-          <h1 style="font-size: 2.4rem; font-weight: 800; color: var(--text-title); margin-bottom: 6px;">${word.word}</h1>
-          <p style="color: var(--text-muted); font-size: 0.95rem;">[${word.posShort}]</p>
-          <button class="speaker-btn" id="fc-audio-btn" style="margin-top: 16px;">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg>
-          </button>
-        ` : `
-          <h2 class="urdu-text" style="font-size: 2.2rem; font-weight: 700; color: var(--text-title); margin-bottom: 8px;">${word.urduMeaning}</h2>
-          <div style="width: 100%; border-top: 1px solid var(--divider); padding-top: 12px; margin-top: 8px;">
-            <div style="font-size: 0.82rem; font-weight: 600; color: var(--text-faint); margin-bottom: 4px;">Instead of: ${word.insteadOf[0]}</div>
-            <p style="font-size: 0.95rem; font-weight: 600; color: var(--text-title);">"${word.sentences[0].en}"</p>
-            <p class="urdu-text" style="font-size: 1.15rem; color: var(--text-title); line-height: 1.9;">${word.sentences[0].ur}</p>
-          </div>
-        `}
-      </div>
-
-      <div style="display: flex; gap: 14px;">
-        <button class="notes-text-btn" style="flex: 1; justify-content: center; border: 1px solid var(--divider); background: var(--bg-card); color: var(--text-body); border-radius: 12px; padding: 12px;" id="fc-need-work">
-          Need Practice
-        </button>
-        <button class="notes-text-btn" style="flex: 1; justify-content: center; background: var(--text-title); color: var(--bg-app); border-radius: 12px; padding: 12px;" id="fc-mastered">
-          Mastered ✓
-        </button>
-      </div>
-    `;
-
-    const box = document.getElementById('flashcard-box');
-    box.addEventListener('click', (e) => {
-      if (e.target.closest('#fc-audio-btn')) return;
-      this.isCardFlipped = !this.isCardFlipped;
-      this.renderRevisionCard();
-    });
-
-    const audioBtn = document.getElementById('fc-audio-btn');
-    if (audioBtn) {
-      audioBtn.addEventListener('click', (e) => {
-        e.stopPropagation();
-        tts.speak(word.word);
-      });
-    }
-
-    document.getElementById('fc-need-work').addEventListener('click', () => {
-      this.isCardFlipped = false;
-      this.currentRevisionIndex++;
-      this.renderRevisionCard();
-    });
-
-    document.getElementById('fc-mastered').addEventListener('click', () => {
-      this.isCardFlipped = false;
-      this.currentRevisionIndex++;
-      this.renderRevisionCard();
-    });
-
-    document.getElementById('exit-practice-btn').addEventListener('click', () => {
-      this.switchTab('favorites');
     });
   }
 
