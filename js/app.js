@@ -577,6 +577,14 @@ const defaultVocabulary = [
         en: "She remained resilient despite facing severe setbacks.",
         ur: "وہ شدید مشکلات کے باوجود ثابت قدم رہی۔"
       }
+    ],
+    synonymsAntonymsList: [
+      {
+        num: 1,
+        context: 'for the meaning of "recovering quickly from difficulty"',
+        syns: ["tenacious", "hardy", "tough", "adaptable", "robust", "strong"],
+        ants: ["fragile", "vulnerable", "brittle", "weak", "delicate"]
+      }
     ]
   },
   {
@@ -598,6 +606,14 @@ const defaultVocabulary = [
       {
         en: "The lawyer gave an eloquent speech that convinced the jury.",
         ur: "وکیل نے ایک فصیح تقریر کی جس نے تمام ججوں کو قائل کر لیا۔"
+      }
+    ],
+    synonymsAntonymsList: [
+      {
+        num: 1,
+        context: 'for the meaning of "fluent and persuasive in speech"',
+        syns: ["articulate", "fluent", "expressive", "persuasive", "silver-tongued"],
+        ants: ["inarticulate", "tongue-tied", "hesitant", "halting", "awkward"]
       }
     ]
   },
@@ -621,6 +637,14 @@ const defaultVocabulary = [
         en: "We need a pragmatic approach to solve this crisis.",
         ur: "ہمیں اس بحران کو حل کرنے کے لیے ایک حقیقت پسندانہ طریقہ اپنانا ہوگا۔"
       }
+    ],
+    synonymsAntonymsList: [
+      {
+        num: 1,
+        context: 'for the meaning of "practical and realistic"',
+        syns: ["practical", "realistic", "down-to-earth", "sensible", "hardheaded"],
+        ants: ["idealistic", "impractical", "theoretical", "visionary", "unrealistic"]
+      }
     ]
   },
   {
@@ -642,6 +666,14 @@ const defaultVocabulary = [
       {
         en: "He did meticulous research before writing the report.",
         ur: "اس نے رپورٹ لکھنے سے پہلے انتہائی باریک بینی سے تحقیق کی۔"
+      }
+    ],
+    synonymsAntonymsList: [
+      {
+        num: 1,
+        context: 'for the meaning of "showing great attention to detail"',
+        syns: ["painstaking", "thorough", "scrupulous", "fastidious", "precise", "diligent"],
+        ants: ["careless", "sloppy", "negligent", "slapdash", "inaccurate"]
       }
     ]
   },
@@ -665,6 +697,14 @@ const defaultVocabulary = [
         en: "A leader without empathy will struggle to unite people.",
         ur: "ہمدردانہ احساس کے بغیر رہنما لوگوں کو متحد رکھنے میں ناکام رہتا ہے۔"
       }
+    ],
+    synonymsAntonymsList: [
+      {
+        num: 1,
+        context: 'for the meaning of "understanding and sharing feelings"',
+        syns: ["compassion", "understanding", "sensitivity", "affinity", "fellow-feeling"],
+        ants: ["apathy", "indifference", "callousness", "coldness", "insensitivity"]
+      }
     ]
   },
   {
@@ -686,6 +726,14 @@ const defaultVocabulary = [
       {
         en: "If you persevere daily, you will speak English fluently.",
         ur: "اگر آپ روزانہ ڈٹے رہیں گے، تو روانی سے بولنا سیکھ جائیں گے۔"
+      }
+    ],
+    synonymsAntonymsList: [
+      {
+        num: 1,
+        context: 'for the meaning of "continuing firmly despite difficulties"',
+        syns: ["persist", "carry on", "endure", "press on", "soldier on", "stand firm"],
+        ants: ["give up", "quit", "surrender", "abandon", "yield"]
       }
     ]
   },
@@ -709,6 +757,14 @@ const defaultVocabulary = [
         en: "I appreciate your candid opinion about my work.",
         ur: "میرے کام کے بارے میں آپ کی کھری رائے کی میں قدر کرتا ہوں۔"
       }
+    ],
+    synonymsAntonymsList: [
+      {
+        num: 1,
+        context: 'for the meaning of "truthful, frank, and straightforward"',
+        syns: ["frank", "outspoken", "forthright", "direct", "blunt", "honest"],
+        ants: ["guarded", "disingenuous", "insincere", "deceptive", "secretive"]
+      }
     ]
   },
   {
@@ -730,6 +786,14 @@ const defaultVocabulary = [
       {
         en: "Stop procrastinating and prepare for your interview.",
         ur: "ٹال مٹول کرنا بند کریں اور انٹرویو کی تیاری شروع کریں۔"
+      }
+    ],
+    synonymsAntonymsList: [
+      {
+        num: 1,
+        context: 'for the meaning of "delaying or postponing action"',
+        syns: ["delay", "postpone", "defer", "put off", "stall", "dilly-dally"],
+        ants: ["expedite", "hasten", "hurry", "accelerate", "act immediately"]
       }
     ]
   },
@@ -753,6 +817,14 @@ const defaultVocabulary = [
         en: "The professor gave a lucid explanation of the concept.",
         ur: "پروفیسر نے اس تصور کی نہایت صاف اور آسان وضاحت پیش کی۔"
       }
+    ],
+    synonymsAntonymsList: [
+      {
+        num: 1,
+        context: 'for the meaning of "clearly expressed and easily understood"',
+        syns: ["clear", "coherent", "transparent", "intelligible", "articulate", "rational"],
+        ants: ["confusing", "obscure", "muddled", "ambiguous", "incomprehensible"]
+      }
     ]
   },
   {
@@ -774,6 +846,14 @@ const defaultVocabulary = [
       {
         en: "The valley looked serene in the early morning sunrise.",
         ur: "صبح کے وقت وادی کا منظر بے حد پُرسکون تھا۔"
+      }
+    ],
+    synonymsAntonymsList: [
+      {
+        num: 1,
+        context: 'for the meaning of "calm, peaceful, and untroubled"',
+        syns: ["calm", "tranquil", "peaceful", "placid", "undisturbed", "unruffled"],
+        ants: ["agitated", "turbulent", "stormy", "chaotic", "anxious", "frantic"]
       }
     ]
   },
@@ -797,6 +877,14 @@ const defaultVocabulary = [
         en: "Her diligent efforts resulted in a major promotion.",
         ur: "اس کی انتھک محنت کا نتیجہ ایک بڑی ترقی کی صورت میں ملا۔"
       }
+    ],
+    synonymsAntonymsList: [
+      {
+        num: 1,
+        context: 'for the meaning of "showing hard work and thorough care"',
+        syns: ["industrious", "hardworking", "assiduous", "conscientious", "meticulous", "tireless"],
+        ants: ["lazy", "idle", "negligent", "careless", "slothful", "indolent"]
+      }
     ]
   },
   {
@@ -818,6 +906,14 @@ const defaultVocabulary = [
       {
         en: "His instructions were ambiguous and caused confusion.",
         ur: "اس کی ہدایات مبہم تھیں جس سے الجھن پیدا ہوئی۔"
+      }
+    ],
+    synonymsAntonymsList: [
+      {
+        num: 1,
+        context: 'for the meaning of "open to more than one interpretation"',
+        syns: ["equivocal", "vague", "obscure", "cryptic", "dubious", "enigmatic"],
+        ants: ["clear", "unambiguous", "explicit", "definite", "precise", "transparent"]
       }
     ]
   },
@@ -854,6 +950,14 @@ const defaultVocabulary = [
         en: "The cabinet spokesman accused Ottawa of playing to the large Tamil diaspora in Canada.",
         ur: "کابینہ کے ترجمان نے کینیڈا میں مقیم بڑی تامل تارک وطن آبادی کو خوش کرنے کا الزام عائد کیا۔",
         source: "BBC: Commonwealth faces 'real test' on Sri Lanka"
+      }
+    ],
+    synonymsAntonymsList: [
+      {
+        num: 1,
+        context: 'for the meaning of "dispersion of a people outside their homeland"',
+        syns: ["dispersion", "scattering", "migration", "exile", "expatriate community"],
+        ants: ["homeland", "gathering", "concentration", "repatriation"]
       }
     ]
   }
@@ -922,6 +1026,7 @@ const quickAutocompleteIndex = [
   { word: "Believe", pos: "v.", urdu: "یقین کرنا / ماننا" },
   { word: "Belong", pos: "v.", urdu: "تعلق رکھنا / ملکیت ہونا" },
   { word: "Benefit", pos: "n.", urdu: "فائدہ / نفع" },
+  { word: "Benevolent", pos: "adj.", urdu: "مہربان / فیاض / خیر خواہ" },
   { word: "Beside", pos: "prep.", urdu: "پہلو میں / قریب" },
   { word: "Better", pos: "adj.", urdu: "بہتر / عمدہ" },
   { word: "Beyond", pos: "prep.", urdu: "اس پار / بالاتر" },
@@ -1080,11 +1185,14 @@ const quickAutocompleteIndex = [
   { word: "Elaborate", pos: "adj.", urdu: "جامع / مفصل" },
   { word: "Elegant", pos: "adj.", urdu: "حسین / باوقار" },
   { word: "Eloquent", pos: "adj.", urdu: "خوش گفتار / فصیح" },
+  { word: "Equivocal", pos: "adj.", urdu: "مبہم / گول مول / ذو معنی" },
   { word: "Embarrass", pos: "v.", urdu: "شرمندہ کرنا" },
   { word: "Emerge", pos: "v.", urdu: "ابھرنا / سامنے آنا" },
   { word: "Emotion", pos: "n.", urdu: "جذبہ / احساس" },
   { word: "Emphasis", pos: "n.", urdu: "زور / تاکید" },
   { word: "Empathy", pos: "n.", urdu: "احساسِ ہمدردی" },
+  { word: "Ephemeral", pos: "adj.", urdu: "عارضی / چند روزہ / ناپائیدار" },
+  { word: "Epiphany", pos: "n.", urdu: "بصیرت کا لمحہ / اچانک ادراک" },
   { word: "Employ", pos: "v.", urdu: "ملازمت دینا / استعمال کرنا" },
   { word: "Enable", pos: "v.", urdu: "قابل بنانا / اختیار دینا" },
   { word: "Encourage", pos: "v.", urdu: "حوصلہ افزائی کرنا" },
@@ -1353,6 +1461,7 @@ const quickAutocompleteIndex = [
   { word: "Message", pos: "n.", urdu: "پیغام / اطلاع" },
   { word: "Method", pos: "n.", urdu: "طریقہ / اسلوب" },
   { word: "Meticulous", pos: "adj.", urdu: "باریک بین / انتہائی محتاط" },
+  { word: "Mitigate", pos: "v.", urdu: "کم کرنا / شدت گھٹانا / تخفیف کرنا" },
   { word: "Mind", pos: "n.", urdu: "دماغ / ذہن" },
   { word: "Miracle", pos: "n.", urdu: "معجزہ / کرشمہ" },
   { word: "Mistake", pos: "n.", urdu: "غلطی / خطاء" },
@@ -1409,6 +1518,7 @@ const quickAutocompleteIndex = [
   { word: "Overcome", pos: "v.", urdu: "قابو پانا / غلبہ پانا" },
   // P
   { word: "Pain", pos: "n.", urdu: "درد / تکلیف" },
+  { word: "Paradigm", pos: "n.", urdu: "نمونہ / مثال / فکری سانچہ" },
   { word: "Patience", pos: "n.", urdu: "صبر / برداشت" },
   { word: "Patient", pos: "adj.", urdu: "صابر / مریض" },
   { word: "Pattern", pos: "n.", urdu: "نمونہ / طریقہ کار" },
@@ -1579,6 +1689,8 @@ const quickAutocompleteIndex = [
   { word: "Seem", pos: "v.", urdu: "معلوم ہونا / دکھائی دینا" },
   { word: "Select", pos: "v.", urdu: "منتخب کرنا / چننا" },
   { word: "Sense", pos: "n.", urdu: "حس / سمجھ بوجھ" },
+  { word: "Serendipity", pos: "n.", urdu: "غیر متوقع خوش نصیبی / حسنِ اتفاق" },
+  { word: "Serene", pos: "adj.", urdu: "پرسکون / پرامن / پر اطمینان" },
   { word: "Sensitive", pos: "adj.", urdu: "حساس / نازک" },
   { word: "Sentence", pos: "n.", urdu: "جملہ / سزا" },
   { word: "Separate", pos: "adj.", urdu: "الگ / جداگانہ" },
@@ -1633,6 +1745,7 @@ const quickAutocompleteIndex = [
   { word: "Success", pos: "n.", urdu: "کامیابی / کامرانی" },
   { word: "Suggest", pos: "v.", urdu: "مشورہ دینا / تجویز" },
   { word: "Summary", pos: "n.", urdu: "خلاصہ / لبِ لباب" },
+  { word: "Superfluous", pos: "adj.", urdu: "ضرورت سے زائد / فالتو / غیر ضروری" },
   { word: "Support", pos: "v.", urdu: "حمایت کرنا / مدد" },
   { word: "Surprise", pos: "n.", urdu: "حیرت / تعجب" },
   { word: "Survive", pos: "v.", urdu: "زندہ بچنا / باقی رہنا" },
@@ -1684,6 +1797,7 @@ const quickAutocompleteIndex = [
   { word: "Undertake", pos: "v.", urdu: "ذمہ داری لینا" },
   { word: "Unique", pos: "adj.", urdu: "منفرد / یکتا" },
   { word: "Unite", pos: "v.", urdu: "متحد ہونا / جوڑنا" },
+  { word: "Ubiquitous", pos: "adj.", urdu: "ہر جگہ موجود / ہمہ گیر" },
   { word: "Universal", pos: "adj.", urdu: "آفاقی / ہمہ گیر" },
   { word: "Unknown", pos: "adj.", urdu: "نامعلوم / گمنام" },
   { word: "Unlikely", pos: "adj.", urdu: "بعید از قیاس / غیر ممکن" },
@@ -1700,6 +1814,7 @@ const quickAutocompleteIndex = [
   { word: "Variety", pos: "n.", urdu: "تنوع / اقسام" },
   { word: "Various", pos: "adj.", urdu: "مختلف / متعدد" },
   { word: "Vast", pos: "adj.", urdu: "وسیع / کشادہ" },
+  { word: "Venerate", pos: "v.", urdu: "عزت کرنا / تعظیم کرنا / محترم جاننا" },
   { word: "Verify", pos: "v.", urdu: "تصدیق کرنا / پڑتال" },
   { word: "Versatile", pos: "adj.", urdu: "ہر فن مولا / ہمہ جہت" },
   { word: "Victory", pos: "n.", urdu: "فتح / کامیابی" },
@@ -2275,6 +2390,8 @@ If and ONLY IF it is a real English word, recognized slang, phrase, or idiom, re
   "coreIdea": "The core conceptual essence of the word (e.g. To lessen the intensity of something negative...)",
   "contextUsage": "1-2 sentences on what context, tone, or situation this word is used in",
   "collocations": ["3-5 common phrases/word partners with this word"],
+  "synonyms": ["4-6 authentic, high-quality, exact synonyms"],
+  "antonyms": ["3-5 authentic, high-quality, exact opposite antonyms"],
   "insteadOf": ["1-2 common words people use instead"],
   "useThis": ["the target word", "1 precise synonym or related term"],
   "howToUse": "1 practical sentence explaining when to use this word in conversation",
@@ -2353,9 +2470,19 @@ CRITICAL REQUIREMENT: The example sentence MUST be a real, meaningful scenario. 
           localStorage.setItem('vocab_gemini_model_v5', model);
         }
 
+        const wordClean = (parsed.word || query).trim();
+        const synList = (Array.isArray(parsed.synonyms) && parsed.synonyms.length > 0)
+          ? [{
+              num: 1,
+              context: `for the sense of "${(parsed.urduMeaning || wordClean).split(/[؛;,/،\.]+/)[0].trim()}"`,
+              syns: parsed.synonyms.filter(s => s && s.toLowerCase() !== wordClean.toLowerCase()).slice(0, 7),
+              ants: (parsed.antonyms || []).filter(a => a && a.toLowerCase() !== wordClean.toLowerCase()).slice(0, 6)
+            }]
+          : [];
+
         return {
           id: `gemini-${Date.now()}`,
-          word: parsed.word || query,
+          word: wordClean,
           posShort: parsed.posShort || 'word.',
           partOfSpeech: parsed.partOfSpeech || 'word',
           phonetic: parsed.phonetic || `/${query}/`,
@@ -2364,6 +2491,13 @@ CRITICAL REQUIREMENT: The example sentence MUST be a real, meaningful scenario. 
           insteadOf: parsed.insteadOf || ["Common term"],
           useThis: parsed.useThis || [parsed.word || query],
           howToUse: parsed.howToUse || '',
+          synonymsAntonymsList: synList,
+          synonymsAntonyms: {
+            word: wordClean,
+            pos: parsed.posShort || 'word.',
+            synonyms: (parsed.synonyms || []).slice(0, 6),
+            antonyms: (parsed.antonyms || []).slice(0, 5)
+          },
           sentences: (parsed.sentences && parsed.sentences.length > 0 && parsed.sentences[0].en) ? parsed.sentences : [{ en: `She clearly explained the concept of ${parsed.word || query} during our team discussion.`, ur: `اس نے ہماری ٹیم کی گفتگو کے دوران "${parsed.urduMeaning || parsed.word || query}" کے مفہوم کو واضح کیا۔` }],
           source: 'Gemini AI ✨'
         };
@@ -3383,6 +3517,341 @@ CRITICAL REQUIREMENT: The example sentence MUST be a real, meaningful scenario. 
     };
   },
 
+  // --- AUTHENTIC CURATED SYNONYMS & ANTONYMS LEXICON ---
+  curatedSynonymsAntonyms: {
+    'adverse': [
+      {
+        num: 1,
+        context: 'for the meaning of "harmful or unfavorable"',
+        syns: ["harmful", "damaging", "detrimental", "injurious", "unfavorable", "hostile"],
+        ants: ["beneficial", "favorable", "advantageous", "helpful", "auspicious"]
+      }
+    ],
+    'alleviate': [
+      {
+        num: 1,
+        context: 'for the meaning of "lessening pain, stress, or a problem"',
+        syns: ["relieve", "ease", "mitigate", "lessen", "soothe", "assuage", "palliate"],
+        ants: ["aggravate", "worsen", "exacerbate", "intensify", "magnify"]
+      }
+    ],
+    'ambiguous': [
+      {
+        num: 1,
+        context: 'for the meaning of "open to more than one interpretation"',
+        syns: ["equivocal", "vague", "obscure", "cryptic", "dubious", "enigmatic"],
+        ants: ["clear", "unambiguous", "explicit", "definite", "precise", "transparent"]
+      }
+    ],
+    'candid': [
+      {
+        num: 1,
+        context: 'for the meaning of "truthful, frank, and straightforward"',
+        syns: ["frank", "outspoken", "forthright", "direct", "blunt", "honest", "sincere"],
+        ants: ["guarded", "disingenuous", "insincere", "deceptive", "secretive"]
+      }
+    ],
+    'conclusion': [
+      {
+        num: 1,
+        context: 'for the meaning of "decision or verdict"',
+        syns: ["agreement", "verdict", "decision", "resolution", "opinion", "conviction"],
+        ants: ["beginning", "start", "prelude", "conjecture"]
+      },
+      {
+        num: 2,
+        context: 'for the meaning of "end or finale"',
+        syns: ["finish", "termination", "close", "cessation", "finale", "outcome"],
+        ants: ["commencement", "introduction", "outset", "opening"]
+      }
+    ],
+    'contradictory': [
+      {
+        num: 1,
+        context: 'for the meaning of "mutually opposed or inconsistent"',
+        syns: ["conflicting", "inconsistent", "contrary", "opposite", "incompatible"],
+        ants: ["consistent", "compatible", "concordant", "harmonious"]
+      }
+    ],
+    'detrimental': [
+      {
+        num: 1,
+        context: 'for the meaning of "causing damage or harm"',
+        syns: ["harmful", "damaging", "injurious", "hurtful", "pernicious", "adverse", "deleterious"],
+        ants: ["beneficial", "harmless", "advantageous", "helpful", "innocuous", "salutary"]
+      }
+    ],
+    'diaspora': [
+      {
+        num: 1,
+        context: 'for the meaning of "dispersion of a people outside their homeland"',
+        syns: ["dispersion", "scattering", "migration", "exile", "expatriate community"],
+        ants: ["homeland", "gathering", "concentration", "repatriation"]
+      }
+    ],
+    'diligent': [
+      {
+        num: 1,
+        context: 'for the meaning of "working with care and conscientious effort"',
+        syns: ["industrious", "hardworking", "assiduous", "conscientious", "meticulous", "tireless"],
+        ants: ["lazy", "idle", "negligent", "careless", "slothful", "indolent"]
+      }
+    ],
+    'eloquent': [
+      {
+        num: 1,
+        context: 'for the meaning of "fluent and persuasive in speaking or writing"',
+        syns: ["articulate", "fluent", "expressive", "persuasive", "silver-tongued"],
+        ants: ["inarticulate", "tongue-tied", "hesitant", "halting", "awkward"]
+      }
+    ],
+    'empathy': [
+      {
+        num: 1,
+        context: 'for the meaning of "understanding and sharing another\'s feelings"',
+        syns: ["compassion", "understanding", "sensitivity", "affinity", "fellow-feeling"],
+        ants: ["apathy", "indifference", "callousness", "coldness", "insensitivity"]
+      }
+    ],
+    'equivocal': [
+      {
+        num: 1,
+        context: 'for the meaning of "uncertain or deliberately misleading"',
+        syns: ["ambiguous", "vague", "cryptic", "ambivalent", "evasive", "dubious"],
+        ants: ["unequivocal", "clear", "definite", "unambiguous", "plain", "explicit"]
+      }
+    ],
+    'lucid': [
+      {
+        num: 1,
+        context: 'for the meaning of "expressed clearly; easy to understand"',
+        syns: ["clear", "coherent", "transparent", "intelligible", "articulate", "rational"],
+        ants: ["confusing", "obscure", "muddled", "ambiguous", "incomprehensible"]
+      }
+    ],
+    'meticulous': [
+      {
+        num: 1,
+        context: 'for the meaning of "showing great attention to detail"',
+        syns: ["painstaking", "thorough", "scrupulous", "fastidious", "precise", "diligent"],
+        ants: ["careless", "sloppy", "negligent", "slapdash", "inaccurate"]
+      }
+    ],
+    'persevere': [
+      {
+        num: 1,
+        context: 'for the meaning of "continuing firmly despite difficulty"',
+        syns: ["persist", "carry on", "endure", "press on", "soldier on", "stand firm"],
+        ants: ["give up", "quit", "surrender", "abandon", "yield"]
+      }
+    ],
+    'pragmatic': [
+      {
+        num: 1,
+        context: 'for the meaning of "dealing with things sensibly and realistically"',
+        syns: ["practical", "realistic", "down-to-earth", "sensible", "hardheaded", "matter-of-fact"],
+        ants: ["idealistic", "impractical", "theoretical", "visionary", "unrealistic"]
+      }
+    ],
+    'procrastinate': [
+      {
+        num: 1,
+        context: 'for the meaning of "delaying or postponing action"',
+        syns: ["delay", "postpone", "defer", "put off", "stall", "dilly-dally", "temporize"],
+        ants: ["expedite", "hasten", "hurry", "accelerate", "act immediately"]
+      }
+    ],
+    'resilient': [
+      {
+        num: 1,
+        context: 'for the meaning of "recovering quickly from difficulty"',
+        syns: ["tenacious", "hardy", "tough", "adaptable", "robust", "strong"],
+        ants: ["fragile", "vulnerable", "brittle", "weak", "delicate"]
+      }
+    ],
+    'serene': [
+      {
+        num: 1,
+        context: 'for the meaning of "calm, peaceful, and untroubled"',
+        syns: ["calm", "tranquil", "peaceful", "placid", "undisturbed", "unruffled"],
+        ants: ["agitated", "turbulent", "stormy", "chaotic", "anxious", "frantic"]
+      }
+    ],
+    'benevolent': [
+      {
+        num: 1,
+        context: 'for the meaning of "well-meaning and kindly"',
+        syns: ["kind", "generous", "charitable", "compassionate", "altruistic", "benign"],
+        ants: ["malevolent", "unkind", "malicious", "spiteful", "cruel"]
+      }
+    ],
+    'mitigate': [
+      {
+        num: 1,
+        context: 'for the meaning of "making something less severe or painful"',
+        syns: ["alleviate", "lessen", "reduce", "moderate", "diminish", "soothe"],
+        ants: ["aggravate", "intensify", "worsen", "exacerbate"]
+      }
+    ],
+    'ephemeral': [
+      {
+        num: 1,
+        context: 'for the meaning of "lasting for a very short time"',
+        syns: ["transient", "fleeting", "short-lived", "momentary", "temporary"],
+        ants: ["permanent", "eternal", "lasting", "perpetual", "enduring"]
+      }
+    ],
+    'ubiquitous': [
+      {
+        num: 1,
+        context: 'for the meaning of "present or found everywhere"',
+        syns: ["omnipresent", "pervasive", "universal", "everywhere", "prevalent"],
+        ants: ["rare", "scarce", "uncommon", "seldom"]
+      }
+    ],
+    'superfluous': [
+      {
+        num: 1,
+        context: 'for the meaning of "unnecessary, especially through being more than enough"',
+        syns: ["redundant", "excessive", "unneeded", "surplus", "extra"],
+        ants: ["essential", "necessary", "vital", "required", "indispensable"]
+      }
+    ],
+    'serendipity': [
+      {
+        num: 1,
+        context: 'for the meaning of "good fortune or happy accident"',
+        syns: ["fluke", "chance", "good fortune", "happy accident", "providence"],
+        ants: ["misfortune", "bad luck", "premeditation", "calamity"]
+      }
+    ],
+    'paradigm': [
+      {
+        num: 1,
+        context: 'for the meaning of "typical example or pattern"',
+        syns: ["model", "pattern", "archetype", "exemplar", "standard", "prototype"],
+        ants: ["anomaly", "deviation", "imperfection", "irregularity"]
+      }
+    ],
+    'epiphany': [
+      {
+        num: 1,
+        context: 'for the meaning of "moment of sudden revelation or insight"',
+        syns: ["revelation", "realization", "insight", "illumination", "breakthrough"],
+        ants: ["confusion", "ignorance", "misconception", "blindness"]
+      }
+    ],
+    'zealous': [
+      {
+        num: 1,
+        context: 'for the meaning of "having great energy or enthusiasm"',
+        syns: ["passionate", "ardent", "fervent", "devoted", "eager", "enthusiastic"],
+        ants: ["apathetic", "indifferent", "reluctant", "unenthusiastic", "cool"]
+      }
+    ],
+    'venerate': [
+      {
+        num: 1,
+        context: 'for the meaning of "regard with great respect or reverence"',
+        syns: ["revere", "respect", "honor", "worship", "esteem", "admire"],
+        ants: ["despise", "disrespect", "disdain", "scorn", "ridicule"]
+      }
+    ]
+  },
+
+  // --- MULTI-STAGE AUTHENTIC SYNONYM & ANTONYM RESOLUTION ENGINE ---
+  async fetchSynonymsAndAntonyms(word, contextMeaning = '') {
+    const clean = (word || '').toLowerCase().trim();
+    if (!clean) return [];
+
+    // 1. Curated academic lexicon (100% verified, 0ms latency)
+    if (this.curatedSynonymsAntonyms && this.curatedSynonymsAntonyms[clean]) {
+      return JSON.parse(JSON.stringify(this.curatedSynonymsAntonyms[clean]));
+    }
+
+    // 2. Storage cache check
+    const cacheKey = `vocab_syn_ant_v2_${clean}`;
+    try {
+      const cached = localStorage.getItem(cacheKey);
+      if (cached) {
+        const parsed = JSON.parse(cached);
+        if (Array.isArray(parsed) && parsed.length > 0) return parsed;
+      }
+    } catch (e) {}
+
+    // 3. Multi-stage Datamuse API with reverse-antonym bridge
+    try {
+      const [synRes, antRes] = await Promise.allSettled([
+        fetch(`https://api.datamuse.com/words?rel_syn=${encodeURIComponent(clean)}&max=8`),
+        fetch(`https://api.datamuse.com/words?rel_ant=${encodeURIComponent(clean)}&max=8`)
+      ]);
+
+      let syns = [];
+      if (synRes.status === 'fulfilled' && synRes.value.ok) {
+        const synData = await synRes.value.json();
+        if (Array.isArray(synData)) {
+          syns = synData.map(d => (d.word || '').trim()).filter(w => w && w.toLowerCase() !== clean && !w.includes(' '));
+        }
+      }
+
+      let ants = [];
+      if (antRes.status === 'fulfilled' && antRes.value.ok) {
+        const antData = await antRes.value.json();
+        if (Array.isArray(antData)) {
+          ants = antData.map(d => (d.word || '').trim()).filter(w => w && w.toLowerCase() !== clean && !w.includes(' '));
+        }
+      }
+
+      // If direct antonyms not found, query antonyms of top synonyms (bridge lookup)
+      if (ants.length === 0 && syns.length > 0) {
+        for (const s of syns.slice(0, 3)) {
+          try {
+            const bridgeRes = await fetch(`https://api.datamuse.com/words?rel_ant=${encodeURIComponent(s)}&max=6`);
+            if (bridgeRes.ok) {
+              const bData = await bridgeRes.json();
+              if (Array.isArray(bData) && bData.length > 0) {
+                const bAnts = bData.map(d => (d.word || '').trim()).filter(w => w && w.toLowerCase() !== clean && !syns.includes(w) && !w.includes(' '));
+                if (bAnts.length > 0) {
+                  ants = bAnts;
+                  break;
+                }
+              }
+            }
+          } catch (e) {}
+        }
+      }
+
+      // Fallback: words with similar meaning (ml)
+      if (syns.length === 0) {
+        try {
+          const mlRes = await fetch(`https://api.datamuse.com/words?ml=${encodeURIComponent(clean)}&max=6`);
+          if (mlRes.ok) {
+            const mlData = await mlRes.json();
+            if (Array.isArray(mlData)) {
+              syns = mlData.map(d => (d.word || '').trim()).filter(w => w && w.toLowerCase() !== clean && !w.includes(' ')).slice(0, 5);
+            }
+          }
+        } catch (e) {}
+      }
+
+      if (syns.length > 0 || ants.length > 0) {
+        const senseLabel = contextMeaning ? `for the meaning of "${contextMeaning.split(/[؛;,/،\.]+/)[0].trim()}"` : `for the sense of "${clean}"`;
+        const result = [
+          {
+            num: 1,
+            context: senseLabel,
+            syns: syns.slice(0, 7),
+            ants: ants.slice(0, 6)
+          }
+        ];
+        try { localStorage.setItem(cacheKey, JSON.stringify(result)); } catch (e) {}
+        return result;
+      }
+    } catch (e) {}
+
+    return [];
+  },
+
   // --- AUTHENTIC COLLINS COBUILD ADVANCED DICTIONARY LOOKUP ---
   async fetchCollinsData(word) {
     const clean = (word || '').trim().toLowerCase();
@@ -3531,7 +4000,7 @@ CRITICAL REQUIREMENT: The example sentence MUST be a real, meaningful scenario. 
       const [urduResult, dictResult, synsResult, wikiResult, phonesResult, collinsResult] = await Promise.allSettled([
         this.translate(cleanWord, 'auto', 'ur'),
         this.getDictionaryData(cleanWord),
-        this.getSynonyms(cleanWord),
+        this.fetchSynonymsAndAntonyms(cleanWord),
         this.fetchWikipediaSummary(cleanWord),
         this.fetchDualPhonetics(cleanWord),
         this.fetchCollinsData(cleanWord)
@@ -3539,7 +4008,13 @@ CRITICAL REQUIREMENT: The example sentence MUST be a real, meaningful scenario. 
 
       const urduMeaning = (urduResult.status === 'fulfilled' && urduResult.value) ? urduResult.value.trim() : "";
       const dictData = (dictResult.status === 'fulfilled' && dictResult.value) ? dictResult.value : null;
-      const synonyms = (synsResult.status === 'fulfilled' && synsResult.value) ? synsResult.value : [];
+      const synAntList = (synsResult.status === 'fulfilled' && Array.isArray(synsResult.value) && synsResult.value.length > 0)
+        ? synsResult.value
+        : (this.curatedSynonymsAntonyms && this.curatedSynonymsAntonyms[cleanWord.toLowerCase()]
+            ? this.curatedSynonymsAntonyms[cleanWord.toLowerCase()]
+            : []);
+      const synonyms = (synAntList[0]?.syns) || [];
+      const antonyms = (synAntList[0]?.ants) || [];
       const wikiData = (wikiResult.status === 'fulfilled' && wikiResult.value) ? wikiResult.value : null;
       const phones = (phonesResult.status === 'fulfilled' && phonesResult.value)
         ? phonesResult.value
@@ -3612,11 +4087,12 @@ CRITICAL REQUIREMENT: The example sentence MUST be a real, meaningful scenario. 
           { num: 1, en: sentenceEn, source: "Oxford Dictionary", ur: sentenceUr }
         ],
         sentences: builtSentences.length > 0 ? builtSentences : [{ en: sentenceEn, ur: sentenceUr }],
+        synonymsAntonymsList: synAntList,
         synonymsAntonyms: {
           word: capitalizedWord,
           pos: posShort,
-          synonyms: synonyms.slice(0, 4),
-          antonyms: []
+          synonyms: synonyms.slice(0, 6),
+          antonyms: antonyms.slice(0, 6)
         },
         wikipediaSummary: wikiData ? wikiData.summary : null
       };
@@ -5307,9 +5783,10 @@ class VocabApp {
     if (!match && typeof quickAutocompleteIndex !== 'undefined') {
       const auto = quickAutocompleteIndex.find(item => item.word && item.word.toLowerCase() === qLower);
       if (auto) {
-        const [phones, collins] = await Promise.all([
+        const [phones, collins, synAntList] = await Promise.all([
           OnlineLookupService.fetchDualPhonetics(auto.word),
-          OnlineLookupService.fetchCollinsData(auto.word)
+          OnlineLookupService.fetchCollinsData(auto.word),
+          OnlineLookupService.fetchSynonymsAndAntonyms(auto.word, auto.urdu)
         ]);
         const primaryExample = (collins && collins.definitions[0]?.example) 
           ? collins.definitions[0].example 
@@ -5328,6 +5805,13 @@ class VocabApp {
           forms: auto.pos === 'noun' ? `pl.  ${auto.word}s` : `form: ${auto.word}`,
           tags: [],
           collins: collins || null,
+          synonymsAntonymsList: synAntList || [],
+          synonymsAntonyms: {
+            word: auto.word,
+            pos: auto.pos || 'adj.',
+            synonyms: (synAntList && synAntList[0]?.syns) || [],
+            antonyms: (synAntList && synAntList[0]?.ants) || []
+          },
           sentences: (collins && Array.isArray(collins.definitions) && collins.definitions.some(d => d.example))
             ? collins.definitions.filter(d => d.example).slice(0, 3).map((d, dIdx) => ({
                 num: dIdx + 1,
@@ -5343,11 +5827,23 @@ class VocabApp {
     }
 
     if (match) {
+      const cleanW = match.word.toLowerCase();
       storage.addRecentSearch(match.word);
       if (!match.collins) {
         OnlineLookupService.fetchCollinsData(match.word).then(c => {
           if (c) match.collins = c;
         });
+      }
+      if (!match.synonymsAntonymsList || match.synonymsAntonymsList.length === 0 || !match.synonymsAntonymsList[0].ants || match.synonymsAntonymsList[0].ants.length === 0) {
+        if (OnlineLookupService.curatedSynonymsAntonyms && OnlineLookupService.curatedSynonymsAntonyms[cleanW]) {
+          match.synonymsAntonymsList = OnlineLookupService.curatedSynonymsAntonyms[cleanW];
+          match.synonymsAntonyms = {
+            word: match.word,
+            pos: match.posShort || 'adj.',
+            synonyms: match.synonymsAntonymsList[0].syns || [],
+            antonyms: match.synonymsAntonymsList[0].ants || []
+          };
+        }
       }
       if (!this.words.some(w => w.word.toLowerCase() === match.word.toLowerCase())) {
         this.words.push(match);
@@ -5361,7 +5857,6 @@ class VocabApp {
       `;
       this.attachCardEventListeners(container, false, match);
 
-      const cleanW = match.word.toLowerCase();
       if (!match.phoneticUK || !match.phoneticUS || !match.respelling || match.phoneticUK === `/${cleanW}/` || match.phoneticUS === `/${cleanW}/`) {
         OnlineLookupService.fetchDualPhonetics(match.word).then(phones => {
           if (phones) {
@@ -5674,6 +6169,7 @@ class VocabApp {
       const cleanWord = autoEntry.word;
       const pos = autoEntry.pos || 'n.';
       const urdu = autoEntry.urdu || '';
+      const curatedSyn = OnlineLookupService.curatedSynonymsAntonyms && OnlineLookupService.curatedSynonymsAntonyms[cleanWord.toLowerCase()];
       const instantWordObj = {
         id: `local-${Date.now()}`,
         word: cleanWord,
@@ -5699,11 +6195,13 @@ class VocabApp {
         sentences: [
           { en: `Learning the accurate context of ${cleanWord} helps improve spoken English.`, ur: `اس کا صحیح سیاق و سباق سمجھنا انگریزی بول چال کو بہتر بناتا ہے۔` }
         ],
+        synonymsAntonymsList: curatedSyn || [],
         synonymsAntonyms: {
           word: cleanWord,
           pos: pos,
           context: 'for everyday usage',
-          synonyms: ["related", "similar"]
+          synonyms: (curatedSyn && curatedSyn[0]?.syns) || [],
+          antonyms: (curatedSyn && curatedSyn[0]?.ants) || []
         },
         cognates: {
           root: cleanWord,
@@ -5740,7 +6238,7 @@ class VocabApp {
                 {
                   num: 1,
                   def: `definition and semantic sense of ${cleanWord}`,
-                  synonyms: ["similar"]
+                  synonyms: (curatedSyn && curatedSyn[0]?.syns) || []
                 }
               ]
             }
@@ -5748,6 +6246,21 @@ class VocabApp {
         },
         source: 'Instant Offline Index ⚡'
       };
+
+      if (!curatedSyn) {
+        OnlineLookupService.fetchSynonymsAndAntonyms(cleanWord, urdu).then(list => {
+          if (list && list.length > 0) {
+            instantWordObj.synonymsAntonymsList = list;
+            instantWordObj.synonymsAntonyms = {
+              word: cleanWord,
+              pos: pos,
+              synonyms: list[0].syns || [],
+              antonyms: list[0].ants || []
+            };
+            storage.saveWordToCache(instantWordObj);
+          }
+        });
+      }
 
       this.words.unshift(instantWordObj);
       this.isSearchingOnline = false;
@@ -5777,14 +6290,20 @@ class VocabApp {
         const [urduResult, dictResult, synsResult, wikiResult, phonesResult] = await Promise.allSettled([
           OnlineLookupService.translate(query, 'auto', 'ur'),
           OnlineLookupService.getDictionaryData(query),
-          OnlineLookupService.getSynonyms(query),
+          OnlineLookupService.fetchSynonymsAndAntonyms(query),
           OnlineLookupService.fetchWikipediaSummary(query),
           OnlineLookupService.fetchDualPhonetics(query)
         ]);
 
         const urduMeaning = (urduResult.status === 'fulfilled' && urduResult.value) ? urduResult.value.trim() : "";
         const dictData = (dictResult.status === 'fulfilled' && dictResult.value) ? dictResult.value : null;
-        const synonyms = (synsResult.status === 'fulfilled' && synsResult.value) ? synsResult.value : [];
+        const synAntList = (synsResult.status === 'fulfilled' && Array.isArray(synsResult.value) && synsResult.value.length > 0)
+          ? synsResult.value
+          : (OnlineLookupService.curatedSynonymsAntonyms && OnlineLookupService.curatedSynonymsAntonyms[cleanWord.toLowerCase()]
+              ? OnlineLookupService.curatedSynonymsAntonyms[cleanWord.toLowerCase()]
+              : []);
+        const synonyms = (synAntList[0]?.syns) || [];
+        const antonyms = (synAntList[0]?.ants) || [];
         const wikiData = (wikiResult.status === 'fulfilled' && wikiResult.value) ? wikiResult.value : null;
         const phones = (phonesResult.status === 'fulfilled' && phonesResult.value)
           ? phonesResult.value
@@ -5854,11 +6373,13 @@ class VocabApp {
             { num: 1, en: sentenceEn, source: "Oxford Dictionary", ur: sentenceUr }
           ],
           sentences: builtSentences.length > 0 ? builtSentences : [{ en: sentenceEn, ur: sentenceUr }],
+          synonymsAntonymsList: synAntList,
           synonymsAntonyms: {
             word: cleanWord,
             pos: posShort,
             context: `for everyday usage`,
-            synonyms: synonyms.length > 0 ? synonyms : ["similar", "related"]
+            synonyms: synonyms.length > 0 ? synonyms : [],
+            antonyms: antonyms.length > 0 ? antonyms : []
           },
           cognates: {
             root: cleanWord,
@@ -6159,6 +6680,9 @@ class VocabApp {
     let synAntList = [];
     if (w.synonymsAntonymsList && w.synonymsAntonymsList.length > 0) {
       synAntList = w.synonymsAntonymsList;
+    } else if (OnlineLookupService.curatedSynonymsAntonyms && OnlineLookupService.curatedSynonymsAntonyms[cleanWord]) {
+      synAntList = OnlineLookupService.curatedSynonymsAntonyms[cleanWord];
+      w.synonymsAntonymsList = synAntList;
     } else {
       const syns = Array.isArray(w.synonyms)
         ? w.synonyms
@@ -6177,6 +6701,13 @@ class VocabApp {
             ants: ants.slice(0, 6)
           }
         ];
+      }
+    }
+
+    if (synAntList && synAntList.length > 0 && (!synAntList[0].ants || synAntList[0].ants.length === 0)) {
+      if (OnlineLookupService.curatedSynonymsAntonyms && OnlineLookupService.curatedSynonymsAntonyms[cleanWord]) {
+        synAntList = OnlineLookupService.curatedSynonymsAntonyms[cleanWord];
+        w.synonymsAntonymsList = synAntList;
       }
     }
 
@@ -6315,38 +6846,44 @@ class VocabApp {
         </div>
 
         <!-- 3. Synonyms & Antonyms Card (Screenshots 5 & 6) -->
-        <div class="udict-section-card">
+        <div class="udict-section-card" data-syn-ant-card="${cleanWord}">
           <h3 class="udict-section-title">Synonyms &amp; Antonyms</h3>
           <div class="udict-target-pos-row">
             <span class="udict-target-word-coral">${w.word}</span>
             <span class="udict-target-pos-italic">${w.posShort || 'adj.'}</span>
           </div>
 
-          ${synAntList.map((sense, sIdx) => `
-            <div class="udict-syn-sense-block" style="margin-bottom: 16px;">
-              <div class="udict-context-label">${sense.num || sIdx + 1} &nbsp; ${sense.context}</div>
-              ${sense.syns && sense.syns.length > 0 ? `
-                <div class="udict-syn-group">
-                  <span class="udict-syn-badge">SYN</span>
-                  <div class="udict-syn-links">
-                    ${sense.syns.map((syn, synIdx) => `
-                      <span class="udict-syn-word-link" data-word-search="${syn}">${syn}</span>${synIdx < sense.syns.length - 1 ? '<span class="udict-syn-slash"> / </span>' : ''}
-                    `).join('')}
+          <div class="udict-syn-sense-container" data-syn-ant-list="${cleanWord}">
+            ${synAntList.length > 0 ? synAntList.map((sense, sIdx) => `
+              <div class="udict-syn-sense-block" style="margin-bottom: 16px;">
+                <div class="udict-context-label">${sense.num || sIdx + 1} &nbsp; ${sense.context}</div>
+                ${sense.syns && sense.syns.length > 0 ? `
+                  <div class="udict-syn-group">
+                    <span class="udict-syn-badge">SYN</span>
+                    <div class="udict-syn-links">
+                      ${sense.syns.map((syn, synIdx) => `
+                        <span class="udict-syn-word-link" data-word-search="${syn}">${syn}</span>${synIdx < sense.syns.length - 1 ? '<span class="udict-syn-slash"> / </span>' : ''}
+                      `).join('')}
+                    </div>
                   </div>
-                </div>
-              ` : ''}
-              ${sense.ants && sense.ants.length > 0 ? `
-                <div class="udict-syn-group" style="margin-top: 6px;">
-                  <span class="udict-ant-badge">ANT</span>
-                  <div class="udict-syn-links">
-                    ${sense.ants.map((ant, antIdx) => `
-                      <span class="udict-syn-word-link" data-word-search="${ant}">${ant}</span>${antIdx < sense.ants.length - 1 ? '<span class="udict-syn-slash"> / </span>' : ''}
-                    `).join('')}
+                ` : ''}
+                ${sense.ants && sense.ants.length > 0 ? `
+                  <div class="udict-syn-group" style="margin-top: 6px;">
+                    <span class="udict-ant-badge">ANT</span>
+                    <div class="udict-syn-links">
+                      ${sense.ants.map((ant, antIdx) => `
+                        <span class="udict-syn-word-link" data-word-search="${ant}">${ant}</span>${antIdx < sense.ants.length - 1 ? '<span class="udict-syn-slash"> / </span>' : ''}
+                      `).join('')}
+                    </div>
                   </div>
-                </div>
-              ` : ''}
-            </div>
-          `).join('')}
+                ` : ''}
+              </div>
+            `).join('') : `
+              <div class="udict-syn-loading" style="font-size: 0.85rem; color: var(--text-muted); padding: 8px 0;">
+                Loading accurate synonyms &amp; antonyms...
+              </div>
+            `}
+          </div>
           <a class="udict-more-link" href="#" onclick="event.preventDefault();">More &gt;</a>
         </div>
 
@@ -6530,7 +7067,10 @@ class VocabApp {
           this.switchTab('home');
         }
 
-        if (this.dictSearchInput) {
+        const dedicatedOverlay = document.getElementById('dedicated-search-screen');
+        if (dedicatedOverlay && dedicatedOverlay.style.display !== 'none') {
+          this.selectWordFromSearch(word);
+        } else if (this.dictSearchInput) {
           this.dictSearchInput.value = word;
           this.searchQuery = word;
           if (this.dictClearBtn) this.dictClearBtn.style.display = 'flex';
@@ -6538,6 +7078,8 @@ class VocabApp {
           try {
             window.scrollTo({ top: 0, behavior: 'smooth' });
           } catch(err) {}
+        } else {
+          this.selectWordFromSearch(word);
         }
       });
     });
@@ -6589,6 +7131,77 @@ class VocabApp {
         this.openMoreSentencesModal(type, targetWordObj);
       });
     });
+
+    // 5d. Dynamic Hydration of Synonyms & Antonyms if missing or incomplete
+    if (currentWord && currentWord.word) {
+      const cleanW = currentWord.word.toLowerCase();
+      const synContainer = container.querySelector(`[data-syn-ant-list="${cleanW}"]`);
+      const hasMissingOrIncomplete = !currentWord.synonymsAntonymsList ||
+        currentWord.synonymsAntonymsList.length === 0 ||
+        !currentWord.synonymsAntonymsList[0].ants ||
+        currentWord.synonymsAntonymsList[0].ants.length === 0;
+
+      if (synContainer && hasMissingOrIncomplete) {
+        OnlineLookupService.fetchSynonymsAndAntonyms(currentWord.word, currentWord.urduMeaning).then(fetchedList => {
+          if (fetchedList && fetchedList.length > 0) {
+            currentWord.synonymsAntonymsList = fetchedList;
+            currentWord.synonymsAntonyms = {
+              word: currentWord.word,
+              pos: currentWord.posShort || 'adj.',
+              synonyms: fetchedList[0].syns || [],
+              antonyms: fetchedList[0].ants || []
+            };
+            try { storage.saveWordToCache(currentWord); } catch (e) {}
+
+            synContainer.innerHTML = fetchedList.map((sense, sIdx) => `
+              <div class="udict-syn-sense-block" style="margin-bottom: 16px;">
+                <div class="udict-context-label">${sense.num || sIdx + 1} &nbsp; ${sense.context}</div>
+                ${sense.syns && sense.syns.length > 0 ? `
+                  <div class="udict-syn-group">
+                    <span class="udict-syn-badge">SYN</span>
+                    <div class="udict-syn-links">
+                      ${sense.syns.map((syn, synIdx) => `
+                        <span class="udict-syn-word-link" data-word-search="${syn}">${syn}</span>${synIdx < sense.syns.length - 1 ? '<span class="udict-syn-slash"> / </span>' : ''}
+                      `).join('')}
+                    </div>
+                  </div>
+                ` : ''}
+                ${sense.ants && sense.ants.length > 0 ? `
+                  <div class="udict-syn-group" style="margin-top: 6px;">
+                    <span class="udict-ant-badge">ANT</span>
+                    <div class="udict-syn-links">
+                      ${sense.ants.map((ant, antIdx) => `
+                        <span class="udict-syn-word-link" data-word-search="${ant}">${ant}</span>${antIdx < sense.ants.length - 1 ? '<span class="udict-syn-slash"> / </span>' : ''}
+                      `).join('')}
+                    </div>
+                  </div>
+                ` : ''}
+              </div>
+            `).join('');
+
+            // Bind click on newly rendered syn/ant links
+            synContainer.querySelectorAll('[data-word-search]').forEach(link => {
+              link.addEventListener('click', (e) => {
+                e.stopPropagation();
+                const term = link.dataset.wordSearch;
+                if (!term) return;
+                const dedicatedOverlay = document.getElementById('dedicated-search-screen');
+                if (dedicatedOverlay && dedicatedOverlay.style.display !== 'none') {
+                  this.selectWordFromSearch(term);
+                } else if (this.dictSearchInput) {
+                  this.dictSearchInput.value = term;
+                  this.searchQuery = term;
+                  if (this.dictClearBtn) this.dictClearBtn.style.display = 'flex';
+                  this.performSearch(term);
+                } else {
+                  this.selectWordFromSearch(term);
+                }
+              });
+            });
+          }
+        });
+      }
+    }
 
     // 6. Tab switching buttons (Concise, Collins)
     if (isModal) {
