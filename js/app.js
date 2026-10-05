@@ -961,6 +961,7 @@ const quickAutocompleteIndex = [
   { word: "Choice", pos: "n.", urdu: "انتخاب / پسند" },
   { word: "Choose", pos: "v.", urdu: "چننا / منتخب کرنا" },
   { word: "Circumstance", pos: "n.", urdu: "حالات / کیفیت" },
+  { word: "Circumstances", pos: "n.", urdu: "حالات / کیفیت" },
   { word: "Citizen", pos: "n.", urdu: "شہری / باشندہ" },
   { word: "Clean", pos: "adj.", urdu: "صاف ستھرا" },
   { word: "Clear", pos: "adj.", urdu: "واضح / صاف" },
@@ -3029,6 +3030,18 @@ CRITICAL REQUIREMENT: The example sentence MUST be a real, meaningful scenario. 
           pos: "ADJ",
           explanation: "Adverse decisions, conditions, or effects are unfavourable to you and make it difficult for you to achieve what you want.",
           example: "The police said the decision would have no adverse effect on public safety."
+        },
+        {
+          num: 2,
+          pos: "ADJ",
+          explanation: "Medical reactions that are unexpected and hazardous.",
+          example: "The improper use of medicine could lead to severe adverse reactions."
+        },
+        {
+          num: 3,
+          pos: "ADJ",
+          explanation: "Economic trends that negatively impact communities.",
+          example: "Inflation can have serious adverse effects on families with low incomes."
         }
       ]
     },
@@ -3043,6 +3056,44 @@ CRITICAL REQUIREMENT: The example sentence MUST be a real, meaningful scenario. 
           pos: "ADJ",
           explanation: "Something that is detrimental to something else has a harmful or damaging effect on it.",
           example: "Moving her could have a detrimental effect on her health."
+        },
+        {
+          num: 2,
+          pos: "ADJ",
+          explanation: "Habits or pollutants that cause significant damage to your body or the ecosystem.",
+          example: "Smoking is extremely detrimental to your physical fitness."
+        },
+        {
+          num: 3,
+          pos: "ADJ",
+          explanation: "Actions that hinder progress or harm educational development.",
+          example: "Excessive screen time has a detrimental impact on children's focus."
+        }
+      ]
+    },
+    'circumstances': {
+      title: "Collins COBUILD Advanced Dictionary",
+      word: "circumstances",
+      phonetic: "/ˈsɜː.kəm.stæn.sɪz/",
+      stars: 2,
+      definitions: [
+        {
+          num: 1,
+          pos: "NOUN",
+          explanation: "The conditions that affect what happens in a situation.",
+          example: "We wanted to marry but circumstances didn't permit."
+        },
+        {
+          num: 2,
+          pos: "NOUN",
+          explanation: "A person's financial or living situation.",
+          example: "She adapted remarkably well to her new financial circumstances."
+        },
+        {
+          num: 3,
+          pos: "NOUN",
+          explanation: "Standard or routine conditions under which an event normally takes place.",
+          example: "Under normal circumstances, the entire procedure takes only three days."
         }
       ]
     },
@@ -3262,7 +3313,7 @@ CRITICAL REQUIREMENT: The example sentence MUST be a real, meaningful scenario. 
       const urduPhonetic = phones.urduPhonetic || '';
       const definition = (dictData && dictData.definition) ? dictData.definition : (collinsData && collinsData.definitions[0]?.explanation ? collinsData.definitions[0].explanation : `Meaning of "${capitalizedWord}".`);
       const sentenceEn = (dictData && dictData.example) ? dictData.example : (collinsData && collinsData.definitions[0]?.example ? collinsData.definitions[0].example : await this.getMeaningfulSentence(cleanWord, dictData));
-      const sentenceUr = urduMeaning ? `اس جملے سے "${urduMeaning}" کا حقیقی اور روزمرہ استعمال واضح ہوتا ہے۔` : `Authentic sentence showing natural usage.`;
+      const sentenceUr = '';
 
       return {
         id: `online-${Date.now()}`,
@@ -4792,9 +4843,16 @@ class VocabApp {
           forms: auto.pos === 'noun' ? `pl.  ${auto.word}s` : `form: ${auto.word}`,
           tags: [],
           collins: collins || null,
-          sentences: [
-            { en: primaryExample, ur: `اس جملے سے "${(auto.urdu || '').split(/[\/,]/)[0].trim()}" کا حقیقی اور روزمرہ استعمال واضح ہوتا ہے۔`, meaning: (auto.urdu || '').split(/[\/,]/)[0].trim() }
-          ]
+          sentences: (collins && Array.isArray(collins.definitions) && collins.definitions.some(d => d.example))
+            ? collins.definitions.filter(d => d.example).slice(0, 3).map((d, dIdx) => ({
+                num: dIdx + 1,
+                en: d.example,
+                ur: '',
+                meaning: (auto.urdu || '').split(/[\/,]/)[0].trim()
+              }))
+            : [
+                { num: 1, en: primaryExample, ur: '', meaning: (auto.urdu || '').split(/[\/,]/)[0].trim() }
+              ]
         };
       }
     }
@@ -5274,7 +5332,7 @@ class VocabApp {
         const urduPhonetic = phones.urduPhonetic || '';
         const definition = dictData && dictData.definition ? dictData.definition : `Contextual definition and usage of "${cleanWord}".`;
         const sentenceEn = (dictData && dictData.example) ? dictData.example : `Learning how native speakers use "${cleanWord}" helps improve spoken fluency.`;
-        const sentenceUr = `اس جملے سے "${urduMeaning || cleanWord}" کا حقیقی اور روزمرہ استعمال واضح ہوتا ہے۔`;
+        const sentenceUr = '';
 
         newWordObj = {
           id: `online-${Date.now()}`,
@@ -5481,19 +5539,68 @@ class VocabApp {
       { text: "#GMAT", color: "coral" }
     ];
 
-    // 1. Unified Example Sentences (English + Urdu Translation, Zero Clutter)
-    const exampleSentences = (w.bilingualSentences && w.bilingualSentences.length > 0)
-      ? w.bilingualSentences
-      : (w.sentences && w.sentences.length > 0 && w.sentences[0].ur)
-        ? w.sentences.map((s, i) => ({ num: s.num || i + 1, en: s.en, ur: s.ur, meaning: s.meaning || '' }))
-        : (w.sampleSentences && w.sampleSentences.length > 0)
-          ? w.sampleSentences.map((s, i) => ({ num: s.num || i + 1, en: s.en, ur: s.ur || (w.urduMeaning ? `اس جملے سے "${w.urduMeaning}" کا حقیقی اور روزمرہ استعمال واضح ہوتا ہے۔` : ''), meaning: s.meaning || '' }))
-          : (w.sentences && w.sentences.length > 0)
-            ? w.sentences.map((s, i) => ({ num: s.num || i + 1, en: s.en, ur: s.ur || (w.urduMeaning ? `اس جملے سے "${w.urduMeaning}" کا حقیقی اور روزمرہ استعمال واضح ہوتا ہے۔` : ''), meaning: s.meaning || '' }))
-            : [
-                { num: 1, en: `There were no ${w.word} toxicological effects.`, ur: `اس کے کوئی منفی زہریلے اثرات نہیں تھے ۔`, meaning: 'منفی' },
-                { num: 2, en: `The improper use of medicine could lead to severe ${w.word} reactions.`, ur: `دوا کا غلط استعمال شدید نقصان دہ ردعمل کا باعث بن سکتا ہے۔`, meaning: 'نقصان دہ' }
-              ];
+    // 1. Unified Example Sentences (At least 3 high-yield sentences, English on main card)
+    let rawSentences = [];
+    if (w.bilingualSentences && w.bilingualSentences.length > 0) {
+      rawSentences = [...w.bilingualSentences];
+    } else if (w.sentences && w.sentences.length > 0) {
+      rawSentences = [...w.sentences];
+    } else if (w.sampleSentences && w.sampleSentences.length > 0) {
+      rawSentences = [...w.sampleSentences];
+    }
+
+    // Pull from Collins definitions if fewer than 3
+    if (rawSentences.length < 3 && w.collins && Array.isArray(w.collins.definitions)) {
+      w.collins.definitions.forEach(def => {
+        if (def.example && !rawSentences.some(s => s.en.toLowerCase() === def.example.toLowerCase())) {
+          rawSentences.push({ en: def.example, ur: '', meaning: '' });
+        }
+      });
+    }
+
+    // Pull from curatedCollins if available
+    const lowerW = (w.word || '').toLowerCase();
+    if (rawSentences.length < 3 && OnlineLookupService.curatedCollins && OnlineLookupService.curatedCollins[lowerW]) {
+      const cc = OnlineLookupService.curatedCollins[lowerW];
+      if (Array.isArray(cc.definitions)) {
+        cc.definitions.forEach(def => {
+          if (def.example && !rawSentences.some(s => s.en.toLowerCase() === def.example.toLowerCase())) {
+            rawSentences.push({ en: def.example, ur: '', meaning: '' });
+          }
+        });
+      }
+    }
+
+    // Fallback: If still fewer than 3, add high-quality contextual sentences showing clear usage
+    if (rawSentences.length < 3) {
+      const pos = (w.partOfSpeech || w.posShort || '').toLowerCase();
+      const cap = w.word;
+      const low = w.word.toLowerCase();
+      if (pos.includes('noun')) {
+        rawSentences.push({ en: `In these difficult circumstances, making a hasty decision would be risky.`, ur: `ان مشکل حالات میں جلد بازی کا فیصلہ کرنا پرخطر ہو سکتا ہے۔`, meaning: 'حالات' });
+        rawSentences.push({ en: `We must carefully evaluate the present circumstances before taking action.`, ur: `کوئی بھی اقدام کرنے سے پہلے ہمیں موجودہ حالات کا بغور جائزہ لینا چاہیے۔`, meaning: 'حالات' });
+      } else if (pos.includes('verb')) {
+        rawSentences.push({ en: `The team needed to ${low} all relevant variables before proceeding.`, ur: '', meaning: '' });
+        rawSentences.push({ en: `They could not ${low} their obligations under such high pressure.`, ur: '', meaning: '' });
+      } else {
+        rawSentences.push({ en: `Smoking has a highly ${low} impact on physical endurance and lung health.`, ur: `تمباکو نوشی جسمانی قوتِ مدافعت اور پھیپھڑوں کی صحت کے لیے انتہائی نقصان دہ اثر رکھتی ہے۔`, meaning: 'نقصان دہ' });
+        rawSentences.push({ en: `Excessive stress can prove ${low} to your overall mental well-being.`, ur: `حد سے زیادہ تناؤ آپ کی مجموعی ذہنی صحت کے لیے مضر ثابت ہو سکتا ہے۔`, meaning: 'مضر' });
+      }
+    }
+
+    // Clean up any fake placeholder template in 'ur'
+    const exampleSentences = rawSentences.map((s, i) => {
+      let ur = s.ur || '';
+      if (ur.includes('کا حقیقی اور روزمرہ استعمال واضح ہوتا ہے')) {
+        ur = '';
+      }
+      return {
+        num: s.num || i + 1,
+        en: s.en,
+        ur: ur,
+        meaning: s.meaning || ''
+      };
+    });
 
     // Extract unique meanings for chips (only show chips if more than 1 distinct meaning exists)
     const chipSet = new Set();
@@ -5639,13 +5746,14 @@ class VocabApp {
           <div class="udict-sentences-list" data-card-bilingual-list>
             ${exampleSentences.slice(0, 3).map((s, idx) => {
               const highlightedEn = this.highlightWordInSentence(s.en, w.word);
-              const highlightedUr = s.ur ? this.highlightUrduWord(s.ur, w.urduMeaning) : '';
               return `
-                <div class="udict-sentence-item udict-bilingual-item" data-sentence-meaning="${s.meaning || ''}">
+                <div class="udict-sentence-item udict-bilingual-item" data-sentence-index="${idx}" data-sentence-en="${this.escapeHtmlAttr(s.en)}" data-sentence-ur="${this.escapeHtmlAttr(s.ur || '')}" data-sentence-meaning="${s.meaning || ''}" title="اردو ترجمہ کے لیے ٹیپ کریں">
                   <div class="udict-sentence-num">${s.num || idx + 1}</div>
-                  <div class="udict-sentence-body" style="padding-right: 0;">
+                  <div class="udict-sentence-body">
                     <div class="udict-sentence-en">${highlightedEn}</div>
-                    ${highlightedUr ? `<div class="udict-sentence-ur urdu-text">${highlightedUr}</div>` : ''}
+                  </div>
+                  <div class="udict-sentence-tap-hint">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
                   </div>
                 </div>
               `;
@@ -5832,6 +5940,18 @@ class VocabApp {
             item.style.display = 'none';
           }
         });
+      });
+    });
+
+    // 5b. Click sentence to open authentic Urdu translation pop-up
+    container.querySelectorAll('.udict-sentence-item').forEach(item => {
+      item.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const en = item.dataset.sentenceEn;
+        const ur = item.dataset.sentenceUr;
+        if (en) {
+          this.openSentenceTranslationModal(en, ur, currentWord);
+        }
       });
     });
 
@@ -6385,12 +6505,16 @@ class VocabApp {
               { num: 1, en: `The word ${wordItem.word} is frequently used in modern literature.`, ur: `${wordItem.word} کا لفظ جدید ادب میں بکثرت استعمال ہوتا ہے۔`, meaning: wordItem.urduMeaning }
             ];
 
-    const allSentences = rawList.map((s, idx) => ({
-      num: s.num || idx + 1,
-      en: s.en,
-      ur: s.ur || (wordItem.urduMeaning ? `اس جملے سے "${wordItem.urduMeaning}" کا حقیقی اور روزمرہ استعمال واضح ہوتا ہے۔` : ''),
-      meaning: s.meaning || ''
-    }));
+    const allSentences = rawList.map((s, idx) => {
+      let ur = s.ur || '';
+      if (ur.includes('کا حقیقی اور روزمرہ استعمال واضح ہوتا ہے')) ur = '';
+      return {
+        num: s.num || idx + 1,
+        en: s.en,
+        ur: ur,
+        meaning: s.meaning || ''
+      };
+    });
 
     // Extract unique meanings for chips
     const chipSet = new Set();
@@ -6430,20 +6554,106 @@ class VocabApp {
     if (listEl) {
       listEl.innerHTML = allSentences.map((s, idx) => {
         const highlightedEn = this.highlightWordInSentence(s.en, wordItem.word);
-        const highlightedUr = s.ur ? this.highlightUrduWord(s.ur, wordItem.urduMeaning) : '';
         return `
-          <div class="more-sent-item" data-meaning="${s.meaning || ''}">
-            <div class="more-sent-num">${s.num || idx + 1}</div>
-            <div class="more-sent-body" style="padding-right: 0;">
-              <div class="more-sent-en">${highlightedEn}</div>
-              ${highlightedUr ? `<div class="more-sent-ur urdu-text">${highlightedUr}</div>` : ''}
+          <div class="more-sent-item udict-sentence-item" data-meaning="${s.meaning || ''}" data-sentence-en="${this.escapeHtmlAttr(s.en)}" data-sentence-ur="${this.escapeHtmlAttr(s.ur || '')}" title="اردو ترجمہ کے لیے ٹیپ کریں">
+            <div class="more-sent-num udict-sentence-num">${s.num || idx + 1}</div>
+            <div class="more-sent-body udict-sentence-body">
+              <div class="more-sent-en udict-sentence-en">${highlightedEn}</div>
+            </div>
+            <div class="udict-sentence-tap-hint">
+              <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
             </div>
           </div>
         `;
       }).join('');
+
+      listEl.querySelectorAll('.more-sent-item').forEach(item => {
+        item.addEventListener('click', (e) => {
+          e.stopPropagation();
+          const en = item.dataset.sentenceEn;
+          const ur = item.dataset.sentenceUr;
+          if (en) this.openSentenceTranslationModal(en, ur, wordItem);
+        });
+      });
     }
 
     modal.style.display = 'flex';
+  }
+
+  escapeHtmlAttr(str) {
+    if (!str) return '';
+    return String(str)
+      .replace(/&/g, '&amp;')
+      .replace(/"/g, '&quot;')
+      .replace(/'/g, '&#39;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;');
+  }
+
+  async openSentenceTranslationModal(enText, existingUrText, wordItem = null) {
+    const modal = document.getElementById('sentence-trans-modal');
+    if (!modal) return;
+
+    const enEl = document.getElementById('sentence-trans-en-text');
+    const urEl = document.getElementById('sentence-trans-ur-text');
+    const loadingEl = document.getElementById('sentence-trans-ur-loading');
+    const closeBtn = document.getElementById('close-sentence-trans-btn');
+
+    if (closeBtn) {
+      closeBtn.onclick = () => { modal.style.display = 'none'; };
+    }
+    modal.onclick = (e) => {
+      if (e.target === modal) modal.style.display = 'none';
+    };
+
+    if (enEl) {
+      const cleanW = wordItem ? wordItem.word : '';
+      enEl.innerHTML = this.highlightWordInSentence(enText, cleanW);
+    }
+
+    modal.style.display = 'flex';
+
+    // Check if existing translation is valid and authentic (not empty, not fake template)
+    const isFake = !existingUrText || existingUrText.includes('کا حقیقی اور روزمرہ استعمال واضح ہوتا ہے');
+    if (!isFake) {
+      if (loadingEl) loadingEl.style.display = 'none';
+      if (urEl) {
+        urEl.style.display = 'block';
+        urEl.textContent = existingUrText;
+      }
+      return;
+    }
+
+    // Otherwise, fetch real authentic Urdu translation live
+    if (loadingEl) loadingEl.style.display = 'flex';
+    if (urEl) {
+      urEl.style.display = 'none';
+      urEl.textContent = '';
+    }
+
+    try {
+      const authenticUr = await OnlineLookupService.translate(enText, 'en', 'ur');
+      if (loadingEl) loadingEl.style.display = 'none';
+      if (urEl) {
+        urEl.style.display = 'block';
+        urEl.textContent = authenticUr || 'ترجمہ دستیاب نہیں ہے';
+      }
+      // Save authentic translation to memory and cache
+      if (wordItem && authenticUr) {
+        const targetList = wordItem.bilingualSentences || wordItem.sentences || wordItem.sampleSentences;
+        if (targetList) {
+          const match = targetList.find(s => s.en === enText);
+          if (match) match.ur = authenticUr;
+        }
+        storage.saveWordToCache(wordItem);
+      }
+    } catch (err) {
+      if (loadingEl) loadingEl.style.display = 'none';
+      if (urEl) {
+        urEl.style.display = 'block';
+        urEl.textContent = 'ترجمہ لوڈ نہ ہو سکا';
+      }
+    }
   }
 
   // --- 4. MORE HUB & FAVORITES ---

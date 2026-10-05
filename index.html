@@ -328,6 +328,36 @@
       </div>
     </div>
 
+    <!-- Dedicated Pop-up Card for Sentence Translation (On Tap) -->
+    <div class="word-modal-backdrop" id="sentence-trans-modal" style="display: none; z-index: 95;">
+      <div class="sentence-trans-card">
+        <div class="sentence-trans-header">
+          <div class="sentence-trans-title-wrap">
+            <span class="sentence-trans-badge">Translation</span>
+            <h3 class="sentence-trans-title">Sentence Meaning</h3>
+          </div>
+          <button type="button" class="sentence-trans-close-btn" id="close-sentence-trans-btn" aria-label="Close">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+          </button>
+        </div>
+        <div class="sentence-trans-body">
+          <div class="sentence-trans-block en-block">
+            <div class="sentence-trans-label">English Sentence</div>
+            <div class="sentence-trans-en-text" id="sentence-trans-en-text"></div>
+          </div>
+          <div class="sentence-trans-divider"></div>
+          <div class="sentence-trans-block ur-block">
+            <div class="sentence-trans-label urdu-label">اردو ترجمہ</div>
+            <div id="sentence-trans-ur-loading" class="sentence-trans-loading" style="display: none;">
+              <div class="apple-spinner"></div>
+              <span>مستند اردو ترجمہ لوڈ ہو رہا ہے...</span>
+            </div>
+            <div class="sentence-trans-ur-text urdu-text" id="sentence-trans-ur-text"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
   </main>
 
   <!-- Dynamic Anti-Cache Script Loader -->

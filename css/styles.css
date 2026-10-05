@@ -2003,16 +2003,30 @@ body {
 
 .udict-sentence-item {
   display: flex;
+  align-items: center;
   gap: 12px;
-  margin-bottom: 16px;
-  padding-bottom: 14px;
-  border-bottom: 0.5px solid var(--divider-hairline);
+  margin-bottom: 10px;
+  padding: 10px 12px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.025);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  cursor: pointer;
+  transition: all 0.18s ease;
+}
+
+.udict-sentence-item:hover {
+  background: rgba(255, 255, 255, 0.055);
+  border-color: rgba(255, 255, 255, 0.12);
+  transform: translateX(2px);
+}
+
+.udict-sentence-item:active {
+  background: rgba(255, 255, 255, 0.08);
+  transform: scale(0.99);
 }
 
 .udict-sentence-item:last-child {
-  border-bottom: none;
   margin-bottom: 0;
-  padding-bottom: 0;
 }
 
 .udict-sentence-num {
@@ -2020,7 +2034,6 @@ body {
   font-weight: 700;
   color: var(--text-faint);
   min-width: 14px;
-  padding-top: 2px;
 }
 
 .udict-sentence-body {
@@ -2031,10 +2044,27 @@ body {
   font-size: 0.98rem;
   line-height: 1.55;
   color: var(--text-title);
-  margin-bottom: 4px;
+  margin-bottom: 0;
 }
 
-/* Authentic Bilingual Urdu Translation beneath English sentence (Screenshot 4) */
+.udict-sentence-tap-hint {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  color: var(--text-faint);
+  flex-shrink: 0;
+  transition: all 0.18s ease;
+}
+
+.udict-sentence-item:hover .udict-sentence-tap-hint {
+  color: var(--text-title);
+  transform: translateX(2px);
+}
+
+/* Authentic Bilingual Urdu Translation beneath English sentence */
 .udict-sentence-ur {
   font-size: 1.05rem;
   line-height: 1.6;
@@ -2046,7 +2076,7 @@ body {
 }
 
 .udict-word-highlight {
-  color: #f43f5e;
+  color: inherit;
   font-weight: 700;
   background: transparent;
 }
@@ -3461,6 +3491,137 @@ body {
   padding: 3px 8px;
   border-radius: 6px;
 }
+
+/* Sentence Translation Pop-up Modal Card */
+.sentence-trans-card {
+  width: 90%;
+  max-width: 440px;
+  background: var(--bg-card, #171d2b);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 20px;
+  padding: 22px;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.6);
+  animation: modalPopIn 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  margin: auto;
+}
+
+@keyframes modalPopIn {
+  from {
+    opacity: 0;
+    transform: scale(0.94) translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+.sentence-trans-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.sentence-trans-title-wrap {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.sentence-trans-badge {
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  padding: 3px 8px;
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--text-muted);
+}
+
+.sentence-trans-title {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--text-title);
+  margin: 0;
+}
+
+.sentence-trans-close-btn {
+  background: rgba(255, 255, 255, 0.06);
+  border: none;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  color: var(--text-muted);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+}
+
+.sentence-trans-close-btn:hover {
+  background: rgba(255, 255, 255, 0.15);
+  color: var(--text-title);
+}
+
+.sentence-trans-block {
+  margin-bottom: 10px;
+}
+
+.sentence-trans-label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--text-muted);
+  margin-bottom: 8px;
+}
+
+.sentence-trans-label.urdu-label {
+  direction: rtl;
+  text-align: right;
+  font-family: var(--font-urdu, 'Jameel Noori Nastaleeq', 'Noto Nastaliq Urdu', serif);
+  font-size: 0.95rem;
+}
+
+.sentence-trans-en-text {
+  font-size: 1.05rem;
+  line-height: 1.55;
+  color: var(--text-title);
+  margin: 0;
+  font-weight: 500;
+}
+
+.sentence-trans-divider {
+  height: 1px;
+  background: rgba(255, 255, 255, 0.08);
+  margin: 14px 0;
+}
+
+.sentence-trans-ur-text {
+  font-size: 1.35rem;
+  line-height: 1.9;
+  color: #f1f5f9;
+  margin: 0;
+  direction: rtl;
+  text-align: right;
+  font-weight: 600;
+}
+
+.sentence-trans-loading {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  padding: 10px 0;
+  direction: rtl;
+}
+
 
 
 
