@@ -3517,6 +3517,277 @@ CRITICAL REQUIREMENT: The example sentence MUST be a real, meaningful scenario. 
     };
   },
 
+  // --- AUTHENTIC CURATED PHRASES & COLLOCATIONS WITH NATURAL URDU TRANSLATIONS ---
+  curatedPhrases: {
+    'alleviate': [
+      { text: "alleviate pain", ur: "درد کم کرنا / تکلیف ہلکی کرنا" },
+      { text: "alleviate poverty", ur: "غربت میں کمی لانا" },
+      { text: "alleviate symptoms", ur: "بیماری کی علامات کو ہلکا کرنا" },
+      { text: "alleviate suffering", ur: "دکھ درد یا تکلیف کو کم کرنا" },
+      { text: "alleviate traffic congestion", ur: "ٹریفک کے دباؤ کو کم کرنا" }
+    ],
+    'adverse': [
+      { text: "adverse effect", ur: "منفی اثر / برا نتیجہ" },
+      { text: "adverse reaction", ur: "منفی ردعمل / الرجی یا برا ری ایکشن" },
+      { text: "adverse weather conditions", ur: "خراب یا نامساعد موسمی حالات" },
+      { text: "adverse circumstances", ur: "مخالف یا نامساعد حالات" }
+    ],
+    'conclusion': [
+      { text: "come to a conclusion", ur: "کسی حتمی نتیجے پر پہنچنا" },
+      { text: "draw a conclusion", ur: "نتیجہ اخذ کرنا / نتیجہ نکالنا" },
+      { text: "jump to conclusions", ur: "بغیر سوچے سمجھے جلد بازی میں نتیجہ نکالنا" },
+      { text: "in conclusion", ur: "آخر میں / مختصراً نتیجہ یہ کہ" },
+      { text: "foregone conclusion", ur: "پہلے سے طے شدہ نتیجہ" }
+    ],
+    'equivocal': [
+      { text: "equivocal answer", ur: "مبہم یا دو معنی والا جواب" },
+      { text: "equivocal response", ur: "گول مول یا غیر واضح ردعمل" },
+      { text: "equivocal evidence", ur: "مشکوک یا غیر یقینی ثبوت" },
+      { text: "remain equivocal", ur: "موقف واضح نہ کرنا / مبہم رہنا" }
+    ],
+    'detrimental': [
+      { text: "detrimental effect", ur: "نقصان دہ یا مضر اثر" },
+      { text: "detrimental to health", ur: "صحت کے لیے نقصان دہ" },
+      { text: "detrimental impact", ur: "گہرا نقصان دہ اثر" },
+      { text: "prove detrimental", ur: "نقصان دہ ثابت ہونا" }
+    ],
+    'mitigate': [
+      { text: "mitigate risk", ur: "خطرے کو کم یا محدود کرنا" },
+      { text: "mitigate damage", ur: "نقصان کی شدت کو کم کرنا" },
+      { text: "mitigate the impact", ur: "برے اثر کو ہلکا کرنا" },
+      { text: "mitigating circumstances", ur: "معافی یا نرمی کے لائق حالات" }
+    ],
+    'resilience': [
+      { text: "build resilience", ur: "قوت مدافعت اور حوصلہ پیدا کرنا" },
+      { text: "emotional resilience", ur: "جذباتی استحکام اور ہمت" },
+      { text: "remarkable resilience", ur: "حیرت انگیز استقامت اور ثابت قدمی" }
+    ],
+    'ephemeral': [
+      { text: "ephemeral beauty", ur: "عارضی حسن جو جلد فنا ہو جائے" },
+      { text: "ephemeral nature", ur: "ناپائیدار یا چند روزہ فطرت" },
+      { text: "ephemeral fame", ur: "چند روزہ شہرت" }
+    ],
+    'ubiquitous': [
+      { text: "ubiquitous presence", ur: "ہمہ گیر موجودگی / ہر جگہ ہونا" },
+      { text: "become ubiquitous", ur: "ہر طرف عام ہو جانا" },
+      { text: "ubiquitous influence", ur: "ہر سو پھیلا ہوا اثر" }
+    ],
+    'diligent': [
+      { text: "diligent effort", ur: "انتھک کوشش اور لگن" },
+      { text: "diligent student", ur: "محنتی اور لگن والا طالب علم" },
+      { text: "diligent search", ur: "گہری اور تفصیلی تلاش" },
+      { text: "diligent worker", ur: "مستقل مزاج محنتی کارکن" }
+    ],
+    'pragmatic': [
+      { text: "pragmatic approach", ur: "عملی اور حقیقت پسندانہ انداز" },
+      { text: "pragmatic solution", ur: "عملی اور قابل عمل حل" },
+      { text: "pragmatic decision", ur: "حقیقت پسندی پر مبنی فیصلہ" }
+    ],
+    'honest': [
+      { text: "honest opinion", ur: "کھری اور سچی رائے" },
+      { text: "honest mistake", ur: "معصومانہ یا غیر ارادی غلطی" },
+      { text: "to be honest", ur: "سچ پوچھیں تو / سچائی کے ساتھ" }
+    ],
+    'journey': [
+      { text: "safe journey", ur: "بخیر و عافیت سفر" },
+      { text: "spiritual journey", ur: "روحانی سفر" },
+      { text: "start a journey", ur: "سفر کا آغاز کرنا" }
+    ],
+    'happy': [
+      { text: "happy ending", ur: "خوشگوار انجام" },
+      { text: "happy memory", ur: "خوشگوار یاد" },
+      { text: "happy occasion", ur: "خوشی کا موقع" }
+    ],
+    'water': [
+      { text: "drinking water", ur: "پینے کا پانی" },
+      { text: "fresh water", ur: "میٹھا پانی" },
+      { text: "in hot water", ur: "مشکل صورتحال میں پھنس جانا" }
+    ],
+    'book': [
+      { text: "open book", ur: "کھلی کتاب / صاف گو انسان" },
+      { text: "by the book", ur: "قواعد و ضوابط کے عین مطابق" },
+      { text: "book a ticket", ur: "ٹکٹ بک کروانا" }
+    ],
+    'circumstances': [
+      { text: "under the circumstances", ur: "موجودہ حالات کے پیش نظر" },
+      { text: "unforeseen circumstances", ur: "غیر متوقع حالات" },
+      { text: "extenuating circumstances", ur: "نرمی کے لائق حالات" }
+    ],
+    'decision': [
+      { text: "make a decision", ur: "فیصلہ کرنا" },
+      { text: "tough decision", ur: "مشکل فیصلہ" },
+      { text: "unanimous decision", ur: "متفقہ فیصلہ" }
+    ],
+    'problem': [
+      { text: "solve a problem", ur: "مسئلہ حل کرنا" },
+      { text: "face a problem", ur: "مسئلے کا سامنا کرنا" },
+      { text: "pressing problem", ur: "فوری حل طلب مسئلہ" }
+    ],
+    'opportunity': [
+      { text: "golden opportunity", ur: "سنہری موقع" },
+      { text: "seize the opportunity", ur: "موقع سے فائدہ اٹھانا" },
+      { text: "equal opportunity", ur: "مساوی مواقع" }
+    ],
+    'success': [
+      { text: "achieve success", ur: "کامیابی حاصل کرنا" },
+      { text: "key to success", ur: "کامیابی کی کنجی / راز" },
+      { text: "overnight success", ur: "راتوں رات کامیابی" }
+    ],
+    'failure': [
+      { text: "admit failure", ur: "ناکامی تسلیم کرنا" },
+      { text: "fear of failure", ur: "ناکامی کا خوف" },
+      { text: "complete failure", ur: "مکمل ناکامی" }
+    ],
+    'knowledge': [
+      { text: "acquire knowledge", ur: "علم حاصل کرنا" },
+      { text: "wealth of knowledge", ur: "علم کا وسیع خزانہ" },
+      { text: "prior knowledge", ur: "پہلے سے موجود معلومات" }
+    ],
+    'experience': [
+      { text: "gain experience", ur: "تجربہ حاصل کرنا" },
+      { text: "hands-on experience", ur: "عملی تجربہ" },
+      { text: "firsthand experience", ur: "براہ راست ذاتی تجربہ" }
+    ],
+    'time': [
+      { text: "save time", ur: "وقت بچانا" },
+      { text: "waste time", ur: "وقت ضائع کرنا" },
+      { text: "in the nick of time", ur: "عین وقت پر" }
+    ],
+    'change': [
+      { text: "make a change", ur: "تبدیلی لانا" },
+      { text: "drastic change", ur: "بڑی اور نمایاں تبدیلی" },
+      { text: "climate change", ur: "موسمیاتی تبدیلی" }
+    ],
+    'effort': [
+      { text: "make an effort", ur: "کوشش کرنا" },
+      { text: "joint effort", ur: "مشترکہ کوشش" },
+      { text: "fruitless effort", ur: "بے کار کوشش" }
+    ],
+    'challenge': [
+      { text: "face a challenge", ur: "چیلنج کا سامنا کرنا" },
+      { text: "overcome a challenge", ur: "چیلنج پر قابو پانا" },
+      { text: "daunting challenge", ur: "کڑا اور مشکل چیلنج" }
+    ],
+    'goal': [
+      { text: "set a goal", ur: "ہدف مقرر کرنا" },
+      { text: "achieve a goal", ur: "ہدف حاصل کرنا" },
+      { text: "common goal", ur: "مشترکہ مقصد" }
+    ]
+  },
+
+  getPhrases(wordObj) {
+    if (!wordObj || !wordObj.word) return [];
+    const clean = wordObj.word.toLowerCase().trim();
+
+    // 1. Check curatedPhrases
+    if (this.curatedPhrases && this.curatedPhrases[clean]) {
+      return this.curatedPhrases[clean].map((p, i) => ({
+        num: i + 1,
+        text: p.text,
+        ur: p.ur || ''
+      }));
+    }
+
+    // 2. Check if wordObj has authentic phrases (not fake template)
+    if (Array.isArray(wordObj.phrases) && wordObj.phrases.length > 0) {
+      const isFake = wordObj.phrases.some(p => {
+        const txt = (typeof p === 'string' ? p : p.text || '').toLowerCase();
+        return txt === `${clean} effect` || txt === `${clean} selection` || txt === `${clean} reaction`;
+      });
+      if (!isFake) {
+        return wordObj.phrases.map((p, i) => {
+          if (typeof p === 'string') return { num: i + 1, text: p, ur: '' };
+          return { num: p.num || i + 1, text: p.text, ur: p.ur || '' };
+        });
+      }
+    }
+
+    // 3. Check curatedEnglishContext collocations
+    if (this.curatedEnglishContext && this.curatedEnglishContext[clean] && Array.isArray(this.curatedEnglishContext[clean].collocations)) {
+      return this.curatedEnglishContext[clean].collocations.map((col, i) => ({
+        num: i + 1,
+        text: col,
+        ur: ''
+      }));
+    }
+
+    // 4. Check wordObj.collocations
+    if (Array.isArray(wordObj.collocations) && wordObj.collocations.length > 0) {
+      return wordObj.collocations.map((col, i) => ({
+        num: i + 1,
+        text: col,
+        ur: ''
+      }));
+    }
+
+    return [];
+  },
+
+  async fetchPhrases(word, urduMeaning = '') {
+    if (!word) return [];
+    const clean = word.toLowerCase().trim();
+
+    // Curated check
+    if (this.curatedPhrases && this.curatedPhrases[clean]) {
+      return this.curatedPhrases[clean].map((p, i) => ({
+        num: i + 1,
+        text: p.text,
+        ur: p.ur || ''
+      }));
+    }
+
+    // Gemini AI if configured
+    if (storage && storage.geminiApiKey) {
+      try {
+        const apiKey = storage.geminiApiKey.trim();
+        const activeModel = storage.getGeminiModel() || 'gemini-3.8-flash';
+        const url = `https://generativelanguage.googleapis.com/v1beta/models/${activeModel}:generateContent?key=${apiKey}`;
+        const prompt = `Give 3 to 5 authentic, commonly used English phrases or collocations containing the word "${clean}", along with their natural Urdu translation. Return ONLY valid JSON array with objects having "text" and "ur" properties: [ {"text": "phrase in English", "ur": "اردو ترجمہ"} ]`;
+        const res = await fetch(url, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ contents: [{ parts: [{ text: prompt }] }] })
+        });
+        if (res.ok) {
+          const data = await res.json();
+          const raw = data?.candidates?.[0]?.content?.parts?.[0]?.text || '';
+          const jsonMatch = raw.match(/\\[[\\s\\S]*\\]/);
+          if (jsonMatch) {
+            const list = JSON.parse(jsonMatch[0]);
+            if (Array.isArray(list) && list.length > 0) {
+              return list.map((item, idx) => ({
+                num: idx + 1,
+                text: item.text,
+                ur: item.ur || ''
+              }));
+            }
+          }
+        }
+      } catch(e) {}
+    }
+
+    // Dynamic generation from Datamuse & Google Translate
+    try {
+      const dmUrl = `https://api.datamuse.com/words?rel_trg=${encodeURIComponent(clean)}&max=6`;
+      const dmRes = await fetch(dmUrl);
+      if (dmRes.ok) {
+        const dmData = await dmRes.json();
+        const words = (dmData || []).map(x => x.word).filter(w => w.toLowerCase() !== clean && w.length > 2).slice(0, 4);
+        if (words.length > 0) {
+          const results = [];
+          for (let i = 0; i < words.length; i++) {
+            const phrase = `${clean} ${words[i]}`;
+            const ur = await this.translate(phrase, 'en', 'ur');
+            results.push({ num: i + 1, text: phrase, ur: ur || '' });
+          }
+          return results;
+        }
+      }
+    } catch(e) {}
+
+    return [];
+  },
+
   // --- AUTHENTIC CURATED SYNONYMS & ANTONYMS LEXICON ---
   curatedSynonymsAntonyms: {
     'adverse': [
@@ -6708,13 +6979,14 @@ class VocabApp {
     }
 
     // 4. Phrases
-    const phrases = (w.phrases && w.phrases.length > 0)
-      ? w.phrases
-      : [
-          { num: 1, text: `${w.word} effect` },
-          { num: 2, text: `${w.word} selection` },
-          { num: 3, text: `${w.word} reaction` }
-        ];
+    let phrases = (OnlineLookupService && OnlineLookupService.getPhrases)
+      ? OnlineLookupService.getPhrases(w)
+      : [];
+    if (!phrases || phrases.length === 0) {
+      if (Array.isArray(w.phrases) && w.phrases.length > 0) {
+        phrases = w.phrases.map((p, i) => typeof p === 'string' ? { num: i + 1, text: p, ur: '' } : { num: p.num || i + 1, text: p.text, ur: p.ur || '' });
+      }
+    }
 
     // 5. Wikipedia
     const wikiData = w.wikipedia || {
@@ -6884,13 +7156,24 @@ class VocabApp {
         <!-- 4. Phrases Card (Screenshot 7) -->
         <div class="udict-section-card">
           <h3 class="udict-section-title">Phrases</h3>
-          <div class="udict-phrases-list">
-            ${phrases.map((p, pIdx) => `
-              <div class="udict-phrase-item">
-                <span class="udict-sentence-num">${p.num || pIdx + 1}</span>
-                <span class="udict-syn-word-link" data-word-search="${p.text}">${p.text}</span>
+          <div class="udict-phrases-list" data-phrases-list="${cleanWord}">
+            ${phrases && phrases.length > 0 ? phrases.map((p, pIdx) => `
+              <div class="udict-phrase-item" data-phrase-text="${p.text}" data-phrase-ur="${p.ur || ''}" title="Tap for Urdu translation">
+                <div class="udict-phrase-main">
+                  <span class="udict-sentence-num">${p.num || pIdx + 1}</span>
+                  <span class="udict-phrase-text">${p.text}</span>
+                </div>
+                <div class="udict-phrase-tap-hint">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="9 18 15 12 9 6"></polyline>
+                  </svg>
+                </div>
               </div>
-            `).join('')}
+            `).join('') : `
+              <div class="udict-phrase-loading" style="font-size: 0.85rem; color: var(--text-muted); padding: 8px 0;">
+                Loading accurate phrases...
+              </div>
+            `}
           </div>
         </div>
 
@@ -7114,6 +7397,18 @@ class VocabApp {
       });
     });
 
+    // 5bb. Click phrase to open authentic Urdu translation pop-up
+    container.querySelectorAll('.udict-phrase-item').forEach(item => {
+      item.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const pText = item.dataset.phraseText;
+        const pUr = item.dataset.phraseUr;
+        if (pText) {
+          this.openPhraseTranslationModal(pText, pUr, currentWord);
+        }
+      });
+    });
+
     // 5c. More > for Bilingual or Sample Sentences
     container.querySelectorAll('[data-more-sentences]').forEach(btn => {
       btn.addEventListener('click', (e) => {
@@ -7193,6 +7488,45 @@ class VocabApp {
             });
           }
         });
+      }
+    }
+
+    // 5e. Dynamic Hydration of Phrases if missing or empty
+    if (currentWord && currentWord.word) {
+      const cleanW = currentWord.word.toLowerCase();
+      const phrasesContainer = container.querySelector(`[data-phrases-list="${cleanW}"]`);
+      const existingPhrases = (OnlineLookupService && OnlineLookupService.getPhrases)
+        ? OnlineLookupService.getPhrases(currentWord)
+        : [];
+      if ((!existingPhrases || existingPhrases.length === 0) && phrasesContainer) {
+        OnlineLookupService.fetchPhrases(cleanW, currentWord.urduMeaning).then(fetchedPhrases => {
+          if (fetchedPhrases && fetchedPhrases.length > 0) {
+            currentWord.phrases = fetchedPhrases;
+            try { storage.saveWordToCache(currentWord); } catch (e) {}
+            if (phrasesContainer) {
+              phrasesContainer.innerHTML = fetchedPhrases.map((p, pIdx) => `
+                <div class="udict-phrase-item" data-phrase-text="${p.text}" data-phrase-ur="${p.ur || ''}" title="Tap for Urdu translation">
+                  <div class="udict-phrase-main">
+                    <span class="udict-sentence-num">${p.num || pIdx + 1}</span>
+                    <span class="udict-phrase-text">${p.text}</span>
+                  </div>
+                  <div class="udict-phrase-tap-hint">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <polyline points="9 18 15 12 9 6"></polyline>
+                    </svg>
+                  </div>
+                </div>
+              `).join('');
+
+              phrasesContainer.querySelectorAll('.udict-phrase-item').forEach(pItem => {
+                pItem.addEventListener('click', (ev) => {
+                  ev.stopPropagation();
+                  this.openPhraseTranslationModal(pItem.dataset.phraseText, pItem.dataset.phraseUr, currentWord);
+                });
+              });
+            }
+          }
+        }).catch(() => {});
       }
     }
 
@@ -7849,10 +8183,17 @@ class VocabApp {
     const modal = document.getElementById('sentence-trans-modal');
     if (!modal) return;
 
+    const badgeEl = document.getElementById('sentence-trans-badge');
+    const titleEl = document.getElementById('sentence-trans-title');
+    const enLabelEl = document.getElementById('sentence-trans-en-label');
     const enEl = document.getElementById('sentence-trans-en-text');
     const urEl = document.getElementById('sentence-trans-ur-text');
     const loadingEl = document.getElementById('sentence-trans-ur-loading');
     const closeBtn = document.getElementById('close-sentence-trans-btn');
+
+    if (badgeEl) badgeEl.textContent = 'Translation';
+    if (titleEl) titleEl.textContent = 'Sentence Meaning';
+    if (enLabelEl) enLabelEl.textContent = 'English Sentence';
 
     if (closeBtn) {
       closeBtn.onclick = () => { modal.style.display = 'none'; };
@@ -7901,6 +8242,78 @@ class VocabApp {
           if (match) match.ur = authenticUr;
         }
         storage.saveWordToCache(wordItem);
+      }
+    } catch (err) {
+      if (loadingEl) loadingEl.style.display = 'none';
+      if (urEl) {
+        urEl.style.display = 'block';
+        urEl.textContent = 'ترجمہ لوڈ نہ ہو سکا';
+      }
+    }
+  }
+
+  async openPhraseTranslationModal(phraseText, existingUrText, wordItem = null) {
+    const modal = document.getElementById('sentence-trans-modal');
+    if (!modal) return;
+
+    const badgeEl = document.getElementById('sentence-trans-badge');
+    const titleEl = document.getElementById('sentence-trans-title');
+    const enLabelEl = document.getElementById('sentence-trans-en-label');
+    const enEl = document.getElementById('sentence-trans-en-text');
+    const urEl = document.getElementById('sentence-trans-ur-text');
+    const loadingEl = document.getElementById('sentence-trans-ur-loading');
+    const closeBtn = document.getElementById('close-sentence-trans-btn');
+
+    if (badgeEl) badgeEl.textContent = 'Phrase';
+    if (titleEl) titleEl.textContent = 'Phrase Meaning';
+    if (enLabelEl) enLabelEl.textContent = 'English Phrase';
+
+    if (closeBtn) {
+      closeBtn.onclick = () => { modal.style.display = 'none'; };
+    }
+    modal.onclick = (e) => {
+      if (e.target === modal) modal.style.display = 'none';
+    };
+
+    if (enEl) {
+      const cleanW = wordItem ? wordItem.word : '';
+      enEl.innerHTML = this.highlightWordInSentence(phraseText, cleanW);
+    }
+
+    modal.style.display = 'flex';
+
+    // Check if existing translation is valid and authentic (not empty, not fake template)
+    const isFake = !existingUrText || existingUrText.includes('کا حقیقی اور روزمرہ استعمال واضح ہوتا ہے');
+    if (!isFake) {
+      if (loadingEl) loadingEl.style.display = 'none';
+      if (urEl) {
+        urEl.style.display = 'block';
+        urEl.textContent = existingUrText;
+      }
+      return;
+    }
+
+    // Otherwise, fetch real authentic Urdu translation live
+    if (loadingEl) loadingEl.style.display = 'flex';
+    if (urEl) {
+      urEl.style.display = 'none';
+      urEl.textContent = '';
+    }
+
+    try {
+      const authenticUr = await OnlineLookupService.translate(phraseText, 'en', 'ur');
+      if (loadingEl) loadingEl.style.display = 'none';
+      if (urEl) {
+        urEl.style.display = 'block';
+        urEl.textContent = authenticUr || 'ترجمہ دستیاب نہیں ہے';
+      }
+      // Save authentic translation to memory and cache
+      if (wordItem && authenticUr) {
+        if (Array.isArray(wordItem.phrases)) {
+          const match = wordItem.phrases.find(p => (typeof p === 'string' ? p : p.text) === phraseText);
+          if (match && typeof match === 'object') match.ur = authenticUr;
+        }
+        try { storage.saveWordToCache(wordItem); } catch (e) {}
       }
     } catch (err) {
       if (loadingEl) loadingEl.style.display = 'none';

@@ -2246,13 +2246,67 @@ body {
 
 .udict-phrase-item {
   display: flex;
-  align-items: baseline;
+  align-items: center;
+  justify-content: space-between;
   gap: 12px;
-  font-size: 0.95rem;
-  color: #0284c7;
+  padding: 10px 14px;
+  background: var(--bg-search);
+  border: 1px solid var(--divider-hairline, rgba(0, 0, 0, 0.05));
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  margin-bottom: 6px;
+}
+
+.udict-phrase-item:hover {
+  background: var(--bg-sentence-hover, rgba(0, 0, 0, 0.04));
+  border-color: rgba(2, 132, 199, 0.2);
+  transform: translateY(-1px);
 }
 
 [data-theme="dark"] .udict-phrase-item {
+  background: #181b24;
+  border-color: rgba(255, 255, 255, 0.06);
+}
+
+[data-theme="dark"] .udict-phrase-item:hover {
+  background: #202430;
+  border-color: rgba(56, 189, 248, 0.3);
+}
+
+.udict-phrase-main {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex: 1;
+}
+
+.udict-phrase-text {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #0284c7;
+}
+
+[data-theme="dark"] .udict-phrase-text {
+  color: #38bdf8;
+}
+
+.udict-phrase-tap-hint {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-faint);
+  opacity: 0.6;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.udict-phrase-item:hover .udict-phrase-tap-hint {
+  opacity: 1;
+  transform: translateX(2px);
+  color: #0284c7;
+}
+
+[data-theme="dark"] .udict-phrase-item:hover .udict-phrase-tap-hint {
   color: #38bdf8;
 }
 
