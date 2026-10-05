@@ -1758,7 +1758,26 @@ class StorageManager {
       const en = (w.sentences[0].en || '').toLowerCase();
       return !en.includes('learning how to') && !en.includes('understanding how to') && !en.startsWith('how to use');
     }) : [];
-    if (Array.isArray(loadedCache) && loadedCache.length !== this.cachedWords.length) {
+
+    // Auto-migrate all cached words with rich multiple meanings from quickAutocompleteIndex
+    if (typeof quickAutocompleteIndex !== 'undefined' && Array.isArray(this.cachedWords)) {
+      let upgraded = false;
+      this.cachedWords.forEach(w => {
+        if (!w || !w.word) return;
+        const auto = quickAutocompleteIndex.find(item => item.word && item.word.toLowerCase() === w.word.toLowerCase());
+        if (auto && auto.urdu) {
+          const curCount = (w.urduMeaning || '').split(/[،\/,]/).filter(p => p.trim()).length;
+          const autoCount = auto.urdu.split(/[،\/,]/).filter(p => p.trim()).length;
+          if (autoCount > curCount || (!(w.urduMeaning || '').includes('/') && !(w.urduMeaning || '').includes('،'))) {
+            w.urduMeaning = auto.urdu;
+            upgraded = true;
+          }
+        }
+      });
+      if (upgraded || (Array.isArray(loadedCache) && loadedCache.length !== this.cachedWords.length)) {
+        this.save(this.cacheKey, this.cachedWords);
+      }
+    } else if (Array.isArray(loadedCache) && loadedCache.length !== this.cachedWords.length) {
       this.save(this.cacheKey, this.cachedWords);
     }
     this.geminiApiKey = localStorage.getItem(this.geminiKeyStorage) || '';
@@ -3804,6 +3823,21 @@ class VocabApp {
       return true;
     });
 
+    // Auto-enrich all words (including previously cached ones) with rich multiple meanings from quickAutocompleteIndex
+    if (typeof quickAutocompleteIndex !== 'undefined') {
+      this.words.forEach(w => {
+        if (!w || !w.word) return;
+        const auto = quickAutocompleteIndex.find(item => item.word && item.word.toLowerCase() === w.word.toLowerCase());
+        if (auto && auto.urdu) {
+          const curCount = (w.urduMeaning || '').split(/[،\/,]/).filter(p => p.trim()).length;
+          const autoCount = auto.urdu.split(/[،\/,]/).filter(p => p.trim()).length;
+          if (autoCount > curCount || (!(w.urduMeaning || '').includes('/') && !(w.urduMeaning || '').includes('،'))) {
+            w.urduMeaning = auto.urdu;
+          }
+        }
+      });
+    }
+
     this.todayIndex = 0;
     this.activeTab = 'home';
     this.dictActiveTab = 'concise';
@@ -4287,15 +4321,27 @@ class VocabApp {
     return result;
   }
 
-  formatConciseUrduMeaning(raw) {
-    if (!raw) return '';
-    const parts = raw
+  formatConciseUrduMeaning(raw, word = '') {
+    let text = raw || '';
+    if (word && typeof quickAutocompleteIndex !== 'undefined') {
+      const cleanW = word.toLowerCase().trim();
+      const auto = quickAutocompleteIndex.find(item => item.word && item.word.toLowerCase() === cleanW);
+      if (auto && auto.urdu) {
+        const curCount = text.split(/[،\/,]/).filter(p => p.trim()).length;
+        const autoCount = auto.urdu.split(/[،\/,]/).filter(p => p.trim()).length;
+        if (autoCount > curCount || (!text.includes('،') && !text.includes('/'))) {
+          text = auto.urdu;
+        }
+      }
+    }
+    if (!text) return '';
+    const parts = text
       .replace(/[؛;]/g, '،')
       .split(/[\/,،]/)
       .map(p => p.trim())
       .filter(p => p.length > 0);
     const unique = [...new Set(parts)];
-    if (unique.length === 0) return raw;
+    if (unique.length === 0) return text;
     return unique.join(' ، ');
   }
 
@@ -4818,6 +4864,21 @@ class VocabApp {
     const qLower = term.toLowerCase();
 
     let match = this.words.find(w => w.word && w.word.toLowerCase() === qLower);
+
+    // If match exists from previous search/cache, upgrade with multiple meanings
+    if (typeof quickAutocompleteIndex !== 'undefined') {
+      const auto = quickAutocompleteIndex.find(item => item.word && item.word.toLowerCase() === qLower);
+      if (auto && auto.urdu) {
+        if (match) {
+          const curCount = (match.urduMeaning || '').split(/[،\/,]/).filter(p => p.trim()).length;
+          const autoCount = auto.urdu.split(/[،\/,]/).filter(p => p.trim()).length;
+          if (autoCount > curCount || (!(match.urduMeaning || '').includes('/') && !(match.urduMeaning || '').includes('،'))) {
+            match.urduMeaning = auto.urdu;
+            storage.saveWordToCache(match);
+          }
+        }
+      }
+    }
 
     if (!match && typeof quickAutocompleteIndex !== 'undefined') {
       const auto = quickAutocompleteIndex.find(item => item.word && item.word.toLowerCase() === qLower);
@@ -5727,7 +5788,7 @@ class VocabApp {
         <!-- Part of Speech & Urdu Meaning (Screenshot 3) -->
         <div class="udict-concise-meaning-row">
           <span class="udict-concise-pos">${w.posShort || 'adj.'}</span>
-          <span class="udict-concise-urdu urdu-text">${this.formatConciseUrduMeaning(w.urduMeaning)}</span>
+          <span class="udict-concise-urdu urdu-text">${this.formatConciseUrduMeaning(w.urduMeaning, w.word)}</span>
         </div>
 
         <!-- 1. Unified Example Sentences Section (Tareeqa 1 + 3 Combined) -->
