@@ -4631,17 +4631,8 @@ class VocabApp {
     this.searchResultBox = document.getElementById('search-result-box');
     this.homeSearchTrigger = document.getElementById('home-search-trigger');
     
-    // AI Key & Settings Modal Elements
+    // AI Key Modal Elements
     this.themeToggleBtn = document.getElementById('theme-toggle-btn');
-    this.headerSettingsBtn = document.getElementById('header-settings-btn');
-    this.settingsModal = document.getElementById('settings-modal');
-    this.closeSettingsModalBtn = document.getElementById('close-settings-modal-btn');
-    this.settingsModalGemini = document.getElementById('settings-modal-gemini');
-    this.settingsModalClearCache = document.getElementById('settings-modal-clear-cache');
-    this.settingsAiBadge = document.getElementById('settings-ai-badge');
-    this.modalClearCacheStatus = document.getElementById('modal-clear-cache-status');
-    this.modalClearCacheChevron = document.getElementById('modal-clear-cache-chevron');
-
     this.openAiModalBtn = document.getElementById('open-ai-modal-btn');
     this.aiModal = document.getElementById('ai-key-modal');
     this.aiKeyInput = document.getElementById('ai-key-input');
@@ -4658,41 +4649,6 @@ class VocabApp {
       this.themeToggleBtn.addEventListener('click', (e) => {
         e.preventDefault();
         this.toggleTheme();
-      });
-    }
-
-    // Top Header Settings & Cache Button
-    if (this.headerSettingsBtn) {
-      this.headerSettingsBtn.addEventListener('click', (e) => {
-        e.preventDefault();
-        this.openSettingsModal();
-      });
-    }
-
-    if (this.closeSettingsModalBtn) {
-      this.closeSettingsModalBtn.addEventListener('click', () => {
-        this.closeSettingsModal();
-      });
-    }
-
-    if (this.settingsModal) {
-      this.settingsModal.addEventListener('click', (e) => {
-        if (e.target === this.settingsModal) {
-          this.closeSettingsModal();
-        }
-      });
-    }
-
-    if (this.settingsModalGemini) {
-      this.settingsModalGemini.addEventListener('click', () => {
-        this.closeSettingsModal();
-        this.openAiSettings();
-      });
-    }
-
-    if (this.settingsModalClearCache) {
-      this.settingsModalClearCache.addEventListener('click', () => {
-        this.handleClearCache();
       });
     }
 
@@ -5392,55 +5348,6 @@ class VocabApp {
     }
     this.hideAutocomplete();
     this.performSearch(word);
-  }
-
-  openSettingsModal() {
-    if (!this.settingsModal) return;
-    if (this.settingsAiBadge) {
-      const aiActive = !!storage.geminiApiKey;
-      this.settingsAiBadge.textContent = aiActive ? 'Active' : 'Setup';
-      this.settingsAiBadge.className = `journal-badge ${aiActive ? 'active' : ''}`;
-    }
-    this.settingsModal.style.display = 'flex';
-  }
-
-  closeSettingsModal() {
-    if (this.settingsModal) {
-      this.settingsModal.style.display = 'none';
-    }
-  }
-
-  handleClearCache() {
-    storage.clearAllCache();
-    this.words = (typeof defaultVocabulary !== 'undefined' && Array.isArray(defaultVocabulary)) ? [...defaultVocabulary] : [];
-    this.renderDictionary();
-    if (typeof this.renderRecentSearches === 'function') {
-      this.renderRecentSearches();
-    }
-
-    if (this.modalClearCacheStatus) {
-      this.modalClearCacheStatus.textContent = 'Cache Cleared ✓';
-      this.modalClearCacheStatus.style.display = 'inline-block';
-      if (this.modalClearCacheChevron) this.modalClearCacheChevron.style.display = 'none';
-      setTimeout(() => {
-        if (this.modalClearCacheStatus) this.modalClearCacheStatus.style.display = 'none';
-        if (this.modalClearCacheChevron) this.modalClearCacheChevron.style.display = 'inline-block';
-      }, 3000);
-    }
-
-    const hubStatusEl = document.getElementById('clear-cache-status');
-    const hubChevronEl = document.getElementById('clear-cache-chevron');
-    if (hubStatusEl) {
-      hubStatusEl.textContent = 'Cache Cleared ✓';
-      hubStatusEl.style.display = 'inline-block';
-      if (hubChevronEl) hubChevronEl.style.display = 'none';
-      setTimeout(() => {
-        if (hubStatusEl) hubStatusEl.style.display = 'none';
-        if (hubChevronEl) hubChevronEl.style.display = 'inline-block';
-      }, 3000);
-    }
-
-    this.showToast('Cache Cleared');
   }
 
   openAiSettings() {
