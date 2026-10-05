@@ -1748,15 +1748,59 @@ const quickAutocompleteIndex = [
 class StorageManager {
   constructor() {
     this.favKey = 'vocab_favorites_v5';
-    this.cacheKey = 'vocab_dynamic_cache_v5';
+    this.cacheKey = 'vocab_dynamic_cache_v6';
     this.geminiKeyStorage = 'vocab_gemini_api_key_v5';
     this.favorites = this.load(this.favKey, []);
+
+    // Thorough purge of all legacy and contaminated cache keys
+    const staleKeys = [
+      'vocab_dynamic_cache_v5',
+      'vocab_dynamic_cache_v4',
+      'vocab_dynamic_cache_v3',
+      'vocab_dynamic_cache_v2',
+      'vocab_dynamic_cache_v1',
+      'vocab_dynamic_cache',
+      'vocab_grammar_cache_v5',
+      'vocab_grammar_cache_v4',
+      'vocab_grammar_cache'
+    ];
+    staleKeys.forEach(k => {
+      try { localStorage.removeItem(k); } catch (e) {}
+    });
+
+    // Also remove any stale translation and collins caches that might have contaminated data
+    try {
+      for (let i = localStorage.length - 1; i >= 0; i--) {
+        const k = localStorage.key(i);
+        if (k && (k.startsWith('vocab_trans_') || k.startsWith('vocab_collins_') || k.startsWith('vocab_phones_v2_'))) {
+          localStorage.removeItem(k);
+        }
+      }
+    } catch (e) {}
+
     const loadedCache = this.load(this.cacheKey, []);
-    // Auto-clean any legacy dummy placeholder sentences from cache
+    // Auto-clean any legacy dummy placeholder sentences or cross-contaminated entries
     this.cachedWords = Array.isArray(loadedCache) ? loadedCache.filter(w => {
-      if (!w || !w.sentences || !w.sentences[0]) return true;
-      const en = (w.sentences[0].en || '').toLowerCase();
-      return !en.includes('learning how to') && !en.includes('understanding how to') && !en.startsWith('how to use');
+      if (!w || !w.word) return false;
+      const wordLower = w.word.toLowerCase();
+      // Purge any contaminated entry with foreign detrimental sentences on unrelated words
+      if (w.sentences && Array.isArray(w.sentences)) {
+        const hasDetrimentalLeak = w.sentences.some(s => {
+          const en = (s.en || '').toLowerCase();
+          const ur = (s.ur || '');
+          return (en.includes('smoking has a highly') || en.includes('excessive stress can prove') || (ur.includes('نقصان دہ') && !(w.urduMeaning || '').includes('نقصان')) || (ur.includes('مضر') && !(w.urduMeaning || '').includes('مضر'))) && wordLower !== 'detrimental';
+        });
+        if (hasDetrimentalLeak) return false;
+      }
+      if (w.sampleSentences && Array.isArray(w.sampleSentences)) {
+        const hasLeak = w.sampleSentences.some(s => {
+          const en = (s.en || '').toLowerCase();
+          const ur = (s.ur || '');
+          return (en.includes('smoking has a highly') || en.includes('excessive stress can prove') || (ur.includes('نقصان دہ') && !(w.urduMeaning || '').includes('نقصان')) || (ur.includes('مضر') && !(w.urduMeaning || '').includes('مضر'))) && wordLower !== 'detrimental';
+        });
+        if (hasLeak) return false;
+      }
+      return true;
     }) : [];
 
     // Auto-migrate all cached words with rich multiple meanings from quickAutocompleteIndex
@@ -1781,7 +1825,7 @@ class StorageManager {
       this.save(this.cacheKey, this.cachedWords);
     }
     this.geminiApiKey = localStorage.getItem(this.geminiKeyStorage) || '';
-    this.grammarCacheKey = 'vocab_grammar_cache_v5';
+    this.grammarCacheKey = 'vocab_grammar_cache_v6';
     // Clean wipe of grammar cache to eliminate any stale false results
     try {
       localStorage.removeItem(this.grammarCacheKey);
@@ -1933,6 +1977,19 @@ class StorageManager {
     this.cachedWords = this.cachedWords.filter(w => w && w.word && w.word.toLowerCase() !== wordObj.word.toLowerCase());
     this.cachedWords.unshift(wordObj);
     this.save(this.cacheKey, this.cachedWords);
+  }
+
+  clearAllCache() {
+    this.cachedWords = [];
+    try {
+      localStorage.removeItem(this.cacheKey);
+      for (let i = localStorage.length - 1; i >= 0; i--) {
+        const k = localStorage.key(i);
+        if (k && (k.startsWith('vocab_dynamic_cache') || k.startsWith('vocab_collins_') || k.startsWith('vocab_trans_') || k.startsWith('vocab_grammar_cache') || k.startsWith('vocab_phones_'))) {
+          localStorage.removeItem(k);
+        }
+      }
+    } catch (e) {}
   }
 
   getAutoTranslation(word) {
@@ -2337,19 +2394,45 @@ CRITICAL REQUIREMENT: The example sentence MUST be a real, meaningful scenario. 
         let pos = 'noun';
         let definition = '';
         let example = '';
+        const examples = [];
 
         if (gData && Array.isArray(gData[12]) && gData[12].length > 0) {
           const firstSection = gData[12][0];
           if (firstSection && firstSection[0]) pos = firstSection[0];
-          if (firstSection && Array.isArray(firstSection[1]) && firstSection[1][0]) {
-            const defItem = firstSection[1][0];
-            if (defItem && defItem[0]) definition = defItem[0];
-            if (defItem && defItem[2]) example = defItem[2];
-          }
+          const normEx = (str) => (str || '').toLowerCase().replace(/[^a-z0-9]/g, '');
+          gData[12].forEach(sec => {
+            if (Array.isArray(sec[1])) {
+              sec[1].forEach(defItem => {
+                if (!definition && defItem && defItem[0]) definition = defItem[0];
+                if (defItem && defItem[2]) {
+                  const cl = defItem[2].replace(/<\/?b>/g, '').trim();
+                  if (cl && !examples.some(x => normEx(x) === normEx(cl))) {
+                    examples.push(cl.charAt(0).toUpperCase() + cl.slice(1).replace(/\.?$/, '.'));
+                  }
+                }
+              });
+            }
+          });
         }
 
-        if (!example && gData && Array.isArray(gData[13]) && gData[13][0] && gData[13][0][0]) {
-          example = gData[13][0][0][0].replace(/<\/?b>/g, '');
+        if (gData && Array.isArray(gData[13])) {
+          const normEx = (str) => (str || '').toLowerCase().replace(/[^a-z0-9]/g, '');
+          gData[13].forEach(grp => {
+            if (Array.isArray(grp)) {
+              grp.forEach(it => {
+                if (it && it[0]) {
+                  const cl = it[0].replace(/<\/?b>/g, '').trim();
+                  if (cl && !examples.some(x => normEx(x) === normEx(cl))) {
+                    examples.push(cl.charAt(0).toUpperCase() + cl.slice(1).replace(/\.?$/, '.'));
+                  }
+                }
+              });
+            }
+          });
+        }
+
+        if (examples.length > 0 && !example) {
+          example = examples[0];
         }
 
         if (definition) {
@@ -2357,6 +2440,7 @@ CRITICAL REQUIREMENT: The example sentence MUST be a real, meaningful scenario. 
             pos: pos || 'noun',
             definition: definition,
             example: example,
+            examples: examples,
             phonetic: this.ruleBasedIPA(cleanWord, 'us')
           };
         }
@@ -2378,17 +2462,27 @@ CRITICAL REQUIREMENT: The example sentence MUST be a real, meaningful scenario. 
           const pos = (firstItem.partOfSpeech || 'noun').toLowerCase();
           let definition = '';
           let example = '';
+          const examples = [];
           if (firstItem.definitions && Array.isArray(firstItem.definitions)) {
             for (const d of firstItem.definitions) {
               if (!definition && d.definition) definition = d.definition.replace(/<[^>]*>/g, '').trim();
-              if (!example && d.examples && d.examples[0]) example = d.examples[0].replace(/<[^>]*>/g, '').trim();
+              if (d.examples && Array.isArray(d.examples)) {
+                d.examples.forEach(ex => {
+                  const cl = ex.replace(/<[^>]*>/g, '').trim();
+                  if (cl && !examples.some(x => x.toLowerCase() === cl.toLowerCase())) {
+                    examples.push(cl.charAt(0).toUpperCase() + cl.slice(1).replace(/\.?$/, '.'));
+                  }
+                });
+              }
             }
           }
+          if (examples.length > 0 && !example) example = examples[0];
           if (definition) {
             return {
               pos: pos,
               definition: definition,
               example: example,
+              examples: examples,
               phonetic: this.ruleBasedIPA(cleanWord, 'us')
             };
           }
@@ -3334,6 +3428,24 @@ CRITICAL REQUIREMENT: The example sentence MUST be a real, meaningful scenario. 
       const sentenceEn = (dictData && dictData.example) ? dictData.example : (collinsData && collinsData.definitions[0]?.example ? collinsData.definitions[0].example : await this.getMeaningfulSentence(cleanWord, dictData));
       const sentenceUr = '';
 
+      const dictExamples = (dictData && Array.isArray(dictData.examples)) ? [...dictData.examples] : [];
+      if (sentenceEn && !dictExamples.some(x => x.toLowerCase() === sentenceEn.toLowerCase())) {
+        dictExamples.unshift(sentenceEn);
+      }
+      if (collinsData && Array.isArray(collinsData.definitions)) {
+        collinsData.definitions.forEach(def => {
+          if (def.example && !dictExamples.some(x => x.toLowerCase() === def.example.toLowerCase())) {
+            dictExamples.push(def.example);
+          }
+        });
+      }
+      const builtSentences = dictExamples.map((ex, idx) => ({
+        num: idx + 1,
+        en: ex,
+        source: "Oxford Dictionary",
+        ur: ""
+      }));
+
       return {
         id: `online-${Date.now()}`,
         word: capitalizedWord,
@@ -3353,10 +3465,10 @@ CRITICAL REQUIREMENT: The example sentence MUST be a real, meaningful scenario. 
           { text: "#Vocabulary", color: "purple" }
         ],
         collins: collinsData,
-        sampleSentences: [
+        sampleSentences: builtSentences.length > 0 ? builtSentences : [
           { num: 1, en: sentenceEn, source: "Oxford Dictionary", ur: sentenceUr }
         ],
-        sentences: [{ en: sentenceEn, ur: sentenceUr }],
+        sentences: builtSentences.length > 0 ? builtSentences : [{ en: sentenceEn, ur: sentenceUr }],
         synonymsAntonyms: {
           word: capitalizedWord,
           pos: posShort,
@@ -5392,8 +5504,18 @@ class VocabApp {
         const respelling = phones.respelling || OnlineLookupService.ruleBasedRespelling(cleanWord);
         const urduPhonetic = phones.urduPhonetic || '';
         const definition = dictData && dictData.definition ? dictData.definition : `Contextual definition and usage of "${cleanWord}".`;
-        const sentenceEn = (dictData && dictData.example) ? dictData.example : `Learning how native speakers use "${cleanWord}" helps improve spoken fluency.`;
+        const dictExamples = (dictData && Array.isArray(dictData.examples)) ? [...dictData.examples] : [];
+        if (dictData && dictData.example && !dictExamples.some(x => x.toLowerCase() === dictData.example.toLowerCase())) {
+          dictExamples.unshift(dictData.example);
+        }
+        const sentenceEn = dictExamples[0] || `The term "${cleanWord}" is used to express key ideas in spoken and written English.`;
         const sentenceUr = '';
+        const builtSentences = dictExamples.map((ex, idx) => ({
+          num: idx + 1,
+          en: ex,
+          source: "Oxford Dictionary",
+          ur: ""
+        }));
 
         newWordObj = {
           id: `online-${Date.now()}`,
@@ -5416,14 +5538,14 @@ class VocabApp {
             { text: "#SAT", color: "purple" },
             { text: "#GRE", color: "green" }
           ],
-          sampleSentences: [
-            { num: 1, en: sentenceEn, source: "Collins Dictionary", ur: sentenceUr }
+          sampleSentences: builtSentences.length > 0 ? builtSentences : [
+            { num: 1, en: sentenceEn, source: "Oxford Dictionary", ur: sentenceUr }
           ],
-          sentences: [{ en: sentenceEn, ur: sentenceUr }],
+          sentences: builtSentences.length > 0 ? builtSentences : [{ en: sentenceEn, ur: sentenceUr }],
           synonymsAntonyms: {
             word: cleanWord,
             pos: posShort,
-            context: `for the meaning of "${definition.split(' ')[0] || 'similar'}"`,
+            context: `for everyday usage`,
             synonyms: synonyms.length > 0 ? synonyms : ["similar", "related"]
           },
           cognates: {
@@ -5610,6 +5732,18 @@ class VocabApp {
       rawSentences = [...w.sampleSentences];
     }
 
+    // Clean rawSentences of any foreign or contaminated sentences from old cache
+    const wordLower = (w.word || '').toLowerCase();
+    rawSentences = rawSentences.filter(s => {
+      if (!s || !s.en) return false;
+      const en = s.en.toLowerCase();
+      const ur = s.ur || '';
+      if (wordLower !== 'detrimental' && (en.includes('smoking has a highly') || en.includes('excessive stress can prove') || (ur.includes('نقصان دہ') && !(w.urduMeaning || '').includes('نقصان')) || (ur.includes('مضر') && !(w.urduMeaning || '').includes('مضر')))) {
+        return false;
+      }
+      return true;
+    });
+
     // Pull from Collins definitions if fewer than 3
     if (rawSentences.length < 3 && w.collins && Array.isArray(w.collins.definitions)) {
       w.collins.definitions.forEach(def => {
@@ -5632,70 +5766,107 @@ class VocabApp {
       }
     }
 
+    // Deduplicate sentences before checking count
+    const normSent = (s) => (s && s.en ? s.en : '').toLowerCase().replace(/[^a-z0-9]/g, '');
+    const seenSentences = new Set();
+    rawSentences = rawSentences.filter(s => {
+      const n = normSent(s);
+      if (!n || seenSentences.has(n)) return false;
+      seenSentences.add(n);
+      return true;
+    });
+
     // Fallback: If still fewer than 3, add high-quality contextual sentences showing clear usage
     if (rawSentences.length < 3) {
       const pos = (w.partOfSpeech || w.posShort || '').toLowerCase();
-      const cap = w.word;
+      const cap = w.word.charAt(0).toUpperCase() + w.word.slice(1);
       const low = w.word.toLowerCase();
+      const candidateFallbacks = [];
       if (pos.includes('noun')) {
-        rawSentences.push({ en: `In these difficult circumstances, making a hasty decision would be risky.`, ur: `ان مشکل حالات میں جلد بازی کا فیصلہ کرنا پرخطر ہو سکتا ہے۔`, meaning: 'حالات' });
-        rawSentences.push({ en: `We must carefully evaluate the present circumstances before taking action.`, ur: `کوئی بھی اقدام کرنے سے پہلے ہمیں موجودہ حالات کا بغور جائزہ لینا چاہیے۔`, meaning: 'حالات' });
+        candidateFallbacks.push({ en: `The concept of ${low} plays an important role in academic and practical discussions.`, ur: '', meaning: '' });
+        candidateFallbacks.push({ en: `Researchers examined the direct relationship between ${low} and long-term outcomes.`, ur: '', meaning: '' });
       } else if (pos.includes('verb')) {
-        rawSentences.push({ en: `The team needed to ${low} all relevant variables before proceeding.`, ur: '', meaning: '' });
-        rawSentences.push({ en: `They could not ${low} their obligations under such high pressure.`, ur: '', meaning: '' });
+        candidateFallbacks.push({ en: `The committee needed to ${low} all relevant variables before reaching a final decision.`, ur: '', meaning: '' });
+        candidateFallbacks.push({ en: `They were advised to ${low} each situation with great care and attention.`, ur: '', meaning: '' });
       } else {
-        rawSentences.push({ en: `Smoking has a highly ${low} impact on physical endurance and lung health.`, ur: `تمباکو نوشی جسمانی قوتِ مدافعت اور پھیپھڑوں کی صحت کے لیے انتہائی نقصان دہ اثر رکھتی ہے۔`, meaning: 'نقصان دہ' });
-        rawSentences.push({ en: `Excessive stress can prove ${low} to your overall mental well-being.`, ur: `حد سے زیادہ تناؤ آپ کی مجموعی ذہنی صحت کے لیے مضر ثابت ہو سکتا ہے۔`, meaning: 'مضر' });
+        candidateFallbacks.push({ en: `The preliminary findings remained somewhat ${low} and subject to interpretation.`, ur: '', meaning: '' });
+        candidateFallbacks.push({ en: `Her explanation was characterized as ${low} by the review committee.`, ur: '', meaning: '' });
+      }
+      for (const fb of candidateFallbacks) {
+        if (rawSentences.length >= 3) break;
+        const n = normSent(fb);
+        if (!seenSentences.has(n)) {
+          seenSentences.add(n);
+          rawSentences.push(fb);
+        }
       }
     }
 
-    // Clean up any fake placeholder template in 'ur'
+    // Allowed meanings strictly from w.urduMeaning to prevent cross-contamination
+    const allowedMeanings = (w.urduMeaning || '')
+      .split(/[؛;,/،]+/)
+      .map(p => p.trim())
+      .filter(p => p.length >= 2);
+
+    // Clean up and assign meaning to sentences strictly from allowedMeanings
     const exampleSentences = rawSentences.map((s, i) => {
       let ur = s.ur || '';
       if (ur.includes('کا حقیقی اور روزمرہ استعمال واضح ہوتا ہے')) {
         ur = '';
       }
+      let meaning = (s.meaning || '').trim();
+      // If meaning doesn't match word's allowed meanings, reject it
+      if (meaning && !allowedMeanings.some(am => am === meaning || meaning.includes(am) || am.includes(meaning))) {
+        meaning = '';
+      }
+      // If meaning is empty and multiple allowed meanings exist, distribute them cleanly
+      if (!meaning && allowedMeanings.length > 0) {
+        meaning = allowedMeanings[i % allowedMeanings.length];
+      }
       return {
         num: s.num || i + 1,
         en: s.en,
         ur: ur,
-        meaning: s.meaning || ''
+        meaning: meaning
       };
     });
 
-    // Extract unique meanings for chips (only show chips if more than 1 distinct meaning exists)
+    // Extract unique meanings for chips (ONLY allow meanings that belong to this word's urduMeaning)
     const chipSet = new Set();
     exampleSentences.forEach(s => {
-      if (s.meaning && s.meaning.trim()) chipSet.add(s.meaning.trim());
+      if (s.meaning && allowedMeanings.includes(s.meaning)) {
+        chipSet.add(s.meaning);
+      }
     });
-    if (chipSet.size === 0 && w.urduMeaning) {
-      w.urduMeaning.split(/[؛;,/]+/).map(p => p.trim()).filter(p => p.length >= 2).forEach(p => chipSet.add(p));
+    if (chipSet.size < 2 && allowedMeanings.length > 1) {
+      allowedMeanings.forEach(m => chipSet.add(m));
     }
     const filterChips = chipSet.size > 1 ? ['All', ...Array.from(chipSet)] : [];
 
     // 3. Synonyms & Antonyms (Multiple senses with SYN and ANT badges)
-    const synAntList = (w.synonymsAntonymsList && w.synonymsAntonymsList.length > 0)
-      ? w.synonymsAntonymsList
-      : [
+    let synAntList = [];
+    if (w.synonymsAntonymsList && w.synonymsAntonymsList.length > 0) {
+      synAntList = w.synonymsAntonymsList;
+    } else {
+      const syns = Array.isArray(w.synonyms)
+        ? w.synonyms
+        : (w.synonymsAntonyms && Array.isArray(w.synonymsAntonyms.synonyms) ? w.synonymsAntonyms.synonyms : []);
+      const ants = Array.isArray(w.antonyms)
+        ? w.antonyms
+        : (w.synonymsAntonyms && Array.isArray(w.synonymsAntonyms.antonyms) ? w.synonymsAntonyms.antonyms : []);
+
+      if (syns.length > 0 || ants.length > 0) {
+        const primarySense = (w.urduMeaning || w.definition || w.word).split(/[؛;,/،\.]+/)[0].trim();
+        synAntList = [
           {
             num: 1,
-            context: 'for the meaning of "antagonistic"',
-            syns: (w.synonymsAntonyms && w.synonymsAntonyms.synonyms) ? w.synonymsAntonyms.synonyms.slice(0, 2) : ["conflicting", "negative"],
-            ants: ["friendly", "kind", "assisting", "helpful", "good", "nice"]
-          },
-          {
-            num: 2,
-            context: 'for the meaning of "harmful"',
-            syns: ["negative", "opposite", "dangerous", "damaging", "harmful", "destructive"],
-            ants: ["lucky", "helpful", "suitable", "beneficial", "fortunate", "advantageous"]
-          },
-          {
-            num: 3,
-            context: 'for the meaning of "unfavourable"',
-            syns: ["bad", "unfortunate", "hostile", "ominous"],
-            ants: []
+            context: `for the sense of "${primarySense || w.word}"`,
+            syns: syns.slice(0, 8),
+            ants: ants.slice(0, 6)
           }
         ];
+      }
+    }
 
     // 4. Phrases
     const phrases = (w.phrases && w.phrases.length > 0)
@@ -6563,27 +6734,52 @@ class VocabApp {
         : (wordItem.sampleSentences && wordItem.sampleSentences.length > 0)
           ? wordItem.sampleSentences
           : [
-              { num: 1, en: `The word ${wordItem.word} is frequently used in modern literature.`, ur: `${wordItem.word} کا لفظ جدید ادب میں بکثرت استعمال ہوتا ہے۔`, meaning: wordItem.urduMeaning }
+              { num: 1, en: `The word ${wordItem.word} is frequently used in modern literature.`, ur: '', meaning: '' }
             ];
 
-    const allSentences = rawList.map((s, idx) => {
+    const wordLower = (wordItem.word || '').toLowerCase();
+    const cleanRawList = rawList.filter(s => {
+      if (!s || !s.en) return false;
+      const en = s.en.toLowerCase();
+      const ur = s.ur || '';
+      if (wordLower !== 'detrimental' && (en.includes('smoking has a highly') || en.includes('excessive stress can prove') || (ur.includes('نقصان دہ') && !(wordItem.urduMeaning || '').includes('نقصان')) || (ur.includes('مضر') && !(wordItem.urduMeaning || '').includes('مضر')))) {
+        return false;
+      }
+      return true;
+    });
+
+    const allowedMeanings = (wordItem.urduMeaning || '')
+      .split(/[؛;,/،]+/)
+      .map(p => p.trim())
+      .filter(p => p.length >= 2);
+
+    const allSentences = cleanRawList.map((s, idx) => {
       let ur = s.ur || '';
       if (ur.includes('کا حقیقی اور روزمرہ استعمال واضح ہوتا ہے')) ur = '';
+      let meaning = (s.meaning || '').trim();
+      if (meaning && !allowedMeanings.some(am => am === meaning || meaning.includes(am) || am.includes(meaning))) {
+        meaning = '';
+      }
+      if (!meaning && allowedMeanings.length > 0) {
+        meaning = allowedMeanings[idx % allowedMeanings.length];
+      }
       return {
         num: s.num || idx + 1,
         en: s.en,
         ur: ur,
-        meaning: s.meaning || ''
+        meaning: meaning
       };
     });
 
-    // Extract unique meanings for chips
+    // Extract unique meanings for chips strictly from allowedMeanings
     const chipSet = new Set();
     allSentences.forEach(s => {
-      if (s.meaning && s.meaning.trim()) chipSet.add(s.meaning.trim());
+      if (s.meaning && allowedMeanings.includes(s.meaning)) {
+        chipSet.add(s.meaning);
+      }
     });
-    if (chipSet.size === 0 && wordItem.urduMeaning) {
-      wordItem.urduMeaning.split(/[؛;,/]+/).map(p => p.trim()).filter(p => p.length >= 2).forEach(p => chipSet.add(p));
+    if (chipSet.size < 2 && allowedMeanings.length > 1) {
+      allowedMeanings.forEach(m => chipSet.add(m));
     }
     const filterChips = chipSet.size > 1 ? ['All', ...Array.from(chipSet)] : [];
 
@@ -6873,7 +7069,16 @@ class VocabApp {
           </div>
         </div>
 
-        <!-- 6. About -->
+        <!-- 6. Clear Local Cache -->
+        <div class="journal-menu-row" id="more-nav-clear-cache">
+          <span class="journal-row-title">Clear Local Cache</span>
+          <div class="journal-row-right">
+            <span style="font-size: 0.8rem; color: var(--text-muted); margin-right: 4px;">کیشے صاف کریں</span>
+            <span class="journal-chevron">›</span>
+          </div>
+        </div>
+
+        <!-- 7. About -->
         <div class="journal-menu-row" style="cursor: default;">
           <span class="journal-row-title" style="color: var(--text-muted); font-weight: 500;">Vocab Journal</span>
           <div class="journal-row-right">
@@ -6896,6 +7101,16 @@ class VocabApp {
     document.getElementById('more-nav-gemini').addEventListener('click', () => {
       this.openAiSettings();
     });
+
+    const clearCacheBtn = document.getElementById('more-nav-clear-cache');
+    if (clearCacheBtn) {
+      clearCacheBtn.addEventListener('click', () => {
+        storage.clearAllCache();
+        this.words = [...initialVocabularyData];
+        this.renderDictionary();
+        this.showToast('تمام لوکل کیشے کامیابی سے صاف ہو گیا ✅');
+      });
+    }
 
     const themeRow = document.getElementById('more-nav-theme');
     const themeSwitch = document.getElementById('theme-toggle-switch');
