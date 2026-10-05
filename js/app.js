@@ -4270,11 +4270,46 @@ class VocabApp {
       });
 
       this.activeSearchInput.addEventListener('keydown', (e) => {
-        if (e.key === 'Enter') {
+        const autoBox = this.searchAutocompleteBox || document.getElementById('search-autocomplete-box');
+        const items = autoBox ? autoBox.querySelectorAll('.search-auto-item') : [];
+        const isBoxOpen = autoBox && autoBox.style.display !== 'none' && items.length > 0;
+
+        if (e.key === 'ArrowDown') {
+          if (isBoxOpen) {
+            e.preventDefault();
+            this.activeSearchAutoIndex = ((this.activeSearchAutoIndex !== undefined && this.activeSearchAutoIndex >= 0) ? this.activeSearchAutoIndex + 1 : 0) % items.length;
+            items.forEach((it, i) => it.classList.toggle('active', i === this.activeSearchAutoIndex));
+            if (items[this.activeSearchAutoIndex]) {
+              items[this.activeSearchAutoIndex].scrollIntoView({ block: 'nearest' });
+            }
+          }
+        } else if (e.key === 'ArrowUp') {
+          if (isBoxOpen) {
+            e.preventDefault();
+            const cur = (this.activeSearchAutoIndex !== undefined && this.activeSearchAutoIndex >= 0) ? this.activeSearchAutoIndex : 0;
+            this.activeSearchAutoIndex = (cur - 1 + items.length) % items.length;
+            items.forEach((it, i) => it.classList.toggle('active', i === this.activeSearchAutoIndex));
+            if (items[this.activeSearchAutoIndex]) {
+              items[this.activeSearchAutoIndex].scrollIntoView({ block: 'nearest' });
+            }
+          }
+        } else if (e.key === 'Enter') {
           e.preventDefault();
+          if (isBoxOpen && this.activeSearchAutoIndex !== undefined && this.activeSearchAutoIndex >= 0 && items[this.activeSearchAutoIndex]) {
+            const activeItem = items[this.activeSearchAutoIndex];
+            const word = activeItem.dataset.selectWord || activeItem.dataset.executeSearch;
+            if (word) {
+              this.selectWordFromSearch(word);
+              return;
+            }
+          }
           const q = this.activeSearchInput.value.trim();
           if (q) {
             this.selectWordFromSearch(q);
+          }
+        } else if (e.key === 'Escape') {
+          if (autoBox) {
+            autoBox.style.display = 'none';
           }
         }
       });
@@ -4896,14 +4931,20 @@ class VocabApp {
   }
 
   // --- DEDICATED SEARCH SCREEN CONTROLLER ---
-  openDedicatedSearchScreen() {
+  openDedicatedSearchScreen(initialValue = '') {
     if (!this.dedicatedSearchScreen) return;
     this.dedicatedSearchScreen.style.display = 'flex';
+    const initVal = initialValue || (this.dictSearchInput ? this.dictSearchInput.value : '');
     if (this.activeSearchInput) {
-      this.activeSearchInput.value = '';
-      setTimeout(() => this.activeSearchInput.focus(), 60);
+      this.activeSearchInput.value = initVal;
+      setTimeout(() => {
+        this.activeSearchInput.focus();
+        if (initVal) {
+          this.handleActiveSearchInput(initVal);
+        }
+      }, 60);
     }
-    this.handleActiveSearchInput('');
+    this.handleActiveSearchInput(initVal);
   }
 
   closeDedicatedSearchScreen() {
@@ -5000,54 +5041,165 @@ class VocabApp {
     const autoBox = this.searchAutocompleteBox || document.getElementById('search-autocomplete-box');
     if (!autoBox) return;
 
-    const qLower = q.toLowerCase();
-    const matches = [];
-    const seen = new Set();
+    const qClean = (q || '').trim();
+    const qLower = qClean.toLowerCase();
+    if (!qLower) {
+      autoBox.style.display = 'none';
+      autoBox.innerHTML = '';
+      return;
+    }
 
-    this.words.forEach(w => {
-      if (w.word && w.word.toLowerCase().startsWith(qLower)) {
-        if (!seen.has(w.word.toLowerCase())) {
-          seen.add(w.word.toLowerCase());
-          matches.push({ word: w.word, pos: w.posShort || 'adj.', urdu: w.urduMeaning || '' });
+    // 1. Instant local matching pool (0ms latency)
+    const pool = new Map();
+
+    // 1a. Core words in memory
+    if (Array.isArray(this.words)) {
+      this.words.forEach(w => {
+        if (w.word) {
+          pool.set(w.word.toLowerCase(), {
+            word: w.word,
+            pos: w.posShort || 'adj.',
+            urdu: (w.urduMeaning || '').split('/')[0].trim()
+          });
         }
-      }
-    });
+      });
+    }
 
-    if (typeof quickAutocompleteIndex !== 'undefined') {
+    // 1b. Cached dynamic words
+    try {
+      const cached = storage.getCachedWords ? storage.getCachedWords() : [];
+      if (Array.isArray(cached)) {
+        cached.forEach(w => {
+          if (w.word && !pool.has(w.word.toLowerCase())) {
+            pool.set(w.word.toLowerCase(), {
+              word: w.word,
+              pos: w.posShort || 'adj.',
+              urdu: (w.urduMeaning || '').split('/')[0].trim()
+            });
+          }
+        });
+      }
+    } catch (e) {}
+
+    // 1c. Quick Autocomplete Index (~850 curated words)
+    if (typeof quickAutocompleteIndex !== 'undefined' && Array.isArray(quickAutocompleteIndex)) {
       quickAutocompleteIndex.forEach(item => {
-        if (item.word && item.word.toLowerCase().startsWith(qLower)) {
-          if (!seen.has(item.word.toLowerCase())) {
-            seen.add(item.word.toLowerCase());
-            matches.push(item);
+        if (item.word && !pool.has(item.word.toLowerCase())) {
+          pool.set(item.word.toLowerCase(), {
+            word: item.word,
+            pos: item.pos || 'n.',
+            urdu: (item.urdu || '').split('/')[0].trim()
+          });
+        }
+      });
+    }
+
+    const allEntries = Array.from(pool.values());
+    const prefixMatches = allEntries
+      .filter(item => item.word.toLowerCase().startsWith(qLower))
+      .sort((a, b) => a.word.length - b.word.length || a.word.localeCompare(b.word));
+    const containsMatches = allEntries
+      .filter(item => !item.word.toLowerCase().startsWith(qLower) && (item.word.toLowerCase().includes(qLower) || (item.urdu && item.urdu.includes(qLower))));
+
+    let initialMatches = [...prefixMatches, ...containsMatches].slice(0, 8);
+
+    // Display instant local suggestions right away (0ms latency!)
+    this.renderActiveSearchItems(initialMatches, qLower);
+
+    // 2. Debounced Datamuse Live Suggestions (fetching predictions for ANY English word)
+    clearTimeout(this.activeSearchDebounceTimer);
+    this.activeSearchDebounceTimer = setTimeout(async () => {
+      try {
+        const currentInput = (this.activeSearchInput ? this.activeSearchInput.value : '').trim().toLowerCase();
+        if (currentInput !== qLower) return;
+
+        const res = await fetch(`https://api.datamuse.com/sug?s=${encodeURIComponent(qLower)}&max=8`);
+        if (!res.ok) return;
+        const data = await res.json();
+        if (!Array.isArray(data) || data.length === 0) return;
+
+        // Verify input hasn't changed during fetch
+        const freshInput = (this.activeSearchInput ? this.activeSearchInput.value : '').trim().toLowerCase();
+        if (freshInput !== qLower) return;
+
+        const mergedMap = new Map();
+        initialMatches.forEach(item => mergedMap.set(item.word.toLowerCase(), item));
+
+        const wordsToTranslate = [];
+        for (const entry of data) {
+          const w = (entry.word || '').trim();
+          if (!w) continue;
+          const wLower = w.toLowerCase();
+          if (mergedMap.has(wLower)) continue;
+
+          if (pool.has(wLower)) {
+            mergedMap.set(wLower, pool.get(wLower));
+          } else {
+            const cachedTrans = storage.getAutoTranslation(wLower);
+            if (cachedTrans) {
+              mergedMap.set(wLower, { word: w, pos: cachedTrans.pos || 'n.', urdu: cachedTrans.urdu });
+            } else {
+              mergedMap.set(wLower, { word: w, pos: '', urdu: '' });
+              wordsToTranslate.push(w);
+            }
           }
         }
-      });
-    }
 
-    if (matches.length < 5) {
-      this.words.forEach(w => {
-        if (w.word && w.word.toLowerCase().includes(qLower) && !seen.has(w.word.toLowerCase())) {
-          seen.add(w.word.toLowerCase());
-          matches.push({ word: w.word, pos: w.posShort || 'adj.', urdu: w.urduMeaning || '' });
+        // Re-order: prefix matches first, then contains
+        const allMerged = Array.from(mergedMap.values());
+        const mergedPrefix = allMerged
+          .filter(item => item.word.toLowerCase().startsWith(freshInput))
+          .sort((a, b) => a.word.length - b.word.length || a.word.localeCompare(b.word));
+        const mergedContains = allMerged
+          .filter(item => !item.word.toLowerCase().startsWith(freshInput));
+
+        const finalList = [...mergedPrefix, ...mergedContains].slice(0, 8);
+        this.renderActiveSearchItems(finalList, freshInput);
+
+        // Fetch translations for missing words concurrently in background
+        if (wordsToTranslate.length > 0) {
+          const transPromises = wordsToTranslate.slice(0, 5).map(async (mw) => {
+            const trans = await this.fetchUrduForWord(mw);
+            if (trans) {
+              const existing = mergedMap.get(mw.toLowerCase());
+              if (existing) {
+                existing.urdu = (trans.urdu || '').split('/')[0].split('؛')[0].trim();
+                existing.pos = trans.pos || existing.pos || 'n.';
+              }
+            }
+          });
+          await Promise.all(transPromises);
+
+          // Update UI with translations if input is still active
+          const latestInput = (this.activeSearchInput ? this.activeSearchInput.value : '').trim().toLowerCase();
+          if (latestInput === freshInput) {
+            const updatedAll = Array.from(mergedMap.values());
+            const updatedPrefix = updatedAll
+              .filter(item => item.word.toLowerCase().startsWith(latestInput))
+              .sort((a, b) => a.word.length - b.word.length || a.word.localeCompare(b.word));
+            const updatedContains = updatedAll
+              .filter(item => !item.word.toLowerCase().startsWith(latestInput));
+            this.renderActiveSearchItems([...updatedPrefix, ...updatedContains].slice(0, 8), latestInput);
+          }
         }
-      });
-    }
+      } catch (e) {
+        // Keep current matches on fetch failure
+      }
+    }, 60);
+  }
 
-    const limited = matches.slice(0, 10);
+  renderActiveSearchItems(list, q) {
+    const autoBox = this.searchAutocompleteBox || document.getElementById('search-autocomplete-box');
+    if (!autoBox) return;
 
-    if (limited.length === 0) {
-      autoBox.innerHTML = `
-        <div class="search-auto-item search-auto-online-prompt" data-execute-search="${q}" role="button" tabindex="0">
-          <div class="search-auto-left">
-            <span class="search-auto-icon" style="color: #38bdf8;">🔍</span>
-            <span class="search-auto-word">Search Dictionary for "<strong style="color: #38bdf8;">${q}</strong>"</span>
-          </div>
-          <span class="search-auto-key">Search ↵</span>
-        </div>
-      `;
-    } else {
-      autoBox.innerHTML = limited.map(item => {
-        const matchIdx = item.word.toLowerCase().indexOf(qLower);
+    this.activeSearchAutoList = list || [];
+    this.activeSearchAutoIndex = -1;
+
+    let itemsHtml = '';
+
+    if (list && list.length > 0) {
+      itemsHtml += list.map((item, idx) => {
+        const matchIdx = item.word.toLowerCase().indexOf(q);
         let formattedWord = item.word;
         if (matchIdx !== -1) {
           const prefix = item.word.slice(0, matchIdx);
@@ -5055,18 +5207,35 @@ class VocabApp {
           const rest = item.word.slice(matchIdx + q.length);
           formattedWord = `${prefix}<strong class="auto-highlight">${match}</strong>${rest}`;
         }
+
+        const urduClean = item.urdu ? item.urdu.split('/')[0].trim() : '';
+
         return `
-          <div class="search-auto-item" data-select-word="${item.word}">
+          <div class="search-auto-item" data-select-word="${item.word}" data-index="${idx}" role="button" tabindex="0">
             <div class="search-auto-left">
               <span class="search-auto-icon">🔍</span>
               <span class="search-auto-word">${formattedWord}</span>
               ${item.pos ? `<span class="search-auto-pos">${item.pos}</span>` : ''}
             </div>
-            ${item.urdu ? `<span class="search-auto-urdu urdu-text">${item.urdu.split('/')[0]}</span>` : ''}
+            ${urduClean ? `<span class="search-auto-urdu urdu-text">${urduClean}</span>` : ''}
           </div>
         `;
       }).join('');
     }
+
+    // Always include direct search prompt at bottom
+    itemsHtml += `
+      <div class="search-auto-item search-auto-online-prompt" data-execute-search="${q}" role="button" tabindex="0">
+        <div class="search-auto-left">
+          <span class="search-auto-icon" style="color: #38bdf8;">🔍</span>
+          <span class="search-auto-word">Search Dictionary for "<strong style="color: #38bdf8;">${q}</strong>"</span>
+        </div>
+        <span class="search-auto-key">Search ↵</span>
+      </div>
+    `;
+
+    autoBox.innerHTML = itemsHtml;
+    autoBox.style.display = 'block';
 
     autoBox.querySelectorAll('[data-select-word]').forEach(el => {
       el.addEventListener('click', () => {

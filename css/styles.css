@@ -3578,7 +3578,8 @@ body {
   border-bottom: none;
 }
 
-.search-auto-item:hover {
+.search-auto-item:hover,
+.search-auto-item.active {
   background: var(--bg-chip);
 }
 
