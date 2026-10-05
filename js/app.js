@@ -10,7 +10,7 @@ const defaultVocabulary = [
     phoneticUK: "/'ædvɜːs; əd'vɜːs/",
     phoneticUS: "/əd'vɜːrs,'ædvɜːrs/",
     phonetic: "/'ædvɜːs/",
-    urduMeaning: "مخالف؛",
+    urduMeaning: "مخالف / منفی / نقصان دہ",
     forms: "adv.  adversely",
     tags: [
       { text: "#Top 3500", color: "blue" },
@@ -157,7 +157,7 @@ const defaultVocabulary = [
     phoneticUK: "/kən'klu:ʒn/",
     phoneticUS: "/kən'klu:ʒn/",
     phonetic: "/kən'klu:ʒn/",
-    urduMeaning: "آخری نتیجہ; نتیجہ;",
+    urduMeaning: "نتیجہ / انجام / اختتام",
     forms: "pl.  conclusions",
     tags: [
       { text: "#Top 1000", color: "blue" },
@@ -862,7 +862,7 @@ const defaultVocabulary = [
 // Built-in Quick Autocomplete Index with Urdu Meanings (Comprehensive A-Z Core Vocabulary)
 const quickAutocompleteIndex = [
   // A
-  { word: "adverse", pos: "adj.", urdu: "مخالف" },
+  { word: "adverse", pos: "adj.", urdu: "مخالف / منفی / نقصان دہ" },
   { word: "adversely", pos: "adv.", urdu: "برعکس طور پر" },
   { word: "adverseness", pos: "n.", urdu: "مخالفت" },
   { word: "advertising", pos: "n.", urdu: "تشہیر" },
@@ -1035,6 +1035,7 @@ const quickAutocompleteIndex = [
   { word: "Desperate", pos: "adj.", urdu: "مایوس / بے چین" },
   { word: "Destroy", pos: "v.", urdu: "تباہ کرنا / برباد" },
   { word: "Detail", pos: "n.", urdu: "تفصیل / جزئیات" },
+  { word: "Detrimental", pos: "adj.", urdu: "نقصان دہ / مضر / ضرر رساں" },
   { word: "Determine", pos: "v.", urdu: "عزم کرنا / طے کرنا" },
   { word: "Develop", pos: "v.", urdu: "ترقی دینا / پروان چڑھنا" },
   { word: "Device", pos: "n.", urdu: "آلہ / تدبیر" },
@@ -4235,6 +4236,18 @@ class VocabApp {
     return result;
   }
 
+  formatConciseUrduMeaning(raw) {
+    if (!raw) return '';
+    const parts = raw
+      .replace(/[؛;]/g, '،')
+      .split(/[\/,،]/)
+      .map(p => p.trim())
+      .filter(p => p.length > 0);
+    const unique = [...new Set(parts)];
+    if (unique.length === 0) return raw;
+    return unique.join(' ، ');
+  }
+
   updateAutoHighlight(items) {
     if (!items || items.length === 0) return;
     items.forEach((item, idx) => {
@@ -4780,7 +4793,7 @@ class VocabApp {
           tags: [],
           collins: collins || null,
           sentences: [
-            { en: primaryExample, ur: `اس جملے سے "${auto.urdu}" کا حقیقی اور روزمرہ استعمال واضح ہوتا ہے۔` }
+            { en: primaryExample, ur: `اس جملے سے "${(auto.urdu || '').split(/[\/,]/)[0].trim()}" کا حقیقی اور روزمرہ استعمال واضح ہوتا ہے۔`, meaning: (auto.urdu || '').split(/[\/,]/)[0].trim() }
           ]
         };
       }
@@ -5607,7 +5620,7 @@ class VocabApp {
         <!-- Part of Speech & Urdu Meaning (Screenshot 3) -->
         <div class="udict-concise-meaning-row">
           <span class="udict-concise-pos">${w.posShort || 'adj.'}</span>
-          <span class="udict-concise-urdu urdu-text">${w.urduMeaning || ''}</span>
+          <span class="udict-concise-urdu urdu-text">${this.formatConciseUrduMeaning(w.urduMeaning)}</span>
         </div>
 
         <!-- 1. Unified Example Sentences Section (Tareeqa 1 + 3 Combined) -->

@@ -1892,9 +1892,10 @@ body {
 /* Meaning & Grammatical Forms under Concise */
 .udict-concise-meaning-row {
   display: flex;
+  justify-content: space-between;
   align-items: baseline;
-  gap: 12px;
-  margin-bottom: 10px;
+  gap: 16px;
+  margin-bottom: 12px;
 }
 
 .udict-concise-pos {
@@ -1902,6 +1903,7 @@ body {
   font-size: 1.1rem;
   font-weight: 700;
   color: var(--text-title);
+  flex-shrink: 0;
 }
 
 .udict-concise-urdu {
@@ -1909,6 +1911,9 @@ body {
   font-weight: 700;
   color: var(--text-title);
   direction: rtl;
+  text-align: right;
+  margin-left: auto;
+  line-height: 1.4;
 }
 
 .udict-concise-forms-row {
