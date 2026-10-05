@@ -1982,11 +1982,22 @@ class StorageManager {
 
   clearAllCache() {
     this.cachedWords = [];
+    this.recentSearches = [];
     try {
       localStorage.removeItem(this.cacheKey);
+      localStorage.removeItem('vocab_recent_searches');
+      localStorage.removeItem('vocab_auto_trans_cache');
       for (let i = localStorage.length - 1; i >= 0; i--) {
         const k = localStorage.key(i);
-        if (k && (k.startsWith('vocab_dynamic_cache') || k.startsWith('vocab_collins_') || k.startsWith('vocab_trans_') || k.startsWith('vocab_grammar_cache') || k.startsWith('vocab_phones_'))) {
+        if (k && (
+          k.startsWith('vocab_dynamic_cache') ||
+          k.startsWith('vocab_collins_') ||
+          k.startsWith('vocab_trans_') ||
+          k.startsWith('vocab_grammar_cache') ||
+          k.startsWith('vocab_phones_') ||
+          k.startsWith('vocab_auto_trans_') ||
+          k.startsWith('vocab_recent_')
+        )) {
           localStorage.removeItem(k);
         }
       }
@@ -7451,11 +7462,11 @@ class VocabApp {
         </div>
 
         <!-- 6. Clear Local Cache -->
-        <div class="journal-menu-row" id="more-nav-clear-cache">
+        <div class="journal-menu-row" id="more-nav-clear-cache" role="button" tabindex="0">
           <span class="journal-row-title">Clear Local Cache</span>
           <div class="journal-row-right">
-            <span style="font-size: 0.8rem; color: var(--text-muted); margin-right: 4px;">کیشے صاف کریں</span>
-            <span class="journal-chevron">›</span>
+            <span id="clear-cache-status" style="font-size: 0.85rem; font-weight: 600; color: #10b981; display: none;">Cache Cleared ✓</span>
+            <span class="journal-chevron" id="clear-cache-chevron">›</span>
           </div>
         </div>
 
@@ -7487,9 +7498,25 @@ class VocabApp {
     if (clearCacheBtn) {
       clearCacheBtn.addEventListener('click', () => {
         storage.clearAllCache();
-        this.words = [...initialVocabularyData];
+        this.words = (typeof defaultVocabulary !== 'undefined' && Array.isArray(defaultVocabulary)) ? [...defaultVocabulary] : [];
         this.renderDictionary();
-        this.showToast('تمام لوکل کیشے کامیابی سے صاف ہو گیا ✅');
+        if (typeof this.renderRecentSearches === 'function') {
+          this.renderRecentSearches();
+        }
+
+        const statusEl = document.getElementById('clear-cache-status');
+        const chevronEl = document.getElementById('clear-cache-chevron');
+        if (statusEl) {
+          statusEl.textContent = 'Cache Cleared ✓';
+          statusEl.style.display = 'inline-block';
+          if (chevronEl) chevronEl.style.display = 'none';
+          setTimeout(() => {
+            if (statusEl) statusEl.style.display = 'none';
+            if (chevronEl) chevronEl.style.display = 'inline-block';
+          }, 3000);
+        }
+
+        this.showToast('Cache Cleared');
       });
     }
 
