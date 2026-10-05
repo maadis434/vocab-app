@@ -908,25 +908,7 @@ body {
   margin-bottom: 14px;
 }
 
-/* ==========================================================
-   FLASHCARD BOX (Apple Minimalist Revision)
-   ========================================================== */
-.minimal-flashcard-box {
-  background: var(--bg-card);
-  border: 0.5px solid var(--divider-hairline);
-  border-radius: 24px;
-  padding: 34px 22px;
-  min-height: 310px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  margin: 18px 0;
-  cursor: pointer;
-  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.05);
-  transition: background-color 0.2s ease, border-color 0.2s ease;
-}
+
 
 .notes-text-btn {
   background: none;

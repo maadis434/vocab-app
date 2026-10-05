@@ -6205,7 +6205,7 @@ class VocabApp {
     this.closeDedicatedSearchScreen();
 
     // 2. Dismiss any open modals/sheets
-    ['word-detail-modal', 'discover-modal', 'more-sentences-modal', 'report-problem-modal', 'ai-key-modal', 'settings-modal'].forEach(id => {
+    ['word-detail-modal', 'discover-modal', 'more-sentences-modal', 'report-problem-modal', 'ai-key-modal', 'settings-modal', 'sentence-trans-modal'].forEach(id => {
       const el = document.getElementById(id);
       if (el) el.style.display = 'none';
     });
@@ -7624,8 +7624,8 @@ class VocabApp {
           e.stopPropagation();
           const modal1 = document.getElementById('word-detail-modal');
           if (modal1) modal1.style.display = 'none';
-          const modal2 = document.getElementById('discover-modal');
-          if (modal2) modal2.style.display = 'none';
+          const transModal = document.getElementById('sentence-trans-modal');
+          if (transModal) transModal.style.display = 'none';
         });
       });
     } else {
@@ -7933,10 +7933,6 @@ class VocabApp {
           </div>
         `).join('')}
       </div>
-
-      <div class="word-modal-backdrop" id="discover-modal" style="display: none;">
-        <div class="word-modal-content" id="discover-modal-body"></div>
-      </div>
     `;
 
     this.discoverContainer.querySelectorAll('[data-open-word-id]').forEach(row => {
@@ -7949,8 +7945,8 @@ class VocabApp {
   }
 
   openWordModal(word, modalActiveTab = 'concise') {
-    const modal = document.getElementById('word-detail-modal') || document.getElementById('discover-modal');
-    const modalBody = document.getElementById('word-detail-modal-body') || document.getElementById('discover-modal-body');
+    const modal = document.getElementById('word-detail-modal');
+    const modalBody = document.getElementById('word-detail-modal-body');
     if (!modal || !modalBody) return;
 
     modalBody.innerHTML = `
@@ -7983,8 +7979,6 @@ class VocabApp {
     modal.onclick = (e) => { 
       if (e.target === modal) {
         modal.style.display = 'none';
-        const discoverModal = document.getElementById('discover-modal');
-        if (discoverModal) discoverModal.style.display = 'none';
       }
     };
 
@@ -8413,11 +8407,6 @@ class VocabApp {
   renderMoreHub() {
     if (!this.moreContainer) return;
 
-    if (this.moreSubView === 'my-words') {
-      this.renderMyWordsView();
-      return;
-    }
-
     if (this.moreSubView === 'grammar') {
       this.renderGrammarCheckView();
       return;
@@ -8767,97 +8756,6 @@ class VocabApp {
     this.grammarResult = finalResult;
     this.isCheckingGrammar = false;
     this.renderGrammarCheckView();
-  }
-
-  renderMyWordsView() {
-    if (!this.moreContainer) return;
-
-    const favIds = storage.favorites;
-    const favWords = this.words.filter(w => favIds.includes(w.id));
-
-    this.moreContainer.innerHTML = `
-      <button class="back-to-more-btn" id="back-to-more-menu-btn">
-        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"></polyline></svg>
-        <span>Back to More</span>
-      </button>
-
-      <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 16px; border-bottom: 1px solid var(--divider); padding-bottom: 8px;">
-        <span style="font-size: 0.88rem; font-weight: 700; color: var(--text-title);">MY WORDS (${favWords.length})</span>
-      </div>
-
-      ${favWords.length === 0 ? `
-        <div style="text-align: center; padding: 60px 20px; color: var(--text-muted);">
-          <p style="font-size: 1.1rem; font-weight: 700; color: var(--text-title); margin-bottom: 6px;">No Saved Words Yet</p>
-          <p style="font-size: 0.88rem; line-height: 1.5; margin-bottom: 20px;">Tap the heart icon on any word in Dictionary or Word of Day to build your personal revision list.</p>
-          <button class="notes-text-btn" style="margin: 0 auto; color: var(--text-title); text-decoration: underline;" id="my-words-goto-dict">
-            Search in Dictionary →
-          </button>
-        </div>
-      ` : `
-        <div>
-          ${favWords.map(w => `
-            <div class="discover-list-row" data-fav-open-id="${w.id}">
-              <div class="discover-row-left">
-                <span class="discover-word-text">${w.word}</span>
-                <span class="word-pos-tag">[${w.posShort || 'n.'}]</span>
-              </div>
-              <div style="display: flex; align-items: center; gap: 8px;">
-                <span class="discover-row-right urdu-text">${(w.urduMeaning || '').split('/')[0]}</span>
-                <button class="speaker-btn" data-speech-text="${w.word}" style="padding: 4px;">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg>
-                </button>
-                <button class="star-fav-btn active" data-fav-remove-mywords-id="${w.id}" style="padding: 4px;" title="Remove from favorites">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="#eab308" stroke="#eab308" stroke-width="2">
-                    <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
-                  </svg>
-                </button>
-              </div>
-            </div>
-          `).join('')}
-        </div>
-      `}
-    `;
-
-    document.getElementById('back-to-more-menu-btn').addEventListener('click', () => {
-      this.moreSubView = 'menu';
-      this.renderMoreHub();
-    });
-
-    const gotoDictBtn = document.getElementById('my-words-goto-dict');
-    if (gotoDictBtn) {
-      gotoDictBtn.addEventListener('click', () => {
-        this.switchTab('home');
-        if (this.dictSearchInput) {
-          this.dictSearchInput.focus();
-        }
-      });
-    }
-
-    this.moreContainer.querySelectorAll('.speaker-btn').forEach(btn => {
-      btn.addEventListener('click', (e) => {
-        e.stopPropagation();
-        tts.speak(btn.dataset.speechText);
-      });
-    });
-
-    this.moreContainer.querySelectorAll('[data-fav-remove-mywords-id]').forEach(starBtn => {
-      starBtn.addEventListener('click', (e) => {
-        e.stopPropagation();
-        const id = starBtn.dataset.favRemoveMywordsId;
-        storage.toggleFavorite(id);
-        this.renderMyWordsView();
-        this.renderFavoritesTab();
-        this.renderDictionary();
-      });
-    });
-
-    this.moreContainer.querySelectorAll('[data-fav-open-id]').forEach(row => {
-      row.addEventListener('click', (e) => {
-        if (e.target.closest('.speaker-btn') || e.target.closest('[data-fav-remove-mywords-id]')) return;
-        const w = this.words.find(item => item.id === row.dataset.favOpenId);
-        if (w) this.openWordModal(w);
-      });
-    });
   }
 
   // --- THEME MANAGEMENT ---
