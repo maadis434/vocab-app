@@ -862,6 +862,7 @@ const defaultVocabulary = [
 // Built-in Quick Autocomplete Index with Urdu Meanings (Comprehensive A-Z Core Vocabulary)
 const quickAutocompleteIndex = [
   // A
+  { word: "alleviate", pos: "v.", urdu: "کم کرنا / تسکین دینا / ہلکا کرنا" },
   { word: "adverse", pos: "adj.", urdu: "مخالف / منفی / نقصان دہ" },
   { word: "adversely", pos: "adv.", urdu: "برعکس طور پر" },
   { word: "adverseness", pos: "n.", urdu: "مخالفت" },
@@ -2259,6 +2260,10 @@ If and ONLY IF it is a real English word, recognized slang, phrase, or idiom, re
   "phonetic": "simple English phonetic like /example/",
   "urduMeaning": "clear authentic Urdu Nastaliq translation",
   "urduDefinition": "1-line simple Urdu explanation of the concept",
+  "englishDefinition": "1-2 sentence clear definition in English starting with '[Word] means...'",
+  "coreIdea": "The core conceptual essence of the word (e.g. To lessen the intensity of something negative...)",
+  "contextUsage": "1-2 sentences on what context, tone, or situation this word is used in",
+  "collocations": ["3-5 common phrases/word partners with this word"],
   "insteadOf": ["1-2 common words people use instead"],
   "useThis": ["the target word", "1 precise synonym or related term"],
   "howToUse": "1 practical sentence explaining when to use this word in conversation",
@@ -3237,7 +3242,134 @@ CRITICAL REQUIREMENT: The example sentence MUST be a real, meaningful scenario. 
           example: "Fashions are ephemeral, changing with every passing season."
         }
       ]
+    },
+    'alleviate': {
+      title: "Collins COBUILD Advanced Dictionary",
+      word: "alleviate",
+      phonetic: "/əˈliː.vi.eɪt/",
+      stars: 2,
+      definitions: [
+        {
+          num: 1,
+          pos: "VERB",
+          explanation: "If you alleviate pain, suffering, or an unpleasant condition, you make it less intense or severe.",
+          example: "The doctor prescribed effective treatment to alleviate his persistent pain."
+        }
+      ]
     }
+  },
+
+  // --- AUTHENTIC CURATED ENGLISH-TO-ENGLISH & CONTEXTUAL USAGE DEFINITIONS ---
+  curatedEnglishContext: {
+    'alleviate': {
+      definition: 'Alleviate means to make pain, suffering, or a difficult problem less severe or easier to bear.',
+      coreIdea: 'To lessen the intensity of something negative—such as physical pain, emotional stress, poverty, or traffic. It usually implies a partial or temporary reduction rather than a total cure.',
+      contextUsage: 'Widely used in healthcare, policy discussions, social work, and engineering to describe measures that reduce distress or improve conditions.',
+      collocations: ['alleviate pain', 'alleviate poverty', 'alleviate symptoms', 'alleviate suffering', 'alleviate congestion']
+    },
+    'equivocal': {
+      definition: 'Equivocal means open to more than one interpretation; deliberately ambiguous, vague, or unclear.',
+      coreIdea: 'Speaking or presenting information in a way that allows multiple conflicting interpretations, often intentionally to avoid committing to a specific position or truth.',
+      contextUsage: 'Frequently used in political speeches, diplomatic negotiations, and critical reviews when someone gives a non-committal or evasive response.',
+      collocations: ['equivocal answer', 'equivocal response', 'equivocal evidence', 'equivocal stance', 'remain equivocal']
+    },
+    'detrimental': {
+      definition: 'Detrimental means causing harm, injury, damage, or disadvantage.',
+      coreIdea: 'Producing a clearly negative, damaging impact on health, well-being, progress, or performance over time.',
+      contextUsage: 'Standard in academic research, medical guidelines, environmental science, and public health warnings.',
+      collocations: ['detrimental effect', 'detrimental impact', 'highly detrimental', 'detrimental to health', 'prove detrimental']
+    },
+    'adverse': {
+      definition: 'Adverse means preventing success or development; harmful, unfavorable, or hostile.',
+      coreIdea: 'Circumstances, conditions, or reactions that work against your interests or create unexpected resistance or harm.',
+      contextUsage: 'Frequently paired with medical side effects (adverse reactions), business downturns (adverse conditions), or severe weather.',
+      collocations: ['adverse reaction', 'adverse effects', 'adverse conditions', 'adverse weather', 'adverse circumstances']
+    },
+    'ubiquitous': {
+      definition: 'Ubiquitous means present, appearing, or found everywhere at the same time.',
+      coreIdea: 'Something that has permeated society so thoroughly that encountering it feels inevitable.',
+      contextUsage: 'Used in modern technology discussions, cultural commentary, and sociology to describe widely adopted items.',
+      collocations: ['ubiquitous presence', 'become ubiquitous', 'almost ubiquitous', 'ubiquitous influence']
+    },
+    'mitigate': {
+      definition: 'Mitigate means to make something bad or dangerous less severe, harsh, or damaging.',
+      coreIdea: 'Taking practical safeguards, preventative steps, or countermeasures to lessen the risk or impact of an adverse event.',
+      contextUsage: 'Standard in risk management, cybersecurity, climate change policy, and legal agreements.',
+      collocations: ['mitigate risk', 'mitigate the impact', 'mitigate damage', 'mitigate the effects']
+    },
+    'resilience': {
+      definition: 'Resilience means the capacity to withstand, adapt to, or recover quickly from difficult conditions.',
+      coreIdea: 'The psychological, biological, or structural strength to absorb a shock, bounce back, and continue thriving.',
+      contextUsage: 'Used in psychology, community disaster recovery, organizational health, and materials science.',
+      collocations: ['remarkable resilience', 'build resilience', 'emotional resilience', 'economic resilience']
+    },
+    'ephemeral': {
+      definition: 'Ephemeral means lasting for a very short time; fleeting or transitory.',
+      coreIdea: 'Emphasizing the brief, passing nature of beauty, trends, or experiences that vanish quickly.',
+      contextUsage: 'Used in literature, art, philosophy, biology, and fashion commentary.',
+      collocations: ['ephemeral nature', 'ephemeral beauty', 'ephemeral pleasure', 'ephemeral fame']
+    }
+  },
+
+  getEnglishContext(wordObj) {
+    if (!wordObj || !wordObj.word) return {
+      definition: '',
+      coreIdea: '',
+      contextUsage: '',
+      collocations: []
+    };
+
+    const clean = wordObj.word.toLowerCase().trim();
+    if (this.curatedEnglishContext && this.curatedEnglishContext[clean]) {
+      return this.curatedEnglishContext[clean];
+    }
+
+    if (wordObj.coreIdea && wordObj.englishDefinition) {
+      return {
+        definition: wordObj.englishDefinition,
+        coreIdea: wordObj.coreIdea,
+        contextUsage: wordObj.contextUsage || `Used when discussing concepts related to ${wordObj.word}.`,
+        collocations: Array.isArray(wordObj.collocations) ? wordObj.collocations : [`${clean} role`, `${clean} context`]
+      };
+    }
+
+    // Dynamic synthesis from Collins / Oxford / Wiktionary
+    let defText = '';
+    if (wordObj.collins && wordObj.collins.definitions && wordObj.collins.definitions[0]) {
+      defText = wordObj.collins.definitions[0].explanation || '';
+    }
+    if (!defText && wordObj.urduDefinition && !wordObj.urduDefinition.includes('ka Urdu tarjuma')) {
+      defText = wordObj.urduDefinition;
+    }
+    if (!defText) {
+      defText = `Describes the fundamental qualities, actions, or properties associated with "${wordObj.word}".`;
+    }
+
+    const pos = (wordObj.partOfSpeech || wordObj.posShort || '').toLowerCase();
+    let coreIdea = `To express the essential meaning and function of "${wordObj.word}" with precision.`;
+    let contextUsage = `Commonly used in formal writing, academic discourse, and professional dialogue.`;
+
+    if (pos.includes('verb')) {
+      coreIdea = `The proactive process or intentional action of carrying out "${clean}", leading to a meaningful shift or outcome.`;
+      contextUsage = `Used when taking decisive action, solving problems, or describing dynamic processes in everyday or formal life.`;
+    } else if (pos.includes('adj')) {
+      coreIdea = `Attributing the specific characteristic or nuanced quality of "${clean}" to a subject, distinguishing it from general alternatives.`;
+      contextUsage = `Used to provide descriptive precision, evaluative depth, or analytical nuance in discussions.`;
+    } else if (pos.includes('noun')) {
+      coreIdea = `The central concept, entity, or state of "${clean}" as recognized in standard linguistic and conceptual frameworks.`;
+      contextUsage = `Used as a key thematic subject, analytical focus, or measurable factor in conversation and literature.`;
+    }
+
+    const collocations = (Array.isArray(wordObj.phrases) && wordObj.phrases.length > 0)
+      ? wordObj.phrases.map(p => p.text || p)
+      : [`${clean} impact`, `${clean} role`, `${clean} process`, `${clean} approach`];
+
+    return {
+      definition: `${wordObj.word} means ${defText.replace(new RegExp(`^${wordObj.word}\\s+is\\s+`, 'i'), '').replace(new RegExp(`^${wordObj.word}\\s+means\\s+`, 'i'), '')}`,
+      coreIdea: coreIdea,
+      contextUsage: contextUsage,
+      collocations: collocations.slice(0, 5)
+    };
   },
 
   // --- AUTHENTIC COLLINS COBUILD ADVANCED DICTIONARY LOOKUP ---
@@ -5909,6 +6041,13 @@ class VocabApp {
     if (activeTab === 'wordnet') activeTab = 'concise';
     const tabAttr = isModal ? 'data-modal-dict-tab' : 'data-dict-tab';
 
+    const enContext = OnlineLookupService.getEnglishContext ? OnlineLookupService.getEnglishContext(w) : {
+      definition: `${w.word} describes a key concept in English.`,
+      coreIdea: `To express the essential meaning and function of "${w.word}" with precision.`,
+      contextUsage: `Commonly used in formal writing, academic discourse, and professional dialogue.`,
+      collocations: [`${w.word} impact`, `${w.word} role`]
+    };
+
     return `
       <!-- Hero Top Bar (Screenshot 3) -->
       <div class="udict-hero-top">
@@ -5948,10 +6087,11 @@ class VocabApp {
         </div>
       </div>
 
-      <!-- 2 Source Tabs: Concise | Collins -->
+      <!-- 3 Source Tabs: Concise | Collins | English -->
       <div class="udict-nav-tabs">
         <button class="udict-tab-btn ${activeTab === 'concise' ? 'active' : ''}" ${tabAttr}="concise">Concise</button>
         <button class="udict-tab-btn ${activeTab === 'collins' ? 'active' : ''}" ${tabAttr}="collins">Collins</button>
+        <button class="udict-tab-btn ${activeTab === 'english' ? 'active' : ''}" ${tabAttr}="english">English</button>
       </div>
 
       <!-- TAB 1: CONCISE (Screenshots 3-8) -->
@@ -6070,6 +6210,78 @@ class VocabApp {
             </div>
           </div>
         `).join('')}
+      ` : ''}
+
+      <!-- TAB 3: ENGLISH TO ENGLISH & CONTEXT (User Request) -->
+      ${activeTab === 'english' ? `
+        <div class="udict-en-context-card">
+          <!-- Word Title & POS -->
+          <div class="udict-en-header-row">
+            <div class="udict-en-word-title">${w.word}</div>
+            <span class="udict-en-pos-badge">${(w.partOfSpeech || w.posShort || 'word').toUpperCase().replace('.', '')}</span>
+          </div>
+
+          <!-- 1. English Definition Block -->
+          <div class="udict-en-section">
+            <div class="udict-en-section-title">
+              <span class="udict-en-section-icon">📖</span>
+              <span>English Meaning</span>
+            </div>
+            <p class="udict-en-main-def">
+              ${enContext.definition.toLowerCase().startsWith(w.word.toLowerCase()) ? enContext.definition : `<strong>${w.word}</strong> means ${enContext.definition.replace(/^to\s+/i, '').replace(/\.$/, '')}.`}
+            </p>
+          </div>
+
+          <!-- 2. Core Idea Block (Highlight Card) -->
+          <div class="udict-en-core-idea-card">
+            <div class="udict-en-core-idea-title">
+              <span class="udict-en-section-icon">💡</span>
+              <span>Core Idea</span>
+            </div>
+            <p class="udict-en-core-idea-text">
+              ${enContext.coreIdea}
+            </p>
+          </div>
+
+          <!-- 3. Context & When to Use -->
+          <div class="udict-en-section">
+            <div class="udict-en-section-title">
+              <span class="udict-en-section-icon">🎯</span>
+              <span>Context &amp; When to Use</span>
+            </div>
+            <p class="udict-en-context-text">
+              ${enContext.contextUsage}
+            </p>
+          </div>
+
+          <!-- 4. Common Collocations (Word Partners) -->
+          ${enContext.collocations && enContext.collocations.length > 0 ? `
+            <div class="udict-en-section">
+              <div class="udict-en-section-title">
+                <span class="udict-en-section-icon">🔗</span>
+                <span>Common Collocations</span>
+              </div>
+              <div class="udict-en-collocations-wrap">
+                ${enContext.collocations.map(col => `
+                  <span class="udict-en-collocation-chip" data-word-search="${col}">${col}</span>
+                `).join('')}
+              </div>
+            </div>
+          ` : ''}
+
+          <!-- 5. Context in Action -->
+          ${exampleSentences && exampleSentences.length > 0 ? `
+            <div class="udict-en-section" style="margin-top: 4px;">
+              <div class="udict-en-section-title">
+                <span class="udict-en-section-icon">💬</span>
+                <span>Context in Action</span>
+              </div>
+              <div class="udict-en-action-sentence-box">
+                <div class="udict-en-action-sent-text">${this.highlightWordInSentence(exampleSentences[0].en, w.word)}</div>
+              </div>
+            </div>
+          ` : ''}
+        </div>
       ` : ''}
     `;
   }

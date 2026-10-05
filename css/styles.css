@@ -2383,6 +2383,161 @@ body {
   color: var(--text-muted);
 }
 
+/* ==========================================================
+   TAB 3: ENGLISH TO ENGLISH & CONTEXTUAL USAGE
+   ========================================================== */
+.udict-en-context-card {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  animation: fadeInTab 0.18s ease-out;
+}
+
+@keyframes fadeInTab {
+  from { opacity: 0; transform: translateY(4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.udict-en-header-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 2px;
+}
+
+.udict-en-word-title {
+  font-size: 1.4rem;
+  font-weight: 800;
+  color: var(--text-title);
+  letter-spacing: -0.015em;
+}
+
+.udict-en-pos-badge {
+  font-size: 0.72rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 3px 8px;
+  border-radius: 6px;
+  background: var(--bg-search);
+  color: var(--text-muted);
+  border: 1px solid var(--divider);
+}
+
+.udict-en-section {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.udict-en-section-title {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.82rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--text-muted);
+}
+
+.udict-en-section-icon {
+  font-size: 0.95rem;
+}
+
+.udict-en-main-def {
+  font-size: 0.98rem;
+  line-height: 1.6;
+  color: var(--text-title);
+  margin: 0;
+}
+
+.udict-en-main-def strong {
+  color: #3b82f6;
+  font-weight: 700;
+}
+
+/* Core Idea Highlight Card */
+.udict-en-core-idea-card {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 14px 16px;
+  background: rgba(37, 99, 235, 0.06);
+  border: 1px solid rgba(59, 130, 246, 0.22);
+  border-left: 4px solid #3b82f6;
+  border-radius: 12px;
+}
+
+[data-theme="dark"] .udict-en-core-idea-card {
+  background: rgba(37, 99, 235, 0.12);
+  border-color: rgba(59, 130, 246, 0.3);
+  border-left-color: #60a5fa;
+}
+
+.udict-en-core-idea-title {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.82rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #2563eb;
+}
+
+[data-theme="dark"] .udict-en-core-idea-title {
+  color: #60a5fa;
+}
+
+.udict-en-core-idea-text {
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: var(--text-title);
+  margin: 0;
+  font-weight: 500;
+}
+
+.udict-en-context-text {
+  font-size: 0.93rem;
+  line-height: 1.6;
+  color: var(--text-muted);
+  margin: 0;
+}
+
+.udict-en-collocations-wrap {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 4px;
+}
+
+.udict-en-collocation-chip {
+  display: inline-flex;
+  align-items: center;
+  padding: 5px 12px;
+  border-radius: 8px;
+  font-size: 0.84rem;
+  font-weight: 600;
+  background: var(--bg-search);
+  color: var(--text-title);
+  border: 1px solid var(--divider);
+}
+
+.udict-en-action-sentence-box {
+  background: var(--bg-search);
+  border: 1px solid var(--divider);
+  border-radius: 12px;
+  padding: 12px 14px;
+  margin-top: 4px;
+}
+
+.udict-en-action-sent-text {
+  font-size: 0.94rem;
+  line-height: 1.55;
+  color: var(--text-title);
+}
+
 /* Copy Toast Indicator */
 .toast-notice {
   position: fixed;
