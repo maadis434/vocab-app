@@ -2834,6 +2834,11 @@ CRITICAL REQUIREMENT: The example sentence MUST be a real, meaningful scenario. 
     'quintessential': { uk: '/ˌkwɪn.tɪˈsen.ʃəl/', us: '/ˌkwɪn.təˈsen.ʃəl/', respelling: 'kwin-tuh-SEN-shuhl', urduPhonetic: 'کونٹیسینشل' }
   },
 
+  // =========================================================================
+  // [LOCKED FEATURE - DO NOT MODIFY WITHOUT EXPLICIT USER CONFIRMATION]
+  // Smart Dual-Respelling Engine (UK vs US)
+  // Status: Verified & Locked
+  // =========================================================================
   getDualRespelling(wordObj) {
     if (!wordObj || !wordObj.word) return { uk: '', us: '', isDifferent: false };
     const clean = wordObj.word.toLowerCase().trim();
@@ -7078,7 +7083,10 @@ class VocabApp {
           </div>
         </div>
 
-        <!-- Dual Audio Rows: UK and US -->
+        <!-- ============================================================= -->
+        <!-- [LOCKED FEATURE - DO NOT MODIFY WITHOUT USER CONFIRMATION]   -->
+        <!-- Dual Audio Rows: Original Red Speaker Buttons (UK & US)      -->
+        <!-- ============================================================= -->
         <div class="udict-audio-list">
           <div class="udict-audio-item">
             <button type="button" class="udict-accent-speaker-btn" data-accent-speech="${w.word}" data-accent="uk" title="Listen UK Pronunciation">

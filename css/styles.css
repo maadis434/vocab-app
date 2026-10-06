@@ -1748,7 +1748,10 @@ body {
   color: #e11d48;
 }
 
-/* Dual Accents Audio List (UK & US) */
+/* ==========================================================================
+   [LOCKED FEATURE - DO NOT MODIFY WITHOUT EXPLICIT USER CONFIRMATION]
+   Dual Accents Audio List (Original Red Speaker Buttons: UK & US)
+   ========================================================================== */
 .udict-audio-list {
   display: flex;
   flex-direction: column;
