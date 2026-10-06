@@ -2807,21 +2807,21 @@ CRITICAL REQUIREMENT: The example sentence MUST be a real, meaningful scenario. 
     'adverse': { uk: '/ˈæd.vɜːs/', us: '/ædˈvɝːs/', respelling: 'ad-VURS', urduPhonetic: 'ایڈورس' },
     'conclusion': { uk: '/kənˈkluː.ʒən/', us: '/kənˈkluː.ʒən/', respelling: 'kuhn-KLOO-zhuhn', urduPhonetic: 'کنکلوژن' },
     'contradictory': { uk: '/ˌkɒn.trəˈdɪk.tər.i/', us: '/ˌkɑːn.trəˈdɪk.tɚ.i/', respelling: 'kon-truh-DIK-tuh-ree', urduPhonetic: 'کنٹراڈکٹری' },
-    'schedule': { uk: '/ˈʃed.juːl/', us: '/ˈskedʒ.uːl/', respelling: 'SKED-jool', urduPhonetic: 'شیڈول' },
-    'privacy': { uk: '/ˈprɪv.ə.si/', us: '/ˈpraɪ.və.si/', respelling: 'PRYE-vuh-see', urduPhonetic: 'پرائیویسی' },
-    'advertisement': { uk: '/ədˈvɜː.tɪs.mənt/', us: '/ˌæd.vɚˈtaɪz.mənt/', respelling: 'ad-ver-TYZE-muhnt', urduPhonetic: 'ایڈورٹائزمنٹ' },
-    'water': { uk: '/ˈwɔː.tər/', us: '/ˈwɑː.t̬ɚ/', respelling: 'WAH-tur', urduPhonetic: 'واٹر' },
-    'neither': { uk: '/ˈnaɪ.ðər/', us: '/ˈniː.ðɚ/', respelling: 'NEE-thur', urduPhonetic: 'نیدر' },
-    'either': { uk: '/ˈaɪ.ðər/', us: '/ˈiː.ðɚ/', respelling: 'EE-thur', urduPhonetic: 'ایدر' },
-    'vitamin': { uk: '/ˈvɪt.ə.mɪn/', us: '/ˈvaɪ.t̬ə.mɪn/', respelling: 'VYE-tuh-min', urduPhonetic: 'وٹامن' },
-    'tomato': { uk: '/təˈmɑː.təʊ/', us: '/təˈmeɪ.t̬oʊ/', respelling: 'tuh-MAY-toh', urduPhonetic: 'ٹماٹر' },
-    'herb': { uk: '/hɜːb/', us: '/ɜːrb/', respelling: 'urb', urduPhonetic: 'ہرب' },
-    'leisure': { uk: '/ˈleʒ.ər/', us: '/ˈliː.ʒɚ/', respelling: 'LEE-zhur', urduPhonetic: 'لیژر' },
-    'route': { uk: '/ruːt/', us: '/raʊt/', respelling: 'root', urduPhonetic: 'روٹ' },
-    'garage': { uk: '/ˈɡær.ɑːʒ/', us: '/ɡəˈrɑːʒ/', respelling: 'guh-RAHZH', urduPhonetic: 'گیراج' },
-    'vase': { uk: '/vɑːz/', us: '/veɪs/', respelling: 'vays', urduPhonetic: 'واز' },
+    'schedule': { uk: '', us: '', respellingUK: 'SHED-jool', respellingUS: 'SKED-jool', urduPhonetic: 'شیڈول' },
+    'privacy': { uk: '', us: '', respellingUK: 'PRIV-uh-see', respellingUS: 'PRYE-vuh-see', urduPhonetic: 'پرائیویسی' },
+    'advertisement': { uk: '', us: '', respellingUK: 'ad-VUR-tis-muhnt', respellingUS: 'ad-ver-TYZE-muhnt', urduPhonetic: 'ایڈورٹائزمنٹ' },
+    'water': { uk: '', us: '', respellingUK: 'WAW-tuh', respellingUS: 'WAH-tur', urduPhonetic: 'واٹر' },
+    'neither': { uk: '', us: '', respellingUK: 'NYE-thur', respellingUS: 'NEE-thur', urduPhonetic: 'نیدر' },
+    'either': { uk: '', us: '', respellingUK: 'EYE-thur', respellingUS: 'EE-thur', urduPhonetic: 'ایدر' },
+    'vitamin': { uk: '', us: '', respellingUK: 'VIT-uh-min', respellingUS: 'VYE-tuh-min', urduPhonetic: 'وٹامن' },
+    'tomato': { uk: '', us: '', respellingUK: 'tuh-MAH-toh', respellingUS: 'tuh-MAY-toh', urduPhonetic: 'ٹماٹر' },
+    'herb': { uk: '', us: '', respellingUK: 'hurb', respellingUS: 'urb', urduPhonetic: 'ہرب' },
+    'leisure': { uk: '', us: '', respellingUK: 'LEZH-ur', respellingUS: 'LEE-zhur', urduPhonetic: 'لیژر' },
+    'route': { uk: '', us: '', respellingUK: 'root', respellingUS: 'rowt', urduPhonetic: 'روٹ' },
+    'garage': { uk: '', us: '', respellingUK: 'GAIR-ahzh', respellingUS: 'guh-RAHZH', urduPhonetic: 'گیراج' },
+    'vase': { uk: '', us: '', respellingUK: 'vahz', respellingUS: 'vays', urduPhonetic: 'واز' },
     'ballet': { uk: '/ˈbæleɪ/', us: '/bæˈleɪ/', respelling: 'ba-LAY', urduPhonetic: 'بیلے' },
-    'aluminum': { uk: '/ˌæljʊˈmɪn.i.əm/', us: '/əˈluː.mɪ.nəm/', respelling: 'uh-LOO-mi-nuhm', urduPhonetic: 'ایلومینیم' },
+    'aluminum': { uk: '', us: '', respellingUK: 'al-yoo-MIN-ee-uhm', respellingUS: 'uh-LOO-mi-nuhm', urduPhonetic: 'ایلومینیم' },
     'ephemeral': { uk: '/ɪˈfem.ər.əl/', us: '/əˈfem.ɚ.əl/', respelling: 'ih-FEM-er-uhl', urduPhonetic: 'افیمرل' },
     'ubiquitous': { uk: '/juːˈbɪk.wɪ.təs/', us: '/juːˈbɪk.wə.t̬əs/', respelling: 'yoo-BIK-wuh-tuhs', urduPhonetic: 'یوبیکوٹَس' },
     'serendipity': { uk: '/ˌser.ənˈdɪp.ə.ti/', us: '/ˌser.ənˈdɪp.ə.t̬i/', respelling: 'sehr-uhn-DIP-i-tee', urduPhonetic: 'سیرینڈیپیٹی' },
@@ -2830,8 +2830,36 @@ CRITICAL REQUIREMENT: The example sentence MUST be a real, meaningful scenario. 
     'enigma': { uk: '/ɪˈnɪɡ.mə/', us: '/əˈnɪɡ.mə/', respelling: 'ih-NIG-muh', urduPhonetic: 'انِگما' },
     'garrulous': { uk: '/ˈɡær.əl.əs/', us: '/ˈɡer.ə.ləs/', respelling: 'GAIR-uh-luhs', urduPhonetic: 'گیرولس' },
     'loquacious': { uk: '/ləˈkweɪ.ʃəs/', us: '/loʊˈkweɪ.ʃəs/', respelling: 'loh-KWAY-shuhs', urduPhonetic: 'لوکویشس' },
-    'mitigate': { uk: '/ˈmɪt.ɪ.ɡeɪt/', us: '/ˈmɪt̬.ə.ɡeɪt/', respelling: 'MIT-i-gayt', urduPhonetic: 'مٹیگیٹ' },
+    'mitigate': { uk: '', us: '', respelling: 'MIT-i-gayt', urduPhonetic: 'مٹیگیٹ' },
     'quintessential': { uk: '/ˌkwɪn.tɪˈsen.ʃəl/', us: '/ˌkwɪn.təˈsen.ʃəl/', respelling: 'kwin-tuh-SEN-shuhl', urduPhonetic: 'کونٹیسینشل' }
+  },
+
+  getDualRespelling(wordObj) {
+    if (!wordObj || !wordObj.word) return { uk: '', us: '', isDifferent: false };
+    const clean = wordObj.word.toLowerCase().trim();
+    const curated = this.curatedPhonetics && this.curatedPhonetics[clean];
+    if (curated) {
+      const uk = curated.respellingUK || curated.respelling || '';
+      const us = curated.respellingUS || curated.respelling || '';
+      return {
+        uk,
+        us,
+        isDifferent: uk && us && uk.toLowerCase() !== us.toLowerCase()
+      };
+    }
+    const wUk = wordObj.respellingUK || wordObj.respelling || '';
+    const wUs = wordObj.respellingUS || wordObj.respelling || '';
+    if (wUk || wUs) {
+      const uk = wUk || wUs;
+      const us = wUs || wUk;
+      return {
+        uk,
+        us,
+        isDifferent: uk && us && uk.toLowerCase() !== us.toLowerCase()
+      };
+    }
+    const base = this.ruleBasedRespelling ? this.ruleBasedRespelling(clean) : '';
+    return { uk: base, us: base, isDifferent: false };
   },
 
   arpaToRespelling(arpaStr) {
@@ -6808,17 +6836,13 @@ class VocabApp {
     const isFav = storage.isFavorite(w.id);
     const cleanWord = (w.word || '').toLowerCase();
     const quick = OnlineLookupService.getQuickPhonetics ? OnlineLookupService.getQuickPhonetics(w.word) : null;
-    const respelling = w.respelling || (quick ? quick.respelling : '') || (OnlineLookupService.ruleBasedRespelling ? OnlineLookupService.ruleBasedRespelling(w.word) : '');
+    const dualResp = OnlineLookupService.getDualRespelling
+      ? OnlineLookupService.getDualRespelling(w)
+      : { uk: '', us: '', isDifferent: false };
+    const ukRespelling = dualResp.uk || w.respelling || '';
+    const usRespelling = dualResp.us || w.respelling || '';
+    const respelling = usRespelling || ukRespelling;
     const urduPhonetic = w.urduPhonetic || (quick ? quick.urduPhonetic : '');
-
-    let ukPhonetic = w.phoneticUK;
-    if (!ukPhonetic || ukPhonetic === `/${cleanWord}/` || ukPhonetic === `/${w.word}/`) {
-      ukPhonetic = (quick && quick.uk && quick.uk !== `/${cleanWord}/`) ? quick.uk : (OnlineLookupService.ruleBasedIPA ? OnlineLookupService.ruleBasedIPA(w.word, 'uk') : '');
-    }
-    let usPhonetic = w.phoneticUS;
-    if (!usPhonetic || usPhonetic === `/${cleanWord}/` || usPhonetic === `/${w.word}/`) {
-      usPhonetic = (quick && quick.us && quick.us !== `/${cleanWord}/`) ? quick.us : (OnlineLookupService.ruleBasedIPA ? OnlineLookupService.ruleBasedIPA(w.word, 'us') : '');
-    }
 
     const badges = (w.tags && w.tags.length > 0) ? w.tags : [
       { text: "#Top 3500", color: "blue" },
@@ -7007,7 +7031,7 @@ class VocabApp {
     const collinsData = w.collins || (OnlineLookupService.curatedCollins && OnlineLookupService.curatedCollins[w.word.toLowerCase()]) || {
       title: "Collins COBUILD Advanced Dictionary",
       word: w.word,
-      phonetic: ukPhonetic,
+      phonetic: respelling,
       stars: 2,
       definitions: [
         {
@@ -7041,7 +7065,7 @@ class VocabApp {
         <div class="udict-title-bar">
           <div class="udict-word-header-wrap">
             <h1 class="udict-main-word">${w.word}</h1>
-            ${respelling ? `<span class="udict-respelling-badge" data-phonetic-display="respelling">[ ${respelling} ]</span>` : ''}
+            ${(!dualResp.isDifferent && respelling) ? `<span class="udict-respelling-badge" data-phonetic-display="respelling">[ ${respelling} ]</span>` : ''}
             ${urduPhonetic ? `<span class="udict-urdu-phonetic-badge" data-phonetic-display="urdu">(${urduPhonetic})</span>` : ''}
           </div>
           <div class="udict-actions-group">
@@ -7054,16 +7078,22 @@ class VocabApp {
           </div>
         </div>
 
-        <!-- Dual Audio Buttons: UK and US -->
+        <!-- Dual Audio Rows: UK and US -->
         <div class="udict-audio-list">
-          <button type="button" class="udict-accent-pill-btn" data-accent-speech="${w.word}" data-accent="uk" title="Listen UK Pronunciation">
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg>
-            <span class="udict-accent-pill-label">UK</span>
-          </button>
-          <button type="button" class="udict-accent-pill-btn" data-accent-speech="${w.word}" data-accent="us" title="Listen US Pronunciation">
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg>
-            <span class="udict-accent-pill-label">US</span>
-          </button>
+          <div class="udict-audio-item">
+            <button type="button" class="udict-accent-speaker-btn" data-accent-speech="${w.word}" data-accent="uk" title="Listen UK Pronunciation">
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg>
+            </button>
+            <span class="udict-accent-label">UK</span>
+            ${dualResp.isDifferent && ukRespelling ? `<span class="udict-accent-phonetic" data-phonetic-display="uk-respelling">[ ${ukRespelling} ]</span>` : ''}
+          </div>
+          <div class="udict-audio-item">
+            <button type="button" class="udict-accent-speaker-btn" data-accent-speech="${w.word}" data-accent="us" title="Listen US Pronunciation">
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg>
+            </button>
+            <span class="udict-accent-label">US</span>
+            ${dualResp.isDifferent && usRespelling ? `<span class="udict-accent-phonetic" data-phonetic-display="us-respelling">[ ${usRespelling} ]</span>` : ''}
+          </div>
         </div>
       </div>
 
@@ -7297,9 +7327,12 @@ class VocabApp {
             if (phones.urduPhonetic) currentWord.urduPhonetic = phones.urduPhonetic;
 
             const respEl = container.querySelector('[data-phonetic-display="respelling"]');
-            const urduEl = container.querySelector('[data-phonetic-display="urdu"]');
+            const ukRespEl = container.querySelector('[data-phonetic-display="uk-respelling"]');
+            const usRespEl = container.querySelector('[data-phonetic-display="us-respelling"]');
 
             if (respEl && currentWord.respelling) respEl.textContent = `[ ${currentWord.respelling} ]`;
+            if (ukRespEl && currentWord.respellingUK) ukRespEl.textContent = `[ ${currentWord.respellingUK} ]`;
+            if (usRespEl && currentWord.respellingUS) usRespEl.textContent = `[ ${currentWord.respellingUS} ]`;
             if (urduEl && currentWord.urduPhonetic) urduEl.textContent = `(${currentWord.urduPhonetic})`;
           }
         });

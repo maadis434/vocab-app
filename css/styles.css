@@ -1751,65 +1751,52 @@ body {
 /* Dual Accents Audio List (UK & US) */
 .udict-audio-list {
   display: flex;
-  flex-direction: row;
-  align-items: center;
-  gap: 10px;
-  margin: 10px 0 16px 0;
-  flex-wrap: wrap;
+  flex-direction: column;
+  gap: 8px;
+  margin: 8px 0 16px 0;
 }
 
-.udict-accent-pill-btn {
+.udict-audio-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.95rem;
+  color: var(--text-muted);
+}
+
+.udict-accent-speaker-btn {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  color: #f43f5e;
   display: inline-flex;
   align-items: center;
-  gap: 7px;
-  background: var(--bg-search);
-  border: 1px solid var(--divider-hairline);
-  color: var(--text-title);
-  padding: 6px 14px;
-  border-radius: 9999px;
-  font-size: 0.88rem;
+  justify-content: center;
+  transition: transform 0.15s ease;
+}
+
+.udict-accent-speaker-btn:hover {
+  transform: scale(1.2);
+}
+
+.udict-accent-label {
   font-weight: 700;
-  cursor: pointer;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
-  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.udict-accent-pill-btn svg {
-  color: #f43f5e;
-  flex-shrink: 0;
-  transition: transform 0.2s ease;
-}
-
-.udict-accent-pill-btn:hover {
-  background: rgba(244, 63, 94, 0.08);
-  border-color: rgba(244, 63, 94, 0.3);
-  color: #f43f5e;
-  transform: translateY(-1px);
-}
-
-.udict-accent-pill-btn:hover svg {
-  transform: scale(1.15);
-}
-
-.udict-accent-pill-btn:active {
-  transform: scale(0.96);
-}
-
-[data-theme="dark"] .udict-accent-pill-btn {
-  background: #1e222d;
-  border-color: rgba(255, 255, 255, 0.08);
   color: var(--text-title);
+  margin-right: 2px;
+  font-size: 0.92rem;
 }
 
-[data-theme="dark"] .udict-accent-pill-btn:hover {
-  background: rgba(244, 63, 94, 0.15);
-  border-color: #f43f5e;
+.udict-accent-phonetic {
+  color: #6366f1;
+  font-family: inherit;
+  font-size: 0.92rem;
+  font-weight: 600;
+  letter-spacing: 0.3px;
 }
 
-.udict-accent-pill-label {
-  font-size: 0.84rem;
-  font-weight: 800;
-  letter-spacing: 0.5px;
+[data-theme="dark"] .udict-accent-phonetic {
+  color: #818cf8;
 }
 
 .udict-word-header-wrap {
