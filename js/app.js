@@ -2781,8 +2781,17 @@ CRITICAL REQUIREMENT: The example sentence MUST be a real, meaningful scenario. 
 
   // --- AUTHENTIC DUAL-DIALECT PHONETICS & PRONUNCIATION RESPELLING ENGINE ---
   curatedPhonetics: {
-    'resilient': { uk: '/rɪˈzɪl.jənt/', us: '/rɪˈzɪl.jənt/', respelling: 'ri-ZIL-yuhnt', urduPhonetic: 'رِزِل یینٹ' },
-    'detrimental': { uk: '/ˌdet.rɪˈmen.təl/', us: '/ˌdet.rəˈmen.t̬əl/', respelling: 'deh-truh-MEN-tuhl', urduPhonetic: 'ڈیٹری مینٹل' },
+    'alleviate': { uk: '', us: '', respelling: 'uh-LEE-vee-ayt', urduPhonetic: 'اَلیوی اَیٹ' },
+    'resilience': { uk: '', us: '', respelling: 'ri-ZIL-yuhns', urduPhonetic: 'رِزِل یَنس' },
+    'resilient': { uk: '', us: '', respelling: 'ri-ZIL-yuhnt', urduPhonetic: 'رِزِل یَینٹ' },
+    'equivocal': { uk: '', us: '', respelling: 'ih-KWIV-uh-kuhl', urduPhonetic: 'اِکوِیووکل' },
+    'happy': { uk: '', us: '', respelling: 'HAP-ee', urduPhonetic: 'ہیپی' },
+    'book': { uk: '', us: '', respelling: 'buuk', urduPhonetic: 'بُک' },
+    'journey': { uk: '', us: '', respelling: 'JUR-nee', urduPhonetic: 'جرنی' },
+    'honest': { uk: '', us: '', respelling: 'ON-ist', urduPhonetic: 'اونِسٹ' },
+    'circumstances': { uk: '', us: '', respelling: 'SUR-kuhm-stan-siz', urduPhonetic: 'سرکمسٹینسز' },
+    'decision': { uk: '', us: '', respelling: 'dih-SIZH-uhn', urduPhonetic: 'ڈسِیژن' },
+    'detrimental': { uk: '', us: '', respelling: 'deh-truh-MEN-tuhl', urduPhonetic: 'ڈیٹری مینٹل' },
     'eloquent': { uk: '/ˈel.ə.kwənt/', us: '/ˈel.ə.kwənt/', respelling: 'EH-luh-kwuhnt', urduPhonetic: 'ایلوکوینٹ' },
     'pragmatic': { uk: '/præɡˈmæt.ɪk/', us: '/præɡˈmæt̬.ɪk/', respelling: 'prag-MAT-ik', urduPhonetic: 'پریگ میٹک' },
     'meticulous': { uk: '/məˈtɪk.jə.ləs/', us: '/məˈtɪk.jə.ləs/', respelling: 'muh-TIK-yuh-luhs', urduPhonetic: 'میٹی کیولس' },
@@ -6313,7 +6322,6 @@ class VocabApp {
               <span class="word-pos-tag">[${word.posShort || 'n.'}]</span>
               ${respelling ? `<span class="udict-respelling-badge" style="font-size: 0.88rem; padding: 2px 8px;">[ ${respelling} ]</span>` : ''}
               ${urduPhonetic ? `<span class="udict-urdu-phonetic-badge" style="font-size: 0.92rem; padding: 1px 8px;">(${urduPhonetic})</span>` : ''}
-              ${phoneticUS ? `<span style="font-size: 0.88rem; color: var(--text-muted); font-weight: 500;">${phoneticUS}</span>` : ''}
             </div>
             <div style="display: flex; align-items: center; gap: 8px;">
               <button class="speaker-btn" data-speech-text="${word.word}" id="play-today-word" title="Listen to pronunciation">
@@ -7046,23 +7054,16 @@ class VocabApp {
           </div>
         </div>
 
-        <!-- Dual Audio Rows: UK and US (Screenshot 3) -->
+        <!-- Dual Audio Buttons: UK and US -->
         <div class="udict-audio-list">
-          <div class="udict-audio-item">
-            <button class="udict-accent-speaker-btn" data-accent-speech="${w.word}" data-accent="uk" title="Listen UK Pronunciation">
-              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg>
-            </button>
-            <span class="udict-accent-label">UK</span>
-            <span class="udict-accent-phonetic" data-phonetic-display="uk">${ukPhonetic}</span>
-          </div>
-          <div class="udict-audio-item">
-            <button class="udict-accent-speaker-btn" data-accent-speech="${w.word}" data-accent="us" title="Listen US Pronunciation">
-              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg>
-            </button>
-            <span class="udict-accent-label">US</span>
-            <span class="udict-accent-phonetic" data-phonetic-display="us">${usPhonetic}</span>
-            ${respelling ? `<span class="udict-accent-respelling" data-phonetic-display="audio-respelling">• [ ${respelling} ]</span>` : ''}
-          </div>
+          <button type="button" class="udict-accent-pill-btn" data-accent-speech="${w.word}" data-accent="uk" title="Listen UK Pronunciation">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg>
+            <span class="udict-accent-pill-label">UK</span>
+          </button>
+          <button type="button" class="udict-accent-pill-btn" data-accent-speech="${w.word}" data-accent="us" title="Listen US Pronunciation">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg>
+            <span class="udict-accent-pill-label">US</span>
+          </button>
         </div>
       </div>
 
@@ -7191,7 +7192,7 @@ class VocabApp {
         <div class="udict-cobuild-header">${collinsData.title}</div>
         <div class="udict-cobuild-word-row">
           <span class="udict-cobuild-title">${collinsData.word}</span>
-          <span class="udict-accent-phonetic">${collinsData.phonetic}</span>
+          ${respelling ? `<span class="udict-respelling-badge" style="font-size: 0.85rem; padding: 2px 8px;">[ ${respelling} ]</span>` : ''}
           <span class="udict-stars-rating">${'★'.repeat(collinsData.stars || 2)}</span>
         </div>
         ${collinsData.definitions.map(def => `
@@ -7295,16 +7296,10 @@ class VocabApp {
             if (phones.respelling) currentWord.respelling = phones.respelling;
             if (phones.urduPhonetic) currentWord.urduPhonetic = phones.urduPhonetic;
 
-            const ukEl = container.querySelector('[data-phonetic-display="uk"]');
-            const usEl = container.querySelector('[data-phonetic-display="us"]');
             const respEl = container.querySelector('[data-phonetic-display="respelling"]');
-            const audioRespEl = container.querySelector('[data-phonetic-display="audio-respelling"]');
             const urduEl = container.querySelector('[data-phonetic-display="urdu"]');
 
-            if (ukEl && currentWord.phoneticUK) ukEl.textContent = currentWord.phoneticUK;
-            if (usEl && currentWord.phoneticUS) usEl.textContent = currentWord.phoneticUS;
             if (respEl && currentWord.respelling) respEl.textContent = `[ ${currentWord.respelling} ]`;
-            if (audioRespEl && currentWord.respelling) audioRespEl.textContent = `• [ ${currentWord.respelling} ]`;
             if (urduEl && currentWord.urduPhonetic) urduEl.textContent = `(${currentWord.urduPhonetic})`;
           }
         });
@@ -7312,7 +7307,7 @@ class VocabApp {
     }
 
     // 1. UK & US Accent Speaker buttons
-    container.querySelectorAll('.udict-accent-speaker-btn').forEach(btn => {
+    container.querySelectorAll('.udict-accent-speaker-btn, .udict-accent-pill-btn').forEach(btn => {
       btn.addEventListener('click', (e) => {
         e.stopPropagation();
         const text = btn.dataset.accentSpeech;
