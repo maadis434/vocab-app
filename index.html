@@ -348,6 +348,17 @@
 
   </main>
 
+  <!-- Service Worker Registration for PWA Installation -->
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('./sw.js').catch(err => {
+          console.warn('ServiceWorker registration error:', err);
+        });
+      });
+    }
+  </script>
+
   <!-- Dynamic Anti-Cache Script Loader -->
   <script>
     (function() {

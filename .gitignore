@@ -1,0 +1,7 @@
+*.backup.*
+*.tmp
+test_*.js
+test_*.cjs
+.DS_Store
+Thumbs.db
+app_ui_screens/
