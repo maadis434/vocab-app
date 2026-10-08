@@ -2779,6 +2779,60 @@ CRITICAL REQUIREMENT: The example sentence MUST be a real, meaningful scenario. 
     }
   },
 
+  // --- CURATED MULTI-DIMENSIONAL RICH URDU MEANINGS (4-5 Nuanced Meanings per Word) ---
+  curatedRichUrduMeanings: {
+    'alleviate': 'کم کرنا / ہلکا کرنا / تسکین دینا / تخفیف کرنا / دور کرنا',
+    'resilience': 'ثابت قدمی / قوتِ مدافعت / لچک / سنبھلنے کی صلاحیت / ہمت',
+    'resilient': 'ثابت قدم / باحوصلہ / لچکدار / جلد سنبھلنے والا / پرعزم',
+    'pragmatic': 'عملی / حقیقت پسندانہ / قابلِ عمل / مصلحت آمیز / مفید',
+    'meticulous': 'انتہائی باریک بین / محتاط / باریکی پر دھیان دینے والا / عرق ریز / دقیق',
+    'eloquent': 'خوش گفتار / فصیح و بلیغ / شیریں بیاں / اثر انگیز بولنے والا / گویا',
+    'diligent': 'محنتی / ان تھک / سرگرم / مستعد / عرق ریز',
+    'detrimental': 'نقصان دہ / مضر / مہلک / تباہ کن / باعثِ نقصان',
+    'schedule': 'نظام الاوقات / شیڈول / اوقات نامہ / پروگرام بنانا / مقررہ وقت',
+    'privacy': 'تنہائی / رازداری / پردہ داری / خلوت / ذاتی زندگی کا تحفظ',
+    'advertisement': 'اشتہار / تشہیر / اعلان / پبلسٹی / اشتہار بازی',
+    'mitigate': 'کم کرنا / شدت گھٹانا / تخفیف کرنا / نرم کرنا / دھیما کرنا',
+    'serendipity': 'خوش قسمتی / غیر متوقع فائدہ / حسنِ اتفاق / اچانک کامیابی / غیبی مدد',
+    'paradigm': 'نمونہ / مثال / بنیادی ڈھانچہ / طریقہ کار / طرزِ فکر',
+    'enigma': 'معمہ / گتھی / پر اسرار چیز / الجھن / ناقابلِ فہم بات',
+    'ubiquitous': 'ہر جگہ موجود / ہمہ گیر / عام پایا جانے والا / ہر جا حاضر / عالمگیر',
+    'ephemeral': 'عارضی / ناپائیدار / چند روزہ / بے ثبات / قلیل المدت',
+    'anomaly': 'بے قاعدگی / خلافِ معمول بات / انوکھی حالت / غیر معمولی واقعہ / انحراف',
+    'garrulous': 'باتونی / پرگو / فضول گو / بسیار گو / بکواسی',
+    'loquacious': 'خوش گفتار / زیادہ بولنے والا / چرب زبان / حاضر جواب / باتونی',
+    'quintessential': 'کامل ترین مثال / خالص ترین جوہر / نمونہء کامل / اصل بنیاد / بے نظیر',
+    'ambiguous': 'مبہم / مشکوک / غیر واضح / دو پہلو رکھنے والا / پیچیدہ',
+    'adverse': 'مخالف / منفی / ناموافق / نقصان دہ / برعکس',
+    'candid': 'کھرا / بے باک / صاف گو / غیر جانبدار / سچا',
+    'persevere': 'ڈٹے رہنا / استقلال دکھانا / ہمت نہ ہارنا / مسلسل کوشش کرنا / ثابت قدم رہنا',
+    'procrastinate': 'ٹال مٹول کرنا / کام کو لٹکانا / تاخیر کرنا / دیر لگانا / پس و پیش کرنا',
+    'empathy': 'ہمدردی / احساسِ غم / دوسرے کے جذبات کو سمجھنا / دلی وابستگی / درد مندی',
+    'lucid': 'واضح / شفاف / آسانی سے سمجھ آنے والا / چمکدار / صاف و شفاف',
+    'serene': 'پر سکون / پر امن / پر اطمینان / ٹھہرا ہوا / پر سکوت',
+    'equivocal': 'مبہم / مشتبہ / گول مول / غیر واضح / دو معنی رکھنے والا',
+    'diaspora': 'ہجرت زدہ قوم / تارکینِ وطن / وطن سے دور منتشر آبادی / جلاوطن طبقہ',
+    'conclusion': 'نتیجہ / اختتام / فیصلہ / انجام / حاصلِ کلام',
+    'contradictory': 'متضاد / متناقض / برعکس / مخالف / الٹ',
+    'water': 'پانی / آب / جل / سیراب کرنا / پانی دینا',
+    'neither': 'نہ یہ نہ وہ / دونوں میں سے کوئی نہیں / کوئی بھی نہیں',
+    'either': 'یا یہ یا وہ / دونوں میں سے کوئی ایک / ہر دو',
+    'vitamin': 'حیاتین / وٹامن / جسمانی نشوونما کے لازمی اجزاء',
+    'tomato': 'ٹماٹر / ولایتی بینگن',
+    'herb': 'جڑی بوٹی / نباتات / ادویاتی پودا / بوٹی',
+    'leisure': 'فرصت / فراغت / فارغ وقت / تفریح / آرام',
+    'route': 'راستہ / شاہراہ / گزرگاہ / راستہ طے کرنا / روٹ',
+    'garage': 'گیراج / موٹر خانہ / ورکشاپ / گاڑی کھڑی کرنے کی جگہ',
+    'vase': 'گلدان / پھول دان / صراحی',
+    'ballet': 'کلاسیکی رقص / بیلے ڈانس / تمثیلی ناچ',
+    'aluminum': 'ایلومینیم / ہلکی چاندی جیسی دھات',
+    'happy': 'خوش / مسرور / شادمان / خوش و خرم / پر مسرت',
+    'honest': 'ایماندار / دیانت دار / سچا / راست باز / کھرا',
+    'journey': 'سفر / سیاحت / مسافت / سفر کرنا / مہم',
+    'decision': 'فیصلہ / ارادہ / عزم / حکم / تصفیہ',
+    'circumstances': 'حالات / واقعات / کیفیات / صورتحال / احوال'
+  },
+
   // --- AUTHENTIC DUAL-DIALECT PHONETICS & PRONUNCIATION RESPELLING ENGINE ---
   curatedPhonetics: {
     'alleviate': { uk: '', us: '', respelling: 'uh-LEE-vee-ayt', urduPhonetic: 'اَلیوی اَیٹ' },
@@ -5401,14 +5455,18 @@ class VocabApp {
 
   formatConciseUrduMeaning(raw, word = '') {
     let text = raw || '';
-    if (word && typeof quickAutocompleteIndex !== 'undefined') {
+    if (word) {
       const cleanW = word.toLowerCase().trim();
-      const auto = quickAutocompleteIndex.find(item => item.word && item.word.toLowerCase() === cleanW);
-      if (auto && auto.urdu) {
-        const curCount = text.split(/[،\/,]/).filter(p => p.trim()).length;
-        const autoCount = auto.urdu.split(/[،\/,]/).filter(p => p.trim()).length;
-        if (autoCount > curCount || (!text.includes('،') && !text.includes('/'))) {
-          text = auto.urdu;
+      if (typeof OnlineLookupService !== 'undefined' && OnlineLookupService.curatedRichUrduMeanings && OnlineLookupService.curatedRichUrduMeanings[cleanW]) {
+        text = OnlineLookupService.curatedRichUrduMeanings[cleanW];
+      } else if (typeof quickAutocompleteIndex !== 'undefined') {
+        const auto = quickAutocompleteIndex.find(item => item.word && item.word.toLowerCase() === cleanW);
+        if (auto && auto.urdu) {
+          const curCount = text.split(/[،\/,]/).filter(p => p.trim()).length;
+          const autoCount = auto.urdu.split(/[،\/,]/).filter(p => p.trim()).length;
+          if (autoCount > curCount || (!text.includes('،') && !text.includes('/'))) {
+            text = auto.urdu;
+          }
         }
       }
     }
