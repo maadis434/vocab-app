@@ -1855,7 +1855,29 @@ const quickAutocompleteIndex = [
   { word: "Zeal", pos: "n.", urdu: "جذبہ / جوش و خروش" },
   { word: "Zealous", pos: "adj.", urdu: "پر جوش / سرگرم" },
   { word: "Zenith", pos: "n.", urdu: "عروج / بلندی" },
-  { word: "Zone", pos: "n.", urdu: "علاقہ / خطہ" }
+  { word: "Zone", pos: "n.", urdu: "علاقہ / خطہ" },
+  // High-Yield IELTS Academic Words
+  { word: "Sustainable", pos: "adj.", urdu: "پائیدار / ماحول دوست / دیرپا" },
+  { word: "Sedentary", pos: "adj.", urdu: "ساکن / غیر متحرک / بیٹھے رہنے والی زندگی" },
+  { word: "Deterrent", pos: "n.", urdu: "روک تھام / رکاوٹ / عبرت ناک تدبیر" },
+  { word: "Lucrative", pos: "adj.", urdu: "منافع بخش / پرکشش / فائدہ مند" },
+  { word: "Obsolete", pos: "adj.", urdu: "متروک / پرانا / غیر مستعمل" },
+  { word: "Cognitive", pos: "adj.", urdu: "دماغی / فکری / ذہنی / ادراکی" },
+  { word: "Chronic", pos: "adj.", urdu: "دائمی / پرانا / مستقل بیماری" },
+  { word: "Biodiversity", pos: "n.", urdu: "حیاتیاتی تنوع / جانداروں کی اقسام" },
+  { word: "Degradation", pos: "n.", urdu: "تنزلی / بگاڑ / انحطاط" },
+  { word: "Emission", pos: "n.", urdu: "اخراج / خارج ہونے والی گیس" },
+  { word: "Bolster", pos: "v.", urdu: "تقویت دینا / مضبوط کرنا / سہارا دینا" },
+  { word: "Hamper", pos: "v.", urdu: "رکاوٹ ڈالنا / مانع ہونا / کام روکنا" },
+  { word: "Jeopardize", pos: "v.", urdu: "خطرے میں ڈالنا / داؤ پر لگانا" },
+  { word: "Plausible", pos: "adj.", urdu: "معقول / قابلِ قبول / قرینِ قیاس" },
+  { word: "Thrive", pos: "v.", urdu: "پھلنا پھولنا / پروان چڑھنا / ترقی کرنا" },
+  { word: "Withstand", pos: "v.", urdu: "برداشت کرنا / مقابلہ کرنا / جھیلنا" },
+  { word: "Undermine", pos: "v.", urdu: "کمزور کرنا / جڑیں کھوکھلی کرنا" },
+  { word: "Validate", pos: "v.", urdu: "تصدیق کرنا / درست قرار دینا" },
+  { word: "Stimulate", pos: "v.", urdu: "حوصلہ افزائی کرنا / متحرک کرنا" },
+  { word: "Refine", pos: "v.", urdu: "نکھارنا / بہتر بنانا / صاف کرنا" },
+  { word: "Fluctuate", pos: "v.", urdu: "اتار چڑھاؤ آنا / غیر مستقل ہونا" }
 ];
 
 // ==========================================================
@@ -2830,7 +2852,23 @@ CRITICAL REQUIREMENT: The example sentence MUST be a real, meaningful scenario. 
     'honest': 'ایماندار / دیانت دار / سچا / راست باز / کھرا',
     'journey': 'سفر / سیاحت / مسافت / سفر کرنا / مہم',
     'decision': 'فیصلہ / ارادہ / عزم / حکم / تصفیہ',
-    'circumstances': 'حالات / واقعات / کیفیات / صورتحال / احوال'
+    'circumstances': 'حالات / واقعات / کیفیات / صورتحال / احوال',
+    'sustainable': 'پائیدار / ماحول دوست / دیرپا / قائم رہنے والا / قابلِ برداشت',
+    'sedentary': 'ساکن / غیر متحرک / بیٹھے رہنے والی زندگی / کاہل',
+    'deterrent': 'روک تھام / رکاوٹ / عبرت ناک تدبیر / باز رکھنے والا عنصر',
+    'lucrative': 'منافع بخش / پرکشش / فائدہ مند / سود مند / کثیر آمدنی والا',
+    'obsolete': 'متروک / پرانا / غیر مستعمل / بے کار / فرسودہ',
+    'cognitive': 'دماغی / فکری / ذہنی / ادراکی / شعوری',
+    'chronic': 'دائمی / پرانا / مستقل / پائیدار بیماری / شدید',
+    'biodiversity': 'حیاتیاتی تنوع / جانداروں کی اقسام / ماحولیاتی تنوع',
+    'degradation': 'تنزلی / بگاڑ / انحطاط / خرابی / پسپائی',
+    'emission': 'اخراج / خروج / خارج ہونے والی گیس / روشنی یا حرارت کا نکلنا',
+    'bolster': 'تقویت دینا / مضبوط کرنا / سہارا دینا / حوصلہ بڑھانا',
+    'hamper': 'رکاوٹ ڈالنا / مانع ہونا / کام روکنا / الجھانا',
+    'jeopardize': 'خطرے میں ڈالنا / خطرہ پیدا کرنا / داؤ پر لگانا',
+    'plausible': 'معقول / قابلِ قبول / بظاہر درست / قرینِ قیاس',
+    'thrive': 'پھلنا پھولنا / پروان چڑھنا / ترقی کرنا / کامیاب ہونا',
+    'withstand': 'برداشت کرنا / مقابلہ کرنا / ثابت قدم رہنا / جھیلنا'
   },
 
   // --- CURATED INTUITIVE & HIGH-CONTEXT EXAMPLE SENTENCES (Crystal-Clear Everyday Scenarios) ---
@@ -2962,6 +3000,61 @@ CRITICAL REQUIREMENT: The example sentence MUST be a real, meaningful scenario. 
     ],
     'circumstances': [
       { num: 1, en: "Due to unforeseen weather circumstances, the outdoor festival was moved inside.", ur: "موسم کے غیر متوقع حالات کی وجہ سے باہر ہونے والا میلہ ہال کے اندر منتقل کر دیا گیا۔" }
+    ],
+    'sustainable': [
+      { num: 1, en: "Using solar energy is a sustainable way to power homes without harming the environment.", ur: "شمسی توانائی کا استعمال ماحول کو نقصان پہنچائے بغیر گھروں کو بجلی فراہم کرنے کا ایک پائیدار اور ماحول دوست طریقہ ہے۔" },
+      { num: 2, en: "The company adopted sustainable packaging to reduce plastic waste.", ur: "کمپنی نے پلاسٹک کا کچرا کم کرنے کے لیے ماحول دوست اور پائیدار پیکیجنگ کا طریقہ اپنایا۔" }
+    ],
+    'sedentary': [
+      { num: 1, en: "Sitting at a desk all day can lead to a sedentary lifestyle and back pain.", ur: "سارا دن میز پر بیٹھے رہنا ایک ساکن اور غیر متحرک طرزِ زندگی اور کمر کے درد کا باعث بن سکتا ہے۔" },
+      { num: 2, en: "Doctors recommend daily walking to people with sedentary office jobs.", ur: "ڈاکٹرز دفتری کام کرنے والے غیر متحرک افراد کو روزانہ چہل قدمی کا مشورہ دیتے ہیں۔" }
+    ],
+    'deterrent': [
+      { num: 1, en: "Installing security cameras outside the house acts as a strong deterrent against thieves.", ur: "گھر کے باہر سیکیورٹی کیمرے لگانا چوروں کے لیے ایک مضبوط روک تھام اور رکاوٹ کا کام کرتا ہے۔" },
+      { num: 2, en: "Heavy traffic fines serve as a deterrent to dangerous and fast driving.", ur: "ٹریفک کے بھاری جرمانے خطرناک اور تیز رفتار ڈرائیونگ کی روک تھام کا ذریعہ بنتے ہیں۔" }
+    ],
+    'lucrative': [
+      { num: 1, en: "Software development has become a highly lucrative career for young graduates.", ur: "سافٹ ویئر ڈویلپمنٹ نوجوان گریجویٹس کے لیے ایک انتہائی منافع بخش اور پرکشش کیریئر بن چکا ہے۔" },
+      { num: 2, en: "He left his old job to start a lucrative online exporting business.", ur: "اس نے ایک منافع بخش آن لائن برآمدی کاروبار شروع کرنے کے لیے اپنی پرانی نوکری چھوڑ دی۔" }
+    ],
+    'obsolete': [
+      { num: 1, en: "Smartphones have made cassette tapes and floppy disks completely obsolete.", ur: "اسمارٹ فونز نے کیسٹ ٹیپس اور فلاپی ڈسکس کو مکمل طور پر پرانا، متروک اور بے کار کر دیا ہے۔" },
+      { num: 2, en: "Old computer software quickly becomes obsolete if it is not updated regularly.", ur: "پرانا کمپیوٹر سافٹ ویئر اگر باقاعدگی سے اپ ڈیٹ نہ کیا جائے تو جلد ہی متروک ہو جاتا ہے۔" }
+    ],
+    'cognitive': [
+      { num: 1, en: "Reading books and solving puzzles helps maintain sharp cognitive abilities as you grow older.", ur: "کتابیں پڑھنا اور پہیلیاں حل کرنا عمر بڑھنے کے ساتھ دماغی اور فکری صلاحیتوں کو تیز رکھنے میں مدد دیتا ہے۔" },
+      { num: 2, en: "Lack of sleep negatively affects a student's cognitive performance in morning exams.", ur: "نیند کی کمی صبح کے امتحانات میں طالب علم کی ذہنی کارکردگی پر برا اثر ڈالتی ہے۔" }
+    ],
+    'chronic': [
+      { num: 1, en: "He suffers from chronic back pain that gets worse during cold winter weather.", ur: "وہ کمر کے دائمی اور پرانے درد میں مبتلا ہے جو سردیوں کے موسم میں مزید بڑھ جاتا ہے۔" },
+      { num: 2, en: "Smoking is the leading cause of chronic respiratory diseases.", ur: "تمباکو نوشی سانس کی دائمی اور مستقل بیماریوں کی سب سے بڑی وجہ ہے۔" }
+    ],
+    'biodiversity': [
+      { num: 1, en: "Protecting the rainforest is crucial for preserving the rich biodiversity of rare animals.", ur: "بارانی جنگلات کا تحفظ نایاب جانوروں کی کثیر حیاتیاتی تنوع اور انواع کو بچانے کے لیے انتہائی اہم ہے۔" }
+    ],
+    'degradation': [
+      { num: 1, en: "Soil degradation caused by over-farming makes it difficult for crops to grow properly.", ur: "حد سے زیادہ کاشتکاری کی وجہ سے مٹی کی زرخیزی کی تنزلی اور خرابی فصلوں کے اگنے میں رکاوٹ بنتی ہے۔" }
+    ],
+    'emission': [
+      { num: 1, en: "Electric cars produce zero harmful carbon emissions on the road.", ur: "الیکٹرک گاڑیاں سڑک پر چلتے ہوئے مضرِ صحت کاربن کا اخراج بالکل نہیں کرتیں۔" }
+    ],
+    'bolster': [
+      { num: 1, en: "Adding extra security guards helped bolster safety at the international airport.", ur: "اضافی سیکیورٹی گارڈز تعینات کرنے سے بین الاقوامی ہوائی اڈے کی حفاظت کو مزید تقویت اور مضبوطی ملی۔" }
+    ],
+    'hamper': [
+      { num: 1, en: "Heavy snowfall hampered the rescue team's efforts to reach the remote mountain village.", ur: "شدید برف باری نے دور دراز پہاڑی گاؤں تک پہنچنے کے لیے امدادی ٹیم کی کوششوں میں رکاوٹ ڈالی۔" }
+    ],
+    'jeopardize': [
+      { num: 1, en: "Arriving late to the final exam could jeopardize your entire school year.", ur: "فائنل امتحان میں دیر سے پہنچنا آپ کے پورے تعلیمی سال کو خطرے میں ڈال سکتا ہے۔" }
+    ],
+    'plausible': [
+      { num: 1, en: "He gave a plausible explanation for why his car broke down on the highway.", ur: "اس نے ایک قابلِ قبول اور معقول وجہ بتائی کہ ہائی وے پر اس کی گاڑی کیوں خراب ہوئی۔" }
+    ],
+    'thrive': [
+      { num: 1, en: "Plants thrive and grow quickly when they receive plenty of sunlight and clean water.", ur: "پودے جب وافر دھوپ اور صاف پانی حاصل کرتے ہیں تو خوب پھلتے پھولتے اور پروان چڑھتے ہیں۔" }
+    ],
+    'withstand': [
+      { num: 1, en: "The strong bridge was specially built to withstand severe earthquakes and heavy floods.", ur: "مضبوط پل کو خاص طور پر شدید زلزلوں اور بھاری سیلابوں کو جھیلنے اور برداشت کرنے کے لیے بنایا گیا تھا۔" }
     ]
   },
 
@@ -8174,7 +8267,7 @@ class VocabApp {
     this.discoverContainer.querySelectorAll('[data-open-word-id]').forEach(row => {
       row.addEventListener('click', () => {
         const id = row.dataset.openWordId;
-        const word = this.words.find(w => w.id === id);
+        const word = (this.discoverWords && this.discoverWords.find(w => w.id === id)) || this.words.find(w => w.id === id);
         if (word) this.openWordModal(word);
       });
     });
