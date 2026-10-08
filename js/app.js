@@ -2833,6 +2833,138 @@ CRITICAL REQUIREMENT: The example sentence MUST be a real, meaningful scenario. 
     'circumstances': 'حالات / واقعات / کیفیات / صورتحال / احوال'
   },
 
+  // --- CURATED INTUITIVE & HIGH-CONTEXT EXAMPLE SENTENCES (Crystal-Clear Everyday Scenarios) ---
+  curatedSentences: {
+    'alleviate': [
+      { num: 1, en: "The doctor gave him medicine to alleviate his severe back pain.", ur: "ڈاکٹر نے اس کی کمر کے شدید درد کو کم کرنے کے لیے دوا دی ہے۔" },
+      { num: 2, en: "A warm cup of tea helped alleviate her stress after a long busy day.", ur: "ایک کپ گرم چائے نے لمبے مصروف دن کے بعد اس کے ذہنی دباؤ کو ہلکا کرنے میں مدد کی۔" },
+      { num: 3, en: "Opening the windows helped alleviate the heat and stuffiness in the room.", ur: "کھڑکیاں کھولنے سے کمرے کی گرمی اور گھٹن کو دور کرنے میں مدد ملی۔" }
+    ],
+    'resilient': [
+      { num: 1, en: "Even after losing his job, he remained resilient and quickly started a new business.", ur: "نوکری چھوٹنے کے بعد بھی وہ باحوصلہ رہا اور اس نے جلد ہی نیا کاروبار شروع کیا۔" },
+      { num: 2, en: "Children are naturally resilient and usually recover fast after falling ill.", ur: "بچے قدرتی طور پر باہمت ہوتے ہیں اور بیمار پڑنے کے بعد جلد سنبھل جاتے ہیں۔" },
+      { num: 3, en: "The local economy proved resilient despite difficult global conditions.", ur: "مشکل عالمی حالات کے باوجود مقامی معیشت نے زبردست استحکام اور لچک کا مظاہرہ کیا۔" }
+    ],
+    'resilience': [
+      { num: 1, en: "She showed remarkable resilience by rebuilding her life after the flood.", ur: "اس نے سیلاب کے بعد اپنی زندگی کو دوبارہ سنوار کر شاندار ہمت اور قوتِ مدافعت کا مظاہرہ کیا۔" },
+      { num: 2, en: "Daily exercise and healthy food improve your body's physical resilience.", ur: "روزانہ ورزش اور صحت بخش کھانا آپ کے جسم کی بیماریوں سے لڑنے کی طاقت بڑھاتا ہے۔" }
+    ],
+    'adverse': [
+      { num: 1, en: "The outdoor cricket match was cancelled due to adverse weather conditions.", ur: "خراب اور نا موافق موسم کی وجہ سے باہر کا میچ منسوخ کر دیا گیا۔" },
+      { num: 2, en: "Smoking has a severe adverse effect on your lungs and heart.", ur: "تمباکو نوشی آپ کے پھیپھڑوں اور دل پر انتہائی نقصان دہ اثر ڈالتی ہے۔" },
+      { num: 3, en: "Despite adverse financial circumstances, she worked hard and completed her degree.", ur: "تنگدستی اور مشکل حالات کے باوجود اس نے محنت کی اور اپنی ڈگری مکمل کی۔" }
+    ],
+    'conclusion': [
+      { num: 1, en: "After reviewing all the evidence, the judge reached the conclusion that he was innocent.", ur: "تمام شواہد کا جائزہ لینے کے بعد جج اس نتیجے پر پہنچا کہ وہ بے گناہ تھا۔" },
+      { num: 2, en: "At the conclusion of the speech, everyone in the hall stood up and cheered.", ur: "تقریر کے اختتام پر ہال میں موجود ہر شخص کھڑا ہوا اور داد دی۔" },
+      { num: 3, en: "Don't jump to quick conclusions before you hear both sides of the story.", ur: "پوری سچائی سنے بغیر جلد بازی میں کوئی حتمی نتیجہ نہ نکالیں۔" }
+    ],
+    'contradictory': [
+      { num: 1, en: "His current actions are contradictory to the promises he made yesterday.", ur: "اس کے موجودہ کام ان وعدوں کے بالکل برعکس اور متضاد ہیں جو اس نے کل کیے تھے۔" },
+      { num: 2, en: "The two witnesses gave completely contradictory statements about who caused the accident.", ur: "دونوں گواہوں نے اس بارے میں بالکل متضاد بیانات دیے کہ حادثہ کس کی وجہ سے ہوا۔" },
+      { num: 3, en: "She was confused because her parents gave her contradictory advice.", ur: "وہ الجھن کا شکار ہو گئی کیونکہ اس کے والدین نے اسے ایک دوسرے کے الٹ اور متضاد مشورے دیے۔" }
+    ],
+    'pragmatic': [
+      { num: 1, en: "Instead of arguing about theories, we need a pragmatic approach to fix the broken road.", ur: "نظریاتی بحث کے بجائے ہمیں ٹوٹی ہوئی سڑک کو ٹھیک کرنے کے لیے ایک عملی سوچ کی ضرورت ہے۔" },
+      { num: 2, en: "She made a pragmatic decision to rent a smaller house to save monthly expenses.", ur: "ماہانہ اخراجات بچانے کے لیے اس نے ایک چھوٹے گھر میں رہنے کا حقیقت پسندانہ اور عملی فیصلہ کیا۔" },
+      { num: 3, en: "He is a pragmatic leader who focuses on real results rather than empty promises.", ur: "وہ ایک باعمل اور حقیقت پسند رہنما ہے جو کھوکھلے وعدوں کے بجائے ٹھوس نتائج پر توجہ دیتا ہے۔" }
+    ],
+    'meticulous': [
+      { num: 1, en: "The watchmaker is very meticulous and inspects every tiny gear with a magnifying glass.", ur: "گھڑی ساز بہت باریک بین ہے اور ہر چھوٹے پرزے کو شیشے سے غور سے دیکھتا ہے۔" },
+      { num: 2, en: "She prepared the final financial report with meticulous attention to detail.", ur: "اس نے حتمی مالیاتی رپورٹ کو ہر چھوٹی باریکی پر دھیان دیتے ہوئے انتہائی احتیاط سے تیار کیا۔" },
+      { num: 3, en: "He keeps a meticulous record of every rupee he spends each month.", ur: "وہ ہر ماہ خرچ ہونے والے ایک ایک روپے کا انتہائی محتاط اور تفصیلی حساب رکھتا ہے۔" }
+    ],
+    'eloquent': [
+      { num: 1, en: "The lawyer gave an eloquent speech that easily convinced the entire jury.", ur: "وکیل نے اتنی فصیح اور اثر انگیز تقریر کی جس نے پوری جیوری کو قائل کر لیا۔" },
+      { num: 2, en: "She is so eloquent that she can explain complicated ideas in very simple words.", ur: "وہ اتنی خوش گفتار اور شیریں بیاں ہے کہ پیچیدہ باتوں کو بھی آسان لفظوں میں سمجھا دیتی ہے۔" },
+      { num: 3, en: "His eloquent letter touched everyone's heart in the family.", ur: "اس کے پرتاثیر اور فصیح خط نے خاندان کے ہر فرد کے دل کو چھو لیا۔" }
+    ],
+    'diligent': [
+      { num: 1, en: "He is a diligent student who finishes his homework every day before going out to play.", ur: "وہ ایک محنتی طالب علم ہے جو کھیلنے جانے سے پہلے روزانہ اپنا ہوم ورک مکمل کرتا ہے۔" },
+      { num: 2, en: "Thanks to the diligent efforts of the rescue team, all passengers were safely saved.", ur: "امدادی ٹیم کی انتھک محنت اور کوششوں کی بدولت تمام مسافروں کو بحفاظت بچا لیا گیا۔" },
+      { num: 3, en: "She received a promotion because of her diligent work on the major company project.", ur: "کمپنی کے بڑے پروجیکٹ پر اس کے مخلصانہ اور انتھک کام کی وجہ سے اسے ترقی ملی۔" }
+    ],
+    'detrimental': [
+      { num: 1, en: "Eating fast food every single day is detrimental to your heart and overall fitness.", ur: "روزانہ فاسٹ فوڈ کھانا آپ کے دل اور مجموعی صحت کے لیے سخت نقصان دہ ہے۔" },
+      { num: 2, en: "Excessive screen time late at night is detrimental to a child's sleep quality.", ur: "رات گئے موبائل کا بے تحاشا استعمال بچے کی نیند کے معیار کے لیے مضر ثابت ہوتا ہے۔" },
+      { num: 3, en: "Industrial waste is causing detrimental damage to clean rivers and marine life.", ur: "صنعتی کچرا صاف دریاؤں اور آبی حیات کو شدید نقصان پہنچا رہا ہے۔" }
+    ],
+    'mitigate': [
+      { num: 1, en: "Planting more green trees helps mitigate the extreme summer heat in big cities.", ur: "زیادہ سرسبز درخت لگانے سے بڑے شہروں میں گرمیوں کی شدید تپش کو کم کرنے میں مدد ملتی ہے۔" },
+      { num: 2, en: "Wearing a safety helmet greatly mitigates the risk of head injuries on motorbikes.", ur: "ہیلمٹ پہننا موٹر سائیکل پر سر کی چوٹ کے خطرے کو کافی حد تک گھٹا دیتا ہے۔" },
+      { num: 3, en: "The airline offered full refunds to mitigate passenger frustration after the delay.", ur: "پرواز میں تاخیر کے بعد ایئرلائن نے مسافروں کی پریشانی اور غصے کو کم کرنے کے لیے پورے پیسے واپس کیے۔" }
+    ],
+    'schedule': [
+      { num: 1, en: "The passenger train was delayed by one hour and did not arrive on schedule.", ur: "مسافر ٹرین میں ایک گھنٹے کی تاخیر ہوئی اور وہ اپنے مقررہ وقت پر نہ پہنچ سکی۔" },
+      { num: 2, en: "I have a very busy work schedule today with four meetings lined up.", ur: "آج چار میٹنگز کی وجہ سے میرا کام کا شیڈول اور نظام الاوقات بہت مصروف ہے۔" },
+      { num: 3, en: "Setting a consistent daily study schedule makes exam preparation stress-free.", ur: "روزانہ پڑھائی کا باقاعدہ نظام الاوقات بنانا امتحان کی تیاری کو آسان بناتا ہے۔" }
+    ],
+    'privacy': [
+      { num: 1, en: "Never share your secret banking passwords with anyone to protect your privacy.", ur: "اپنی رازداری اور تحفظ کے لیے کبھی بھی اپنا خفیہ بینک پاس ورڈ کسی کو نہ بتائیں۔" },
+      { num: 2, en: "He closed the bedroom door so he could discuss personal family matters in privacy.", ur: "اس نے کمرے کا دروازہ بند کیا تاکہ رازداری اور سکون سے ذاتی خاندانی معاملات پر بات کر سکے۔" },
+      { num: 3, en: "Social media apps must have strong security tools to safeguard user privacy.", ur: "سوشل میڈیا ایپس میں صارفین کی ذاتی معلومات کی رازداری کے تحفظ کے لیے مضبوط ٹولز ہونے چاہئیں۔" }
+    ],
+    'advertisement': [
+      { num: 1, en: "They placed an advertisement in the newspaper to sell their used car quickly.", ur: "انہوں نے اپنی پرانی گاڑی جلدی بیچنے کے لیے اخبار میں ایک اشتہار دیا۔" },
+      { num: 2, en: "The catchy TV advertisement convinced many families to try the new healthy cooking oil.", ur: "ٹی وی کے دلکش اشتہار نے بہت سے خاندانوں کو نیا صحت بخش تیل آزمانے پر آمادہ کیا۔" }
+    ],
+    'serendipity': [
+      { num: 1, en: "Finding my lost gold ring while cleaning under the sofa was pure serendipity.", ur: "صوفے کے نیچے صفائی کرتے ہوئے کھوئی ہوئی سونے کی انگوٹھی کا اچانک مل جانا ایک خوشگوار حسنِ اتفاق تھا۔" },
+      { num: 2, en: "Meeting my future business partner at an airport lounge was an act of serendipity.", ur: "ایئرپورٹ لاؤنج میں مستقبل کے بزنس پارٹنر سے غیر متوقع ملاقات ایک شاندار حسنِ اتفاق تھی۔" }
+    ],
+    'paradigm': [
+      { num: 1, en: "Online learning created a completely new paradigm for modern school education.", ur: "آن لائن تدریس نے جدید اسکول ایجوکیشن کا ایک بالکل نیا طریقہ کار اور نمونہ قائم کر دیا۔" }
+    ],
+    'enigma': [
+      { num: 1, en: "The sudden disappearance of the airplane remains an unsolved enigma for investigators.", ur: "طیارے کا اچانک لاپتہ ہو جانا تفتیش کاروں کے لیے آج بھی ایک حل طلب معمہ اور گتھی ہے۔" }
+    ],
+    'ubiquitous': [
+      { num: 1, en: "Smartphones and high-speed internet have become ubiquitous in almost every modern city.", ur: "اسمارٹ فونز اور تیز رفتار انٹرنیٹ آج کل تقریباً ہر جدید شہر میں عام اور ہر جگہ دستیاب ہو چکے ہیں۔" }
+    ],
+    'ephemeral': [
+      { num: 1, en: "The colorful rainbow in the sky was ephemeral and disappeared within five minutes.", ur: "آسمان پر رنگین دھنک عارضی اور چند لمحوں کی تھی جو پانچ منٹ میں غائب ہو گئی۔" }
+    ],
+    'ambiguous': [
+      { num: 1, en: "His reply was ambiguous, so nobody understood whether he agreed or disagreed.", ur: "اس کا جواب اتنا مبہم اور غیر واضح تھا کہ کوئی نہ سمجھ سکا کہ وہ راضی تھا یا نہیں۔" }
+    ],
+    'candid': [
+      { num: 1, en: "In a candid interview on live TV, the player openly admitted his mistakes.", ur: "لائیو ٹی وی پر ایک کھلے اور بے باک انٹرویو میں کھلاڑی نے کھل کر اپنی غلطیوں کا اعتراف کیا۔" }
+    ],
+    'persevere': [
+      { num: 1, en: "If you persevere and practice English every single day, you will speak fluently soon.", ur: "اگر آپ استقلال اور مستقل مزاجی سے روزانہ انگریزی بولیں گے تو آپ جلد روانی حاصل کر لیں گے۔" }
+    ],
+    'procrastinate': [
+      { num: 1, en: "Don't procrastinate on paying your bills until the last day to avoid late fines.", ur: "اضافی جرمانے سے بچنے کے لیے آخری دن تک اپنے بل بھرنے میں ٹال مٹول اور تاخیر نہ کریں۔" }
+    ],
+    'empathy': [
+      { num: 1, en: "A kind doctor listens patiently and shows genuine empathy towards every patient.", ur: "ایک شفیق ڈاکٹر مریضوں کی بات تسلی سے سنتا ہے اور ان سے سچی ہمدردی اور دلی احساس کا اظہار کرتا ہے۔" }
+    ],
+    'lucid': [
+      { num: 1, en: "The teacher gave a lucid and simple explanation of a difficult math problem.", ur: "استاد نے ریاضی کے ایک مشکل سوال کی بالکل واضح، شفاف اور آسان وضاحت پیش کی۔" }
+    ],
+    'serene': [
+      { num: 1, en: "Walking by the quiet blue lake at sunrise felt peaceful and deeply serene.", ur: "طلوعِ آفتاب کے وقت پرسکون جھیل کے کنارے چہل قدمی کرنے سے بے انتہا سکون اور راحت محسوس ہوئی۔" }
+    ],
+    'equivocal': [
+      { num: 1, en: "His equivocal response left the team confused about the project deadline.", ur: "اس کے گول مول اور مبہم جواب نے پوری ٹیم کو کام مکمل کرنے کی آخری تاریخ کے بارے میں الجھن میں ڈال دیا۔" }
+    ],
+    'happy': [
+      { num: 1, en: "The children were very happy when their father brought home a box of fresh mangoes.", ur: "جب والد گھر میں تازہ آموں کا ڈبہ لائے تو بچے بے حد خوش اور مسرور ہو گئے۔" }
+    ],
+    'honest': [
+      { num: 1, en: "He is an honest shopkeeper who always returns the exact change to every customer.", ur: "وہ ایک ایماندار اور دیانت دار دکاندار ہے جو ہمیشہ ہر گاہک کو پورا بقایا واپس کرتا ہے۔" }
+    ],
+    'journey': [
+      { num: 1, en: "Their train journey across the scenic green hills took six relaxing hours.", ur: "خوبصورت سرسبز پہاڑوں کے درمیان ان کا ٹرین کا سفر چھ آرام دہ گھنٹوں میں مکمل ہوا۔" }
+    ],
+    'decision': [
+      { num: 1, en: "Take your time and think carefully before making a major career decision.", ur: "کوئی بھی بڑا کیریئر کا فیصلہ کرنے سے پہلے پورا وقت لیں اور اچھی طرح غور کریں۔" }
+    ],
+    'circumstances': [
+      { num: 1, en: "Due to unforeseen weather circumstances, the outdoor festival was moved inside.", ur: "موسم کے غیر متوقع حالات کی وجہ سے باہر ہونے والا میلہ ہال کے اندر منتقل کر دیا گیا۔" }
+    ]
+  },
+
   // --- AUTHENTIC DUAL-DIALECT PHONETICS & PRONUNCIATION RESPELLING ENGINE ---
   curatedPhonetics: {
     'alleviate': { uk: '', us: '', respelling: 'uh-LEE-vee-ayt', urduPhonetic: 'اَلیوی اَیٹ' },
@@ -6918,8 +7050,16 @@ class VocabApp {
     ];
 
     // 1. Unified Example Sentences (At least 3 high-yield sentences, English on main card)
+    const wordLower = (w.word || '').toLowerCase().trim();
     let rawSentences = [];
-    if (w.bilingualSentences && w.bilingualSentences.length > 0) {
+    if (typeof OnlineLookupService !== 'undefined' && OnlineLookupService.curatedSentences && OnlineLookupService.curatedSentences[wordLower]) {
+      rawSentences = OnlineLookupService.curatedSentences[wordLower].map((s, idx) => ({
+        num: idx + 1,
+        en: s.en,
+        ur: s.ur || '',
+        meaning: s.meaning || ''
+      }));
+    } else if (w.bilingualSentences && w.bilingualSentences.length > 0) {
       rawSentences = [...w.bilingualSentences];
     } else if (w.sentences && w.sentences.length > 0) {
       rawSentences = [...w.sentences];
@@ -6928,11 +7068,13 @@ class VocabApp {
     }
 
     // Clean rawSentences of any foreign or contaminated sentences from old cache
-    const wordLower = (w.word || '').toLowerCase();
     rawSentences = rawSentences.filter(s => {
       if (!s || !s.en) return false;
       const en = s.en.toLowerCase();
       const ur = s.ur || '';
+      if (en.includes('learning the accurate context of') || en.includes('is used to express key ideas in') || en.includes('draw a conclusion from premisses') || en.includes('hobbled lamely to his') || en.includes('christiansen were murdered')) {
+        return false;
+      }
       if (wordLower !== 'detrimental' && (en.includes('smoking has a highly') || en.includes('excessive stress can prove') || (ur.includes('نقصان دہ') && !(w.urduMeaning || '').includes('نقصان')) || (ur.includes('مضر') && !(w.urduMeaning || '').includes('مضر')))) {
         return false;
       }
