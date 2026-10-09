@@ -90,6 +90,49 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+/* Enable Mobile Text Selection & Long-Press Copy */
+body, .app-wrapper, .app-body, .tab-view, .udict-card, .word-modal-content,
+.udict-main-word, .udict-urdu-giant, .udict-phonetic, .udict-sentence-en,
+.udict-sentence-ur, .udict-phrase-text, .udict-syn-word-link, .udict-wiki-text,
+.udict-cobuild-def-item, .discover-word-text, .discover-row-right, .fav-word-text,
+.fav-urdu-text, .report-modal-content, p, span, h1, h2, h3, h4 {
+  -webkit-user-select: text;
+  user-select: text;
+  -webkit-touch-callout: default;
+}
+
+/* Keep interactive controls non-selectable for clean native app feel */
+button, .bottom-bar, .bottom-tab-btn, .top-header, .search-btn,
+.udict-accent-speaker-btn, .udict-tab-chip, .discover-pill-btn, .discover-pull-indicator,
+.fav-trash-btn, .udict-sentence-num, .udict-sentence-tap-hint,
+.udict-phrase-tap-hint, .udict-syn-badge, .udict-ant-badge, .discover-band-badge,
+.more-item-chevron, .modal-close-btn, .close-modal-action, .star-fav-btn {
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-touch-callout: none;
+}
+
+/* Quick Copy Button */
+.udict-copy-btn {
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  cursor: pointer;
+  padding: 6px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.15s ease;
+}
+.udict-copy-btn:hover {
+  color: var(--accent-blue, #6366f1);
+  background: var(--bg-search);
+}
+.udict-copy-btn:active {
+  transform: scale(0.92);
+}
+
 /* Urdu Calligraphy */
 .urdu-text {
   font-family: var(--font-urdu);

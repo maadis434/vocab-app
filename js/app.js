@@ -6079,6 +6079,29 @@ class VocabApp {
       });
     }
 
+    // Sentence Translation Modal Copy Actions
+    const copyEnBtn = document.getElementById('sentence-copy-en-btn');
+    if (copyEnBtn) {
+      copyEnBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const enEl = document.getElementById('sentence-trans-en-text');
+        if (enEl && enEl.textContent) {
+          this.copyToClipboard(enEl.textContent.trim());
+        }
+      });
+    }
+
+    const copyUrBtn = document.getElementById('sentence-copy-ur-btn');
+    if (copyUrBtn) {
+      copyUrBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const urEl = document.getElementById('sentence-trans-ur-text');
+        if (urEl && urEl.textContent) {
+          this.copyToClipboard(urEl.textContent.trim());
+        }
+      });
+    }
+
     // Dictionary Search Input & Live Autocomplete
     if (this.dictSearchInput) {
       this.dictSearchInput.addEventListener('input', (e) => {
@@ -6233,6 +6256,41 @@ class VocabApp {
     this.toastTimeout = setTimeout(() => {
       toast.classList.remove('show');
     }, 1800);
+  }
+
+  async copyToClipboard(text) {
+    if (!text) return;
+    try {
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        await navigator.clipboard.writeText(text);
+      } else {
+        const ta = document.createElement('textarea');
+        ta.value = text;
+        ta.style.position = 'fixed';
+        ta.style.opacity = '0';
+        document.body.appendChild(ta);
+        ta.focus();
+        ta.select();
+        document.execCommand('copy');
+        document.body.removeChild(ta);
+      }
+      this.showToast('Copied to clipboard! 📋');
+    } catch(err) {
+      const ta = document.createElement('textarea');
+      ta.value = text;
+      ta.style.position = 'fixed';
+      ta.style.opacity = '0';
+      document.body.appendChild(ta);
+      ta.focus();
+      ta.select();
+      try {
+        document.execCommand('copy');
+        this.showToast('Copied to clipboard! 📋');
+      } catch(e) {
+        this.showToast('Failed to copy');
+      }
+      document.body.removeChild(ta);
+    }
   }
 
   highlightWordInSentence(sentence, targetWord) {
@@ -7944,6 +8002,12 @@ class VocabApp {
             ${urduPhonetic ? `<span class="udict-urdu-phonetic-badge" data-phonetic-display="urdu">(${urduPhonetic})</span>` : ''}
           </div>
           <div class="udict-actions-group">
+            <button type="button" class="udict-action-icon-btn udict-copy-btn" data-copy-text="${this.escapeHtmlAttr(w.word + (w.urduMeaning ? ' — ' + w.urduMeaning : ''))}" title="Copy Word &amp; Urdu Meaning">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+              </svg>
+            </button>
             <button class="udict-action-icon-btn star-fav-btn ${isFav ? 'active' : ''}" ${isModal ? 'id="modal-fav-btn"' : `data-fav-id="${w.id}"`} title="${isFav ? 'Remove from favorites' : 'Add to favorites'}">
               <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="${isFav ? '#eab308' : 'none'}" stroke="${isFav ? '#eab308' : 'currentColor'}" stroke-width="2">
                 <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
@@ -8551,6 +8615,18 @@ class VocabApp {
         });
       });
     }
+
+    // 8. Quick Copy Button Handlers
+    container.querySelectorAll('[data-copy-text]').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        const textToCopy = btn.dataset.copyText;
+        if (textToCopy) {
+          this.copyToClipboard(textToCopy);
+        }
+      });
+    });
   }
 
   renderDictionaryResult(matches) {
