@@ -2288,29 +2288,68 @@ button, .bottom-bar, .bottom-tab-btn, .top-header, .search-btn,
 }
 
 .udict-syn-links {
-  font-size: 0.95rem;
-  line-height: 1.55;
-  color: #0284c7;
-}
-
-[data-theme="dark"] .udict-syn-links {
-  color: #38bdf8;
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.92rem;
+  line-height: 1.5;
 }
 
 .udict-syn-word-link {
-  color: inherit;
+  color: #0284c7;
   text-decoration: none;
   font-weight: 600;
   cursor: pointer;
+  padding: 3px 8px;
+  background: rgba(2, 132, 199, 0.08);
+  border: 1px solid rgba(2, 132, 199, 0.2);
+  border-radius: 6px;
+  display: inline-flex;
+  align-items: center;
+  transition: all 0.15s ease;
+  user-select: text;
+  -webkit-tap-highlight-color: transparent;
+}
+
+[data-theme="dark"] .udict-syn-word-link {
+  color: #38bdf8;
+  background: rgba(56, 189, 248, 0.1);
+  border-color: rgba(56, 189, 248, 0.22);
 }
 
 .udict-syn-word-link:hover {
-  text-decoration: underline;
+  background: rgba(2, 132, 199, 0.18);
+  border-color: rgba(2, 132, 199, 0.45);
+  text-decoration: none;
+}
+
+[data-theme="dark"] .udict-syn-word-link:hover {
+  background: rgba(56, 189, 248, 0.22);
+  border-color: rgba(56, 189, 248, 0.5);
+  color: #bae6fd;
+}
+
+.udict-syn-word-link:active {
+  transform: scale(0.95);
+}
+
+.udict-syn-group:has(.udict-ant-badge) .udict-syn-word-link,
+.udict-ant-badge + .udict-syn-links .udict-syn-word-link {
+  color: #e11d48;
+  background: rgba(225, 29, 72, 0.08);
+  border-color: rgba(225, 29, 72, 0.22);
+}
+
+[data-theme="dark"] .udict-syn-group:has(.udict-ant-badge) .udict-syn-word-link,
+[data-theme="dark"] .udict-ant-badge + .udict-syn-links .udict-syn-word-link {
+  color: #fb7185;
+  background: rgba(244, 63, 94, 0.12);
+  border-color: rgba(244, 63, 94, 0.28);
 }
 
 .udict-syn-slash {
-  color: var(--text-faint);
-  margin: 0 4px;
+  display: none;
 }
 
 /* Phrases Section (Screenshot 7) */
@@ -3519,22 +3558,34 @@ button, .bottom-bar, .bottom-tab-btn, .top-header, .search-btn,
 }
 
 .search-screen-clear-btn {
-  background: var(--divider);
-  border: none;
+  background: var(--surface-card, rgba(255, 255, 255, 0.08));
+  border: 1px solid var(--border-color, rgba(255, 255, 255, 0.12));
   color: var(--text-muted);
-  width: 22px;
-  height: 22px;
+  min-width: 26px;
+  min-height: 26px;
+  width: 26px;
+  height: 26px;
   border-radius: 50%;
-  font-size: 0.72rem;
+  font-size: 0.78rem;
+  font-weight: 700;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: background 0.15s ease;
+  transition: all 0.15s ease;
+  flex-shrink: 0;
+  margin-right: 4px;
+  -webkit-tap-highlight-color: transparent;
 }
 
 .search-screen-clear-btn:hover {
-  color: var(--text-title);
+  color: #fff;
+  background: rgba(239, 68, 68, 0.25);
+  border-color: rgba(239, 68, 68, 0.5);
+}
+
+.search-screen-clear-btn:active {
+  transform: scale(0.9);
 }
 
 .search-screen-submit-btn {

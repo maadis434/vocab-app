@@ -5901,8 +5901,19 @@ class VocabApp {
     if (this.activeSearchForm) {
       this.activeSearchForm.addEventListener('submit', (e) => {
         e.preventDefault();
+        const autoBox = this.searchAutocompleteBox || document.getElementById('search-autocomplete-box');
+        const items = autoBox ? autoBox.querySelectorAll('.search-auto-item') : [];
+        const isBoxOpen = autoBox && autoBox.style.display !== 'none' && items.length > 0;
         const q = this.activeSearchInput ? this.activeSearchInput.value.trim() : '';
         if (q) {
+          if (isBoxOpen && items.length > 0) {
+            const firstItem = items[0];
+            const firstWord = firstItem.dataset.selectWord;
+            if (firstWord && (firstWord.toLowerCase().startsWith(q.toLowerCase()) || q.length <= 4)) {
+              this.selectWordFromSearch(firstWord);
+              return;
+            }
+          }
           this.selectWordFromSearch(q);
         }
       });
@@ -5911,8 +5922,19 @@ class VocabApp {
     if (this.activeSearchSubmitBtn) {
       this.activeSearchSubmitBtn.addEventListener('click', (e) => {
         e.preventDefault();
+        const autoBox = this.searchAutocompleteBox || document.getElementById('search-autocomplete-box');
+        const items = autoBox ? autoBox.querySelectorAll('.search-auto-item') : [];
+        const isBoxOpen = autoBox && autoBox.style.display !== 'none' && items.length > 0;
         const q = this.activeSearchInput ? this.activeSearchInput.value.trim() : '';
         if (q) {
+          if (isBoxOpen && items.length > 0) {
+            const firstItem = items[0];
+            const firstWord = firstItem.dataset.selectWord;
+            if (firstWord && (firstWord.toLowerCase().startsWith(q.toLowerCase()) || q.length <= 4)) {
+              this.selectWordFromSearch(firstWord);
+              return;
+            }
+          }
           this.selectWordFromSearch(q);
         }
       });
@@ -5960,6 +5982,14 @@ class VocabApp {
           }
           const q = this.activeSearchInput.value.trim();
           if (q) {
+            if (isBoxOpen && items.length > 0) {
+              const firstItem = items[0];
+              const firstWord = firstItem.dataset.selectWord;
+              if (firstWord && (firstWord.toLowerCase().startsWith(q.toLowerCase()) || q.length <= 4)) {
+                this.selectWordFromSearch(firstWord);
+                return;
+              }
+            }
             this.selectWordFromSearch(q);
           }
         } else if (e.key === 'Escape') {
@@ -5970,15 +6000,21 @@ class VocabApp {
       });
     }
 
-    // Dedicated Search Clear Button
+    // Dedicated Search Clear Button with instant touch response
     if (this.activeSearchClearBtn) {
-      this.activeSearchClearBtn.addEventListener('click', () => {
+      const doClear = (e) => {
+        if (e) {
+          e.preventDefault();
+          e.stopPropagation();
+        }
         if (this.activeSearchInput) {
           this.activeSearchInput.value = '';
           this.activeSearchInput.focus();
         }
         this.handleActiveSearchInput('');
-      });
+      };
+      this.activeSearchClearBtn.addEventListener('click', doClear);
+      this.activeSearchClearBtn.addEventListener('touchend', doClear);
     }
 
     // AI Key Modal Triggers
@@ -6950,7 +6986,12 @@ class VocabApp {
     if (!term) return;
     const clean = term.trim();
 
-    if (this.activeSearchInput) this.activeSearchInput.value = clean;
+    if (this.activeSearchInput) {
+      this.activeSearchInput.value = clean;
+      try {
+        this.activeSearchInput.blur();
+      } catch (e) {}
+    }
     if (this.activeSearchClearBtn) this.activeSearchClearBtn.style.display = 'flex';
 
     const autoBox = this.searchAutocompleteBox || document.getElementById('search-autocomplete-box');
@@ -6963,6 +7004,12 @@ class VocabApp {
     if (resultBox) {
       resultBox.style.display = 'block';
       this.renderSearchResultInsideSearchScreen(clean, resultBox);
+      try {
+        const searchBody = document.querySelector('.search-screen-body');
+        if (searchBody) {
+          searchBody.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+      } catch (e) {}
     }
   }
 
