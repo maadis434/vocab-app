@@ -651,8 +651,58 @@ body {
 }
 
 /* ==========================================================
-   DISCOVER (iOS Notes Index List)
+   DISCOVER (iOS Notes Index List & Categories)
    ========================================================== */
+.discover-filter-bar {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  padding: 6px 2px 14px 2px;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+}
+.discover-filter-bar::-webkit-scrollbar {
+  display: none;
+}
+.discover-pill-btn {
+  flex-shrink: 0;
+  padding: 6px 14px;
+  border-radius: 9999px;
+  font-size: 0.82rem;
+  font-weight: 700;
+  background: var(--bg-search);
+  border: 1px solid var(--divider-hairline);
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: all 0.18s ease;
+  white-space: nowrap;
+}
+.discover-pill-btn:hover {
+  background: var(--card-bg);
+  color: var(--text-title);
+}
+.discover-pill-btn.active {
+  background: var(--accent-blue, #6366f1);
+  color: #ffffff;
+  border-color: var(--accent-blue, #6366f1);
+  box-shadow: 0 2px 8px rgba(99, 102, 241, 0.25);
+}
+.discover-band-badge {
+  font-size: 0.72rem;
+  font-weight: 700;
+  padding: 1px 6px;
+  border-radius: 4px;
+  background: rgba(99, 102, 241, 0.12);
+  color: #6366f1;
+  border: 1px solid rgba(99, 102, 241, 0.25);
+  margin-left: 2px;
+}
+[data-theme="dark"] .discover-band-badge {
+  background: rgba(129, 140, 248, 0.18);
+  color: #a5b4fc;
+  border-color: rgba(129, 140, 248, 0.35);
+}
+
 .discover-list-row {
   display: flex;
   justify-content: space-between;

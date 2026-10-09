@@ -5131,6 +5131,68 @@ const sampleGrammarChecks = {
 };
 
 // ==========================================================
+// Categorization sets for Discover Tab
+// ==========================================================
+const IELTS_DISCOVER_WORDS = new Set([
+  'sustainable', 'sedentary', 'deterrent', 'lucrative', 'obsolete', 'cognitive', 'chronic',
+  'biodiversity', 'degradation', 'emission', 'bolster', 'hamper', 'jeopardize', 'plausible',
+  'thrive', 'withstand', 'undermine', 'validate', 'stimulate', 'refine', 'fluctuate',
+  'alleviate', 'resilience', 'resilient', 'pragmatic', 'ubiquitous', 'eloquent', 'meticulous',
+  'scrutinize', 'scrutiny', 'ambiguous', 'paradigm', 'juxtapose', 'ephemeral', 'prolific',
+  'quintessential', 'comprehensive', 'indispensable', 'ubiquity', 'phenomenon', 'unprecedented',
+  'pervasive', 'conspicuous', 'substantiate', 'exacerbate', 'advocate', 'cohesive',
+  'feasibility', 'empirical', 'counterpart', 'predominant', 'discernible', 'tenacious',
+  'arbitrary', 'disparity', 'inevitable', 'proliferation', 'spontaneous', 'diminish',
+  'augment', 'adverse', 'imperative', 'pivotal', 'synthetic', 'synthesize', 'aesthetic',
+  'erratic', 'versatile', 'feasible', 'robust', 'subtle', 'profound', 'tangible', 'tentative',
+  'viable', 'vivid', 'transient', 'intricate', 'elusive', 'candid', 'authentic', 'obscure',
+  'redundant', 'prominent', 'prevalent', 'eminent', 'pertinent', 'coherent', 'susceptible',
+  'articulate', 'diligent', 'innovative', 'formidable', 'subsequent', 'nuance', 'propensity',
+  'rigorous', 'mitigate', 'facet', 'prerequisite', 'delineate', 'corroborate', 'eradicate',
+  'perpetuate', 'reconcile', 'curtail', 'expedite', 'fathom', 'repudiate', 'elucidate',
+  'abstain', 'condescend', 'deviate', 'disperse', 'dissent', 'evoke', 'fabricate', 'heed',
+  'imitate', 'impose', 'induce', 'negate', 'overhaul', 'postulate', 'query', 'renounce',
+  'retract', 'scoff', 'simulate', 'solicit', 'terminate', 'truncate', 'usurp', 'vacate',
+  'venture', 'wield', 'yield', 'zenith', 'equitable', 'exemplify', 'fastidious', 'fortuitous',
+  'gratuitous', 'haphazard', 'infallible', 'judicious', 'lucid', 'magnanimous', 'nonchalant',
+  'opaque', 'placid', 'quaint', 'resplendent', 'stoic', 'trepidation', 'unwarranted', 'vindicate'
+]);
+
+const BUSINESS_DISCOVER_WORDS = new Set([
+  'lucrative', 'feasibility', 'fluctuate', 'bolster', 'undermine', 'counterpart', 'predominant',
+  'disparity', 'negotiation', 'revenue', 'deficit', 'asset', 'liability', 'dividend', 'monopoly',
+  'stakeholder', 'leverage', 'benchmark', 'procurement', 'compliance', 'incentive', 'acquisition',
+  'venture', 'entrepreneur', 'collateral', 'contingency', 'diversification', 'audit', 'fiscal',
+  'equity', 'merger', 'synergy', 'yield', 'surplus', 'turnover', 'depreciation', 'volatile',
+  'commerce', 'enterprise', 'strategy', 'valuation', 'portfolio', 'subsidy', 'trade',
+  'investment', 'expenditure', 'tariff', 'inflation', 'optimize', 'capital', 'transaction',
+  'affiliate', 'commission', 'liquidation', 'projection', 'prospectus', 'recession', 'solvent',
+  'outsource', 'franchise', 'corporate', 'executive', 'monetary', 'reimbursement', 'remuneration'
+]);
+
+const ENVIRONMENT_DISCOVER_WORDS = new Set([
+  'sustainable', 'biodiversity', 'degradation', 'emission', 'conservation', 'ecosystem', 'habitat',
+  'renewable', 'pollutant', 'deforestation', 'extinction', 'climate', 'depletion', 'reforestation',
+  'endangered', 'contamination', 'fossil', 'ecological', 'preservation', 'biosphere', 'footprint',
+  'afforestation', 'greenhouse', 'atmosphere', 'precipitation', 'ozone', 'solar', 'organic',
+  'agriculture', 'global', 'carbon', 'erosion', 'species', 'wildlife', 'flora', 'fauna',
+  'sanctuary', 'biodegradable', 'biomass', 'ecology', 'emissions', 'drought', 'terrain',
+  'vegetation', 'waste', 'recycle', 'radiation', 'reservoir', 'toxic', 'sanitation'
+]);
+
+const EVERYDAY_DISCOVER_WORDS = new Set([
+  'enthusiastic', 'curious', 'generous', 'diligent', 'honest', 'cheerful', 'patient', 'reliable',
+  'clever', 'brave', 'calm', 'friendly', 'polite', 'grateful', 'humble', 'gentle', 'creative',
+  'sensible', 'modest', 'ambitious', 'conclusion', 'abandon', 'accurate', 'achieve', 'acquire',
+  'adapt', 'adequate', 'adjust', 'admire', 'benefit', 'capable', 'category', 'challenge',
+  'clarify', 'comfort', 'complex', 'constant', 'essential', 'simple', 'obvious', 'easily',
+  'frequent', 'usual', 'normal', 'everyday', 'common', 'family', 'journey', 'advice', 'routine',
+  'leisure', 'habit', 'sincere', 'prompt', 'balance', 'effort', 'memory', 'courage', 'active',
+  'delight', 'favor', 'harbor', 'talent', 'unique', 'value', 'wonder', 'friendship', 'freedom',
+  'happiness', 'kindness', 'passion', 'purpose', 'wisdom'
+]);
+
+// ==========================================================
 // 5. MAIN APPLICATION CONTROLLER
 // ==========================================================
 class VocabApp {
@@ -5181,6 +5243,7 @@ class VocabApp {
     this.grammarLastCheckedSentence = '';
 
     // Discover Tab Dynamic Batch
+    this.discoverCategory = 'all';
     this.discoverWords = [];
     this.generateDiscoverBatch(true);
 
@@ -8038,20 +8101,47 @@ class VocabApp {
       });
     }
 
-    // 3. Track seen words in sessionStorage so each new pull/session gives totally new words
+    const cat = this.discoverCategory || 'all';
+
+    // Filter by selected category
+    let categoryPool = pool;
+    if (cat === 'ielts') {
+      categoryPool = pool.filter(w => {
+        const k = w.word.toLowerCase();
+        return IELTS_DISCOVER_WORDS.has(k) || (w.tags && w.tags.some(t => t.text && t.text.toLowerCase().includes('ielts')));
+      });
+    } else if (cat === 'business') {
+      categoryPool = pool.filter(w => {
+        const k = w.word.toLowerCase();
+        return BUSINESS_DISCOVER_WORDS.has(k) || (w.tags && w.tags.some(t => t.text && t.text.toLowerCase().includes('business')));
+      });
+    } else if (cat === 'environment') {
+      categoryPool = pool.filter(w => {
+        const k = w.word.toLowerCase();
+        return ENVIRONMENT_DISCOVER_WORDS.has(k) || (w.tags && w.tags.some(t => t.text && t.text.toLowerCase().includes('environment')));
+      });
+    } else if (cat === 'everyday') {
+      categoryPool = pool.filter(w => {
+        const k = w.word.toLowerCase();
+        return EVERYDAY_DISCOVER_WORDS.has(k) || (!IELTS_DISCOVER_WORDS.has(k) && !BUSINESS_DISCOVER_WORDS.has(k) && !ENVIRONMENT_DISCOVER_WORDS.has(k));
+      });
+    }
+
+    // 3. Track seen words in sessionStorage per category so each new pull/session gives totally new words
+    const sessionKey = `seen_discover_${cat}`;
     let seenKeys = [];
     try {
-      seenKeys = JSON.parse(sessionStorage.getItem('seen_discover_words') || '[]');
+      seenKeys = JSON.parse(sessionStorage.getItem(sessionKey) || '[]');
     } catch(e) {
       seenKeys = [];
     }
 
-    let candidates = pool.filter(w => !seenKeys.includes(w.word.toLowerCase()));
+    let candidates = categoryPool.filter(w => !seenKeys.includes(w.word.toLowerCase()));
 
-    // Reset if pool is exhausted or fewer than 20 left
-    if (candidates.length < 20) {
+    // Reset if candidates are exhausted or fewer than 15 left
+    if (candidates.length < 15) {
       seenKeys = [];
-      candidates = [...pool];
+      candidates = [...categoryPool];
     }
 
     // Fisher-Yates Shuffle
@@ -8065,7 +8155,7 @@ class VocabApp {
     // Save seen keys in sessionStorage
     batch.forEach(w => seenKeys.push(w.word.toLowerCase()));
     try {
-      sessionStorage.setItem('seen_discover_words', JSON.stringify(seenKeys));
+      sessionStorage.setItem(sessionKey, JSON.stringify(seenKeys));
     } catch(e) {}
 
     this.discoverWords = batch;
@@ -8244,26 +8334,63 @@ class VocabApp {
   renderDiscover() {
     if (!this.discoverContainer) return;
 
+    if (!this.discoverCategory) {
+      this.discoverCategory = 'all';
+    }
+
     if (!this.discoverWords || this.discoverWords.length === 0) {
       this.generateDiscoverBatch(false);
     }
 
+    const categories = [
+      { id: 'all', label: '🌟 All Words' },
+      { id: 'ielts', label: '🎓 Pure IELTS (Band 7-8+)' },
+      { id: 'business', label: '💼 Business' },
+      { id: 'environment', label: '🌿 Environment' },
+      { id: 'everyday', label: '💬 Everyday Core' }
+    ];
+
     this.discoverContainer.innerHTML = `
-      <div class="discover-list-fade-in">
-        ${this.discoverWords.map(w => `
-          <div class="discover-list-row" data-open-word-id="${w.id}">
-            <div class="discover-row-left">
-              <span class="discover-word-text">${w.word}</span>
-              <span class="word-pos-tag" style="font-size: 0.82rem;">[${w.posShort || 'n.'}]</span>
-            </div>
-            <div class="discover-row-right urdu-text">
-              ${(w.urduMeaning || '').split('/')[0]}
-            </div>
-          </div>
+      <div class="discover-filter-bar">
+        ${categories.map(c => `
+          <button class="discover-pill-btn ${this.discoverCategory === c.id ? 'active' : ''}" data-discover-cat="${c.id}">
+            ${c.label}
+          </button>
         `).join('')}
+      </div>
+      <div class="discover-list-fade-in">
+        ${this.discoverWords.map(w => {
+          const isIelts = IELTS_DISCOVER_WORDS.has(w.word.toLowerCase()) || (w.tags && w.tags.some(t => t.text && t.text.toLowerCase().includes('ielts')));
+          return `
+            <div class="discover-list-row" data-open-word-id="${w.id}">
+              <div class="discover-row-left">
+                <span class="discover-word-text">${w.word}</span>
+                <span class="word-pos-tag" style="font-size: 0.82rem;">[${w.posShort || 'n.'}]</span>
+                ${isIelts ? '<span class="discover-band-badge">IELTS 7.5+</span>' : ''}
+              </div>
+              <div class="discover-row-right urdu-text">
+                ${(w.urduMeaning || '').split('/')[0]}
+              </div>
+            </div>
+          `;
+        }).join('')}
       </div>
     `;
 
+    // Filter pill click listeners
+    this.discoverContainer.querySelectorAll('[data-discover-cat]').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const cat = btn.dataset.discoverCat;
+        if (this.discoverCategory !== cat) {
+          this.discoverCategory = cat;
+          this.generateDiscoverBatch(true);
+          this.renderDiscover();
+        }
+      });
+    });
+
+    // Row click listeners -> openWordModal
     this.discoverContainer.querySelectorAll('[data-open-word-id]').forEach(row => {
       row.addEventListener('click', () => {
         const id = row.dataset.openWordId;
