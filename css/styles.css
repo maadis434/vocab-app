@@ -112,27 +112,6 @@ button, .bottom-bar, .bottom-tab-btn, .top-header, .search-btn,
   -webkit-touch-callout: none;
 }
 
-/* Quick Copy Button */
-.udict-copy-btn {
-  background: none;
-  border: none;
-  color: var(--text-muted);
-  cursor: pointer;
-  padding: 6px;
-  border-radius: 8px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: all 0.15s ease;
-}
-.udict-copy-btn:hover {
-  color: var(--accent-blue, #6366f1);
-  background: var(--bg-search);
-}
-.udict-copy-btn:active {
-  transform: scale(0.92);
-}
-
 /* Urdu Calligraphy */
 .urdu-text {
   font-family: var(--font-urdu);
