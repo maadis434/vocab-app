@@ -8548,11 +8548,11 @@ class VocabApp {
 
     const categories = [
       { id: 'all', label: '🌟 All Words' },
-      { id: 'tharoorian', label: '🎩 Tharoorian (Ultra)' },
       { id: 'ielts', label: '🎓 Pure IELTS (Band 7-8+)' },
       { id: 'business', label: '💼 Business' },
       { id: 'environment', label: '🌿 Environment' },
-      { id: 'everyday', label: '💬 Everyday Core' }
+      { id: 'everyday', label: '💬 Everyday Core' },
+      { id: 'tharoorian', label: '🎩 Tharoorian (Ultra)' }
     ];
 
     this.discoverContainer.innerHTML = `
