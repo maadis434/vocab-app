@@ -965,6 +965,57 @@ const defaultVocabulary = [
 
 // Built-in Quick Autocomplete Index with Urdu Meanings (Comprehensive A-Z Core Vocabulary)
 const quickAutocompleteIndex = [
+  // --- SHASHI THAROOR & SESQUIPEDALIAN ICONIC VOCABULARY ---
+  { word: "farrago", pos: "n.", urdu: "ملغوبہ / سچ اور جھوٹ کی کھچڑی / ابہام / بے ربط مجموعہ / گڑبڑ" },
+  { word: "snollygoster", pos: "n.", urdu: "چالاک اور بے اصول سیاستدان / ابن الوقت رہنما / خود غرض انسان" },
+  { word: "kakistocracy", pos: "n.", urdu: "بدترین اور نااہل ترین لوگوں کی حکومت / نااہل قیادت" },
+  { word: "rodomontade", pos: "n.", urdu: "شیخی بگھارنا / لمبی چوڑی چھوڑنا / خود ستائی / ڈینگیں مارنا" },
+  { word: "sesquipedalian", pos: "adj.", urdu: "انتہائی طویل اور بھاری الفاظ بولنے والا / لمبا لفظ" },
+  { word: "ultracrepidarian", pos: "n.", urdu: "بغیر جانے بوجھے مفت مشورہ دینے والا / ناواقف تبصرہ نگار" },
+  { word: "defenestration", pos: "n.", urdu: "کسی کو کھڑکی سے باہر پھینکنا / عہدے یا اقتدار سے اچانک بے دخل کرنا" },
+  { word: "kerfuffle", pos: "n.", urdu: "چھوٹا موٹا ہنگامہ / شور شرابا / بے معنی بحث / ہڑبونگ" },
+  { word: "discombobulate", pos: "v.", urdu: "حواس باختہ کرنا / الجھن میں ڈالنا / گھبراہٹ پیدا کرنا" },
+  { word: "lalochezia", pos: "n.", urdu: "غصے میں سخت الفاظ یا گالی دے کر ذہنی سکون حاصل کرنا" },
+  { word: "imbroglio", pos: "n.", urdu: "انتہائی الجھا ہوا پیچیدہ معاملہ / تنازع / شدید الجھاؤ" },
+  { word: "troglodyte", pos: "n.", urdu: "قدامت پسند انسان / تنگ نظر / غار میں رہنے کی سوچ رکھنے والا" },
+  { word: "supercilious", pos: "adj.", urdu: "مغرور / خود پسند / متکبر / دوسروں کو حقیر سمجھنے والا" },
+  { word: "pusillanimous", pos: "adj.", urdu: "بزدل / کمزور دل / ہمت نہ رکھنے والا / ڈرپوک" },
+  { word: "perspicacious", pos: "adj.", urdu: "تیز نظر / گہری بصیرت رکھنے والا / دور اندیش / ذہین" },
+  { word: "floccinaucinihilipilification", pos: "n.", urdu: "کسی چیز کو حقیر یا بے قدر سمجھنے کی عادت" },
+  { word: "hippopotomonstrosesquippedaliophobia", pos: "n.", urdu: "انتہائی طویل اور بھاری الفاظ کا خوف" },
+  { word: "gorgonize", pos: "v.", urdu: "سکتہ طاری کر دینا / ہیبت سے پتھر کا بنا دینا / سُن کرنا" },
+  { word: "panglossian", pos: "adj.", urdu: "آنکھیں بند کر کے ضرورت سے زیادہ پرامید / خوش فہم" },
+  { word: "quidnunc", pos: "n.", urdu: "دوسروں کے معاملات میں ٹوہ لگانے والا / تجسس رکھنے والا / گپ شپ باز" },
+  { word: "mugwump", pos: "n.", urdu: "الگ تھلگ رہنے والا / غیر جانبدار / موقع پرست" },
+  { word: "obfuscate", pos: "v.", urdu: "معاملے کو الجھانا / جان بوجھ کر غیر واضح کرنا / دھندلا کرنا" },
+  { word: "grandiloquent", pos: "adj.", urdu: "بڑے بول بولنے والا / مبالغہ آمیز زبان استعمال کرنے والا" },
+  { word: "lugubrious", pos: "adj.", urdu: "افسردہ / غمگین / اداس / سوگوار" },
+  { word: "cacophony", pos: "n.", urdu: "کانوں کو ناگوار گزرنے والا شدید شور / کھڑکھڑاہٹ" },
+  { word: "tergiversation", pos: "n.", urdu: "بات سے پھر جانا / ٹال مٹول / موقف بدلنا / ہیرا پھیری" },
+  { word: "recalcitrant", pos: "adj.", urdu: "سرکش / ضدی / نافرمان / حکم نہ ماننے والا" },
+  { word: "fastidious", pos: "adj.", urdu: "باریک بین / صفائی پسند / بہت مشکل سے راضی ہونے والا" },
+  { word: "vituperation", pos: "n.", urdu: "سخت سست کہنا / تلخ کلامی / گالی گلوچ / لعن طعن" },
+  { word: "pleonasm", pos: "n.", urdu: "ضرورت سے زیادہ الفاظ کا استعمال / زائد از ضرورت کلام" },
+  { word: "tintinnabulation", pos: "n.", urdu: "گھنٹیوں کی جھنکار / ٹن ٹن کی مسلسل آواز" },
+  { word: "schadenfreude", pos: "n.", urdu: "کسی دوسرے کے نقصان یا ناکامی پر خوشی محسوس کرنا" },
+  { word: "verisimilitude", pos: "n.", urdu: "حقیقت سے مشابہت / سچائی کا گمان / اصلی پن" },
+  { word: "apposite", pos: "adj.", urdu: "برمحل / بالکل مناسب / موقع کے مطابق / موزوں" },
+  { word: "weasel word", pos: "n.", urdu: "مبہم اور گمراہ کن لفظ / دھوکہ دہی والا بیان" },
+  { word: "pachydermatous", pos: "adj.", urdu: "موٹی چمڑی والا / بے حس / طنز و تنقید سے بے پرواہ" },
+  { word: "opsimath", pos: "n.", urdu: "بڑھاپے یا عمر گزرنے کے بعد علم حاصل کرنے والا شخص" },
+  { word: "philistine", pos: "n.", urdu: "ادب اور آرٹ سے بے بہرہ انسان / مادہ پرست / غیر حساس شخص" },
+  { word: "torschlusspanik", pos: "n.", urdu: "وقت نکل جانے کا خوف / موقع ہاتھ سے چھوٹنے کی گھبراہٹ" },
+  { word: "omphaloskepsis", pos: "n.", urdu: "اپنی ذات میں گم رہنا / خود پسندی سے اپنے ہی دھیان میں رہنا" },
+  { word: "borborygmus", pos: "n.", urdu: "پیٹ میں گڑگڑاہٹ / آنتوں کے بولنے کی آواز" },
+  { word: "callipygian", pos: "adj.", urdu: "خوش نما اور متناسب جسمانی ساخت رکھنے والا" },
+  { word: "quomodo", pos: "n.", urdu: "طریقہ کار / کام کرنے کا ڈھنگ / کس طرح" },
+  { word: "absquatulate", pos: "v.", urdu: "اچانک بھاگ جانا / چپکے سے فرار ہو جانا" },
+  { word: "defalcate", pos: "v.", urdu: "امانت میں خیانت کرنا / فنڈز کا غبن کرنا" },
+  { word: "epicaricacy", pos: "n.", urdu: "کسی کی بدقسمتی پر دل ہی دل میں لطف اندوز ہونا" },
+  { word: "jentacular", pos: "adj.", urdu: "صبح کے ناشتے سے متعلق" },
+  { word: "mumpsimus", pos: "n.", urdu: "غلط بات پر ضد سے قائم رہنے والا شخص / غلطی پر ہٹ دھرمی" },
+  { word: "scripturient", pos: "adj.", urdu: "لکھنے کی شدید خواہش یا لگن رکھنے والا" },
+  { word: "zugzwang", pos: "n.", urdu: "ایسی مجبور حالت جہاں ہر اگلا قدم نقصان دہ ہو" },
   // A
   { word: "alleviate", pos: "v.", urdu: "کم کرنا / تسکین دینا / ہلکا کرنا" },
   { word: "adverse", pos: "adj.", urdu: "مخالف / منفی / نقصان دہ" },
@@ -2803,6 +2854,56 @@ CRITICAL REQUIREMENT: The example sentence MUST be a real, meaningful scenario. 
 
   // --- CURATED MULTI-DIMENSIONAL RICH URDU MEANINGS (4-5 Nuanced Meanings per Word) ---
   curatedRichUrduMeanings: {
+    'farrago': 'ملغوبہ / سچ اور جھوٹ کی کھچڑی / ابہام / بے ربط مجموعہ / گڑبڑ',
+    'snollygoster': 'چالاک اور بے اصول سیاستدان / ابن الوقت رہنما / خود غرض انسان / مکار لیڈر',
+    'kakistocracy': 'بدترین اور نااہل ترین لوگوں کی حکومت / نااہل قیادت / نالائقوں کا راج',
+    'rodomontade': 'شیخی بگھارنا / لمبی چوڑی چھوڑنا / خود ستائی / ڈینگیں مارنا / طمطراق',
+    'sesquipedalian': 'طویل اور بھاری الفاظ بولنے والا / لمبا لفظ / پرشکوہ زبان / بارعب کلام',
+    'ultracrepidarian': 'بغیر جانے بوجھے مفت مشورہ دینے والا / ناواقف تبصرہ نگار / بلا علم رائے زنی',
+    'defenestration': 'کسی کو کھڑکی سے باہر پھینکنا / عہدے یا اقتدار سے اچانک بے دخل کرنا / برطرفی',
+    'kerfuffle': 'چھوٹا موٹا ہنگامہ / شور شرابا / بے معنی بحث / ہڑبونگ / ہلڑ بازی',
+    'discombobulate': 'حواس باختہ کرنا / الجھن میں ڈالنا / گھبراہٹ پیدا کرنا / بدحواس کرنا',
+    'lalochezia': 'غصے میں سخت الفاظ یا گالی دے کر ذہنی سکون حاصل کرنا / دل کی بھڑاس نکالنا',
+    'imbroglio': 'انتہائی الجھا ہوا پیچیدہ معاملہ / تنازع / شدید الجھاؤ / گنجلک مسئلہ',
+    'troglodyte': 'قدامت پسند انسان / تنگ نظر / غار میں رہنے کی سوچ رکھنے والا / دقیانوسی',
+    'supercilious': 'مغرور / خود پسند / متکبر / دوسروں کو حقیر سمجھنے والا / تکبر پسند',
+    'pusillanimous': 'بزدل / کمزور دل / ہمت نہ رکھنے والا / ڈرپوک / کم حوصلہ',
+    'perspicacious': 'تیز نظر / گہری بصیرت رکھنے والا / دور اندیش / ذہین / صاحبِ فراست',
+    'floccinaucinihilipilification': 'کسی چیز کو حقیر یا بے قدر سمجھنے کی عادت / بے وقعت ٹھہرانا',
+    'hippopotomonstrosesquippedaliophobia': 'انتہائی طویل اور بھاری الفاظ کا خوف / طویل کلمات سے گھبراہٹ',
+    'gorgonize': 'سکتہ طاری کر دینا / ہیبت سے پتھر کا بنا دینا / سُن کرنا / متحیر کرنا',
+    'panglossian': 'آنکھیں بند کر کے ضرورت سے زیادہ پرامید / خوش فہم / اندھا دھند رجائیت پسند',
+    'quidnunc': 'دوسروں کے معاملات میں ٹوہ لگانے والا / تجسس رکھنے والا / گپ شپ باز / چغل خور',
+    'mugwump': 'الگ تھلگ رہنے والا / غیر جانبدار / موقع پرست / آزاد رائے رکھنے والا',
+    'obfuscate': 'معاملے کو الجھانا / جان بوجھ کر غیر واضح کرنا / دھندلا کرنا / تذبذب پیدا کرنا',
+    'grandiloquent': 'بڑے بول بولنے والا / مبالغہ آمیز زبان استعمال کرنے والا / پر طمطراق کلام',
+    'lugubrious': 'افسردہ / غمگین / اداس / سوگوار / رنجیدہ',
+    'cacophony': 'کانوں کو ناگوار گزرنے والا شدید شور / کھڑکھڑاہٹ / بے ہنگم آوازیں',
+    'tergiversation': 'بات سے پھر جانا / ٹال مٹول / موقف بدلنا / ہیرا پھیری / تذبذب',
+    'recalcitrant': 'سرکش / ضدی / نافرمان / حکم نہ ماننے والا / باغی',
+    'fastidious': 'باریک بین / صفائی پسند / بہت مشکل سے راضی ہونے والا / نکتہ چیں',
+    'vituperation': 'سخت سست کہنا / تلخ کلامی / گالی گلوچ / لعن طعن / دشنام طرازی',
+    'pleonasm': 'ضرورت سے زیادہ الفاظ کا استعمال / زائد از ضرورت کلام / حشو و زوائد',
+    'tintinnabulation': 'گھنٹیوں کی جھنکار / ٹن ٹن کی مسلسل آواز / جل ترنگ',
+    'schadenfreude': 'کسی دوسرے کے نقصان یا ناکامی پر خوشی محسوس کرنا / بدخواہی',
+    'verisimilitude': 'حقیقت سے مشابہت / سچائی کا گمان / اصلی پن / ہو بہو مماثلت',
+    'apposite': 'برمحل / بالکل مناسب / موقع کے مطابق / موزوں / عین مطابق',
+    'weasel word': 'مبہم اور گمراہ کن لفظ / دھوکہ دہی والا بیان / چالاکی بھری بات',
+    'pachydermatous': 'موٹی چمڑی والا / بے حس / طنز و تنقید سے بے پرواہ / سخت جان',
+    'opsimath': 'بڑھاپے یا عمر گزرنے کے بعد علم حاصل کرنے والا شخص / دیر سے سیکھنے والا',
+    'philistine': 'ادب اور آرٹ سے بے بہرہ انسان / مادہ پرست / غیر حساس شخص / بے ذوق',
+    'torschlusspanik': 'وقت نکل جانے کا خوف / موقع ہاتھ سے چھوٹنے کی گھبراہٹ / ڈیڈ لائن کا دباؤ',
+    'omphaloskepsis': 'اپنی ذات میں گم رہنا / خود پسندی سے اپنے ہی دھیان میں رہنا / خود نگری',
+    'borborygmus': 'پیٹ میں گڑگڑاہٹ / آنتوں کے بولنے کی آواز / پیٹ کا شور',
+    'callipygian': 'خوش نما اور متناسب جسمانی ساخت رکھنے والا / متناسب الاعضاء',
+    'quomodo': 'طریقہ کار / کام کرنے کا ڈھنگ / کس طرح / اسلوب',
+    'absquatulate': 'اچانک بھاگ جانا / چپکے سے فرار ہو جانا / رفو چکر ہونا',
+    'defalcate': 'امانت میں خیانت کرنا / فنڈز کا غبن کرنا / خورد برد کرنا',
+    'epicaricacy': 'کسی کی بدقسمتی پر دل ہی دل میں لطف اندوز ہونا / حسد بھری خوشی',
+    'jentacular': 'صبح کے ناشتے سے متعلق / ناشتے کا',
+    'mumpsimus': 'غلط بات پر ضد سے قائم رہنے والا شخص / غلطی پر ہٹ دھرمی / کج بحث',
+    'scripturient': 'لکھنے کی شدید خواہش یا لگن رکھنے والا / قلم کا شوقین',
+    'zugzwang': 'ایسی مجبور حالت جہاں ہر اگلا قدم نقصان دہ ہو / بے بسی کی کیفیت',
     'alleviate': 'کم کرنا / ہلکا کرنا / تسکین دینا / تخفیف کرنا / دور کرنا',
     'resilience': 'ثابت قدمی / قوتِ مدافعت / لچک / سنبھلنے کی صلاحیت / ہمت',
     'resilient': 'ثابت قدم / باحوصلہ / لچکدار / جلد سنبھلنے والا / پرعزم',
@@ -2873,6 +2974,86 @@ CRITICAL REQUIREMENT: The example sentence MUST be a real, meaningful scenario. 
 
   // --- CURATED INTUITIVE & HIGH-CONTEXT EXAMPLE SENTENCES (Crystal-Clear Everyday Scenarios) ---
   curatedSentences: {
+    'farrago': [
+      { num: 1, en: "His speech was a farrago of lies, exaggerations, and unverified rumors.", ur: "اس کی تقریر جھوٹ، مبالغہ آرائی اور غیر تصدیق شدہ افواہوں کی ایک کھچڑی تھی۔" },
+      { num: 2, en: "The media report presented a confusing farrago of unrelated facts.", ur: "میڈیا رپورٹ نے غیر متعلقہ حقائق کا ایک الجھا ہوا بے ربط ملغوبہ پیش کیا۔" }
+    ],
+    'snollygoster': [
+      { num: 1, en: "Voters rejected the candidate because they saw him as an unprincipled snollygoster.", ur: "ووٹروں نے امیدوار کو مسترد کر دیا کیونکہ وہ اسے ایک بے اصول اور خود غرض سیاستدان سمجھتے تھے۔" },
+      { num: 2, en: "A true statesman works for the people, unlike a selfish snollygoster who only seeks power.", ur: "ایک سچا رہنما عوام کے لیے کام کرتا ہے، نہ کہ اس چالاک سیاستدان کی طرح جو صرف اقتدار کا پیاسا ہوتا ہے۔" }
+    ],
+    'kakistocracy': [
+      { num: 1, en: "When corrupt and unqualified officials run the country, it turns into a kakistocracy.", ur: "جب بدعنوان اور نااہل عہدیدار ملک چلائیں تو وہ نااہل ترین لوگوں کی حکومت بن جاتا ہے۔" },
+      { num: 2, en: "The citizens protested in the streets against the incompetence of the kakistocracy.", ur: "شہریوں نے نااہل قیادت اور حکومت کے خلاف سڑکوں پر پرامن احتجاج کیا۔" }
+    ],
+    'rodomontade': [
+      { num: 1, en: "Nobody believed his rodomontade about owning five luxury sports cars.", ur: "پانچ لگژری اسپورٹس کاروں کا مالک ہونے کے بارے میں اس کی لمبی چوڑی شیخیوں پر کسی نے یقین نہیں کیا۔" },
+      { num: 2, en: "Behind his loud rodomontade, he was actually quite insecure and shy.", ur: "اپنی بڑی بڑی ڈینگوں کے پیچھے وہ حقیقت میں کافی کمزور اور شرمیلا انسان تھا۔" }
+    ],
+    'sesquipedalian': [
+      { num: 1, en: "He often uses sesquipedalian words to make his simple speeches sound academic.", ur: "وہ اکثر اپنی سادہ تقاریر کو علمی اور بارعب بنانے کے لیے لمبے اور بھاری الفاظ استعمال کرتا ہے۔" },
+      { num: 2, en: "The legal contract was filled with confusing sesquipedalian phrases.", ur: "قانونی معاہدہ سمجھ میں نہ آنے والے لمبے اور پیچیدہ الفاظ سے بھرا ہوا تھا۔" }
+    ],
+    'ultracrepidarian': [
+      { num: 1, en: "Ignore his financial tips; he is just an ultracrepidarian with zero business experience.", ur: "اس کے مالی مشوروں کو نظر انداز کرو؛ وہ بغیر کسی کاروباری تجربے کے مفت رائے دینے والا انسان ہے۔" },
+      { num: 2, en: "Social media allows every ultracrepidarian to comment on complex medical surgeries.", ur: "سوشل میڈیا نے ہر ناواقف شخص کو پیچیدہ طبی سرجریوں پر بغیر سوچے سمجھے تبصرہ کرنے کا موقع دے دیا ہے۔" }
+    ],
+    'defenestration': [
+      { num: 1, en: "The CEO's sudden defenestration from the company shocked all the employees.", ur: "کمپنی کے عہدے سے سی ای او کی اچانک برطرفی اور بے دخلی نے تمام ملازمین کو حیران کر دیا۔" },
+      { num: 2, en: "After the election defeat, the party leadership faced complete political defenestration.", ur: "انتخابات میں شکست کے بعد پارٹی قیادت کو اقتدار سے مکمل طور پر باہر نکال دیا گیا۔" }
+    ],
+    'kerfuffle': [
+      { num: 1, en: "There was a noisy kerfuffle at the airport when the flight was suddenly delayed.", ur: "جب پرواز میں اچانک تاخیر ہوئی تو ایئرپورٹ پر مسافروں کے درمیان ہلکا پھلکا شور شرابا اور ہنگامہ ہو گیا۔" },
+      { num: 2, en: "Don't create a kerfuffle over such a small misunderstanding.", ur: "اتنی چھوٹی سی غلط فہمی پر بلاوجہ شور اور ہڑبونگ پیدا نہ کرو۔" }
+    ],
+    'discombobulate': [
+      { num: 1, en: "The sudden change in road directions completely discombobulated the driver.", ur: "سڑک کے راستوں میں اچانک تبدیلی نے ڈرائیور کو مکمل طور پر بدحواس اور الجھن میں مبتلا کر دیا۔" },
+      { num: 2, en: "Difficult questions in the interview were designed to discombobulate nervous candidates.", ur: "انٹرویو میں مشکل سوالات اس لیے پوچھے گئے تاکہ امیدواروں کے حواس اور اعتماد کو پرکھا جا سکے۔" }
+    ],
+    'lalochezia': [
+      { num: 1, en: "When he hit his finger with the hammer, a quick moment of lalochezia relieved his pain.", ur: "جب ہتھوڑے سے اس کی انگلی پر چوٹ لگی تو اس نے سخت الفاظ بول کر دل کی بھڑاس نکالی۔" }
+    ],
+    'imbroglio': [
+      { num: 1, en: "The disputed land inheritance turned into a bitter family imbroglio for decades.", ur: "زمین کے متنازع ورثے نے کئی دہائیوں تک خاندان کو ایک پیچیدہ اور تلخ تنازعے میں الجھائے رکھا۔" },
+      { num: 2, en: "Diplomats worked all night to resolve the delicate international imbroglio.", ur: "سفارت کاروں نے اس نازک اور الجھے ہوئے بین الاقوامی معاملے کو سلجھانے کے لیے رات بھر کام کیا۔" }
+    ],
+    'troglodyte': [
+      { num: 1, en: "Anyone who still opposes women's right to education has the mindset of a troglodyte.", ur: "جو اب بھی خواتین کے حقِ تعلیم کی مخالفت کرتا ہے وہ دقیانوسی اور تنگ نظر سوچ کا مالک ہے۔" }
+    ],
+    'supercilious': [
+      { num: 1, en: "His supercilious smile showed that he thought he was superior to everyone in the room.", ur: "اس کی متکبرانہ مسکراہٹ سے ظاہر ہو رہا تھا کہ وہ خود کو کمرے میں موجود ہر شخص سے برتر سمجھتا ہے۔" }
+    ],
+    'pusillanimous': [
+      { num: 1, en: "Backing down from defending an innocent friend was a pusillanimous act.", ur: "ایک بے گناہ دوست کا ساتھ چھوڑ کر پیچھے ہٹ جانا بزدلی اور کم ہمتی کا ثبوت تھا۔" }
+    ],
+    'perspicacious': [
+      { num: 1, en: "The perspicacious detective noticed the tiny clue that everyone else had missed.", ur: "تیز نظر اور ذہین سراغ رساں نے وہ چھوٹا سا ثبوت ڈھونڈ لیا جو باقی سب سے چھوٹ گیا تھا۔" },
+      { num: 2, en: "Her perspicacious analysis of the stock market saved the company millions.", ur: "اسٹاک مارکیٹ کے اس کے گہرے اور دور اندیش تجزیے نے کمپنی کے لاکھوں روپے بچا لیے۔" }
+    ],
+    'obfuscate': [
+      { num: 1, en: "The corrupt official tried to obfuscate the financial audit by hiding key receipts.", ur: "بدعنوان افسر نے اہم رسیدیں چھپا کر مالیاتی آڈٹ کو جان بوجھ کر الجھانے اور دھندلا کرنے کی کوشش کی۔" }
+    ],
+    'grandiloquent': [
+      { num: 1, en: "His grandiloquent promises of building a utopia failed to convince practical voters.", ur: "خوابوں کی دنیا بنانے کے اس کے مبالغہ آمیز اور بڑے بول عملی سوچ رکھنے والے ووٹروں کو قائل نہ کر سکے۔" }
+    ],
+    'lugubrious': [
+      { num: 1, en: "The dark rainy evening cast a lugubrious shadow over the entire quiet village.", ur: "تاریک برسات کی شام نے پورے پرسکون گاؤں پر ایک اداس اور سوگوار فضا قائم کر دی۔" }
+    ],
+    'cacophony': [
+      { num: 1, en: "The cacophony of barking dogs and construction noise woke everyone at dawn.", ur: "کتوں کے بھونکنے اور تعمیراتی کام کے شدید شور نے صبح سویرے سب کی نیند خراب کر دی۔" }
+    ],
+    'recalcitrant': [
+      { num: 1, en: "The recalcitrant horse refused to step into the water stream despite gentle pulls.", ur: "سرکش گھوڑے نے پیار سے کھینچنے کے باوجود پانی کی ندی میں قدم رکھنے سے انکار کر دیا۔" }
+    ],
+    'fastidious': [
+      { num: 1, en: "He is so fastidious about cleanliness that he washes his hands before and after touching any tool.", ur: "وہ صفائی کے معاملے میں اتنا باریک بین ہے کہ کسی بھی اوزار کو چھونے سے پہلے اور بعد ہاتھ دھوتا ہے۔" }
+    ],
+    'schadenfreude': [
+      { num: 1, en: "He hid his feeling of schadenfreude when his arrogant rival lost the championship.", ur: "جب اس کے مغرور حریف کو فائنل میں شکست ہوئی تو اس نے اپنی اندرونی خوشی کو چھپایا۔" }
+    ],
+    'apposite': [
+      { num: 1, en: "The speaker shared an apposite story that perfectly illustrated the main message.", ur: "مقرر نے ایک انتہائی برمحل اور موزوں کہانی سنائی جس نے اصل پیغام کو خوب واضح کر دیا۔" }
+    ],
     'alleviate': [
       { num: 1, en: "The doctor gave him medicine to alleviate his severe back pain.", ur: "ڈاکٹر نے اس کی کمر کے شدید درد کو کم کرنے کے لیے دوا دی ہے۔" },
       { num: 2, en: "A warm cup of tea helped alleviate her stress after a long busy day.", ur: "ایک کپ گرم چائے نے لمبے مصروف دن کے بعد اس کے ذہنی دباؤ کو ہلکا کرنے میں مدد کی۔" },
@@ -5133,6 +5314,24 @@ const sampleGrammarChecks = {
 // ==========================================================
 // Categorization sets for Discover Tab
 // ==========================================================
+const THAROORIAN_DISCOVER_WORDS = new Set([
+  'farrago', 'snollygoster', 'kakistocracy', 'rodomontade', 'sesquipedalian',
+  'ultracrepidarian', 'defenestration', 'kerfuffle', 'discombobulate', 'lalochezia',
+  'imbroglio', 'troglodyte', 'supercilious', 'pusillanimous', 'perspicacious',
+  'floccinaucinihilipilification', 'hippopotomonstrosesquippedaliophobia', 'gorgonize',
+  'panglossian', 'quidnunc', 'mugwump', 'obfuscate', 'grandiloquent', 'lugubrious',
+  'cacophony', 'tergiversation', 'recalcitrant', 'fastidious', 'vituperation',
+  'pleonasm', 'tintinnabulation', 'schadenfreude', 'verisimilitude', 'apposite',
+  'weasel word', 'pachydermatous', 'opsimath', 'philistine', 'torschlusspanik',
+  'omphaloskepsis', 'borborygmus', 'callipygian', 'quomodo', 'absquatulate',
+  'defalcate', 'epicaricacy', 'jentacular', 'mumpsimus', 'scripturient', 'zugzwang',
+  'perspicacity', 'periphrastic', 'juxtapose', 'ephemeral', 'prolific', 'quintessential',
+  'unprecedented', 'substantiate', 'exacerbate', 'equivocal', 'magnanimous', 'delineate',
+  'corroborate', 'eradicate', 'perpetuate', 'reconcile', 'curtail', 'expedite', 'fathom',
+  'repudiate', 'elucidate', 'solicit', 'zenith', 'equitable', 'exemplify', 'fastidious',
+  'infallible', 'judicious', 'lucid', 'nonchalant', 'resplendent', 'stoic', 'trepidation'
+]);
+
 const IELTS_DISCOVER_WORDS = new Set([
   'sustainable', 'sedentary', 'deterrent', 'lucrative', 'obsolete', 'cognitive', 'chronic',
   'biodiversity', 'degradation', 'emission', 'bolster', 'hamper', 'jeopardize', 'plausible',
@@ -8105,7 +8304,12 @@ class VocabApp {
 
     // Filter by selected category
     let categoryPool = pool;
-    if (cat === 'ielts') {
+    if (cat === 'tharoorian') {
+      categoryPool = pool.filter(w => {
+        const k = w.word.toLowerCase();
+        return THAROORIAN_DISCOVER_WORDS.has(k) || (w.tags && w.tags.some(t => t.text && t.text.toLowerCase().includes('tharoor')));
+      });
+    } else if (cat === 'ielts') {
       categoryPool = pool.filter(w => {
         const k = w.word.toLowerCase();
         return IELTS_DISCOVER_WORDS.has(k) || (w.tags && w.tags.some(t => t.text && t.text.toLowerCase().includes('ielts')));
@@ -8123,7 +8327,7 @@ class VocabApp {
     } else if (cat === 'everyday') {
       categoryPool = pool.filter(w => {
         const k = w.word.toLowerCase();
-        return EVERYDAY_DISCOVER_WORDS.has(k) || (!IELTS_DISCOVER_WORDS.has(k) && !BUSINESS_DISCOVER_WORDS.has(k) && !ENVIRONMENT_DISCOVER_WORDS.has(k));
+        return EVERYDAY_DISCOVER_WORDS.has(k) || (!THAROORIAN_DISCOVER_WORDS.has(k) && !IELTS_DISCOVER_WORDS.has(k) && !BUSINESS_DISCOVER_WORDS.has(k) && !ENVIRONMENT_DISCOVER_WORDS.has(k));
       });
     }
 
@@ -8344,6 +8548,7 @@ class VocabApp {
 
     const categories = [
       { id: 'all', label: '🌟 All Words' },
+      { id: 'tharoorian', label: '🎩 Tharoorian (Ultra)' },
       { id: 'ielts', label: '🎓 Pure IELTS (Band 7-8+)' },
       { id: 'business', label: '💼 Business' },
       { id: 'environment', label: '🌿 Environment' },
@@ -8360,13 +8565,23 @@ class VocabApp {
       </div>
       <div class="discover-list-fade-in">
         ${this.discoverWords.map(w => {
-          const isIelts = IELTS_DISCOVER_WORDS.has(w.word.toLowerCase()) || (w.tags && w.tags.some(t => t.text && t.text.toLowerCase().includes('ielts')));
+          const kLower = w.word.toLowerCase();
+          const isTharoorian = THAROORIAN_DISCOVER_WORDS.has(kLower);
+          const isIelts = IELTS_DISCOVER_WORDS.has(kLower) || (w.tags && w.tags.some(t => t.text && t.text.toLowerCase().includes('ielts')));
+          
+          let badgeHtml = '';
+          if (isTharoorian) {
+            badgeHtml = '<span class="discover-band-badge tharoor-badge">🎩 Tharoorian</span>';
+          } else if (isIelts) {
+            badgeHtml = '<span class="discover-band-badge">IELTS 7.5+</span>';
+          }
+
           return `
             <div class="discover-list-row" data-open-word-id="${w.id}">
               <div class="discover-row-left">
                 <span class="discover-word-text">${w.word}</span>
                 <span class="word-pos-tag" style="font-size: 0.82rem;">[${w.posShort || 'n.'}]</span>
-                ${isIelts ? '<span class="discover-band-badge">IELTS 7.5+</span>' : ''}
+                ${badgeHtml}
               </div>
               <div class="discover-row-right urdu-text">
                 ${(w.urduMeaning || '').split('/')[0]}
