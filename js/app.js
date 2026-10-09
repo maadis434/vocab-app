@@ -4174,6 +4174,121 @@ CRITICAL REQUIREMENT: The example sentence MUST be a real, meaningful scenario. 
       { text: "set a goal", ur: "ہدف مقرر کرنا" },
       { text: "achieve a goal", ur: "ہدف حاصل کرنا" },
       { text: "common goal", ur: "مشترکہ مقصد" }
+    ],
+    'sustainable': [
+      { text: "sustainable development", ur: "پائیدار اور دیرپا ترقی" },
+      { text: "sustainable energy", ur: "ماحول دوست قابل تجدید توانائی" },
+      { text: "sustainable growth", ur: "مستقل اور مستحکم معاشی نمو" }
+    ],
+    'sedentary': [
+      { text: "sedentary lifestyle", ur: "بیٹھے رہنے والی غیر متحرک طرزِ زندگی" },
+      { text: "sedentary job", ur: "کرسی پر بیٹھ کر کرنے والی نوکری" },
+      { text: "sedentary habits", ur: "سست اور غیر فعال عادات" }
+    ],
+    'deterrent': [
+      { text: "act as a deterrent", ur: "عبرت یا روک تھام کا سبب بننا" },
+      { text: "nuclear deterrent", ur: "ایٹمی دفاعی روک تھام" },
+      { text: "effective deterrent", ur: "موثر اور ٹھوس رکاوٹ" }
+    ],
+    'lucrative': [
+      { text: "lucrative deal", ur: "انتہائی منافع بخش معاہدہ" },
+      { text: "lucrative market", ur: "پرکشش اور منافع بخش مارکیٹ" },
+      { text: "lucrative career", ur: "کثیر آمدنی والا پیشہ" }
+    ],
+    'obsolete': [
+      { text: "become obsolete", ur: "متروک اور ناقابل استعمال ہو جانا" },
+      { text: "obsolete technology", ur: "پرانی اور فرسودہ ٹیکنالوجی" },
+      { text: "render obsolete", ur: "کسی چیز کو بے کار یا متروک کر دینا" }
+    ],
+    'cognitive': [
+      { text: "cognitive development", ur: "دماغی اور ادراکی نشوونما" },
+      { text: "cognitive skills", ur: "ذہنی اور فکری صلاحیتیں" },
+      { text: "cognitive impairment", ur: "دماغی یا یادداشت کی کمزوری" }
+    ],
+    'chronic': [
+      { text: "chronic disease", ur: "دائمی اور پرانی بیماری" },
+      { text: "chronic pain", ur: "مسلسل رہنے والا پرانا درد" },
+      { text: "chronic shortage", ur: "طویل مدتی اور مسلسل قلت" }
+    ],
+    'biodiversity': [
+      { text: "preserve biodiversity", ur: "حیاتیاتی تنوع کا تحفظ کرنا" },
+      { text: "loss of biodiversity", ur: "قدرتی جانداروں کی اقسام کا خاتمہ" },
+      { text: "rich biodiversity", ur: "مختلف النوع جانداروں کی کثرت" }
+    ],
+    'bolster': [
+      { text: "bolster the economy", ur: "معیشت کو سہارا دینا اور مضبوط کرنا" },
+      { text: "bolster confidence", ur: "اعتماد اور حوصلہ بڑھانا" },
+      { text: "bolster defense", ur: "دفاع کو مزید مضبوط بنانا" }
+    ],
+    'hamper': [
+      { text: "hamper progress", ur: "ترقی کی راہ میں رکاوٹ ڈالنا" },
+      { text: "hamper rescue efforts", ur: "امدادی کاموں میں رخنہ ڈالنا" },
+      { text: "hamper growth", ur: "نشوونما یا بڑھوتری کو روکنا" }
+    ],
+    'jeopardize': [
+      { text: "jeopardize future", ur: "مستقبل کو خطرے میں ڈالنا" },
+      { text: "jeopardize the mission", ur: "مشن کو داؤ پر لگانا" },
+      { text: "jeopardize health", ur: "صحت کے لیے خطرہ پیدا کرنا" }
+    ],
+    'plausible': [
+      { text: "plausible explanation", ur: "معقول اور قابلِ قبول وضاحت" },
+      { text: "plausible scenario", ur: "قرینِ قیاس ممکنہ صورتحال" },
+      { text: "highly plausible", ur: "انتہائی قابل فہم اور ممکن" }
+    ],
+    'thrive': [
+      { text: "thrive on challenges", ur: "مشکلات میں بھی خوب پروان چڑھنا" },
+      { text: "thrive in environment", ur: "ماحول میں کامیابی سے پھلنا پھولنا" },
+      { text: "continue to thrive", ur: "مسلسل ترقی اور کامیابی حاصل کرنا" }
+    ],
+    'withstand': [
+      { text: "withstand pressure", ur: "دباؤ یا سختی کو برداشت کرنا" },
+      { text: "withstand the test of time", ur: "وقت کے امتحان پر پورا اترنا" },
+      { text: "withstand extreme weather", ur: "شدید ترین موسم کا مقابلہ کرنا" }
+    ],
+    'farrago': [
+      { text: "farrago of lies", ur: "جھوٹ اور من گھڑت کہانیوں کی کھچڑی" },
+      { text: "farrago of distortions", ur: "حقائق کو مسخ کرنے کا بے ربط مجموعہ" },
+      { text: "confusing farrago", ur: "الجھا ہوا اور بے تکی باتوں کا ملغوبہ" }
+    ],
+    'snollygoster': [
+      { text: "political snollygoster", ur: "چالاک اور موقع پرست بے اصول سیاستدان" },
+      { text: "unprincipled snollygoster", ur: "ضمیر کے بغیر ذاتی مفاد سوچنے والا رہنما" }
+    ],
+    'kakistocracy': [
+      { text: "descent into kakistocracy", ur: "نااہل اور بدترین قیادت کا راج قائم ہونا" },
+      { text: "corrupt kakistocracy", ur: "بدعنوان اور نالائق لوگوں کی حکومت" }
+    ],
+    'rodomontade': [
+      { text: "hollow rodomontade", ur: "کھوکھلی اور بے بنیاد شیخی بگھارنا" },
+      { text: "boastful rodomontade", ur: "مبالغہ آمیز اور جھوٹی ڈینگیں مارنا" }
+    ],
+    'sesquipedalian': [
+      { text: "sesquipedalian vocabulary", ur: "انتہائی لمبے اور بھاری بھرکم الفاظ" },
+      { text: "sesquipedalian style", ur: "پرشکوہ اور دقیق اندازِ تحریر" }
+    ],
+    'ultracrepidarian': [
+      { text: "ultracrepidarian critics", ur: "معاملے سے ناواقف ہو کر رائے زنی کرنے والے نقاد" },
+      { text: "ultracrepidarian advice", ur: "بغیر جانے بوجھے دیا گیا مفت مشورہ" }
+    ],
+    'defenestration': [
+      { text: "political defenestration", ur: "اقتدار یا اعلیٰ عہدے سے اچانک بے دخلی" },
+      { text: "abrupt defenestration", ur: "عہدے سے فوری اور حیران کن برطرفی" }
+    ],
+    'kerfuffle': [
+      { text: "minor kerfuffle", ur: "چھوٹا موٹا ہنگامہ یا ہلکی پھلکی بحث" },
+      { text: "cause a kerfuffle", ur: "ہڑبونگ اور بے معنی شور مچانا" }
+    ],
+    'discombobulate': [
+      { text: "completely discombobulated", ur: "مکمل طور پر حواس باختہ اور پریشان" },
+      { text: "discombobulate the opponent", ur: "حریف کو الجھن اور گھبراہٹ میں ڈالنا" }
+    ],
+    'perspicacious': [
+      { text: "perspicacious observer", ur: "تیز نظر اور باریک بین مبصر" },
+      { text: "perspicacious mind", ur: "گہری بصیرت رکھنے والا ذہین ذہن" }
+    ],
+    'supercilious': [
+      { text: "supercilious manner", ur: "تکبر بھرا اور مغرور انداز" },
+      { text: "supercilious look", ur: "دوسروں کو حقیر سمجھنے والی نظر" }
     ]
   },
 
@@ -4528,6 +4643,206 @@ CRITICAL REQUIREMENT: The example sentence MUST be a real, meaningful scenario. 
         context: 'for the meaning of "regard with great respect or reverence"',
         syns: ["revere", "respect", "honor", "worship", "esteem", "admire"],
         ants: ["despise", "disrespect", "disdain", "scorn", "ridicule"]
+      }
+    ],
+    'sustainable': [
+      {
+        num: 1,
+        context: 'for the meaning of "able to be maintained over time"',
+        syns: ["viable", "renewable", "maintainable", "enduring", "durable", "eco-friendly"],
+        ants: ["unsustainable", "depleting", "harmful", "transient", "unviable"]
+      }
+    ],
+    'sedentary': [
+      {
+        num: 1,
+        context: 'for the meaning of "inactive or sitting down a lot"',
+        syns: ["inactive", "desk-bound", "sitting", "stationary", "idle", "sluggish"],
+        ants: ["active", "mobile", "energetic", "dynamic", "physical"]
+      }
+    ],
+    'deterrent': [
+      {
+        num: 1,
+        context: 'for the meaning of "a thing that discourages someone from doing something"',
+        syns: ["disincentive", "curb", "check", "restraint", "obstacle", "hindrance"],
+        ants: ["incentive", "encouragement", "catalyst", "stimulus", "inducement"]
+      }
+    ],
+    'lucrative': [
+      {
+        num: 1,
+        context: 'for the meaning of "producing a great deal of profit"',
+        syns: ["profitable", "rewarding", "gainful", "fruitful", "remunerative", "high-paying"],
+        ants: ["unprofitable", "loss-making", "unrewarding", "disadvantageous"]
+      }
+    ],
+    'obsolete': [
+      {
+        num: 1,
+        context: 'for the meaning of "no longer produced or used; out of date"',
+        syns: ["outdated", "archaic", "defunct", "antiquated", "outmoded", "passé"],
+        ants: ["modern", "contemporary", "current", "state-of-the-art", "cutting-edge"]
+      }
+    ],
+    'cognitive': [
+      {
+        num: 1,
+        context: 'for the meaning of "relating to conscious intellectual activity"',
+        syns: ["mental", "intellectual", "cerebral", "perceptual", "rational"],
+        ants: ["emotional", "instinctive", "physical", "non-intellectual"]
+      }
+    ],
+    'chronic': [
+      {
+        num: 1,
+        context: 'for the meaning of "persisting for a long time or constantly recurring"',
+        syns: ["persistent", "long-standing", "incurable", "entrenched", "ceaseless"],
+        ants: ["acute", "temporary", "fleeting", "transient", "curable"]
+      }
+    ],
+    'bolster': [
+      {
+        num: 1,
+        context: 'for the meaning of "support or strengthen"',
+        syns: ["strengthen", "reinforce", "boost", "support", "fortify", "underpin"],
+        ants: ["undermine", "weaken", "diminish", "jeopardize", "impair"]
+      }
+    ],
+    'hamper': [
+      {
+        num: 1,
+        context: 'for the meaning of "hinder or impede the movement or progress"',
+        syns: ["hinder", "obstruct", "impede", "inhibit", "handicap", "slow down"],
+        ants: ["facilitate", "assist", "expedite", "encourage", "promote"]
+      }
+    ],
+    'jeopardize': [
+      {
+        num: 1,
+        context: 'for the meaning of "put someone or something into a situation of danger"',
+        syns: ["endanger", "threaten", "risk", "compromise", "imperil", "hazard"],
+        ants: ["safeguard", "protect", "secure", "ensure", "preserve"]
+      }
+    ],
+    'plausible': [
+      {
+        num: 1,
+        context: 'for the meaning of "seeming reasonable or probable"',
+        syns: ["credible", "believable", "likely", "feasible", "probable", "tenable"],
+        ants: ["implausible", "unbelievable", "improbable", "doubtful", "unreasonable"]
+      }
+    ],
+    'thrive': [
+      {
+        num: 1,
+        context: 'for the meaning of "grow or develop vigorously"',
+        syns: ["flourish", "prosper", "bloom", "blossom", "succeed", "burgeon"],
+        ants: ["wither", "fail", "decline", "stagnate", "perish"]
+      }
+    ],
+    'withstand': [
+      {
+        num: 1,
+        context: 'for the meaning of "remain undamaged or unaffected by"',
+        syns: ["endure", "resist", "tolerate", "survive", "stand up to", "brave"],
+        ants: ["succumb", "yield", "surrender", "collapse", "give way"]
+      }
+    ],
+    'farrago': [
+      {
+        num: 1,
+        context: 'for the meaning of "a confused mixture or hodgepodge"',
+        syns: ["mishmash", "hodgepodge", "jumble", "medley", "potpourri", "amalgam"],
+        ants: ["order", "uniformity", "homogeneity", "clarity", "consistency"]
+      }
+    ],
+    'snollygoster': [
+      {
+        num: 1,
+        context: 'for the meaning of "a shrewd, unprincipled person or politician"',
+        syns: ["opportunist", "rogue", "charlatan", "demagogue", "scoundrel"],
+        ants: ["statesman", "idealist", "altruist", "principled leader"]
+      }
+    ],
+    'kakistocracy': [
+      {
+        num: 1,
+        context: 'for the meaning of "government by the least suitable or worst citizens"',
+        syns: ["misrule", "ineptocracy", "bad governance", "maladministration"],
+        ants: ["meritocracy", "aristocracy", "good governance", "technocracy"]
+      }
+    ],
+    'rodomontade': [
+      {
+        num: 1,
+        context: 'for the meaning of "boastful or inflated talk or behavior"',
+        syns: ["boasting", "bragging", "bravado", "vainglory", "gasconade"],
+        ants: ["modesty", "humility", "understatement", "reserve"]
+      }
+    ],
+    'sesquipedalian': [
+      {
+        num: 1,
+        context: 'for the meaning of "having many syllables; using long words"',
+        syns: ["polysyllabic", "grandiloquent", "verbose", "bombastic", "pedantic"],
+        ants: ["monosyllabic", "concise", "succinct", "laconic", "simple"]
+      }
+    ],
+    'ultracrepidarian': [
+      {
+        num: 1,
+        context: 'for the meaning of "expressing opinions on matters outside one\'s knowledge"',
+        syns: ["pretentious critic", "know-it-all", "armchair expert", "pseudo-intellectual"],
+        ants: ["specialist", "expert", "authority", "professional"]
+      }
+    ],
+    'defenestration': [
+      {
+        num: 1,
+        context: 'for the meaning of "the action of dismissing someone from a position of power"',
+        syns: ["ouster", "dismissal", "expulsion", "removal", "deposition"],
+        ants: ["installation", "appointment", "inauguration", "election"]
+      }
+    ],
+    'kerfuffle': [
+      {
+        num: 1,
+        context: 'for the meaning of "a commotion or fuss"',
+        syns: ["commotion", "fuss", "disturbance", "hullabaloo", "uproar", "ado"],
+        ants: ["peace", "calm", "tranquility", "harmony", "order"]
+      }
+    ],
+    'discombobulate': [
+      {
+        num: 1,
+        context: 'for the meaning of "disconcert or confuse someone"',
+        syns: ["baffle", "bewilder", "fluster", "perplex", "disconcert", "disorient"],
+        ants: ["reassure", "calm", "orient", "clarify", "compose"]
+      }
+    ],
+    'supercilious': [
+      {
+        num: 1,
+        context: 'for the meaning of "behaving as though one thinks one is superior"',
+        syns: ["arrogant", "haughty", "pompous", "condescending", "patronizing", "disdainful"],
+        ants: ["humble", "modest", "unpretentious", "respectful", "meek"]
+      }
+    ],
+    'pusillanimous': [
+      {
+        num: 1,
+        context: 'for the meaning of "showing a lack of courage or determination"',
+        syns: ["cowardly", "timid", "faint-hearted", "craven", "spineless"],
+        ants: ["brave", "courageous", "valiant", "fearless", "bold"]
+      }
+    ],
+    'perspicacious': [
+      {
+        num: 1,
+        context: 'for the meaning of "having a ready insight into things; discerning"',
+        syns: ["insightful", "shrewd", "discerning", "astute", "sharp-witted", "perceptive"],
+        ants: ["dull", "obtuse", "unperceptive", "naive", "shortsighted"]
       }
     ]
   },
