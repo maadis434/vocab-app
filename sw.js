@@ -1,12 +1,9 @@
-const CACHE_NAME = 'vocab-pwa-v1';
+const CACHE_NAME = 'vocab-pwa-v2';
 const ASSETS_TO_CACHE = [
   './',
   './index.html',
   './manifest.json',
   './css/styles.css',
-  './js/storage.js',
-  './js/tts.js',
-  './js/words-data.js',
   './js/app.js',
   './assets/icon-192.png',
   './assets/icon-512.png',
